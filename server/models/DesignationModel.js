@@ -14,13 +14,21 @@ DesignationModel.init(
     departmentId: {
       type: Sequelize.INTEGER,
       references: {
-        model: "department",
+        model: "departments",
         key: "id",
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    isRemoved: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
   },
-  { sequelize, modelName: "designation" }
+  { sequelize, modelName: "designations" }
 );
 
 module.exports = DesignationModel;

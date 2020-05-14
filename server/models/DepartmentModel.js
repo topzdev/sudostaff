@@ -11,9 +11,17 @@ DepartmentModel.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: Sequelize.STRING,
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    isRemoved: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
   },
-  { sequelize, modelName: "department" }
+  { sequelize, modelName: "departments" }
 );
 
 module.exports = DepartmentModel;

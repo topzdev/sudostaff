@@ -19,7 +19,7 @@ LeaveTypeModel.init(
 
     description: Sequelize.STRING,
   },
-  { sequelize, modelName: "leaveType" }
+  { sequelize, modelName: "leaveTypes" }
 );
 
 module.exports = LeaveTypeModel;

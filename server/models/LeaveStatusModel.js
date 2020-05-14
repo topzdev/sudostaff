@@ -18,7 +18,7 @@ LeaveStatusModel.init(
 
     description: Sequelize.STRING,
   },
-  { sequelize, modelName: "leaveStatus" }
+  { sequelize, modelName: "leaveStatuses" }
 );
 
 module.exports = LeaveStatusModel;

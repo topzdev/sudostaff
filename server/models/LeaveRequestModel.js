@@ -14,7 +14,7 @@ LeaveRequestModel.init(
     employee_id: {
       type: Sequelize.STRING,
       references: {
-        model: "employee",
+        model: "employees",
         key: "id",
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
@@ -30,10 +30,10 @@ LeaveRequestModel.init(
     },
 
     leaveType: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
       references: {
-        model: "leaveType",
+        model: "leaveTypes",
         key: "id",
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
@@ -45,3 +45,5 @@ LeaveRequestModel.init(
   },
   { sequelize, modelName: "leaveRequest" }
 );
+
+module.exports = LeaveRequestModel;

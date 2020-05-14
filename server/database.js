@@ -1,5 +1,6 @@
 const config = require("./config");
 const Sequelize = require("sequelize");
+
 module.exports = new Sequelize(
   config.database.database,
   config.database.user,

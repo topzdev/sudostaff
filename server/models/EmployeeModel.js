@@ -19,10 +19,14 @@ EmployeeModel.init(
     joiningDate: Sequelize.DATE,
     birthPlace: Sequelize.STRING,
     citizenship: Sequelize.STRING,
+    isRemoved: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
     contact_id: {
       type: Sequelize.INTEGER,
       references: {
-        model: "contact",
+        model: "contacts",
         key: "id",
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
@@ -30,13 +34,13 @@ EmployeeModel.init(
     designation_id: {
       type: Sequelize.INTEGER,
       references: {
-        model: "designation",
+        model: "designations",
         key: "id",
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
   },
-  { sequelize, modelName: "employee", timestamps: true }
+  { sequelize, modelName: "employees", timestamps: true }
 );
 
 module.exports = EmployeeModel;

@@ -14,14 +14,14 @@ ContactModel.init(
     city: Sequelize.STRING,
     country: Sequelize.STRING,
     province: Sequelize.STRING,
-    address_line1: Sequelize.STRING,
-    address_line2: Sequelize.STRING,
-    postCode: Sequelize.STRING,
-    emailAdress: Sequelize.STRING,
+    addressLine1: Sequelize.STRING,
+    addressLine2: Sequelize.STRING,
+    postalCode: Sequelize.STRING,
+    emailAddress: Sequelize.STRING,
     landline: Sequelize.STRING,
     mobile: Sequelize.STRING,
   },
-  { sequelize, modelName: "contact" }
+  { sequelize, modelName: "contacts", underscored: true }
 );
 
 module.exports = ContactModel;
