@@ -1,10 +1,19 @@
 const { validateResponse } = require("../helpers/validateResponse");
-const designationServices = require("../services/DesignationServices");
+const leaveRequestService = require("../services/LeaveRequestServices");
 
-class DesignationController {
-  async createDesignation(req, res) {
+class LeaveRequestController {
+  async createLeaveRequest(req, res) {
     try {
-      const result = await designationServices.create(req.body);
+      const result = await leaveRequestService.create(req.body);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: "500", msg: "Server Error" });
+    }
+  }
+  async fetchSingleLeaveRequest(req, res) {
+    try {
+      const result = await leaveRequestService.getOne(req.params);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -12,20 +21,10 @@ class DesignationController {
     }
   }
 
-  async fetchSingleDesignation(req, res) {
-    try {
-      const result = await designationServices.getOne(req.params);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
-  async fetchDesignations(req, res) {
+  async fetchLeaveRequests(req, res) {
     try {
       console.log(req.body);
-      const result = await designationServices.getAll(req.query);
+      const result = await leaveRequestService.getAll(req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -33,9 +32,9 @@ class DesignationController {
     }
   }
 
-  async updateDesignation(req, res) {
+  async updateLeaveRequestByUser(req, res) {
     try {
-      const result = await designationServices.update(req.body);
+      const result = await leaveRequestService.updateByUser(req.body);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -43,19 +42,9 @@ class DesignationController {
     }
   }
 
-  async removeDesignation(req, res) {
+  async updateLeaveRequestByAdmin(req, res) {
     try {
-      const result = await designationServices.remove(req.params);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
-  async deleteDesignation(req, res) {
-    try {
-      const result = await designationServices.delete(req.params);
+      const result = await leaveRequestService.updateByAdmin(req.body);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -64,4 +53,4 @@ class DesignationController {
   }
 }
 
-module.exports = new DesignationController();
+module.exports = new LeaveRequestController();

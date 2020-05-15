@@ -1,11 +1,15 @@
 const Express = require("express");
-const employeeRoute = require("./employeeRoute");
-const departmentRoute = require("./departmentRoute");
+const employeeRouter = require("./employeeRoute");
+const departmentRouter = require("./departmentRoute");
 const designationRouter = require("./designationRoute");
+const leaveTypeRouter = require("./leaveTypeRoute");
+const leaveRequestRouter = require("./leaveRequestRoute");
 const router = Express.Router();
 
-router.use("/employee", employeeRoute);
-router.use("/department", departmentRoute);
+router.use("/employee", employeeRouter);
+router.use("/department", departmentRouter);
 router.use("/designation", designationRouter);
+router.use("/leave-type", leaveTypeRouter);
+router.use("/leave-request", leaveRequestRouter);
 
 module.exports = router;

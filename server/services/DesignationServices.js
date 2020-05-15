@@ -9,7 +9,6 @@ class DesignationServices {
       data: result.length ? result[0] : [],
     };
   }
-
   async getAll({ search, limit, offset }) {
     const options = {
       where: {},

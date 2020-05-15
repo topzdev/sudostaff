@@ -1,18 +1,16 @@
 const {
   successResponse,
-  successResponseWithData,
   errorResponse,
   notFoundResponse,
-  validationErrorWithData,
   unauthorizedResponse,
+  validationError,
 } = require("./httpResponse");
 
 exports.validateResponse = function (response, { data, msg, status }) {
   if (status === "200") {
-    if (data) return successResponseWithData(response, msg, data);
-    return successResponse(response, msg);
+    return successResponse(response, msg, data);
   } else if (status === "400") {
-    return validationErrorWithData(response, msg, data);
+    return validationError(response, msg, data);
   } else if (status === "401") {
     return unauthorizedResponse(response, msg);
   } else if (status === "404") {

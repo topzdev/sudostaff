@@ -6,7 +6,7 @@ class DepartmentServices {
     const result = await DepartmentModel.findAll({ where: { id }, limit: 1 });
     return {
       status: "200",
-      msg: "Designation fetch successfully",
+      msg: "Departments fetch successfully",
       data: result.length ? result[0] : [],
     };
   }

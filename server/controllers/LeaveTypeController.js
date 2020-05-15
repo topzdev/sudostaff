@@ -1,31 +1,20 @@
 const { validateResponse } = require("../helpers/validateResponse");
-const designationServices = require("../services/DesignationServices");
+const leaveTypeService = require("../services/LeaveTypeServices");
 
-class DesignationController {
-  async createDesignation(req, res) {
-    try {
-      const result = await designationServices.create(req.body);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
-  async fetchSingleDesignation(req, res) {
-    try {
-      const result = await designationServices.getOne(req.params);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
-  async fetchDesignations(req, res) {
+class LeaveTypeController {
+  async createLeaveType(req, res) {
     try {
       console.log(req.body);
-      const result = await designationServices.getAll(req.query);
+      const result = await leaveTypeService.create(req.body);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: "500", msg: "Server Error" });
+    }
+  }
+  async fetchSingleLeaveType(req, res) {
+    try {
+      const result = await leaveTypeService.getOne(req.params);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -33,9 +22,10 @@ class DesignationController {
     }
   }
 
-  async updateDesignation(req, res) {
+  async fetchLeaveTypes(req, res) {
     try {
-      const result = await designationServices.update(req.body);
+      console.log(req.body);
+      const result = await leaveTypeService.getAll(req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -43,9 +33,9 @@ class DesignationController {
     }
   }
 
-  async removeDesignation(req, res) {
+  async updateLeaveType(req, res) {
     try {
-      const result = await designationServices.remove(req.params);
+      const result = await leaveTypeService.update(req.body);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -53,9 +43,9 @@ class DesignationController {
     }
   }
 
-  async deleteDesignation(req, res) {
+  async deleteLeaveType(req, res) {
     try {
-      const result = await designationServices.delete(req.params);
+      const result = await leaveTypeService.delete(req.params);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -64,4 +54,4 @@ class DesignationController {
   }
 }
 
-module.exports = new DesignationController();
+module.exports = new LeaveTypeController();
