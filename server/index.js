@@ -4,8 +4,8 @@ const app = express();
 const config = require("./config");
 const bodyParser = require("body-parser");
 const database = require("./database");
-const tables = require("./models");
-const hrRoute = require("./routes");
+const hrModels = require("./components/models");
+const hrRoute = require("./components/routes");
 
 app.use(cors());
 // parse application/x-www-form-urlencoded
@@ -23,7 +23,7 @@ database
     console.error("Unable to connect to the database:", err);
   });
 
-tables();
+hrModels();
 
 app.use("/hr/api/", hrRoute);
 
