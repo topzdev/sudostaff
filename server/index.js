@@ -23,7 +23,8 @@ database
     console.error("Unable to connect to the database:", err);
   });
 
-hrModels();
+// Sync all tables
+// database.sync();
 
 app.use("/hr/api/", hrRoute);
 

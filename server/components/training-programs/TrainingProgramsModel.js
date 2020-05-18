@@ -2,14 +2,14 @@ const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
 
-class Childrens extends Model {}
+class TrainingPrograms extends Model {}
 
-Childrens.init(
+TrainingPrograms.init(
   {
     id: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
     },
     employeeId: {
       type: Sequelize.STRING,
@@ -19,14 +19,11 @@ Childrens.init(
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
-    fullName: Sequelize.STRING,
-    birthDate: Sequelize.STRING,
+    totalHours: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.STRING,
+    sponsor: Sequelize.STRING,
   },
-  {
-    sequelize,
-    modelName: "childrens",
-    timestamps: false,
-  }
+  { sequelize, modelName: "training-programs", timestamps: true }
 );
 
-module.exports = Childrens;
+module.exports = TrainingPrograms;

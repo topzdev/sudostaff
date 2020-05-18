@@ -1,6 +1,6 @@
 const DepartmentModel = require("./DepartmentModel");
-const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
+const deparmentHelpers = require("./departmentHelpers");
+
 class DepartmentServices {
   async getOne({ id }) {
     const result = await DepartmentModel.findAll({ where: { id }, limit: 1 });
@@ -12,25 +12,18 @@ class DepartmentServices {
   }
 
   async getAll({ search, limit, offset }) {
-    const options = {
-      where: {},
-      offset,
-      limit,
-    };
-
-    if (search) options.where.name = { [Op.like]: `%${search}%` };
-
-    const result = await DepartmentModel.findAll(options);
+    const result = await DepartmentModel.findAll(
+      deparmentHelpers.parseCondition({ search, limit, offset })
+    );
     return {
       status: "200",
       msg: "Departments fetch successfully",
       data: result,
     };
   }
-  async create({ name }) {
-    const isExist = await DepartmentModel.findOne({ where: { name } });
 
-    if (isExist)
+  async create({ name }) {
+    if (await deparmentHelpers.isExist({ name }))
       return {
         status: "500",
         msg: "Department name is already exist",
@@ -44,49 +37,27 @@ class DepartmentServices {
     return {
       status: "200",
       msg: "Department added succesfully",
-      data: result,
+      data: result.id,
     };
   }
 
-  async update({ id, name, isRemoved }) {
-    const result = await DepartmentModel.update(
-      { name, isRemoved },
-      { where: { id } }
-    );
+  async update(departmentInfo) {
+    const id = departmentInfo.id;
+    delete departmentInfo.id;
+
+    const result = await DepartmentModel.update(departmentInfo, {
+      where: { id },
+    });
 
     return {
       status: "200",
       msg: "Department Updated Successfully",
-      data: result,
-    };
-  }
-
-  async remove({ id }) {
-    console.log(id);
-    const isExist = await DepartmentModel.findOne({ where: { id } });
-    if (!isExist)
-      return {
-        status: "500",
-        msg: "Department is not exist",
-      };
-
-    const result = await DepartmentModel.update(
-      { isRemoved: true },
-      { where: { id } }
-    );
-
-    return {
-      status: "200",
-      msg:
-        "Department Remove Temporarily, Only Administrator can delete this data",
-      data: result,
+      data: result[0] ? true : false,
     };
   }
 
   async delete({ id }) {
-    console.log(id);
-    const isExist = await DepartmentModel.findOne({ where: { id } });
-    if (!isExist)
+    if (!(await deparmentHelpers.isExist({ name })))
       return {
         status: "500",
         msg: "Department is not exist",

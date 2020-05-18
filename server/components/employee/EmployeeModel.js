@@ -3,7 +3,6 @@ const Model = Sequelize.Model;
 const sequelize = require("../../database");
 
 class EmployeeModel extends Model {}
-
 EmployeeModel.init(
   {
     id: {
@@ -14,6 +13,8 @@ EmployeeModel.init(
     lastName: Sequelize.STRING,
     middleName: Sequelize.STRING,
     extensionName: Sequelize.STRING,
+    birthDate: Sequelize.DATEONLY,
+    birthPlace: Sequelize.STRING,
     citizenship: Sequelize.STRING,
     emailAddress: Sequelize.STRING,
     landline: Sequelize.STRING,
@@ -21,20 +22,42 @@ EmployeeModel.init(
     bloodType: Sequelize.STRING(5),
     height: Sequelize.DECIMAL,
     weight: Sequelize.DECIMAL,
-    birthDate: Sequelize.DATE,
-    birthPlace: Sequelize.STRING,
     civilStatus: Sequelize.STRING,
-    joiningDate: Sequelize.DATE,
+    joiningDate: Sequelize.DATEONLY,
 
     gender: {
       type: Sequelize.ENUM("m", "f"),
       allowNull: false,
     },
-    isRemoved: {
+    isActive: {
       type: Sequelize.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
+    },
+    benifitsId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "benifits",
+        key: "id",
+        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
+      },
+    },
+    familyDetailsId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "family-details",
+        key: "id",
+        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
+      },
     },
     addressId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "addresses",
+        key: "id",
+        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
+      },
+    },
+    governmentIssuedId: {
       type: Sequelize.INTEGER,
       references: {
         model: "addresses",
@@ -52,7 +75,7 @@ EmployeeModel.init(
       },
     },
   },
-  { sequelize, modelName: "employees", timestamps: true }
+  { sequelize, modelName: "employees", timestamps: false }
 );
 
 module.exports = EmployeeModel;

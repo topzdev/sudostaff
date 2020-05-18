@@ -2,15 +2,16 @@ const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
 
-class Childrens extends Model {}
+class VoluntaryExpModel extends Model {}
 
-Childrens.init(
+VoluntaryExpModel.init(
   {
     id: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
     },
+
     employeeId: {
       type: Sequelize.STRING,
       references: {
@@ -19,14 +20,15 @@ Childrens.init(
         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
-    fullName: Sequelize.STRING,
-    birthDate: Sequelize.STRING,
+
+    company: Sequelize.STRING,
+    position: Sequelize.STRING,
+    address: Sequelize.STRING,
+    from: Sequelize.DATEONLY,
+    to: Sequelize.DATEONLY,
+    totalHours: Sequelize.DECIMAL(10, 2),
   },
-  {
-    sequelize,
-    modelName: "childrens",
-    timestamps: false,
-  }
+  { sequelize, modelName: "voluntary-experiences", timestamps: false }
 );
 
-module.exports = Childrens;
+module.exports = VoluntaryExpModel;

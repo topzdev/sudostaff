@@ -5,9 +5,9 @@ class EmployeeServices {
   async getOne({ id }) {
     const result = await EmployeeModel.findOne({
       attributes: {
-        exclude: ["createdAt", "updatedAt", "isRemoved"],
+        exclude: ["createdAt", "updatedAt"],
       },
-      where: { id, isRemoved: false },
+      where: { id },
     });
     console.log(result);
     return {
@@ -18,15 +18,9 @@ class EmployeeServices {
   }
 
   async getAll({ search, limit, offset }) {
-    const options = {
-      where: {},
-      offset,
-      limit,
-    };
-
-    if (search) options.where.name = { [Op.like]: `%${search}%` };
-
-    const result = await EmployeeModel.findAll(options);
+    const result = await EmployeeModel.findAll(
+      helper.parseCondition({ search, limit, offset })
+    );
     return {
       status: "200",
       msg: "Employees fetch successfully",
@@ -39,21 +33,24 @@ class EmployeeServices {
     firstName,
     lastName,
     middleName,
+    extensionName,
     birthDate,
-    maritalStatus,
-    joiningDate,
     birthPlace,
     citizenship,
-    city,
-    country,
-    province,
-    addressLine1,
-    addressLine2,
-    postalCode,
     emailAddress,
     landline,
     mobile,
+    bloodType,
+    height,
+    weight,
+    civilStatus,
+    joiningDate,
     gender,
+    isActive,
+    benifitsId,
+    familyDetailsId,
+    addressId,
+    governmentIssuedId,
     designationId,
   }) {
     if (await helper.isExist(id))
@@ -68,21 +65,24 @@ class EmployeeServices {
         firstName,
         lastName,
         middleName,
+        extensionName,
         birthDate,
-        maritalStatus,
-        joiningDate,
         birthPlace,
         citizenship,
-        city,
-        country,
-        province,
-        addressLine1,
-        addressLine2,
-        postalCode,
         emailAddress,
         landline,
         mobile,
+        bloodType,
+        height,
+        weight,
+        civilStatus,
+        joiningDate,
         gender,
+        isActive,
+        benifitsId,
+        familyDetailsId,
+        addressId,
+        governmentIssuedId,
         designationId,
       },
       { returning: ["id"] }
@@ -90,7 +90,7 @@ class EmployeeServices {
     return {
       status: "200",
       msg: "Employee Successfully Added",
-      data: result,
+      data: result.id,
     };
   }
 
@@ -105,28 +105,7 @@ class EmployeeServices {
     return {
       status: "200",
       msg: "Employee Successfully Updated",
-      data: result,
-    };
-  }
-
-  async remove({ id }) {
-    console.log(id);
-    if (!(await helper.isExist(id)))
-      return {
-        status: "500",
-        msg: "Employee is not exist",
-      };
-
-    const result = await EmployeeModel.update(
-      { isRemoved: true },
-      { where: { id } }
-    );
-
-    return {
-      status: "200",
-      msg:
-        "Employee Remove Temporarily, Only Administrator can only delete this data",
-      data: result,
+      data: result[0] ? true : false,
     };
   }
 

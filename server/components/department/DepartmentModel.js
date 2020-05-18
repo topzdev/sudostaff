@@ -16,9 +16,9 @@ DepartmentModel.init(
       allowNull: false,
     },
 
-    isRemoved: {
+    isActive: {
       type: Sequelize.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
   },
   { sequelize, modelName: "departments" }

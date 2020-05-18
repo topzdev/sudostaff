@@ -43,16 +43,6 @@ class DesignationController {
     }
   }
 
-  async removeDesignation(req, res) {
-    try {
-      const result = await designationServices.remove(req.params);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
   async deleteDesignation(req, res) {
     try {
       const result = await designationServices.delete(req.params);

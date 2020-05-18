@@ -1,4 +1,5 @@
 const DesignationModel = require("./DesignationModel");
+const designationHelpers = require("./designationHelpers");
 
 class DesignationServices {
   async getOne({ id }) {
@@ -9,6 +10,7 @@ class DesignationServices {
       data: result.length ? result[0] : [],
     };
   }
+
   async getAll({ search, limit, offset }) {
     const options = {
       where: {},
@@ -19,17 +21,16 @@ class DesignationServices {
     if (search) options.where.name = { [Op.like]: `%${search}%` };
 
     const result = await DesignationModel.findAll(options);
+
     return {
       status: "200",
       msg: "Designations fetch successfully",
       data: result,
     };
   }
+
   async create({ departmentId, name }) {
-    console.log(departmentId, name);
-    const isExist = await DesignationModel.findOne({ where: { name } });
-    console.log(isExist);
-    if (isExist)
+    if (await designationHelpers.isExist({ name }))
       return {
         status: "500",
         msg: "Designation name is already exist",
@@ -37,64 +38,36 @@ class DesignationServices {
 
     const result = await DesignationModel.create({ departmentId, name });
 
-    console.log(result);
-
     return {
       status: "200",
       msg: "Designation added succesfully",
-      data: result,
+      data: result.id,
     };
   }
 
-  async update({ id, departmentId, name }) {
-    const isExist = await DesignationModel.findOne({ where: { name } });
+  async update(designationInfo) {
+    const id = designationInfo.id;
+    delete designationInfo.id;
 
-    if (isExist)
+    if (await designationHelpers.isExist({ name: designationInfo.name }))
       return {
         status: "500",
         msg: "Designation name is already exist",
       };
 
-    const result = await DesignationModel.update(
-      { departmentId, name },
-      { where: { id } }
-    );
-
-    console.log(result);
+    const result = await DesignationModel.update(designationInfo, {
+      where: { id },
+    });
 
     return {
       status: "200",
       msg: "Designation updated succesfully",
-      data: result,
-    };
-  }
-
-  async remove({ id }) {
-    console.log(id);
-    const isExist = await DesignationModel.findOne({ where: { id } });
-    if (!isExist)
-      return {
-        status: "500",
-        msg: "Designation is not exist",
-      };
-
-    const result = await DesignationModel.update(
-      { isRemoved: true },
-      { where: { id } }
-    );
-
-    return {
-      status: "200",
-      msg:
-        "Designation Remove Temporarily, Only Administrator can delete this data",
-      data: result,
+      data: result[0] ? true : false,
     };
   }
 
   async delete({ id }) {
-    console.log(id);
-    const isExist = await DesignationModel.findOne({ where: { id } });
-    if (!isExist)
+    if (!(await designationHelpers.isExist({ id })))
       return {
         status: "500",
         msg: "Designation is not exist",

@@ -1,15 +1,34 @@
 const { validateResponse } = require("../../helpers/validateResponse");
-const departmentServices = require("./DepartmentServices");
+const LicenseInfoServices = require("./LicenseInfoServices");
 
-class DepartmentController {
+class LicenseInfoController {
   constructor() {
-    console.log("Department Controller");
+    console.log("License Controller");
+  }
+  async fetchLicenseInfos(req, res) {
+    try {
+      const result = await LicenseInfoServices.getAll(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: "500", msg: "Server Error" });
+    }
+  }
+  async fetchSingleLicenseInfo(req, res) {
+    try {
+      console.log(req.params);
+      const result = await LicenseInfoServices.getOne(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: "500", msg: "Server Error" });
+    }
   }
 
-  async createDepartment(req, res) {
+  async createLicenseInfo(req, res) {
     try {
       console.log(req.body);
-      const result = await departmentServices.create(req.body);
+      const result = await LicenseInfoServices.create(req.body);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -17,9 +36,9 @@ class DepartmentController {
     }
   }
 
-  async fetchSingleDisignation(req, res) {
+  async updateLicenseInfo(req, res) {
     try {
-      const result = await departmentServices.getOne(req.params);
+      const result = await LicenseInfoServices.update(req.body);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -27,30 +46,9 @@ class DepartmentController {
     }
   }
 
-  async fetchDepartments(req, res) {
+  async deleteLicenseInfo(req, res) {
     try {
-      console.log(req.body);
-      const result = await departmentServices.getAll(req.query);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
-  async updateDepartment(req, res) {
-    try {
-      const result = await departmentServices.update(req.body);
-      validateResponse(res, result);
-    } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
-    }
-  }
-
-  async deleteDepartment(req, res) {
-    try {
-      const result = await departmentServices.delete(req.params);
+      const result = await LicenseInfoServices.delete(req.params);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
@@ -59,4 +57,4 @@ class DepartmentController {
   }
 }
 
-module.exports = new DepartmentController();
+module.exports = new LicenseInfoController();

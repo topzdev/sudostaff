@@ -7,8 +7,9 @@ class FamilyModel extends Model {}
 FamilyModel.init(
   {
     id: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     spouseFirstName: Sequelize.STRING,
     spouseLastName: Sequelize.STRING,
@@ -24,9 +25,10 @@ FamilyModel.init(
   },
   {
     sequelize,
-    modelName: "families",
+    modelName: "family-details",
     timestamps: true,
   }
 );
 
 module.exports = FamilyModel;
+FamilyModel;

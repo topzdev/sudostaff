@@ -7,3 +7,15 @@ exports.isExist = async (id) => {
 
   return count ? true : false;
 };
+
+exports.parseCondition = ({ search, limit, offset }) => {
+  const options = {
+    where: {},
+    offset,
+    limit,
+  };
+
+  if (search) options.where.name = { [Op.like]: `%${search}%` };
+
+  return options;
+};

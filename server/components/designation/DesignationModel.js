@@ -23,9 +23,9 @@ DesignationModel.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    isRemoved: {
+    isActive: {
       type: Sequelize.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
   },
   { sequelize, modelName: "designations" }

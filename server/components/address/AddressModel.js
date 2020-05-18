@@ -2,12 +2,13 @@ const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
 
-class AddressesModel extends Model {}
+class AddressModel extends Model {}
 
-AddressesModel.init(
+AddressModel.init(
   {
     id: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
 
@@ -27,8 +28,8 @@ AddressesModel.init(
   {
     sequelize,
     modelName: "addresses",
-    timestamps: true,
+    timestamps: false,
   }
 );
 
-module.exports = AddressesModel;
+module.exports = AddressModel;
