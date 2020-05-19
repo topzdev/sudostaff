@@ -7,7 +7,7 @@ class TrainingProgramsServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Training Programs Fetched Successfully",
       data: result,
     };
@@ -25,7 +25,7 @@ class TrainingProgramsServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Training Programs Added",
       data: result.id,
     };
@@ -39,7 +39,7 @@ class TrainingProgramsServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Training Programs Updated",
       data: result[0] ? true : false,
     };
@@ -48,7 +48,7 @@ class TrainingProgramsServices {
   async delete({ id }) {
     const result = await TrainingProgramsModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Training Programs Deleted",
     };
   }

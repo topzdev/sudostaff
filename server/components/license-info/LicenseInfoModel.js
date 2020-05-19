@@ -16,7 +16,6 @@ LicenseInfoModel.init(
       references: {
         model: "employees",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     company: Sequelize.STRING,

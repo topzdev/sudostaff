@@ -5,7 +5,7 @@ class GovernmentIdsServices {
     const result = await GovernmentIdsModel.findOne({ where: { id } });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Government Ids Informantion Fetched Successfully",
       data: result,
     };
@@ -28,7 +28,7 @@ class GovernmentIdsServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Goverment Ids Information Added",
       data: result.id,
     };
@@ -42,7 +42,7 @@ class GovernmentIdsServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Goverment Ids Information Updated",
       data: result[0] ? true : false,
     };
@@ -51,7 +51,7 @@ class GovernmentIdsServices {
   async delete({ id }) {
     const result = await GovernmentIdsModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Benifits Information Deleted",
     };
   }

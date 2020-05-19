@@ -7,7 +7,7 @@ class FamilyDetailsServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Family details successfully fetched",
       data: result,
     };
@@ -19,7 +19,7 @@ class FamilyDetailsServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Family details successfully added",
       data: result.id,
     };
@@ -32,7 +32,7 @@ class FamilyDetailsServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Family details successfully updated",
       data: result.id,
     };
@@ -42,7 +42,7 @@ class FamilyDetailsServices {
     const result = await FamilyDetailsModel.destroy({ where: { id } });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Family details successfully deleted",
     };
   }

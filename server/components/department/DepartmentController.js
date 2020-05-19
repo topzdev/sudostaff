@@ -13,7 +13,7 @@ class DepartmentController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -23,7 +23,7 @@ class DepartmentController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -34,7 +34,7 @@ class DepartmentController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -44,7 +44,7 @@ class DepartmentController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -54,7 +54,7 @@ class DepartmentController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 }

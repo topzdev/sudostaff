@@ -7,7 +7,7 @@ class EducBackgroundServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Educational Background Fetched Successfully",
       data: result,
     };
@@ -40,7 +40,7 @@ class EducBackgroundServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Educational Background Added",
       data: result.id,
     };
@@ -54,7 +54,7 @@ class EducBackgroundServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Educational Background Updated",
       data: result[0] ? true : false,
     };
@@ -63,7 +63,7 @@ class EducBackgroundServices {
   async delete({ id }) {
     const result = await EducBackgroundModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Educational Background Deleted",
     };
   }

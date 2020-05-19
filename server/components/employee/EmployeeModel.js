@@ -38,7 +38,6 @@ EmployeeModel.init(
       references: {
         model: "benifits",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     familyDetailsId: {
@@ -46,7 +45,6 @@ EmployeeModel.init(
       references: {
         model: "family-details",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     addressId: {
@@ -54,7 +52,6 @@ EmployeeModel.init(
       references: {
         model: "addresses",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     governmentIssuedId: {
@@ -62,7 +59,6 @@ EmployeeModel.init(
       references: {
         model: "addresses",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     designationId: {
@@ -71,11 +67,10 @@ EmployeeModel.init(
       references: {
         model: "designations",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
   },
-  { sequelize, modelName: "employees", timestamps: false }
+  { sequelize, modelName: "employees", timestamps: true }
 );
 
 module.exports = EmployeeModel;

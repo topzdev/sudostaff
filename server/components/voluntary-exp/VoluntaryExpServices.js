@@ -7,7 +7,7 @@ class VoluntaryExpServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Voluntary Experiences Fetched Successfully",
       data: result,
     };
@@ -20,7 +20,7 @@ class VoluntaryExpServices {
 
     console.log(result, VoluntaryExpArray);
     return {
-      status: "200",
+      status: 200,
       msg: "Voluntary Experiences Added",
       data: result,
     };
@@ -34,7 +34,7 @@ class VoluntaryExpServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Voluntary Experiences Updated",
       data: result[0] ? true : false,
     };
@@ -43,7 +43,7 @@ class VoluntaryExpServices {
   async delete({ id }) {
     const result = await VoluntaryExpModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Voluntary Experiences Deleted",
     };
   }

@@ -5,7 +5,7 @@ class LeaveRequestServices {
   async getOne({ id }) {
     const result = await LeaveRequestModel.findAll({ where: { id }, limit: 1 });
     return {
-      status: "200",
+      status: 200,
       msg: "Leave Request fetch successfully",
       data: result.length ? result[0] : [],
     };
@@ -22,7 +22,7 @@ class LeaveRequestServices {
 
     const result = await LeaveRequestModel.findAll(options);
     return {
-      status: "200",
+      status: 200,
       msg: "Leave Requests fetch successfully",
       data: result,
     };
@@ -31,7 +31,7 @@ class LeaveRequestServices {
   async create({ employeeId, startDate, endDate, leaveType, reason }) {
     if (await helpers.isActive())
       return {
-        status: "400",
+        status: 400,
         msg: "Your account is currently active in leave application",
       };
 
@@ -44,7 +44,7 @@ class LeaveRequestServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Your Leave Request Submitted Successfully",
       data: result.id,
     };
@@ -55,7 +55,7 @@ class LeaveRequestServices {
 
     if (!(await helpers.isExist(id)))
       return {
-        status: "400",
+        status: 400,
         msg: "leave application is not exist",
       };
 
@@ -65,7 +65,7 @@ class LeaveRequestServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Your Leave Request Updated Successfully",
       data: result,
     };
@@ -79,13 +79,13 @@ class LeaveRequestServices {
   }) {
     if (!(await helpers.isExist(id)))
       return {
-        status: "400",
+        status: 400,
         msg: "leave application is not exist",
       };
 
     if (!helpers.isActive())
       return {
-        status: "400",
+        status: 400,
         msg: "This request is already marked as rejected/authorized",
       };
 
@@ -95,7 +95,7 @@ class LeaveRequestServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Your Leave Request Updated Successfully",
       data: result,
     };

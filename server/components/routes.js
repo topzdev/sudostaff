@@ -17,6 +17,8 @@ const trainingProgramsRouter = require("./training-programs/trainingProgramsRout
 const educBackgroundRouter = require("./educational-background/educBackgroundRoute");
 const civilEligibilityRouter = require("./civil-eligiblity/civilEligibilityRoute");
 const childrensRouter = require("./childrens/childrenRoute");
+const imageRouter = require("./image/imageRoute");
+const mailerRouter = require("./mailer/mailerRoute");
 
 router.use("/attendance", attendanceRouter);
 router.use("/employee", employeeRouter);
@@ -33,5 +35,7 @@ router.use("/educational-background", educBackgroundRouter);
 router.use("/civil-eligibility", civilEligibilityRouter);
 router.use("/childrens", childrensRouter);
 router.use("/address", addressRouter);
+router.use("/image", imageRouter);
+router.use("/mailer", mailerRouter);
 
 module.exports = router;

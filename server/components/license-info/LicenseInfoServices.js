@@ -7,7 +7,7 @@ class LicenseInfoServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Licenses Information Fetched Successfully",
       data: result,
     };
@@ -42,7 +42,7 @@ class LicenseInfoServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Licenses Information Added",
       data: result.id,
     };
@@ -56,7 +56,7 @@ class LicenseInfoServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Licenses Information Updated",
       data: result,
     };
@@ -65,7 +65,7 @@ class LicenseInfoServices {
   async delete({ id }) {
     const result = await LicenseInfoModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Licenses Information Deleted",
     };
   }

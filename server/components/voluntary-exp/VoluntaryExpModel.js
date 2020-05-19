@@ -17,7 +17,6 @@ VoluntaryExpModel.init(
       references: {
         model: "employees",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
 

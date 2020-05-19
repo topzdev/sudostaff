@@ -5,7 +5,7 @@ class DesignationServices {
   async getOne({ id }) {
     const result = await DesignationModel.findAll({ where: { id }, limit: 1 });
     return {
-      status: "200",
+      status: 200,
       msg: "Designation fetch successfully",
       data: result.length ? result[0] : [],
     };
@@ -23,7 +23,7 @@ class DesignationServices {
     const result = await DesignationModel.findAll(options);
 
     return {
-      status: "200",
+      status: 200,
       msg: "Designations fetch successfully",
       data: result,
     };
@@ -32,14 +32,14 @@ class DesignationServices {
   async create({ departmentId, name }) {
     if (await designationHelpers.isExist({ name }))
       return {
-        status: "500",
+        status: 500,
         msg: "Designation name is already exist",
       };
 
     const result = await DesignationModel.create({ departmentId, name });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Designation added succesfully",
       data: result.id,
     };
@@ -51,7 +51,7 @@ class DesignationServices {
 
     if (await designationHelpers.isExist({ name: designationInfo.name }))
       return {
-        status: "500",
+        status: 500,
         msg: "Designation name is already exist",
       };
 
@@ -60,7 +60,7 @@ class DesignationServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Designation updated succesfully",
       data: result[0] ? true : false,
     };
@@ -69,13 +69,13 @@ class DesignationServices {
   async delete({ id }) {
     if (!(await designationHelpers.isExist({ id })))
       return {
-        status: "500",
+        status: 500,
         msg: "Designation is not exist",
       };
 
     const result = await DesignationModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Designation Deleted Permenanently",
       data: result,
     };

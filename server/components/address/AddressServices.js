@@ -5,7 +5,7 @@ class AddressServices {
     const result = await AddressModel.findOne({ where: { id } });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Address Fetched Successfully",
       data: result,
     };
@@ -44,7 +44,7 @@ class AddressServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Address Information Added",
       data: result.id,
     };
@@ -57,7 +57,7 @@ class AddressServices {
     const result = await AddressModel.update(AddressInfo, { where: { id } });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Address Information Updated",
       data: result[0] ? true : false,
     };
@@ -66,7 +66,7 @@ class AddressServices {
   async delete({ id }) {
     const result = await AddressModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Address Information Deleted",
     };
   }

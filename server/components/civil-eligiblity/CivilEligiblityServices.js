@@ -7,7 +7,7 @@ class CivilEligibilityServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Civil Eligibility Fetched Successfully",
       data: result,
     };
@@ -36,7 +36,7 @@ class CivilEligibilityServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Civil Eligibility Added",
       data: result.id,
     };
@@ -50,7 +50,7 @@ class CivilEligibilityServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Civil Eligibility Updated",
       data: result,
     };
@@ -59,7 +59,7 @@ class CivilEligibilityServices {
   async delete({ id }) {
     const result = await CivilEligibilityModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Civil Eligibility Deleted",
     };
   }

@@ -5,7 +5,7 @@ class LeaveTypeServices {
   async getOne({ id }) {
     const result = await LeaveTypeModel.findAll({ where: { id }, limit: 1 });
     return {
-      status: "200",
+      status: 200,
       msg: "Leave Type fetch successfully",
       data: result.length ? result[0] : [],
     };
@@ -22,7 +22,7 @@ class LeaveTypeServices {
 
     const result = await LeaveTypeModel.findAll(options);
     return {
-      status: "200",
+      status: 200,
       msg: "Leave Types fetch successfully",
       data: result,
     };
@@ -31,14 +31,14 @@ class LeaveTypeServices {
   async create({ name, description }) {
     if (helpers.isExist(name))
       return {
-        status: "500",
+        status: 500,
         msg: "Leave type is already exist",
       };
 
     const result = await LeaveTypeModel.create({ name, description });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Leave type added successfully",
       data: result,
     };
@@ -47,7 +47,7 @@ class LeaveTypeServices {
   async update({ id, name, description }) {
     if (!(await helpers.isExist({ id })))
       return {
-        status: "500",
+        status: 500,
         msg: "Leave type is not exist",
       };
 
@@ -57,7 +57,7 @@ class LeaveTypeServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Leave type updated successfully",
       data: result,
     };
@@ -66,13 +66,13 @@ class LeaveTypeServices {
   async delete({ id }) {
     if (!(await this.isExist({ id })))
       return {
-        status: "500",
+        status: 500,
         msg: "Leave type is not exist",
       };
 
     const result = await LeaveTypeModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Leave type deleted successfully",
       data: result,
     };

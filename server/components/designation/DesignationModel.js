@@ -16,7 +16,6 @@ DesignationModel.init(
       references: {
         model: "departments",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     name: {

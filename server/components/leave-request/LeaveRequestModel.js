@@ -16,7 +16,6 @@ LeaveRequestModel.init(
       references: {
         model: "employees",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     startDate: {
@@ -35,7 +34,6 @@ LeaveRequestModel.init(
       references: {
         model: "leaveTypes",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
 
@@ -58,7 +56,6 @@ LeaveRequestModel.init(
       references: {
         model: "employees",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
   },

@@ -5,7 +5,7 @@ class DepartmentServices {
   async getOne({ id }) {
     const result = await DepartmentModel.findAll({ where: { id }, limit: 1 });
     return {
-      status: "200",
+      status: 200,
       msg: "Departments fetch successfully",
       data: result.length ? result[0] : [],
     };
@@ -16,7 +16,7 @@ class DepartmentServices {
       deparmentHelpers.parseCondition({ search, limit, offset })
     );
     return {
-      status: "200",
+      status: 200,
       msg: "Departments fetch successfully",
       data: result,
     };
@@ -25,7 +25,7 @@ class DepartmentServices {
   async create({ name }) {
     if (await deparmentHelpers.isExist({ name }))
       return {
-        status: "500",
+        status: 500,
         msg: "Department name is already exist",
       };
 
@@ -35,7 +35,7 @@ class DepartmentServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Department added succesfully",
       data: result.id,
     };
@@ -50,7 +50,7 @@ class DepartmentServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Department Updated Successfully",
       data: result[0] ? true : false,
     };
@@ -59,13 +59,13 @@ class DepartmentServices {
   async delete({ id }) {
     if (!(await deparmentHelpers.isExist({ name })))
       return {
-        status: "500",
+        status: 500,
         msg: "Department is not exist",
       };
 
     const result = await DepartmentModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Department Deleted Permenanently",
       data: result,
     };

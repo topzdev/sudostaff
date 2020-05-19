@@ -1,6 +1,6 @@
 exports.successResponse = function (res, msg, data) {
   var resData = {
-    status: 1,
+    status: true,
     message: msg,
     data: data,
   };
@@ -9,7 +9,7 @@ exports.successResponse = function (res, msg, data) {
 
 exports.errorResponse = function (res, msg) {
   var data = {
-    status: 0,
+    status: false,
     message: msg,
   };
   return res.status(500).json(data);
@@ -17,7 +17,7 @@ exports.errorResponse = function (res, msg) {
 
 exports.notFoundResponse = function (res, msg) {
   var data = {
-    status: 0,
+    status: false,
     message: msg,
   };
   return res.status(404).json(data);
@@ -25,7 +25,7 @@ exports.notFoundResponse = function (res, msg) {
 
 exports.validationError = function (res, msg, data) {
   var resData = {
-    status: 0,
+    status: false,
     message: msg,
     data: data,
   };
@@ -34,7 +34,7 @@ exports.validationError = function (res, msg, data) {
 
 exports.unauthorizedResponse = function (res, msg) {
   var data = {
-    status: 0,
+    status: false,
     message: msg,
   };
   return res.status(401).json(data);

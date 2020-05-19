@@ -1,5 +1,6 @@
 const EmployeeModel = require("./EmployeeModel");
 const helper = require("./employeeHelpers");
+const imageServices = require("../image/ImageServices");
 
 class EmployeeServices {
   async getOne({ id }) {
@@ -11,7 +12,7 @@ class EmployeeServices {
     });
     console.log(result);
     return {
-      status: "200",
+      status: 200,
       msg: "Employee fetch successfully",
       data: result,
     };
@@ -22,42 +23,56 @@ class EmployeeServices {
       helper.parseCondition({ search, limit, offset })
     );
     return {
-      status: "200",
+      status: 200,
       msg: "Employees fetch successfully",
       data: result,
     };
   }
 
-  async create({
-    id,
-    firstName,
-    lastName,
-    middleName,
-    extensionName,
-    birthDate,
-    birthPlace,
-    citizenship,
-    emailAddress,
-    landline,
-    mobile,
-    bloodType,
-    height,
-    weight,
-    civilStatus,
-    joiningDate,
-    gender,
-    isActive,
-    benifitsId,
-    familyDetailsId,
-    addressId,
-    governmentIssuedId,
-    designationId,
-  }) {
+  async create(
+    {
+      id,
+      firstName,
+      lastName,
+      middleName,
+      extensionName,
+      birthDate,
+      birthPlace,
+      citizenship,
+      emailAddress,
+      landline,
+      mobile,
+      bloodType,
+      height,
+      weight,
+      civilStatus,
+      joiningDate,
+      gender,
+      benifitsId,
+      familyDetailsId,
+      addressId,
+      governmentIssuedId,
+      designationId,
+    },
+    rawImage
+  ) {
+    const imageId = null;
+
     if (await helper.isExist(id))
       return {
-        status: "500",
+        status: 500,
         msg: "Employee ID is already exist",
       };
+
+    if (rawImage["profile"]) {
+      const uploaded = await imageServices.create(rawImage["profile"]);
+
+      /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
+      if (uploaded.status !== 200) return uploaded;
+
+      /* if the uploading image is successfull then assign the id of upload image to imageId */
+      imageId = uploaded.data;
+    }
 
     const result = await EmployeeModel.create(
       {
@@ -78,34 +93,58 @@ class EmployeeServices {
         civilStatus,
         joiningDate,
         gender,
-        isActive,
         benifitsId,
         familyDetailsId,
         addressId,
         governmentIssuedId,
         designationId,
+        imageId,
       },
       { returning: ["id"] }
     );
+
     return {
-      status: "200",
+      status: 200,
       msg: "Employee Successfully Added",
-      data: result.id,
+      data: {
+        id: result.id,
+        imageId,
+      },
     };
   }
 
-  async update(employeeInfo) {
+  async update(employeeInfo, rawImage) {
+    const imageId = null;
     const id = employeeInfo.id;
     delete employeeInfo.id;
-    const result = await EmployeeModel.update(employeeInfo, {
-      where: { id },
-    });
 
-    console.log(result);
+    if (rawImage["profile"]) {
+      const uploaded = await imageServices.update({
+        imageId: employeeInfo.imageId,
+        rawImage: rawImage["profile"],
+      });
+
+      /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
+      if (uploaded.status !== 200) return uploaded;
+
+      /* if the uploading image is successfull then assign the id of upload image to employeeInfo.imageId */
+      imageId = uploaded.data;
+    }
+
+    const result = await EmployeeModel.update(
+      { ...employeeInfo, imageId },
+      {
+        where: { id },
+      }
+    );
+
     return {
-      status: "200",
+      status: 200,
       msg: "Employee Successfully Updated",
-      data: result[0] ? true : false,
+      data: {
+        id,
+        imageId,
+      },
     };
   }
 
@@ -113,13 +152,13 @@ class EmployeeServices {
     console.log(id);
     if (!(await helper.isExist(id)))
       return {
-        status: "500",
+        status: 500,
         msg: "Employee is not exist",
       };
 
     const result = await EmployeeModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Employee Deleted Permenanently",
       data: result,
     };

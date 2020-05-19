@@ -5,7 +5,7 @@ class BenifitsServices {
     const result = await BenifitsModel.findOne({ where: { id } });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Benifits Fetched Successfully",
       data: result,
     };
@@ -32,7 +32,7 @@ class BenifitsServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Benifits Information Added",
       data: result.id,
     };
@@ -45,7 +45,7 @@ class BenifitsServices {
     const result = await BenifitsModel.update(benifitsInfo, { where: { id } });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Benifits Information Updated",
       data: result[0] ? true : false,
     };
@@ -54,7 +54,7 @@ class BenifitsServices {
   async delete({ id }) {
     const result = await BenifitsModel.destroy({ where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Benifits Information Deleted",
     };
   }

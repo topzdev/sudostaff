@@ -4,7 +4,7 @@ class ChildrensServices {
   async getAll({ id }) {
     const result = await ChildrensModel.findAll({ where: { employeeId: id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Childrens successfully fetched",
       data: result,
     };
@@ -16,7 +16,7 @@ class ChildrensServices {
       { returning: ["id"] }
     );
     return {
-      status: "200",
+      status: 200,
       msg: "Childrens Added",
       data: result.id,
     };
@@ -27,7 +27,7 @@ class ChildrensServices {
     delete childrenInfo.id;
     const result = await ChildrensModel.update(childrenInfo, { where: { id } });
     return {
-      status: "200",
+      status: 200,
       msg: "Childrens Updated",
       data: result[0] ? true : false,
     };
@@ -39,7 +39,7 @@ class ChildrensServices {
     });
 
     return {
-      status: "200",
+      status: 200,
       msg: "Childrens Deleted",
     };
   }

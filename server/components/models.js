@@ -14,19 +14,18 @@ const TrainingProgramsModel = require("./training-programs/TrainingProgramsModel
 const VoluntaryExpModel = require("./voluntary-exp/VoluntaryExpModel");
 const ChildrensModel = require("./childrens/ChildrensModel");
 const AddressModel = require("./address/AddressModel");
+const ImageModel = require("./image/ImageModel");
 
 module.exports = function () {
-  EmployeeModel.sync({ force: true });
-  DesignationModel.sync({ force: true });
-
-  LeaveTypeModel.sync({ force: true });
-  LeaveRequestModel.sync({ force: true });
-  AttendanceModel.sync({ force: true });
+  // EmployeeModel.sync({ force: true });
+  // DesignationModel.sync({ force: true });
+  // LeaveTypeModel.sync({ force: true });
+  // LeaveRequestModel.sync({ force: true });
+  // AttendanceModel.sync({ force: true });
   // GovernmentIdsModel.sync({ force: true });
   // FamilyDetailsModel.sync({ force: true });
   // BenifitsModel.sync({ force: true });
   // AddressModel.sync({ force: true });
-
   /**Many to One*/
   // EducBackgroundModel.sync({ force: true });
   // CivilEligibiltyModel.sync({ force: true });
@@ -36,4 +35,5 @@ module.exports = function () {
   // ChildrensModel.sync({ force: true });
   /**One to Many*/
   // DepartmentModel.sync({ force: true });
+  // ImageModel.sync({ force: true });
 };

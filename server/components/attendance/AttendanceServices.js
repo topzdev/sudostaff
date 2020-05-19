@@ -11,7 +11,7 @@ class AttendaceServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Attendance record successfully fetched",
       data: result,
     };
@@ -23,7 +23,7 @@ class AttendaceServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Attendance record successfully fetched",
       data: result,
     };
@@ -33,7 +33,7 @@ class AttendaceServices {
     /** Check if the employee is existing in record */
     if (!(await employeeHelpers.isExist(employeeId)))
       return {
-        status: "400",
+        status: 400,
         msg: "Employee not exist",
       };
 
@@ -51,7 +51,7 @@ class AttendaceServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Successfully timed in!",
       data: { employee: employee.data, result },
     };
@@ -63,14 +63,14 @@ class AttendaceServices {
     // Check if not sign in first
     if (signInTime === null)
       return {
-        status: "400",
+        status: 400,
         msg: "Please sign in first",
       };
 
     // Check if already signed out
     if (signOutTime !== null)
       return {
-        status: "400",
+        status: 400,
         msg: "You already signed out @" + signOutTime,
       };
 
@@ -86,7 +86,7 @@ class AttendaceServices {
     );
 
     return {
-      status: "200",
+      status: 200,
       msg: "Successfully timed out!",
       data: { employee: employee.data, result },
     };

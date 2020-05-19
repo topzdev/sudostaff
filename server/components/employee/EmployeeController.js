@@ -12,7 +12,7 @@ class EmployeeController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
   async fetchSingleEmployee(req, res) {
@@ -22,18 +22,17 @@ class EmployeeController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
   async createEmployee(req, res) {
     try {
-      console.log(req.body);
-      const result = await employeeServices.create(req.body);
+      const result = await employeeServices.create(req.body, req.files);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -44,7 +43,7 @@ class EmployeeController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -54,7 +53,7 @@ class EmployeeController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 
@@ -64,7 +63,7 @@ class EmployeeController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: "500", msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error" });
     }
   }
 }

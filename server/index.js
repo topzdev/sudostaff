@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const database = require("./database");
 const hrModels = require("./components/models");
 const hrRoute = require("./components/routes");
+const cloudinary = require("cloudinary");
+const fileUpload = require("express-fileupload");
 
 app.use(cors());
 // parse application/x-www-form-urlencoded
@@ -13,6 +15,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+// parse files in req.body
+app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/", debug: true }));
+
+cloudinary.v2.config(config.cloudinary);
 
 database
   .authenticate()

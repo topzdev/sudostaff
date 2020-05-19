@@ -7,6 +7,6 @@ module.exports = new Sequelize(
   config.database.password,
   {
     host: config.database.host,
-    dialect: "postgres",
+    dialect: config.database.dialect,
   }
 );

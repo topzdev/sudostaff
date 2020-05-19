@@ -16,7 +16,6 @@ TrainingPrograms.init(
       references: {
         model: "employees",
         key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     totalHours: Sequelize.DECIMAL(10, 2),
