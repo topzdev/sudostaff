@@ -28,7 +28,7 @@ LeaveRequestModel.init(
       allowNull: false,
     },
 
-    leaveType: {
+    leaveTypeId: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {

@@ -60,7 +60,7 @@ class EmployeeServices {
 
     if (await helper.isExist(id))
       return {
-        status: 500,
+        status: 400,
         msg: "Employee ID is already exist",
       };
 
@@ -152,7 +152,7 @@ class EmployeeServices {
     console.log(id);
     if (!(await helper.isExist(id)))
       return {
-        status: 500,
+        status: 400,
         msg: "Employee is not exist",
       };
 

@@ -41,4 +41,4 @@ app.get("/", (req, res) => {
 
 const port = config.port || 5000;
 
-app.listen(port, () => console.log("Server Established"));
+app.listen(port, () => console.log(`Listening on port ${port}`));

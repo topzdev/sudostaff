@@ -1,5 +1,7 @@
 const Express = require("express");
 const router = Express.Router();
+const swaggerUi = require("swagger-ui-express");
+const apiDocs = require("./apiDocs.json");
 
 const employeeRouter = require("./employee/employeeRoute");
 const departmentRouter = require("./department/departmentRoute");
@@ -8,6 +10,12 @@ const leaveTypeRouter = require("./leave-type/leaveTypeRoute");
 const leaveRequestRouter = require("./leave-request/leaveRequestRoute");
 const attendanceRouter = require("./attendance/attendanceRoute");
 const benifitsRouter = require("./benifits/benifitsRoute");
+/**
+ * Humand Resources API Documentation
+ * see ./apiDocs.json
+ * or visit http://localhost:5000/hr/api/api-docs/
+ */
+
 const govermentIdsRouter = require("./government-ids/governmentIdsRoute");
 const addressRouter = require("./address/addressRoute");
 
@@ -20,8 +28,10 @@ const childrensRouter = require("./childrens/childrenRoute");
 const imageRouter = require("./image/imageRoute");
 const mailerRouter = require("./mailer/mailerRoute");
 
-router.use("/attendance", attendanceRouter);
+router.use("/api-docs", swaggerUi.serve);
+router.get("/api-docs", swaggerUi.setup(apiDocs));
 router.use("/employee", employeeRouter);
+router.use("/attendance", attendanceRouter);
 router.use("/department", departmentRouter);
 router.use("/designation", designationRouter);
 router.use("/leave-type", leaveTypeRouter);
