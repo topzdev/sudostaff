@@ -22,7 +22,7 @@ export default {
       {
         rel: "stylesheet",
         href:
-          "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap"
+          "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
       }
     ]
   },
@@ -42,7 +42,7 @@ export default {
    ** Nuxt.js dev-modules
    */
 
-  components: { dirs: ["~/components", "~/layouts"] },
+  components: { dirs: ["~/components"] },
 
   buildModules: [
     "@nuxtjs/vuetify",

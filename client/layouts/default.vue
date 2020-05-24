@@ -9,9 +9,14 @@
     </v-content>
   </v-app>
 </template>
-
 <script>
+import BaseNavbar from "./navbars/BaseNavbar";
+import BaseSidebar from "./sidebars/BaseSidebar";
 export default {
+  components: {
+    BaseSidebar,
+    BaseNavbar
+  },
   data() {
     return {};
   }
