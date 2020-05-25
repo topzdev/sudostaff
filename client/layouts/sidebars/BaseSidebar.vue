@@ -40,6 +40,11 @@ export default {
     return {
       items: [
         { title: "Dashboard", icon: "mdi-view-dashboard", to: "/dashboard" },
+        {
+          title: "Personal Info",
+          icon: "mdi-card-account-details-outline",
+          to: "/personal-info"
+        },
         { title: "Employee", icon: "mdi-account-multiple", to: "/employee" },
         {
           title: "Departments",
