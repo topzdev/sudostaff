@@ -13,6 +13,7 @@
 import BaseNavbar from "./navbars/BaseNavbar";
 import BaseSidebar from "./sidebars/BaseSidebar";
 export default {
+  name: "Default",
   components: {
     BaseSidebar,
     BaseNavbar
@@ -26,6 +27,6 @@ export default {
 
 <style lang="scss">
 .v-application {
-  font-family: "Open Sans" !important;
+  font-family: "Poppins" !important;
 }
 </style>

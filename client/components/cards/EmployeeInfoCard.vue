@@ -8,16 +8,41 @@
     <v-card-text>
       <v-row>
         <v-col cols="12">
-          <v-text-field label="Employee ID" hide-details outlined></v-text-field>
+          <v-text-field
+            label="Employee ID"
+            :value="id"
+            @input="$emit('update:id', $event)"
+            hide-details
+            outlined
+          ></v-text-field>
         </v-col>
         <v-col cols="4">
-          <v-select label="Deparment" hide-details outlined></v-select>
+          <v-select
+            label="Deparment"
+            item-text="name"
+            item-value="departmentId"
+            hide-details
+            :value="departmentId"
+            @input="$emit('update:departmentId', $event)"
+            outlined
+          ></v-select>
         </v-col>
         <v-col cols="4">
-          <v-select label="Designation" disabled hide-details outlined></v-select>
+          <v-select
+            label="Designation"
+            disabled
+            hide-details
+            :value="designationId"
+            @input="$emit('update:designationId', $event)"
+            outlined
+          ></v-select>
         </v-col>
         <v-col cols="4">
-          <date-picker label="Joining Date" v-model="workInfo.joiningDate" />
+          <date-picker
+            label="Joining Date"
+            :value="joiningDate"
+            @input="$emit('update:joiningDate', $event)"
+          />
         </v-col>
       </v-row>
     </v-card-text>
@@ -28,16 +53,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  data() {
-    return {
-      workInfo: {
-        id: "",
-        designation: "",
-        designationId: 1,
-        joiningDate: ""
-      }
-    };
-  }
+  props: ["joiningDate", "designationId", "departmentId", "id"]
 };
 </script>
 

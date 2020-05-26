@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined :loading="loading">
+  <v-card outlined :loading="loading" :elevation="false" :flat="false">
     <form-card-header
       v-if="header"
       title="Employee Photo"
