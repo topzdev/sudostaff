@@ -3,6 +3,11 @@ const router = Express.Router();
 const swaggerUi = require("swagger-ui-express");
 const apiDocs = require("./apiDocs.json");
 
+/**
+ * Humand Resources API Documentation
+ * see ./apiDocs.json
+ * or visit http://localhost:5000/hr/api/api-docs/
+ */
 const employeeRouter = require("./employee/employeeRoute");
 const departmentRouter = require("./department/departmentRoute");
 const designationRouter = require("./designation/designationRoute");
@@ -10,16 +15,9 @@ const leaveTypeRouter = require("./leave-type/leaveTypeRoute");
 const leaveRequestRouter = require("./leave-request/leaveRequestRoute");
 const attendanceRouter = require("./attendance/attendanceRoute");
 const benifitsRouter = require("./benifits/benifitsRoute");
-/**
- * Humand Resources API Documentation
- * see ./apiDocs.json
- * or visit http://localhost:5000/hr/api/api-docs/
- */
-
 const govermentIdsRouter = require("./government-ids/governmentIdsRoute");
 const addressRouter = require("./address/addressRoute");
-
-const licenseInfoRouter = require("./license-info/licenseInfoRoute");
+const workExpRouter = require("./work-experience/WorkExpRoute");
 const voluntaryExpRouter = require("./voluntary-exp/voluntaryExpRoute");
 const trainingProgramsRouter = require("./training-programs/trainingProgramsRoute");
 const educBackgroundRouter = require("./educational-background/educBackgroundRoute");
@@ -30,6 +28,7 @@ const mailerRouter = require("./mailer/mailerRoute");
 
 router.use("/api-docs", swaggerUi.serve);
 router.get("/api-docs", swaggerUi.setup(apiDocs));
+
 router.use("/employee", employeeRouter);
 router.use("/attendance", attendanceRouter);
 router.use("/department", departmentRouter);
@@ -38,7 +37,7 @@ router.use("/leave-type", leaveTypeRouter);
 router.use("/leave-request", leaveRequestRouter);
 router.use("/goverment-ids", govermentIdsRouter);
 router.use("/benifits", benifitsRouter);
-router.use("/license-info", licenseInfoRouter);
+router.use("/work-exp", workExpRouter);
 router.use("/voluntary-exp", voluntaryExpRouter);
 router.use("/training-programs", trainingProgramsRouter);
 router.use("/educational-background", educBackgroundRouter);

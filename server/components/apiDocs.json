@@ -826,11 +826,11 @@
         }
       }
     },
-    "/license-info/{id}": {
+    "/work-exp/{id}": {
       "get": {
-        "tags": ["license-info"],
-        "summary": "Return License Information by ID",
-        "description": "Get individual License information by id",
+        "tags": ["work-exp"],
+        "summary": "Return Work Experiennce by ID",
+        "description": "Get individual Work Experience by id",
         "parameters": [
           {
             "in": "path",
@@ -841,11 +841,11 @@
         ],
         "responses": {
           "200": {
-            "description": "License fetch successfully",
+            "description": "Work Experience fetch successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/licenseInfos"
+                  "$ref": "#/components/schemas/workExp"
                 }
               }
             }
@@ -856,24 +856,24 @@
         }
       }
     },
-    "/license-info": {
+    "/work-exp": {
       "post": {
-        "tags": ["license-info"],
-        "summary": "Add License",
-        "description": "Create license-info information and return id of created license-info",
+        "tags": ["work-exp"],
+        "summary": "Add Work Experience",
+        "description": "Create work-exp information and return id of created work-exp",
         "requestBody": {
-          "description": "Send License Information",
+          "description": "Send Work Experiennce",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/licenseInfos"
+                "$ref": "#/components/schemas/workExp"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "License Added",
+            "description": "Work Experience Added",
             "content": {
               "application/json": {
                 "schema": {
@@ -888,14 +888,14 @@
         }
       },
       "put": {
-        "tags": ["license-info"],
-        "summary": "Update License",
-        "description": "Update license-info information",
+        "tags": ["work-exp"],
+        "summary": "Update Work Experience",
+        "description": "Update work-exp information",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/licenseInfos"
+                "$ref": "#/components/schemas/workExp"
               }
             }
           }
@@ -1462,6 +1462,97 @@
           }
         }
       }
+    },
+    "/family-details/{id}": {
+      "get": {
+        "tags": ["family-details"],
+        "summary": "Return Family Details by ID",
+        "description": "Get individual Family Details by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Family Details fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/familyDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/family-details": {
+      "post": {
+        "tags": ["family-details"],
+        "summary": "Add Family Details",
+        "description": "Create family-details and return id of created family-details",
+        "requestBody": {
+          "description": "Send Family Details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/familyDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Family Details Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["family-details"],
+        "summary": "Update Family Details",
+        "description": "Update family-details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/familyDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1732,7 +1823,7 @@
             "description": "<Primary Key> ID of Government Model"
           },
           "governmentIssueId": { "type": "string" },
-          "idLicensePassportId": { "type": "string" },
+          "idWork ExperiencePassportId": { "type": "string" },
           "dateIssuance": { "type": "string", "format": "date" },
           "placeIssuance": { "type": "string" }
         }
@@ -1755,8 +1846,8 @@
           "level": { "type": "string" },
           "degree": { "type": "string" },
           "schoolName": { "type": "string" },
-          "from": { "type": "string", "format": "date" },
-          "to": { "type": "string", "format": "date" },
+          "from": { "type": "number", "example": 2020 },
+          "to": { "type": "number", "example": 2020 },
           "graduateYear": { "type": "number" },
           "recognition": { "type": "string" },
           "scholarship": { "type": "string" }
@@ -1785,15 +1876,15 @@
           "examinationPlace": { "type": "string" }
         }
       },
-      "licenseInfos": {
+      "workExp": {
         "type": "object",
-        "description": "License information of Employee",
+        "description": "Work Experience of Employee",
         "properties": {
           "id": {
             "type": "number",
             "format": "id",
             "example": 1,
-            "description": "<Primary Key> ID of License Information"
+            "description": "<Primary Key> ID of Work Experiennce"
           },
           "employeeId": {
             "type": "number",
@@ -1804,10 +1895,10 @@
           "company": { "type": "string" },
           "position": { "type": "string" },
           "salaryGrade": { "type": "string" },
-          "stepIncrementd": { "type": "string" },
+          "stepIncremented": { "type": "string" },
           "monthlySalaray": { "type": "number", "format": "decimal" },
-          "from": { "type": "string", "format": "date" },
-          "to": { "type": "string", "format": "date" },
+          "from": { "type": "number", "example": 2020 },
+          "to": { "type": "number", "example": 2020 },
           "isFullTime": { "type": "boolean" },
           "isGovernmentService": { "type": "boolean" }
         }
@@ -1828,6 +1919,9 @@
             "example": 1,
             "description": "ID of employee"
           },
+          "title": { "type": "string" },
+          "from": { "type": "string", "format": "date" },
+          "to": { "type": "string", "format": "date" },
           "totalHours": { "type": "number", "format": "decimal" },
           "type": { "type": "string" },
           "sponsor": { "type": "string" }
@@ -1852,8 +1946,8 @@
           "company": { "type": "string" },
           "position": { "type": "string" },
           "address": { "type": "string" },
-          "from": { "type": "string", "format": "date" },
-          "to": { "type": "string", "format": "date" },
+          "from": { "type": "number", "example": 2020 },
+          "to": { "type": "number", "example": 2020 },
           "totalHours": { "type": "number", "format": "decimal" }
         }
       },

@@ -9,7 +9,7 @@ const GovernmentIdsModel = require("./government-ids/GovernmentIdsModel");
 const EducBackgroundModel = require("./educational-background/EducBackgroundModel");
 const CivilEligibiltyModel = require("./civil-eligiblity/CivilEligibilityModel");
 const FamilyDetailsModel = require("./family-details/FamilyDetailsModel");
-const LicenseInfosModel = require("./license-info/LicenseInfoModel");
+const WorkExpModel = require("./work-experience/WorkExpModel");
 const TrainingProgramsModel = require("./training-programs/TrainingProgramsModel");
 const VoluntaryExpModel = require("./voluntary-exp/VoluntaryExpModel");
 const ChildrensModel = require("./childrens/ChildrensModel");
@@ -29,7 +29,7 @@ module.exports = function () {
   /**Many to One*/
   // EducBackgroundModel.sync({ force: true });
   // CivilEligibiltyModel.sync({ force: true });
-  // LicenseInfosModel.sync({ force: true });
+  // WorkExpModel.sync({ force: true });
   // TrainingProgramsModel.sync({ force: true });
   // VoluntaryExpModel.sync({ force: true });
   // ChildrensModel.sync({ force: true });

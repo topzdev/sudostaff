@@ -13,7 +13,7 @@ class TrainingProgramsServices {
     };
   }
 
-  async create({ employeeId, totalHours, type, sponsor }) {
+  async create({ employeeId, totalHours, type, sponsor, from, to, title }) {
     const result = await TrainingProgramsModel.create(
       {
         employeeId,

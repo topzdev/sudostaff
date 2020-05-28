@@ -20,7 +20,7 @@
           <v-col cols="8">
             <v-row>
               <v-col cols="12">
-                <employee-info-tab />
+                <your-info-tabs />
               </v-col>
             </v-row>
           </v-col>

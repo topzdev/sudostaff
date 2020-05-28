@@ -2,16 +2,15 @@ const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
 
-class VoluntaryExpModel extends Model {}
+class WorkExpModel extends Model {}
 
-VoluntaryExpModel.init(
+WorkExpModel.init(
   {
     id: {
       type: Sequelize.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
     },
-
     employeeId: {
       type: Sequelize.STRING,
       references: {
@@ -19,15 +18,17 @@ VoluntaryExpModel.init(
         key: "id",
       },
     },
-
     company: Sequelize.STRING,
     position: Sequelize.STRING,
-    address: Sequelize.STRING,
+    salaryGrade: Sequelize.STRING,
+    stepIncremented: Sequelize.STRING,
+    monthlySalaray: Sequelize.DECIMAL(10, 2),
     from: Sequelize.INTEGER,
     to: Sequelize.INTEGER,
-    totalHours: Sequelize.DECIMAL(10, 2),
+    isFullTime: Sequelize.BOOLEAN,
+    isGovernmentService: Sequelize.BOOLEAN,
   },
-  { sequelize, modelName: "voluntary-experiences", timestamps: false }
+  { sequelize, modelName: "license-infos", timestamps: false }
 );
 
-module.exports = VoluntaryExpModel;
+module.exports = WorkExpModel;

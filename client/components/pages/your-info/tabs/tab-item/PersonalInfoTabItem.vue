@@ -1,0 +1,12 @@
+<template>
+  <v-tab-item>
+    <personal-info-form :isEdit="true" :header="false" :outlined="false" />
+  </v-tab-item>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style>
+</style>

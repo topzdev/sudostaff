@@ -1,0 +1,91 @@
+"/family-details/{id}": {
+    "get": {
+      "tags": ["family-details"],
+      "summary": "Return Family Details by ID",
+      "description": "Get individual Family Details by id",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "schema": { "type": "integer" },
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Family Details fetch successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/familyDetails"
+              }
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected Error"
+        }
+      }
+    }
+  },
+  "/family-details": {
+    "post": {
+      "tags": ["family-details"],
+      "summary": "Add Family Details",
+      "description": "Create family-details and return id of created family-details",
+      "requestBody": {
+        "description": "Send Family Details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/familyDetails"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Family Details Added",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/retDefault"
+              }
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected Error"
+        }
+      }
+    },
+    "put": {
+      "tags": ["family-details"],
+      "summary": "Update Family Details",
+      "description": "Update family-details",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/familyDetails"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Deparment Successfully Updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/retDefault"
+              }
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected Error"
+        }
+      }
+    }
+  }
