@@ -1634,6 +1634,11 @@
             "format": "id",
             "example": 1
           },
+          "headId": {
+            "type": "number",
+            "format": "id",
+            "example": 1
+          },
           "name": {
             "type": "string",
             "nullable": false,

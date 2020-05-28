@@ -16,6 +16,14 @@ DepartmentModel.init(
       allowNull: false,
     },
 
+    headId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "employees",
+        key: "id",
+      },
+    },
+
     isActive: {
       type: Sequelize.BOOLEAN,
       defaultValue: true,

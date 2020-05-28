@@ -9,6 +9,13 @@
             <img :src="employee.imageUrl" alt="John" draggable="false" />
           </v-avatar>
         </v-col>
+        <v-col cols="12">
+          <div class="overline">Name</div>
+          <div
+            class="subtitle-1 black--text"
+          >{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}</div>
+        </v-col>
+
         <v-col cols="6">
           <div class="overline">Employee ID</div>
           <div class="subtitle-1 black--text" v-text="employee.id"></div>

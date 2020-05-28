@@ -38,6 +38,9 @@ export default {
         id: "EMP-2020-01",
         department: "IT Department",
         designation: "Senior Web Developer",
+        firstName: "Christopher",
+        middleName: "Tampos",
+        lastName: "Lugod",
         joiningDate: "05-20-2020",
         imageId: "1",
         imageUrl: "https://cdn.vuetifyjs.com/images/john.jpg"
