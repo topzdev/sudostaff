@@ -28,7 +28,7 @@ WorkExpModel.init(
     isFullTime: Sequelize.BOOLEAN,
     isGovernmentService: Sequelize.BOOLEAN,
   },
-  { sequelize, modelName: "license-infos", timestamps: false }
+  { sequelize, modelName: "workExperiences", timestamps: false }
 );
 
 module.exports = WorkExpModel;

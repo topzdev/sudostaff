@@ -18,11 +18,7 @@ class FamilyDetailsServices {
       returning: ["id"],
     });
 
-    return {
-      status: 200,
-      msg: "Family details successfully added",
-      data: result.id,
-    };
+    return result.id;
   }
 
   async update(familyDetailsInfo) {

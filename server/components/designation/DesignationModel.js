@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
+const DepartmentModel = require("../department/DepartmentModel");
 
 class DesignationModel extends Model {}
 
@@ -14,20 +15,22 @@ DesignationModel.init(
     departmentId: {
       type: Sequelize.INTEGER,
       references: {
-        model: "departments",
         key: "id",
+        model: "departments",
       },
     },
     name: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    isActive: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: true,
+    description: {
+      type: Sequelize.STRING,
     },
   },
-  { sequelize, modelName: "designations" }
+  { sequelize, modelName: "designations", timestamps: true, paranoid: true }
 );
+
+DepartmentModel.hasMany(DesignationModel);
+DesignationModel.belongsTo(DepartmentModel);
 
 module.exports = DesignationModel;

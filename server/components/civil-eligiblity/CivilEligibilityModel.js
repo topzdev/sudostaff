@@ -25,7 +25,7 @@ CivilEligibility.init(
     examinationDate: Sequelize.DATEONLY,
     examinationPlace: Sequelize.STRING,
   },
-  { sequelize, modelName: "civil-eligibilities", timestamps: false }
+  { sequelize, modelName: "civilEligibilities", timestamps: false }
 );
 
 module.exports = CivilEligibility;

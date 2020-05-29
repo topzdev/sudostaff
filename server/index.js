@@ -31,7 +31,8 @@ database
   });
 
 // Sync all tables
-// database.sync();
+// database.drop();
+database.sync({ force: true });
 
 app.use("/hr/api/", hrRoute);
 

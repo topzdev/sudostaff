@@ -25,7 +25,7 @@ TrainingPrograms.init(
     type: Sequelize.STRING,
     sponsor: Sequelize.STRING,
   },
-  { sequelize, modelName: "training-programs", timestamps: true }
+  { sequelize, modelName: "trainingPrograms", timestamps: true }
 );
 
 module.exports = TrainingPrograms;

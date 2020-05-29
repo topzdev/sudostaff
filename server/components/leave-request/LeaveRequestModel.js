@@ -59,7 +59,7 @@ LeaveRequestModel.init(
       },
     },
   },
-  { sequelize, modelName: "leaveRequest", timestamps: true }
+  { sequelize, modelName: "leaveRequest", timestamps: true, paranoid: true }
 );
 
 module.exports = LeaveRequestModel;

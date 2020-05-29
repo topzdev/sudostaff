@@ -12,6 +12,7 @@ FamilyModel.init(
       autoIncrement: true,
     },
     spouseFirstName: Sequelize.STRING,
+    spouseMiddleName: Sequelize.STRING,
     spouseLastName: Sequelize.STRING,
     spouseExt: Sequelize.STRING,
     fatherFirstName: Sequelize.STRING,
@@ -25,8 +26,8 @@ FamilyModel.init(
   },
   {
     sequelize,
-    modelName: "family-details",
-    timestamps: true,
+    modelName: "familyDetails",
+    timestamps: false,
   }
 );
 

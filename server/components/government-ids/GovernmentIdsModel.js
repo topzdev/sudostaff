@@ -17,7 +17,7 @@ GovernmentIdsModel.init(
     dateIssuance: Sequelize.DATEONLY,
     placeIssuance: Sequelize.STRING,
   },
-  { sequelize, modelName: "goverment-ids" }
+  { sequelize, modelName: "governmentIds", timestamps: false }
 );
 
 module.exports = GovernmentIdsModel;

@@ -27,7 +27,7 @@ EducBackgroundModel.init(
     recognition: Sequelize.STRING,
     scholarship: Sequelize.STRING,
   },
-  { sequelize, modelName: "educ-backgrounds", timestamps: false }
+  { sequelize, modelName: "educationBackgrounds", timestamps: false }
 );
 
 module.exports = EducBackgroundModel;

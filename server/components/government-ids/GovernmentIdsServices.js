@@ -27,11 +27,7 @@ class GovernmentIdsServices {
       { returning: ["id"] }
     );
 
-    return {
-      status: 200,
-      msg: "Goverment Ids Information Added",
-      data: result.id,
-    };
+    return result.id;
   }
 
   async update(governmentIdsInfo) {

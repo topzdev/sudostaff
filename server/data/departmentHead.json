@@ -1,17 +1,19 @@
 [
   {
-    "name": "Information Technology",
-    "description": "manage computers in company",
+    "employeeId": null,
+    "departmentId": 1,
     "createdAt": "2020-05-19 10:23:54+02 ",
     "updatedAt": "2020-05-19 10:23:54+02 "
   },
   {
-    "name": "Human Resources",
+    "employeeId": "EMP-001",
+    "departmentId": 2,
     "createdAt": "2020-05-19 10:23:54+02 ",
     "updatedAt": "2020-05-19 10:23:54+02 "
   },
   {
-    "name": "Sales",
+    "employeeId": "EMP-002",
+    "departmentId": 3,
     "createdAt": "2020-05-19 10:23:54+02 ",
     "updatedAt": "2020-05-19 10:23:54+02 "
   }

@@ -15,6 +15,7 @@ const VoluntaryExpModel = require("./voluntary-exp/VoluntaryExpModel");
 const ChildrensModel = require("./childrens/ChildrensModel");
 const AddressModel = require("./address/AddressModel");
 const ImageModel = require("./image/ImageModel");
+const DepartmentHeadModel = require("./department/DepartmentHeadModel");
 
 module.exports = function () {
   // EmployeeModel.sync({ force: true });

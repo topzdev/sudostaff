@@ -27,7 +27,7 @@ VoluntaryExpModel.init(
     to: Sequelize.INTEGER,
     totalHours: Sequelize.DECIMAL(10, 2),
   },
-  { sequelize, modelName: "voluntary-experiences", timestamps: false }
+  { sequelize, modelName: "voluntaryExperiences", timestamps: false }
 );
 
 module.exports = VoluntaryExpModel;

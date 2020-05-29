@@ -1,6 +1,10 @@
 const EmployeeModel = require("./EmployeeModel");
 const helper = require("./employeeHelpers");
 const imageServices = require("../image/ImageServices");
+const benifitsServices = require("../benifits/BenifitsServices");
+const addressServices = require("../address/AddressServices");
+const familyDetailsServices = require("../family-details/FamilyDetailsServices");
+const governmentIssuedId = require("../government-ids/GovernmentIdsServices");
 
 class EmployeeServices {
   async getOne({ id }) {
@@ -48,10 +52,6 @@ class EmployeeServices {
       civilStatus,
       joiningDate,
       gender,
-      benifitsId,
-      familyDetailsId,
-      addressId,
-      governmentIssuedId,
       designationId,
     },
     rawImage
@@ -73,6 +73,12 @@ class EmployeeServices {
       /* if the uploading image is successfull then assign the id of upload image to imageId */
       imageId = uploaded.data;
     }
+
+    // Create blanks model and get the id
+    const benifitsId = await benifitsServices.create({});
+    const familyDetailsId = await familyDetailsServices.create({});
+    const addressId = await addressServices.create({});
+    const governmentIssuedId = await governmentIssuedId.create({});
 
     const result = await EmployeeModel.create(
       {

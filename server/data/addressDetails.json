@@ -1,0 +1,50 @@
+[
+  {
+    "houseBlock": "1320 A 48",
+    "street": "C.P. Garcia",
+    "subdivision": null,
+    "barangay": "123",
+    "city": "Manila",
+    "zipcode": "1012",
+    "province": null,
+    "houseBlock2": null,
+    "street2": null,
+    "subdivision2": null,
+    "barangay2": null,
+    "city2": null,
+    "province2": null,
+    "zipcode2": null
+  },
+  {
+    "houseBlock": "358",
+    "street": "Pavia st",
+    "subdivision": null,
+    "barangay": "69",
+    "city": "Manila",
+    "province": null,
+    "zipcode": "1013",
+    "houseBlock2": "34",
+    "street2": "Cabuyao",
+    "subdivision2": "Camella Homes.",
+    "barangay2": "234",
+    "city2": "Cavite",
+    "province2": "Tagbilaran, Bohol",
+    "zipcode2": "1345"
+  },
+  {
+    "houseBlock": "31",
+    "street": "San Jose St",
+    "subdivision": null,
+    "barangay": "56",
+    "city": "Quezon City",
+    "province": null,
+    "zipcode": "1013",
+    "houseBlock2": "34",
+    "street2": "Candly",
+    "subdivision2": "Castle Homes.",
+    "barangay2": "234",
+    "city2": "Bulancan",
+    "province2": "Lapu Lapu City, Cebu",
+    "zipcode2": "1345"
+  }
+]

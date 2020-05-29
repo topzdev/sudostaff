@@ -31,11 +31,7 @@ class BenifitsServices {
       { returning: ["id"] }
     );
 
-    return {
-      status: 200,
-      msg: "Benifits Information Added",
-      data: result.id,
-    };
+    return result.id;
   }
 
   async update(benifitsInfo) {

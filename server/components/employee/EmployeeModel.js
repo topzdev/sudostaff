@@ -43,7 +43,7 @@ EmployeeModel.init(
     familyDetailsId: {
       type: Sequelize.INTEGER,
       references: {
-        model: "family-details",
+        model: "familyDetails",
         key: "id",
       },
     },
@@ -57,7 +57,7 @@ EmployeeModel.init(
     governmentIssuedId: {
       type: Sequelize.INTEGER,
       references: {
-        model: "addresses",
+        model: "governmentIds",
         key: "id",
       },
     },
@@ -70,7 +70,7 @@ EmployeeModel.init(
       },
     },
   },
-  { sequelize, modelName: "employees", timestamps: true }
+  { sequelize, modelName: "employees", timestamps: true, paranoid: true }
 );
 
 module.exports = EmployeeModel;

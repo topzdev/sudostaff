@@ -1,9 +1,30 @@
 const DepartmentModel = require("./DepartmentModel");
 const deparmentHelpers = require("./departmentHelpers");
+const DeparmentHeadModel = require("./DepartmentHeadModel");
+const EmployeeModel = require("../employee/EmployeeModel");
+
+const include = [
+  {
+    model: DeparmentHeadModel,
+    attributes: ["id", "employeeId"],
+    include: [
+      {
+        model: EmployeeModel,
+        attributes: ["firstName", "middleName", "lastName"],
+        right: true,
+      },
+    ],
+  },
+];
 
 class DepartmentServices {
   async getOne({ id }) {
-    const result = await DepartmentModel.findAll({ where: { id }, limit: 1 });
+    const result = await DepartmentModel.findAll({
+      where: { id },
+      limit: 1,
+      include,
+    });
+
     return {
       status: 200,
       msg: "Department fetch successfully",
@@ -12,9 +33,10 @@ class DepartmentServices {
   }
 
   async getAll({ search, limit, offset }) {
-    const result = await DepartmentModel.findAll(
-      deparmentHelpers.parseCondition({ search, limit, offset })
-    );
+    const result = await DepartmentModel.findAll({
+      ...deparmentHelpers.parseCondition({ search, limit, offset }),
+      include,
+    });
     return {
       status: 200,
       msg: "Departments fetch successfully",
@@ -22,17 +44,19 @@ class DepartmentServices {
     };
   }
 
-  async create({ name }) {
+  async create({ name, description, employeeId }) {
     if (await deparmentHelpers.isExist({ name }))
       return {
         status: 500,
         msg: "Department name is already exist",
       };
 
-    const result = await DepartmentModel.create(
-      { name },
-      { returning: ["id"] }
-    );
+    const result = await DepartmentModel.create({ name, description });
+
+    const head = await DeparmentHeadModel.create({
+      departmentId: result.id,
+      employeeId,
+    });
 
     return {
       status: 200,
@@ -49,6 +73,15 @@ class DepartmentServices {
       where: { id },
     });
 
+    const departmentHead = await DeparmentHeadModel.update(
+      { employeeId: departmentInfo.employeeId },
+      {
+        where: { departmentId: id },
+      }
+    );
+
+    console.log(departmentHead);
+
     return {
       status: 200,
       msg: "Department Updated Successfully",
@@ -63,7 +96,14 @@ class DepartmentServices {
         msg: "Department is not exist",
       };
 
+    const departmentHead = await DeparmentHeadModel.destroy({
+      departmentId: id,
+    });
+
     const result = await DepartmentModel.destroy({ where: { id } });
+
+    console.log(departmentHead, result);
+
     return {
       status: 200,
       msg: "Department Deleted Permenanently",

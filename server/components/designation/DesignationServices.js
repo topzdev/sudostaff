@@ -1,9 +1,16 @@
 const DesignationModel = require("./DesignationModel");
 const designationHelpers = require("./designationHelpers");
+const DepartmentModel = require("../department/DepartmentModel");
+
+const include = [{ model: DepartmentModel, attributes: ["name", "id"] }];
 
 class DesignationServices {
   async getOne({ id }) {
-    const result = await DesignationModel.findAll({ where: { id }, limit: 1 });
+    const result = await DesignationModel.findAll({
+      where: { id },
+      limit: 1,
+      include,
+    });
     return {
       status: 200,
       msg: "Designation fetch successfully",
@@ -16,6 +23,7 @@ class DesignationServices {
       where: {},
       offset,
       limit,
+      include,
     };
 
     if (search) options.where.name = { [Op.like]: `%${search}%` };

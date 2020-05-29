@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
+const DeparmentHeadModel = require("./DepartmentHeadModel");
 
 class DepartmentModel extends Model {}
 
@@ -15,21 +16,13 @@ DepartmentModel.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-
-    headId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: "employees",
-        key: "id",
-      },
-    },
-
-    isActive: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: true,
+    description: {
+      type: Sequelize.STRING,
     },
   },
-  { sequelize, modelName: "departments" }
+  { sequelize, modelName: "departments", timestamps: true, paranoid: true }
 );
+
+DepartmentModel.hasOne(DeparmentHeadModel);
 
 module.exports = DepartmentModel;

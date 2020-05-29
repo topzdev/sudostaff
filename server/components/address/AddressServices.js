@@ -17,12 +17,14 @@ class AddressServices {
     subdivision,
     barangay,
     city,
+    province,
     zipcode,
     houseBlock2,
     street2,
     subdivision2,
     barangay2,
     city2,
+    province2,
     zipcode2,
   }) {
     const result = await AddressModel.create(
@@ -32,22 +34,20 @@ class AddressServices {
         subdivision,
         barangay,
         city,
+        province,
         zipcode,
         houseBlock2,
         street2,
         subdivision2,
         barangay2,
         city2,
+        province2,
         zipcode2,
       },
       { returning: ["id"] }
     );
 
-    return {
-      status: 200,
-      msg: "Address Information Added",
-      data: result.id,
-    };
+    return result.id;
   }
 
   async update(AddressInfo) {
