@@ -3,8 +3,8 @@
     <v-card flat class="align-center">
       <v-row>
         <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium">Create Department</v-card-title>
-          <v-card-subtitle>Add Deparment Information</v-card-subtitle>
+          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+          <v-card-subtitle v-text="subtitle"></v-card-subtitle>
         </v-col>
       </v-row>
 
@@ -33,6 +33,17 @@ export default {
         headId: null
       }
     };
+  },
+  created() {},
+  computed: {
+    title() {
+      return this.isEdit ? "Update Department" : "Create Department";
+    },
+    subtitle() {
+      return this.isEdit
+        ? "Edit Deparment Information"
+        : "Add Deparment Information";
+    }
   }
 };
 </script>

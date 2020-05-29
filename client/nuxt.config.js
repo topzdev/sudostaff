@@ -63,7 +63,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: { host: "localhost", port: 5000, prefix: "/hr/api" },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

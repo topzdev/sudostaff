@@ -2,6 +2,8 @@
   <v-app>
     <base-navbar />
     <base-sidebar />
+    <modals />
+    <snackbars />
     <v-content>
       <v-container>
         <nuxt />
@@ -12,11 +14,15 @@
 <script>
 import BaseNavbar from "./navbars/BaseNavbar";
 import BaseSidebar from "./sidebars/BaseSidebar";
+import Modals from "./modals";
+import Snackbars from "./snackbars";
 export default {
   name: "Default",
   components: {
     BaseSidebar,
-    BaseNavbar
+    BaseNavbar,
+    Modals,
+    Snackbars
   },
   data() {
     return {};
