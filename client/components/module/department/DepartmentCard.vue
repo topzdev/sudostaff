@@ -20,14 +20,9 @@
             outlined
           ></v-textarea>
         </v-col>
+
         <v-col cols="12">
-          <v-text-field
-            label="Deparment head"
-            :value="headId"
-            @input="$emit('update:headId', $event)"
-            hide-details
-            outlined
-          ></v-text-field>
+          <search-employee-input v-bind.sync="employeeId" />
         </v-col>
       </v-row>
     </v-card-text>
@@ -38,7 +33,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["name", "description", "headId"]
+  props: ["name", "description", "employeeId"]
 };
 </script>
 

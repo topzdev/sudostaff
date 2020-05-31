@@ -8,7 +8,7 @@ export const state = () => ({
   voluntaryExp: false,
   training: true,
   messageDialog: {
-    show: true,
+    show: false,
     message: "",
     type: "",
     title: "",

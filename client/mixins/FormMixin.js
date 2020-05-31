@@ -1,14 +1,20 @@
 export default {
+  data() {
+    return {
+      loading: false
+    };
+  },
+  methods: {
+    back() {
+      this.$router.back();
+    }
+  },
   props: {
     actions: {
       type: Boolean,
       default: false
     },
     isEdit: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
       type: Boolean,
       default: false
     },

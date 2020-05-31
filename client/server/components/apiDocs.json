@@ -1,0 +1,2041 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/hr/api/",
+      "description": "Human Resources Endpoint"
+    }
+  ],
+  "paths": {
+    "/employee/{id}": {
+      "get": {
+        "tags": ["employee"],
+        "summary": "Return Employee Information by ID",
+        "description": "Get individual employee information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/employee"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Employee ID is already exist or No profile image provided or  Please upload a image format"
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/employee": {
+      "get": {
+        "tags": ["employee"],
+        "summary": "Return list of employee",
+        "description": "Get all employees with their informations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/filterLimit"
+          },
+          {
+            "$ref": "#/components/parameters/filterOffset"
+          },
+
+          {
+            "$ref": "#/components/parameters/filterSearch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Employee",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/employee"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["employee"],
+        "summary": "Add Employee",
+        "description": "Create employee information and return id of created employee",
+        "requestBody": {
+          "description": "Send Employee Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Information Successfully Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retEmployeeData"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["employee"],
+        "summary": "Update Employee",
+        "description": "Update employee information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retEmployeeData"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/department/{id}": {
+      "get": {
+        "tags": ["department"],
+        "summary": "Return Deparment Information by ID",
+        "description": "Get individual Deparment information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Department fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/department"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/department": {
+      "get": {
+        "tags": ["department"],
+        "summary": "Return list of department",
+        "description": "Get all departments with their informations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/filterLimit"
+          },
+          {
+            "$ref": "#/components/parameters/filterOffset"
+          },
+
+          {
+            "$ref": "#/components/parameters/filterSearch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Department",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/department"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["department"],
+        "summary": "Add Department",
+        "description": "Create department information and return id of created department",
+        "requestBody": {
+          "description": "Send Department Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/department"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Information Successfully Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["department"],
+        "summary": "Update Department",
+        "description": "Update department information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/department"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/designation/{id}": {
+      "get": {
+        "tags": ["designation"],
+        "summary": "Return Designation Information by ID",
+        "description": "Get individual Designation information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Designation fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/designation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/designation": {
+      "get": {
+        "tags": ["designation"],
+        "summary": "Return list of designation",
+        "description": "Get all designations with their informations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/filterLimit"
+          },
+          {
+            "$ref": "#/components/parameters/filterOffset"
+          },
+
+          {
+            "$ref": "#/components/parameters/filterSearch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Designation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/designation"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["designation"],
+        "summary": "Add Designation",
+        "description": "Create designation information and return id of created designation",
+        "requestBody": {
+          "description": "Send Designation Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/designation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Information Successfully Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["designation"],
+        "summary": "Update Designation",
+        "description": "Update designation information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/designation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/leave-type/{id}": {
+      "get": {
+        "tags": ["leave-type"],
+        "summary": "Return Leave Type Information by ID",
+        "description": "Get individual Leave Type information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leave Type fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/leaveType"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/leave-type": {
+      "get": {
+        "tags": ["leave-type"],
+        "summary": "Return list of leave-type",
+        "description": "Get all leave-types with their informations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/filterLimit"
+          },
+          {
+            "$ref": "#/components/parameters/filterOffset"
+          },
+
+          {
+            "$ref": "#/components/parameters/filterSearch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Leave Type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/leaveType"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["leave-type"],
+        "summary": "Add Leave Type",
+        "description": "Create leave-type information and return id of created leave-type",
+        "requestBody": {
+          "description": "Send Leave Type Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/leaveType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Information Successfully Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["leave-type"],
+        "summary": "Update Leave Type",
+        "description": "Update leave-type information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/leaveType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/leave-request/{id}": {
+      "get": {
+        "tags": ["leave-request"],
+        "summary": "Return Leave Request Information by ID",
+        "description": "Get individual Leave Request information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leave Request fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/leaveRequest"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/leave-request": {
+      "get": {
+        "tags": ["leave-request"],
+        "summary": "Return list of leave-request",
+        "description": "Get all leave-requests with their informations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/filterLimit"
+          },
+          {
+            "$ref": "#/components/parameters/filterOffset"
+          },
+
+          {
+            "$ref": "#/components/parameters/filterSearch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Leave Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/leaveRequest"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["leave-request"],
+        "summary": "Add Leave Request",
+        "description": "Create leave-request information and return id of created leave-request",
+        "requestBody": {
+          "description": "Send Leave Request Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/leaveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Leave Request Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["leave-request"],
+        "summary": "Update Leave Request",
+        "description": "Update leave-request information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/leaveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/goverment-ids/{id}": {
+      "get": {
+        "tags": ["goverment-ids"],
+        "summary": "Return Government Ids Information by ID",
+        "description": "Get individual Government Ids information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Government Ids fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/governmentIds"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/goverment-ids": {
+      "post": {
+        "tags": ["goverment-ids"],
+        "summary": "Add Government Ids",
+        "description": "Create goverment-ids information and return id of created goverment-ids",
+        "requestBody": {
+          "description": "Send Government Ids Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/governmentIds"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Government Ids Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["goverment-ids"],
+        "summary": "Update Government Ids",
+        "description": "Update goverment-ids information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/governmentIds"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/benifits/{id}": {
+      "get": {
+        "tags": ["benifits"],
+        "summary": "Return Benifits Information by ID",
+        "description": "Get individual Benifits information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Benifits fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/benifit"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/benifits": {
+      "post": {
+        "tags": ["benifits"],
+        "summary": "Add Benifits",
+        "description": "Create benifits information and return id of created benifits",
+        "requestBody": {
+          "description": "Send Benifits Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/benifit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Benifits Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["benifits"],
+        "summary": "Update Benifits",
+        "description": "Update benifits information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/benifit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/work-exp/{id}": {
+      "get": {
+        "tags": ["work-exp"],
+        "summary": "Return Work Experiennce by ID",
+        "description": "Get individual Work Experience by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Work Experience fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workExp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/work-exp": {
+      "post": {
+        "tags": ["work-exp"],
+        "summary": "Add Work Experience",
+        "description": "Create work-exp information and return id of created work-exp",
+        "requestBody": {
+          "description": "Send Work Experiennce",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/workExp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Work Experience Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["work-exp"],
+        "summary": "Update Work Experience",
+        "description": "Update work-exp information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/workExp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/voluntary-exp/{id}": {
+      "get": {
+        "tags": ["voluntary-exp"],
+        "summary": "Return Goverment Exp. Information by ID",
+        "description": "Get individual Goverment Exp. information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Goverment Exp. fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voluntaryExperience"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/voluntary-exp": {
+      "post": {
+        "tags": ["voluntary-exp"],
+        "summary": "Add Goverment Exp.",
+        "description": "Create voluntary-exp information and return id of created voluntary-exp",
+        "requestBody": {
+          "description": "Send Goverment Exp. Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/voluntaryExperience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Goverment Exp. Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["voluntary-exp"],
+        "summary": "Update Goverment Exp.",
+        "description": "Update voluntary-exp information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/voluntaryExperience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/training-programs/{id}": {
+      "get": {
+        "tags": ["training-programs"],
+        "summary": "Return Training Programs Information by ID",
+        "description": "Get individual Training Programs information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Training Programs fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trainingPrograms"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/training-programs": {
+      "post": {
+        "tags": ["training-programs"],
+        "summary": "Add Training Programs",
+        "description": "Create training-programs information and return id of created training-programs",
+        "requestBody": {
+          "description": "Send Training Programs Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/trainingPrograms"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Training Programs Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["training-programs"],
+        "summary": "Update Training Programs",
+        "description": "Update training-programs information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/trainingPrograms"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/educational-background/{id}": {
+      "get": {
+        "tags": ["educational-background"],
+        "summary": "Return Educational Backgrounds Information by ID",
+        "description": "Get individual Educational Backgrounds information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Educational Backgrounds fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/educBackgrounds"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/educational-background": {
+      "post": {
+        "tags": ["educational-background"],
+        "summary": "Add Educational Backgrounds",
+        "description": "Create educational-background information and return id of created educational-background",
+        "requestBody": {
+          "description": "Send Educational Backgrounds Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/educBackgrounds"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Educational Backgrounds Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["educational-background"],
+        "summary": "Update Educational Backgrounds",
+        "description": "Update educational-background information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/educBackgrounds"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/civil-eligibility/{id}": {
+      "get": {
+        "tags": ["civil-eligibility"],
+        "summary": "Return Civil Eligibility Information by ID",
+        "description": "Get individual Civil Eligibility information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Civil Eligibility fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/civilEligibility"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/civil-eligibility": {
+      "post": {
+        "tags": ["civil-eligibility"],
+        "summary": "Add Civil Eligibility",
+        "description": "Create civil-eligibility information and return id of created civil-eligibility",
+        "requestBody": {
+          "description": "Send Civil Eligibility Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/civilEligibility"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Civil Eligibility Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["civil-eligibility"],
+        "summary": "Update Civil Eligibility",
+        "description": "Update civil-eligibility information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/civilEligibility"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/childrens/{id}": {
+      "get": {
+        "tags": ["childrens"],
+        "summary": "Return Children Information by ID",
+        "description": "Get individual Children information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Children fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/childrens"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/childrens": {
+      "post": {
+        "tags": ["childrens"],
+        "summary": "Add Children",
+        "description": "Create childrens information and return id of created childrens",
+        "requestBody": {
+          "description": "Send Children Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/childrens"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Children Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["childrens"],
+        "summary": "Update Children",
+        "description": "Update childrens information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/childrens"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/address/{id}": {
+      "get": {
+        "tags": ["address"],
+        "summary": "Return Address Information by ID",
+        "description": "Get individual Address information by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/address"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/address": {
+      "post": {
+        "tags": ["address"],
+        "summary": "Add Address",
+        "description": "Create address information and return id of created address",
+        "requestBody": {
+          "description": "Send Address Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/address"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["address"],
+        "summary": "Update Address",
+        "description": "Update address information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/address"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Information Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/family-details/{id}": {
+      "get": {
+        "tags": ["family-details"],
+        "summary": "Return Family Details by ID",
+        "description": "Get individual Family Details by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "integer" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Family Details fetch successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/familyDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/family-details": {
+      "post": {
+        "tags": ["family-details"],
+        "summary": "Add Family Details",
+        "description": "Create family-details and return id of created family-details",
+        "requestBody": {
+          "description": "Send Family Details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/familyDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Family Details Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["family-details"],
+        "summary": "Update Family Details",
+        "description": "Update family-details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/familyDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deparment Successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/retDefault"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "retDefault": { "type": "integer", "description": "id of created value" },
+      "retEmployeeData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "imageId": {
+            "type": "integer"
+          }
+        }
+      },
+      "employee": {
+        "type": "object",
+        "description": "Employee Information",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false,
+            "example": "EMP-001",
+            "description": "ID of created employee"
+          },
+          "firstName": { "type": "string", "nullable": false },
+          "lastName": { "type": "string", "nullable": false },
+          "middleName": { "type": "string" },
+          "extensionName": { "type": "string" },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false
+          },
+          "birthPlace": { "type": "string", "nullable": false },
+          "citizenship": { "type": "string", "nullable": false },
+          "emailAddress": { "type": "string" },
+          "landline": { "type": "string", "maxLength": 5 },
+          "mobile": { "type": "integer" },
+          "bloodType": { "type": "string" },
+          "height": { "type": "number", "format": "double" },
+          "weight": { "type": "number", "format": "double" },
+          "civilStatus": { "type": "string", "nullable": false },
+          "joiningDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false
+          },
+          "gender": { "type": "string", "enum": ["m", "f"], "nullable": false },
+          "isActive": { "type": "boolean", "default": true },
+          "familyDetailsId": { "type": "number" },
+          "addressId": { "type": "number" },
+          "governmentIssuedId": { "type": "number" },
+          "designationId": { "type": "number", "nullable": false }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "middleName",
+          "birthDate",
+          "birthPlace",
+          "citizenship",
+          "height",
+          "bloodType",
+          "weight",
+          "civilStatus",
+          "joiningDate",
+          "gender",
+          "designationId"
+        ]
+      },
+      "department": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1
+          },
+          "headId": {
+            "type": "number",
+            "format": "id",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "nullable": false,
+            "example": "Information Technology Department"
+          },
+          "isActive": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "designation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of created Designation "
+          },
+          "departmentId": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of department selected"
+          },
+          "name": {
+            "type": "string",
+            "nullable": false,
+            "example": "Senior Programmer"
+          },
+          "isActive": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "leaveRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of created leave request"
+          },
+          "employeeId": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of Employee"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "description": "when leave set to start"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "description": "when the leave will be ended"
+          },
+          "leaveTypeId": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of leaveType from leaveTypeModel"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Stating why he/she want to request leave"
+          },
+          "requestStatus": {
+            "type": "string",
+            "enum": ["active", "pending", "rejected", "authorized"],
+            "default": "active",
+            "example": "active"
+          },
+          "authorizedComment": {
+            "type": "string",
+            "description": "when the authorized approved/rejected the leave request they leave a comment about your leave request",
+            "nullable": true
+          },
+          "authorizedPersonId": {
+            "type": "string",
+            "description": "ID of the authorized person from EmployeeModal which department is Human Resources",
+            "nullable": true
+          }
+        }
+      },
+      "leaveType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Leave Type"
+          },
+          "name": {
+            "type": "string",
+            "nullable": false,
+            "example": "Information Technology Department"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "attendance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Attendance"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "amBreakStart": { "type": "string", "format": "datetime" },
+          "amBreakEnd": { "type": "string", "format": "datetime" },
+          "pmBreakStart": { "type": "string", "format": "datetime" },
+          "pmBreakEnd": { "type": "string", "format": "datetime" },
+          "lunchBreakStart": { "type": "string", "format": "datetime" },
+          "lunchBreakEnd": { "type": "string", "format": "datetime" },
+          "signInTime": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Logged In time of the employee, when the employee started in work",
+            "nullable": false
+          },
+          "signOutTime": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Time when the employee signed out or ended the work"
+          }
+        }
+      },
+      "benifit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Benifit Model"
+          },
+          "gsisId": { "type": "string" },
+          "pagibigId": { "type": "string" },
+          "philhealthId": { "type": "string" },
+          "sssNo": { "type": "string" },
+          "tinNo": { "type": "string" },
+          "agencyEmployeerId": { "type": "string" }
+        }
+      },
+      "familyDetails": {
+        "type": "object",
+        "description": "Family Details of Employee",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Attendance"
+          },
+          "spouseFirstName": { "type": "string" },
+          "spouseLastName": { "type": "string" },
+          "spouseExt": { "type": "string" },
+          "fatherFirstName": { "type": "string" },
+          "fatherMiddleName": { "type": "string" },
+          "fatherLastName": { "type": "string" },
+          "fatherExt": { "type": "string" },
+          "motherFirstName": { "type": "string" },
+          "motherMiddleName": { "type": "string" },
+          "motherLastName": { "type": "string" },
+          "motherExt": { "type": "string" }
+        }
+      },
+      "governmentIds": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Government Model"
+          },
+          "governmentIssueId": { "type": "string" },
+          "idWork ExperiencePassportId": { "type": "string" },
+          "dateIssuance": { "type": "string", "format": "date" },
+          "placeIssuance": { "type": "string" }
+        }
+      },
+      "educBackgrounds": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Educational Background"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "level": { "type": "string" },
+          "degree": { "type": "string" },
+          "schoolName": { "type": "string" },
+          "from": { "type": "number", "example": 2020 },
+          "to": { "type": "number", "example": 2020 },
+          "graduateYear": { "type": "number" },
+          "recognition": { "type": "string" },
+          "scholarship": { "type": "string" }
+        }
+      },
+      "civilEligibility": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Attendance"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "licenseTitle": { "type": "string" },
+          "licenseNumber": { "type": "string" },
+          "rating": { "type": "string" },
+          "validityDate": { "type": "string", "format": "date" },
+          "examinationDate": { "type": "string", "format": "date" },
+          "examinationPlace": { "type": "string" }
+        }
+      },
+      "workExp": {
+        "type": "object",
+        "description": "Work Experience of Employee",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Work Experiennce"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "company": { "type": "string" },
+          "position": { "type": "string" },
+          "salaryGrade": { "type": "string" },
+          "stepIncremented": { "type": "string" },
+          "monthlySalaray": { "type": "number", "format": "decimal" },
+          "from": { "type": "number", "example": 2020 },
+          "to": { "type": "number", "example": 2020 },
+          "isFullTime": { "type": "boolean" },
+          "isGovernmentService": { "type": "boolean" }
+        }
+      },
+      "trainingPrograms": {
+        "type": "object",
+        "description": "Training Programs of Employee",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Training Programs"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "title": { "type": "string" },
+          "from": { "type": "string", "format": "date" },
+          "to": { "type": "string", "format": "date" },
+          "totalHours": { "type": "number", "format": "decimal" },
+          "type": { "type": "string" },
+          "sponsor": { "type": "string" }
+        }
+      },
+      "voluntaryExperience": {
+        "type": "object",
+        "description": "Voluntary Experience of Employee",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Training Programs"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "company": { "type": "string" },
+          "position": { "type": "string" },
+          "address": { "type": "string" },
+          "from": { "type": "number", "example": 2020 },
+          "to": { "type": "number", "example": 2020 },
+          "totalHours": { "type": "number", "format": "decimal" }
+        }
+      },
+      "childrens": {
+        "type": "object",
+        "description": "Voluntary Experience of Employee",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Children"
+          },
+          "employeeId": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "ID of employee"
+          },
+          "fullName": { "type": "string" },
+          "birthDate": { "type": "string", "format": "date" }
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Address"
+          },
+          "houseBlock": { "type": "string" },
+          "street": { "type": "string" },
+          "subdivision": { "type": "string" },
+          "barangay": { "type": "string" },
+          "city": { "type": "string" },
+          "zipcode": { "type": "string" },
+          "houseBlock2": { "type": "string" },
+          "street2": { "type": "string" },
+          "subdivision2": { "type": "string" },
+          "barangay2": { "type": "string" },
+          "city2": { "type": "string" },
+          "zipcode2": { "type": "string" }
+        }
+      },
+      "image": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "id",
+            "example": 1,
+            "description": "<Primary Key> ID of Address"
+          },
+
+          "imageUrl": {
+            "type": "string"
+          },
+          "imageId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "filterSearch": {
+        "in": "query",
+        "name": "search",
+        "description": "search by id",
+        "schema": { "type": "string" }
+      },
+      "filterLimit": {
+        "in": "query",
+        "name": "limit",
+        "description": "how many items you want to return by server",
+        "schema": { "type": "integer" }
+      },
+      "filterOffset": {
+        "in": "query",
+        "name": "offset",
+        "schema": { "type": "integer" }
+      }
+    }
+  }
+}

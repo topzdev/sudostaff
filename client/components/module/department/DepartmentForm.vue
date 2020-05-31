@@ -1,6 +1,6 @@
 <template>
   <v-form>
-    <v-card flat class="align-center">
+    <v-card :loading="loading" flat class="align-center">
       <v-row>
         <v-col class="py-0">
           <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
@@ -14,7 +14,13 @@
 
       <v-col cols="8" class="py-0">
         <v-card flat>
-          <form-card-action />
+          <form-card-action
+            :cancelFunc="back"
+            :updateFunc="update"
+            :saveFunc="create"
+            :loading="loading"
+            :is-edit="isEdit"
+          />
         </v-card>
       </v-col>
     </v-card>
@@ -22,19 +28,48 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import FormMixin from "@/mixins/FormMixin";
+
 export default {
   mixins: [FormMixin],
   data() {
     return {
       department: {
-        name: "Information Technology Department",
-        description: "Information Technology Department",
-        headId: null
+        id: null,
+        name: "",
+        description: "",
+        employeeId: null
       }
     };
   },
-  created() {},
+  methods: {
+    async fetchData() {
+      const id = this.$route.params.id;
+      if (id && this.isEdit) {
+        await this.$store.dispatch("department/fetchOneDepartment", id);
+        this.department = JSON.parse(JSON.stringify(this.current));
+      }
+    },
+
+    async create() {
+      this.loading = true;
+      await this.$store.dispatch(
+        "department/createDepartment",
+        this.department
+      );
+      this.loading = false;
+    },
+
+    async update() {
+      this.loading = true;
+      await this.$store.dispatch(
+        "department/updateDepartment",
+        this.department
+      );
+      this.loading = false;
+    }
+  },
   computed: {
     title() {
       return this.isEdit ? "Update Department" : "Create Department";
@@ -43,8 +78,15 @@ export default {
       return this.isEdit
         ? "Edit Deparment Information"
         : "Add Deparment Information";
+    },
+    current() {
+      return this.$store.state.department.current;
     }
-  }
+  },
+  created() {
+    this.fetchData();
+  },
+  beforeDestroy() {}
 };
 </script>
 
