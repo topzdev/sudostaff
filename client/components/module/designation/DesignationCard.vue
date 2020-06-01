@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12">
           <v-text-field
-            label="Department Name"
+            label="Designation Name"
             :value="name"
             @input="$emit('update:name', $event)"
             hide-details
@@ -22,11 +22,7 @@
         </v-col>
 
         <v-col cols="12">
-          <search-employee-input
-            :value="employeeId"
-            @input="$emit('update:employeeId', $event)"
-            :default-value="departmentHead"
-          />
+          <department-dropdown :value="departmentId" @input="$emit('update:departmentId', $event)" />
         </v-col>
       </v-row>
     </v-card-text>
@@ -37,7 +33,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["name", "description", "employeeId", "departmentHead"]
+  props: ["name", "description", "departmentId", "department"]
 };
 </script>
 

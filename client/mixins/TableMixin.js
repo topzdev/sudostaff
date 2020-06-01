@@ -9,16 +9,23 @@ export default {
     };
   },
   methods: {
-    async fetchList() {
+    fetchList() {
+      const self = this;
       this.loading = true;
       const { itemsPerPage, page } = this.pagination;
-      await this.$store.dispatch(this.dispatch, {
-        search: this.search,
-        limit: itemsPerPage,
-        offset: page ? (page - 1) * itemsPerPage : undefined
-      });
 
-      this.loading = false;
+      setTimeout(async () => {
+        await self.$store.dispatch(self.dispatch, {
+          search: self.search,
+          limit: itemsPerPage,
+          offset: page ? (page - 1) * itemsPerPage : undefined
+        });
+        console.log("Table Loaded..");
+        self.loading = false;
+      }, 500);
+    },
+    editItem(id) {
+      this.$router.push(this.store + "/update/" + id);
     }
   },
   computed: {
@@ -35,7 +42,7 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
     this.fetchList();
   }
 };

@@ -32,11 +32,11 @@ export default {
   mixins: [TableMixin],
   data() {
     return {
-      dispatch: "department/fetchDepartments",
-      store: "department",
+      dispatch: "designation/fetchDesignations",
+      store: "designation",
       headers: [
         {
-          text: "Department Name",
+          text: "Designation Name",
           value: "name"
         },
         {
@@ -44,8 +44,8 @@ export default {
           value: "description"
         },
         {
-          text: "Department Head",
-          value: "departmentHead.employee.fullName"
+          text: "Department",
+          value: "department.name"
         },
         {
           text: "Actions",

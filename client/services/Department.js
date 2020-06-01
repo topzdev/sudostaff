@@ -7,7 +7,6 @@ class DepartmentApi extends ApiClient {
   }
 
   getAll(query) {
-    console.log(query);
     return $axios.$get("/department" + this.genQuery(query));
   }
 

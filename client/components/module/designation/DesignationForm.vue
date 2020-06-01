@@ -9,7 +9,7 @@
       </v-row>
 
       <v-col cols="8">
-        <department-card v-bind.sync="department" :header="header" :outlined="outlined" />
+        <designation-card v-bind.sync="designation" :header="header" :outlined="outlined" />
       </v-col>
 
       <v-col cols="8" class="py-0">
@@ -35,12 +35,11 @@ export default {
   mixins: [FormMixin],
   data() {
     return {
-      department: {
+      designation: {
         id: null,
         name: "",
         description: "",
-        employeeId: null,
-        departmentHead: null
+        departmentId: null
       }
     };
   },
@@ -48,34 +47,21 @@ export default {
     async fetchData() {
       const id = this.$route.params.id;
 
-      console.log(id);
-
       if (id && this.isEdit) {
-        await this.$store.dispatch("department/fetchOneDepartment", id);
+        await this.$store.dispatch("designation/fetchOneDesignation", {
+          id,
+          query: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+        });
         const data = JSON.parse(JSON.stringify(this.current));
-        if (data) {
-          const { description, id, name, departmentHead } = data;
-          console.log("FORM DATA :", description, id, name, departmentHead);
-          const employeeId = departmentHead.employee
-            ? departmentHead.employee.id
-            : null;
-
-          this.department = {
-            description,
-            id,
-            name,
-            departmentHead,
-            employeeId
-          };
-        }
+        if (data) this.designation = data;
       }
     },
 
     async create() {
       this.loading = true;
       await this.$store.dispatch(
-        "department/createDepartment",
-        this.department
+        "designation/createDesignation",
+        this.designation
       );
       this.loading = false;
     },
@@ -83,23 +69,23 @@ export default {
     async update() {
       this.loading = true;
       await this.$store.dispatch(
-        "department/updateDepartment",
-        this.department
+        "designation/updateDesignation",
+        this.designation
       );
       this.loading = false;
     }
   },
   computed: {
     title() {
-      return this.isEdit ? "Update Department" : "Create Department";
+      return this.isEdit ? "Update Designation" : "Create Designation";
     },
     subtitle() {
       return this.isEdit
-        ? "Edit Deparment Information"
-        : "Add Deparment Information";
+        ? "Edit Designation Information"
+        : "Add Designation Information";
     },
     current() {
-      return this.$store.state.department.current;
+      return this.$store.state.designation.current;
     }
   },
   created() {

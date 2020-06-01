@@ -3,10 +3,14 @@ import { state } from "./department";
 
 export const actions = {
   setNotifError({ commit }, error) {
-    console.error(error);
+    console.log(error.response);
     commit(
       "frontend/" + types.SET_NOTIF_SNACKBAR,
-      { show: true, color: "error", message: "Someting went wrong" },
+      {
+        show: true,
+        color: "error",
+        message: error.response.data.message || "Someting went wrong"
+      },
       { root: true }
     );
   },
