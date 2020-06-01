@@ -2,26 +2,35 @@ const DepartmentModel = require("./DepartmentModel");
 const deparmentHelpers = require("./departmentHelpers");
 const DeparmentHeadModel = require("./DepartmentHeadModel");
 const EmployeeModel = require("../employee/EmployeeModel");
-
-const include = [
-  {
-    model: DeparmentHeadModel,
-    attributes: ["id", "employeeId"],
-    include: [
-      {
-        model: EmployeeModel,
-        attributes: ["firstName", "lastName", "fullName"],
-      },
-    ],
-  },
-];
+const PhotoModel = require("../photo/PhotoModel");
+const parseCondition = require("../../helpers/parseCondition");
 
 class DepartmentServices {
-  async getOne({ id }) {
+  constructor() {
+    this.tableJoin = [
+      {
+        model: DeparmentHeadModel,
+        attributes: ["id"],
+        include: [
+          {
+            model: EmployeeModel,
+            attributes: ["id", "firstName", "lastName", "fullName"],
+            include: [
+              {
+                model: PhotoModel,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+  }
+
+  async getOne({ id }, { include, exclude, withDeptHead }) {
     const result = await DepartmentModel.findAll({
+      ...parseCondition({ limit: 1, include, exclude }),
+      include: withDeptHead ? this.tableJoin : [],
       where: { id },
-      limit: 1,
-      include,
     });
 
     return {
@@ -31,10 +40,25 @@ class DepartmentServices {
     };
   }
 
-  async getAll({ search, limit, offset }) {
+  async getAll({
+    searchText,
+    searchBy,
+    limit,
+    offset,
+    include,
+    exclude,
+    withDeptHead,
+  }) {
     const result = await DepartmentModel.findAndCountAll({
-      ...deparmentHelpers.parseCondition({ search, limit, offset }),
-      include,
+      ...parseCondition({
+        searchText,
+        searchBy,
+        limit,
+        offset,
+        include,
+        exclude,
+      }),
+      include: withDeptHead ? this.tableJoin : [],
     });
     return {
       status: 200,

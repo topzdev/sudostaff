@@ -36,9 +36,16 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchOneDepartment: async function({ dispatch, commit }, id) {
+  fetchOneDepartment: async function(
+    { dispatch, commit },
+    { id, query: { include, exclude } }
+  ) {
     try {
-      const result = await DepartmentAPI.getOne(id);
+      const result = await DepartmentAPI.getOne(id, {
+        include,
+        exclude,
+        withDeptHead: true
+      });
       commit(types.SET_CURRENT, result.data);
     } catch (error) {
       dispatch("utils/setNotifError", error, { root: true });

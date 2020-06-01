@@ -122,7 +122,6 @@ export default {
           include: ["firstName", "middleName", "lastName", "fullName"],
           withPhoto: true
         });
-        console.log("Searching...");
         self.employee = result.data;
       }, 1000);
       self.loading = false;

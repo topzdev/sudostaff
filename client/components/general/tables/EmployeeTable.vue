@@ -59,6 +59,16 @@ export default {
     return {
       page: 1,
       rows: [5, 10, 20, 25],
+      headers: [
+        {
+          text: "Employee Id",
+          value: "id"
+        },
+        {
+          text: "Name",
+          value: "id"
+        }
+      ],
       employees: [
         {
           id: "EMP-001-01",

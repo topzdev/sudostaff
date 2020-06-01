@@ -8,12 +8,17 @@ export const state = () => ({
     rows: [],
     count: 0
   },
+  dropdown: [],
   current: null
 });
 
 export const mutations = {
   [types.SET_DESIGNATIONS](state, list) {
     state.list = list;
+  },
+
+  [types.SET_DROPDOWN](state, list) {
+    state.dropdown = list;
   },
 
   [types.SET_CURRENT](state, current) {

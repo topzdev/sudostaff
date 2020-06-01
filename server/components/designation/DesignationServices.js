@@ -1,16 +1,19 @@
 const DesignationModel = require("./DesignationModel");
 const designationHelpers = require("./designationHelpers");
 const DepartmentModel = require("../department/DepartmentModel");
-
-const include = [{ model: DepartmentModel, attributes: ["name", "id"] }];
+const parseCondition = require("../../helpers/parseCondition");
 
 class DesignationServices {
-  async getOne({ id }) {
+  constructor() {
+    this.tableJoin = [{ model: DepartmentModel, attributes: ["name", "id"] }];
+  }
+  async getOne({ id }, { include, exclude, withDept }) {
     const result = await DesignationModel.findAll({
+      ...parseCondition({ limit: 1, include, exclude }),
+      include: withDept ? this.tableJoin : [],
       where: { id },
-      limit: 1,
-      include,
     });
+
     return {
       status: 200,
       msg: "Designation fetch successfully",
@@ -18,17 +21,26 @@ class DesignationServices {
     };
   }
 
-  async getAll({ search, limit, offset }) {
-    const options = {
-      where: {},
-      offset,
-      limit,
-      include,
-    };
-
-    if (search) options.where.name = { [Op.like]: `%${search}%` };
-
-    const result = await DesignationModel.findAll(options);
+  async getAll({
+    searchText,
+    searchBy,
+    limit,
+    offset,
+    include,
+    exclude,
+    withDept,
+  }) {
+    const result = await DesignationModel.findAndCountAll({
+      ...parseCondition({
+        searchText,
+        searchBy,
+        limit,
+        offset,
+        include,
+        exclude,
+      }),
+      include: withDept ? this.tableJoin : [],
+    });
 
     return {
       status: 200,
@@ -37,14 +49,18 @@ class DesignationServices {
     };
   }
 
-  async create({ departmentId, name }) {
+  async create({ departmentId, name, description }) {
     if (await designationHelpers.isExist({ name }))
       return {
         status: 500,
         msg: "Designation name is already exist",
       };
 
-    const result = await DesignationModel.create({ departmentId, name });
+    const result = await DesignationModel.create({
+      departmentId,
+      name,
+      description,
+    });
 
     return {
       status: 200,
@@ -57,11 +73,14 @@ class DesignationServices {
     const id = designationInfo.id;
     delete designationInfo.id;
 
-    if (await designationHelpers.isExist({ name: designationInfo.name }))
+    /**
+      // add here a name validation when needed
+      if (await designationHelpers.isExist({ name: designationInfo.name }))
       return {
-        status: 500,
+        status: 400,
         msg: "Designation name is already exist",
       };
+     */
 
     const result = await DesignationModel.update(designationInfo, {
       where: { id },

@@ -2,12 +2,9 @@ const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
 const PhotoModel = require("../photo/PhotoModel");
+const DesignationModel = require("../designation/DesignationModel");
 
-class EmployeeModel extends Model {
-  get fullName() {
-    return this.firsName + " " + this.lastName;
-  }
-}
+class EmployeeModel extends Model {}
 
 EmployeeModel.init(
   {

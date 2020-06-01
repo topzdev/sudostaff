@@ -14,7 +14,7 @@ class DesignationController {
 
   async fetchSingleDesignation(req, res) {
     try {
-      const result = await designationServices.getOne(req.params);
+      const result = await designationServices.getOne(req.params, req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);

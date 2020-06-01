@@ -6,8 +6,10 @@ const addressServices = require("../address/AddressServices");
 const familyDetailsServices = require("../family-details/FamilyDetailsServices");
 const governmentIssued = require("../government-ids/GovernmentIdsServices");
 const parseCondition = require("../../helpers/parseCondition");
-const PhotoModel = require("../photo/PhotoModel");
+
 class EmployeeServices {
+  constructor() {}
+
   async getOne({ id }) {
     const result = await EmployeeModel.findOne({
       attributes: {
@@ -31,6 +33,7 @@ class EmployeeServices {
     include,
     exclude,
     withPhoto,
+    withDesignation,
   }) {
     const result = await EmployeeModel.findAll({
       ...parseCondition({
@@ -41,7 +44,7 @@ class EmployeeServices {
         exclude,
         searchBy,
       }),
-      include: withPhoto ? [{ model: PhotoModel }] : [],
+      include: helper.joinTable({ withPhoto, withDesignation }),
     });
     return {
       status: 200,

@@ -51,11 +51,14 @@ export default {
       console.log(id);
 
       if (id && this.isEdit) {
-        await this.$store.dispatch("department/fetchOneDepartment", id);
+        await this.$store.dispatch("department/fetchOneDepartment", {
+          id,
+          query: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+        });
         const data = JSON.parse(JSON.stringify(this.current));
         if (data) {
           const { description, id, name, departmentHead } = data;
-          console.log("FORM DATA :", description, id, name, departmentHead);
+
           const employeeId = departmentHead.employee
             ? departmentHead.employee.id
             : null;

@@ -19,7 +19,7 @@ class DepartmentController {
 
   async fetchSingleDisignation(req, res) {
     try {
-      const result = await departmentServices.getOne(req.params);
+      const result = await departmentServices.getOne(req.params, req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);

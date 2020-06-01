@@ -2,8 +2,8 @@ import { $axios } from "@/utils/axios";
 import ApiClient from "./ApiClient";
 
 class DepartmentApi extends ApiClient {
-  getOne(id) {
-    return $axios.$get("/department/" + id);
+  getOne(id, query) {
+    return $axios.$get("/department/" + id + this.genQuery(query));
   }
 
   getAll(query) {

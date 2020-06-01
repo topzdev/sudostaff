@@ -24,6 +24,10 @@
         <v-col cols="12">
           <department-dropdown :value="departmentId" @input="$emit('update:departmentId', $event)" />
         </v-col>
+
+        <v-col cols="12">
+          <designation-dropdown v-model="sample" :department-id="departmentId" />
+        </v-col>
       </v-row>
     </v-card-text>
   </v-card>
@@ -33,7 +37,12 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["name", "description", "departmentId", "department"]
+  props: ["name", "description", "departmentId", "department"],
+  data() {
+    return {
+      sample: null
+    };
+  }
 };
 </script>
 
