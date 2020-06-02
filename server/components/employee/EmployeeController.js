@@ -18,7 +18,7 @@ class EmployeeController {
   async fetchSingleEmployee(req, res) {
     try {
       console.log(req.params);
-      const result = await employeeServices.getOne(req.params);
+      const result = await employeeServices.getOne(req.params, req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);

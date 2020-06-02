@@ -3,6 +3,7 @@ const Model = Sequelize.Model;
 const sequelize = require("../../database");
 const PhotoModel = require("../photo/PhotoModel");
 const DesignationModel = require("../designation/DesignationModel");
+const DepartmentHeadModel = require("../department/DepartmentHeadModel");
 
 class EmployeeModel extends Model {}
 
@@ -28,10 +29,16 @@ EmployeeModel.init(
     emailAddress: Sequelize.STRING,
     landline: Sequelize.STRING,
     mobile: Sequelize.STRING,
-    bloodType: Sequelize.STRING(5),
+    bloodType: {
+      type: Sequelize.ENUM("a+", "a-", "b+", "b-", "ab+", "o+", "o"),
+      allowNull: false,
+    },
     height: Sequelize.DECIMAL,
     weight: Sequelize.DECIMAL,
-    civilStatus: Sequelize.STRING,
+    civilStatus: {
+      type: Sequelize.ENUM("d", "m", "x", "s", "w", "n", "l"),
+      allowNull: false,
+    },
     joiningDate: Sequelize.DATEONLY,
 
     gender: {
@@ -89,5 +96,6 @@ EmployeeModel.init(
   { sequelize, modelName: "employees", timestamps: true, paranoid: true }
 );
 EmployeeModel.belongsTo(PhotoModel);
-
+EmployeeModel.belongsTo(DesignationModel);
+DepartmentHeadModel.belongsTo(EmployeeModel);
 module.exports = EmployeeModel;

@@ -37,8 +37,8 @@
           large
         >
           <v-avatar left size="50">
-            <img v-if="data.item.photo" :src="data.item.photo.photoUrl" />
-            <img v-else :src="emptyPhoto" />
+            <base-image v-if="data.item.photo" :src="data.item.photo.photoUrl" />
+            <base-image v-else />
           </v-avatar>
           <div>
             <div class="body-1">{{data.item.fullName}}</div>
@@ -52,8 +52,8 @@
         </template>
         <template v-else>
           <v-list-item-avatar>
-            <img v-if="data.item.photo" :src="data.item.photo.photoUrl" />
-            <img v-else :src="emptyPhoto" />
+            <base-image v-if="data.item.photo" :src="data.item.photo.photoUrl" />
+            <base-image v-else />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>{{data.item.fullName}}</v-list-item-title>
@@ -122,7 +122,7 @@ export default {
           include: ["firstName", "middleName", "lastName", "fullName"],
           withPhoto: true
         });
-        self.employee = result.data;
+        self.employee = result.data.rows;
       }, 1000);
       self.loading = false;
     }

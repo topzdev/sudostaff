@@ -10,12 +10,10 @@ const parseCondition = require("../../helpers/parseCondition");
 class EmployeeServices {
   constructor() {}
 
-  async getOne({ id }) {
-    const result = await EmployeeModel.findOne({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-      where: { id },
+  async getOne({ id }, { include, exclude, withPhoto, withDesignation }) {
+    const result = await EmployeeModel.findByPk(id, {
+      ...parseCondition({ include, exclude }),
+      include: helper.joinTable({ withPhoto, withDesignation }),
     });
     console.log(result);
     return {
@@ -35,7 +33,7 @@ class EmployeeServices {
     withPhoto,
     withDesignation,
   }) {
-    const result = await EmployeeModel.findAll({
+    const result = await EmployeeModel.findAndCountAll({
       ...parseCondition({
         searchText,
         limit,

@@ -16,28 +16,21 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="4">
-          <v-select
-            label="Deparment"
-            item-text="name"
-            item-value="departmentId"
-            hide-details
-            :value="departmentId"
-            @input="$emit('update:departmentId', $event)"
-            outlined
-          ></v-select>
+
+        <v-col cols="6">
+          <department-dropdown :value="departmentId" @input="$emit('update:departmentId', $event)" />
         </v-col>
-        <v-col cols="4">
-          <v-select
-            label="Designation"
-            disabled
-            hide-details
+
+        <v-col cols="6">
+          <designation-dropdown
             :value="designationId"
+            :disabled="departmentId ? false : true"
             @input="$emit('update:designationId', $event)"
-            outlined
-          ></v-select>
+            :departmentId="departmentId"
+          />
         </v-col>
-        <v-col cols="4">
+
+        <v-col cols="6">
           <date-picker
             label="Joining Date"
             :value="joiningDate"

@@ -1,6 +1,7 @@
 const EmployeeModel = require("./EmployeeModel");
 const PhotoModel = require("../photo/PhotoModel");
 const DesignationModel = require("../designation/DesignationModel");
+const DepartmentModel = require("../department/DepartmentModel");
 exports.isExist = async (id) => {
   const count = await EmployeeModel.count({
     where: { id },
@@ -15,7 +16,13 @@ exports.joinTable = ({ withPhoto, withDesignation }) => {
   if (withDesignation)
     tables.push({
       model: DesignationModel,
-      attributes: ["name"],
+      attributes: ["id", "name"],
+      include: [
+        {
+          model: DepartmentModel,
+          attributes: ["id", "name"],
+        },
+      ],
     });
 
   return tables;

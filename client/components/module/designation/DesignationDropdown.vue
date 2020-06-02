@@ -7,7 +7,7 @@
       item-text="name"
       item-value="id"
       hide-details
-      :no-data-text="noDataTextt"
+      :no-data-text="noDataText"
       label="Select Designation"
       outlined
       :disabled="disabled"
@@ -20,7 +20,6 @@
         </v-list-item-content>
       </template>
     </v-autocomplete>
-    {{value}}
   </div>
 </template>
 
@@ -30,7 +29,7 @@ export default {
     value: String | Number,
     departmentId: {
       type: Number,
-      default: undefined
+      default: null
     },
     disabled: {
       type: Boolean,
@@ -57,7 +56,9 @@ export default {
   },
   watch: {
     departmentId() {
-      this.$emit("input", null);
+      console.log(this.departmentId);
+      // TODO: fix this when fetching the data the designation id remove when fetching data and mutate the current employee data
+      // this.$emit("input", null);
     }
   }
 };

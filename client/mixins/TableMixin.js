@@ -1,6 +1,7 @@
 export default {
   data() {
     return {
+      queryParams: {},
       loading: false,
       pagination: {
         page: 0,
@@ -15,15 +16,20 @@ export default {
       const { itemsPerPage, page } = this.pagination;
 
       setTimeout(async () => {
+        console.log("Params", self.queryParams);
         await self.$store.dispatch(self.dispatch, {
           search: self.search,
           limit: itemsPerPage,
-          offset: page ? (page - 1) * itemsPerPage : undefined
+          offset: page ? (page - 1) * itemsPerPage : undefined,
+          ...self.queryParams
         });
         console.log("Table Loaded..");
         self.loading = false;
       }, 500);
+
+      console.log(this.list);
     },
+
     editItem(id) {
       this.$router.push(this.store + "/update/" + id);
     }

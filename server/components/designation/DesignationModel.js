@@ -29,8 +29,7 @@ DesignationModel.init(
   },
   { sequelize, modelName: "designations", timestamps: true, paranoid: true }
 );
-
-// DepartmentModel.hasMany(DesignationModel);
+DepartmentModel.hasMany(DesignationModel);
 DesignationModel.belongsTo(DepartmentModel);
 
 module.exports = DesignationModel;

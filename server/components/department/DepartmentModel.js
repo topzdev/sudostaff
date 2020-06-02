@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
-const DeparmentHeadModel = require("./DepartmentHeadModel");
+const DepartmentHeadModel = require("./DepartmentHeadModel");
 
 class DepartmentModel extends Model {}
 
@@ -23,6 +23,7 @@ DepartmentModel.init(
   { sequelize, modelName: "departments", timestamps: true, paranoid: true }
 );
 
-DepartmentModel.hasOne(DeparmentHeadModel);
+DepartmentModel.hasOne(DepartmentHeadModel);
+DepartmentHeadModel.belongsTo(DepartmentModel);
 
 module.exports = DepartmentModel;

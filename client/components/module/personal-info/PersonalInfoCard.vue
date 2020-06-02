@@ -60,40 +60,16 @@
           ></v-text-field>
         </v-col>
         <v-col cols="6">
-          <v-select
-            label="Gender"
-            :value="gender"
-            @input="$emit('update:gender', $event)"
-            hide-details
-            outlined
-          ></v-select>
+          <gender-select :value="gender" @input="$emit('update:gender', $event)" />
         </v-col>
         <v-col cols="6">
-          <v-select
-            label="Civil Status"
-            :value="civilStatus"
-            @input="$emit('update:civilStatus', $event)"
-            hide-details
-            outlined
-          ></v-select>
+          <civil-status-select :value="civilStatus" @input="$emit('update:civilStatus', $event)" />
         </v-col>
         <v-col cols="6">
-          <v-select
-            label="Citizenship"
-            :value="citizenship"
-            @input="$emit('update:citizenship', $event)"
-            hide-details
-            outlined
-          ></v-select>
+          <citizenship-select :value="citizenship" @input="$emit('update:citizenship', $event)"></citizenship-select>
         </v-col>
         <v-col cols="6">
-          <v-select
-            label="Blood Type"
-            :value="bloodType"
-            @input="$emit('update:bloodType', $event)"
-            hide-details
-            outlined
-          ></v-select>
+          <blood-type-select :value="bloodType" @input="$emit('update:bloodType', $event)" />
         </v-col>
         <v-col cols="6">
           <v-text-field

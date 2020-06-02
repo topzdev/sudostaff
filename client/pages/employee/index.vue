@@ -15,9 +15,7 @@
         <employee-table></employee-table>
       </v-card-text>
     </v-card>
-    <v-btn color="primary" to="/employee/add-employee" fixed fab large dark bottom right>
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
+    <quick-create-button to="/employee/create" tooltip="Add Employee" />
   </v-container>
 </template>
 

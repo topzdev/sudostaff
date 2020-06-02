@@ -98,8 +98,8 @@ export default {
     },
     subtitle() {
       return this.isEdit
-        ? "Edit Deparment Information"
-        : "Add Deparment Information";
+        ? "Edit Department Information"
+        : "Add Department Information";
     },
     current() {
       return this.$store.state.department.current;

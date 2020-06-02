@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
+const Employee = require("../employee/EmployeeModel");
 
 class PhotoModel extends Model {}
 

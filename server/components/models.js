@@ -1,5 +1,3 @@
-const DepartmentModel = require("./department/DepartmentModel");
-const DesignationModel = require("./designation/DesignationModel");
 const LeaveRequestModel = require("./leave-request/LeaveRequestModel");
 const EmployeeModel = require("./employee/EmployeeModel");
 const LeaveTypeModel = require("./leave-type/LeaveTypeModel");
