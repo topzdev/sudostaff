@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <benifits-card v-bind.sync="benifits" :header="header" :outlined="outlined" />
     <v-card flat>
       <form-card-action :is-edit="isEdit" update-text="Update Benifits" />

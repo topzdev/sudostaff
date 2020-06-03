@@ -1,6 +1,6 @@
 <template>
   <v-card :loading="loading">
-    <v-form>
+    <v-form ref="form" v-model="valid">
       <v-card-title>L & D Interventions / Training Programs Attended</v-card-title>
       <v-card-text>
         <v-row>
@@ -44,8 +44,9 @@
 <script>
 import { mapMutations } from "vuex";
 import CardMixin from "@/mixins/CardMixin";
+import FormMxin from "@/mixins/FormMixin";
 export default {
-  mixins: [CardMixin],
+  mixins: [CardMixin, FormMxin],
   data() {
     return {
       trainingProg: {

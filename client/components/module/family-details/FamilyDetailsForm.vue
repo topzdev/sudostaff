@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <family-details-card v-bind.sync="familyDetails" :header="header" :outlined="outlined" />
     <v-card flat>
       <form-card-action :is-edit="isEdit" update-text="Update Family" />

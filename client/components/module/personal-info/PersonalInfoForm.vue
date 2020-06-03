@@ -1,6 +1,11 @@
 <template>
-  <v-form>
-    <personal-info-card v-bind.sync="employee" :header="header" :outlined="outlined" />
+  <v-form ref="form" v-model="valid">
+    <personal-info-card
+      v-bind.sync="personal"
+      :header="header"
+      :outlined="outlined"
+      :rules="personalRules"
+    />
     <v-card flat>
       <form-card-action :is-edit="isEdit" update-text="Update Personal" />
     </v-card>
@@ -9,26 +14,17 @@
 
 <script>
 import FormMixin from "@/mixins/FormMixin";
+import PersonalFormMixin from "@/mixins/forms/PersonalFormMixin";
 export default {
-  mixins: [FormMixin],
-  data() {
-    return {
-      employee: {
-        id: "",
-        firstName: "",
-        lastName: "",
-        middleName: "",
-        extensionName: "",
-        gender: "",
-        birthDate: "",
-        birthPlace: "",
-        civilStatus: "",
-        citizenship: "",
-        bloodType: "",
-        height: 0,
-        weight: 0
-      }
-    };
+  mixins: [FormMixin, PersonalFormMixin],
+  computed: {
+    getInfo() {
+      return this.$store.state.auth.personalInfo;
+    }
+  },
+  async created() {
+    await this.$store.dispatch("auth/fetchPersonalInfo");
+    this.personal = JSON.parse(JSON.stringify(this.getInfo));
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-card :loading="loading">
-    <v-form>
+    <v-form ref="form" v-model="valid">
       <v-card-title>Voluntary Work Experience/ Voluntary Organization(s)</v-card-title>
       <v-card-text>
         <v-row>

@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <government-ids-card v-bind.sync="governmentIds" :header="header" :outlined="outlined" />
     <v-card flat>
       <form-card-action :is-edit="isEdit" update-text="Update Government" />

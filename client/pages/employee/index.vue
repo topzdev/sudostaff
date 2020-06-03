@@ -7,7 +7,7 @@
           <v-card-subtitle>Add and view employee basic information</v-card-subtitle>
         </v-col>
         <v-col cols="12" md="5" class="d-flex align-center justify-center py-0">
-          <v-text-field :="true" dense placeholder="Search Employee" filled rounded></v-text-field>
+          <v-text-field dense placeholder="Search Employee" filled rounded></v-text-field>
         </v-col>
       </v-row>
 

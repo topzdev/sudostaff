@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <v-card :loading="loading" flat class="align-center">
       <v-row>
         <v-col class="py-0">
@@ -9,7 +9,12 @@
       </v-row>
 
       <v-col cols="8">
-        <department-card v-bind.sync="department" :header="header" :outlined="outlined" />
+        <department-card
+          v-bind.sync="department"
+          :header="header"
+          :outlined="outlined"
+          :rules="departmentRules"
+        />
       </v-col>
 
       <v-col cols="8" class="py-0">
@@ -30,25 +35,14 @@
 <script>
 import { mapMutations } from "vuex";
 import FormMixin from "@/mixins/FormMixin";
+import DepartmentFormMixin from "@/mixins/forms/DeparmentFornMixin";
 
 export default {
-  mixins: [FormMixin],
-  data() {
-    return {
-      department: {
-        id: null,
-        name: "",
-        description: "",
-        employeeId: null,
-        departmentHead: null
-      }
-    };
-  },
+  mixins: [FormMixin, DepartmentFormMixin],
+
   methods: {
     async fetchData() {
       const id = this.$route.params.id;
-
-      console.log(id);
 
       if (id && this.isEdit) {
         await this.$store.dispatch("department/fetchOneDepartment", {
@@ -75,6 +69,9 @@ export default {
     },
 
     async create() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
       this.loading = true;
       await this.$store.dispatch(
         "department/createDepartment",
@@ -84,6 +81,9 @@ export default {
     },
 
     async update() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
       this.loading = true;
       await this.$store.dispatch(
         "department/updateDepartment",

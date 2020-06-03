@@ -120,7 +120,6 @@ export default {
     },
     async create() {
       this.$refs.form.validate();
-
       if (!this.valid) return;
 
       this.loading = true;
@@ -132,6 +131,9 @@ export default {
     },
 
     async update() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
       this.loading = true;
       /*confusing right? we neeed to pass the photoInfo raw which is the user photo selected from the file input to photo property because when creating and updating the server find the photo property of data which needed on uploading to photo server.
       

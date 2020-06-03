@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined>
+  <v-card :loading="loading" outlined>
     <v-card-title class="title font-weight-regular" v-text="headerInfo.title"></v-card-title>
     <v-card-subtitle v-text="headerInfo.description"></v-card-subtitle>
     <v-tabs v-model="active" grow class="font-weight-bold">
@@ -66,6 +66,10 @@ export default {
   computed: {
     headerInfo() {
       return this.tabs[this.active];
+    },
+
+    loading() {
+      return this.$store.state.auth.loading;
     }
   },
 

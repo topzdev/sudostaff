@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <v-card :loading="loading" flat class="align-center">
       <v-row>
         <v-col class="py-0">
@@ -9,7 +9,12 @@
       </v-row>
 
       <v-col cols="8">
-        <designation-card v-bind.sync="designation" :header="header" :outlined="outlined" />
+        <designation-card
+          v-bind.sync="designation"
+          :header="header"
+          :outlined="outlined"
+          :rules="designationRules"
+        />
       </v-col>
 
       <v-col cols="8" class="py-0">
@@ -30,19 +35,10 @@
 <script>
 import { mapMutations } from "vuex";
 import FormMixin from "@/mixins/FormMixin";
+import DesignationFormMixin from "@/mixins/forms/DesignationFormMixin";
 
 export default {
-  mixins: [FormMixin],
-  data() {
-    return {
-      designation: {
-        id: null,
-        name: "",
-        description: "",
-        departmentId: null
-      }
-    };
-  },
+  mixins: [FormMixin, DesignationFormMixin],
   methods: {
     async fetchData() {
       const id = this.$route.params.id;
@@ -58,6 +54,9 @@ export default {
     },
 
     async create() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
       this.loading = true;
       await this.$store.dispatch(
         "designation/createDesignation",
@@ -67,6 +66,9 @@ export default {
     },
 
     async update() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
       this.loading = true;
       await this.$store.dispatch(
         "designation/updateDesignation",

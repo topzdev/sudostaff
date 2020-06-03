@@ -2,15 +2,16 @@
   <v-card :outlined="outlined" :flat="true">
     <v-card-text>
       <v-row>
-        <v-col cols="12">
+        <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="Designation Name"
             :value="name"
             @input="$emit('update:name', $event)"
             outlined
+            :rules="rules.name"
           ></v-text-field>
         </v-col>
-        <v-col cols="12">
+        <v-col class="py-0 pb-1" cols="12">
           <v-textarea
             label="Description"
             :value="description"
@@ -19,12 +20,12 @@
           ></v-textarea>
         </v-col>
 
-        <v-col cols="12">
-          <department-dropdown :value="departmentId" @input="$emit('update:departmentId', $event)" />
-        </v-col>
-
-        <v-col cols="12">
-          <designation-dropdown v-model="sample" :department-id="departmentId" />
+        <v-col class="py-0 pb-1" cols="12">
+          <department-dropdown
+            :value="departmentId"
+            @input="$emit('update:departmentId', $event)"
+            :rules="rules.departmentId"
+          />
         </v-col>
       </v-row>
     </v-card-text>
@@ -35,12 +36,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["name", "description", "departmentId", "department"],
-  data() {
-    return {
-      sample: null
-    };
-  }
+  props: ["name", "description", "departmentId", "department"]
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <address-details-card v-bind.sync="addressDetails" :header="header" :outlined="outlined" />
     <v-card flat>
       <form-card-action :is-edit="isEdit" update-text="Update Address" />

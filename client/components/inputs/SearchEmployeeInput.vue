@@ -23,6 +23,7 @@
       item-text="fullName"
       item-value="id"
       :loading="loading"
+      :rules="rules"
       :search-input.sync="search"
     >
       <template v-slot:selection="data">
@@ -66,12 +67,10 @@
 
 <script>
 import employeeServices from "@/services/Employee";
+import InputMixin from "@/mixins/InputMixin";
 export default {
+  mixins: [InputMixin],
   props: {
-    value: {
-      type: String,
-      default: null
-    },
     defaultValue: Object
   },
   data() {

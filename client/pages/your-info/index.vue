@@ -13,7 +13,7 @@
           <v-col cols="4">
             <v-row>
               <v-col cols="12">
-                <work-info :employee="employee"></work-info>
+                <your-work-info />
               </v-col>
             </v-row>
           </v-col>
@@ -31,23 +31,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      employee: {
-        id: "EMP-2020-01",
-        department: "IT Department",
-        designation: "Senior Web Developer",
-        firstName: "Christopher",
-        middleName: "Tampos",
-        lastName: "Lugod",
-        joiningDate: "05-20-2020",
-        imageId: "1",
-        imageUrl: "https://cdn.vuetifyjs.com/images/john.jpg"
-      }
-    };
-  }
-};
+export default {};
 </script>
 
 <style>

@@ -1,6 +1,11 @@
 <template>
-  <v-form>
-    <contact-info-card v-bind.sync="employee" :header="header" :outlined="outlined" />
+  <v-form ref="form" v-model="valid">
+    <contact-info-card
+      v-bind.sync="contact"
+      :header="header"
+      :outlined="outlined"
+      :rules="contactRules"
+    />
     <v-card flat>
       <form-card-action :is-edit="isEdit" update-text="Update Contact" />
     </v-card>
@@ -9,18 +14,9 @@
 
 <script>
 import FormMixin from "@/mixins/FormMixin";
+import ContactFormMixin from "@/mixins/forms/ContactFormMixin";
 export default {
-  mixins: [FormMixin],
-  data() {
-    return {
-      employee: {
-        id: "",
-        emailAddress: "",
-        mobile: "",
-        landline: ""
-      }
-    };
-  }
+  mixins: [FormMixin, ContactFormMixin]
 };
 </script>
 
