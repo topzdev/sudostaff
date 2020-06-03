@@ -6,14 +6,15 @@
     item-value="value"
     item-text="text"
     @input="$emit('input', $event)"
-    hide-details
     outlined
+    :rules="rules"
   ></v-select>
 </template>
 
 <script>
+import InputMixin from "@/mixins/InputMixin";
 export default {
-  props: ["value"],
+  mixins: [InputMixin],
   data() {
     return {
       items: [

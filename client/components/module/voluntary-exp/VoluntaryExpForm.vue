@@ -5,18 +5,18 @@
       <v-card-text>
         <v-row>
           <v-col cols="7">
-            <v-text-field label="Company*" v-model="voluntaryExp.company" hide-details outlined></v-text-field>
+            <v-text-field label="Company*" v-model="voluntaryExp.company" outlined></v-text-field>
           </v-col>
 
           <v-col cols="5">
-            <v-text-field label="Position*" v-model="voluntaryExp.position" hide-details outlined></v-text-field>
+            <v-text-field label="Position*" v-model="voluntaryExp.position" outlined></v-text-field>
           </v-col>
 
           <v-col cols="6">
-            <v-select label="From*" v-model="voluntaryExp.from" hide-details outlined></v-select>
+            <v-select label="From*" v-model="voluntaryExp.from" outlined></v-select>
           </v-col>
           <v-col cols="6">
-            <v-select label="to*" v-model="voluntaryExp.to" hide-details outlined></v-select>
+            <v-select label="to*" v-model="voluntaryExp.to" outlined></v-select>
           </v-col>
 
           <v-col cols="6">
@@ -24,7 +24,6 @@
               label="Total Number of Hours*"
               v-model="voluntaryExp.totalHours"
               type="number"
-              hide-details
               outlined
             ></v-text-field>
           </v-col>

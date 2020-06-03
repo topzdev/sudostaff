@@ -1,30 +1,33 @@
 <template>
   <v-menu
-    v-model="show"
+    :value="show"
     :close-on-content-click="false"
     :nudge-right="40"
-    transition="scale-transition"
     offset-y
     min-width="290px"
   >
     <template v-slot:activator="{ on }">
       <v-text-field
-        v-model="date"
+        :value="value"
         @input="setValue"
         :label="label"
         prepend-inner-icon="mdi-calendar"
         outlined
-        hide-details
         readonly
         v-on="on"
+        :disabled="disabled"
+        :required="required"
+        :rules="rules"
       ></v-text-field>
     </template>
-    <v-date-picker v-model="date" @input="setValue"></v-date-picker>
+    <v-date-picker :value="value" @input="setValue"></v-date-picker>
   </v-menu>
 </template>
 
 <script>
+import InputMixin from "@/mixins/InputMixin";
 export default {
+  mixins: [InputMixin],
   props: {
     label: {
       type: String,
@@ -33,7 +36,6 @@ export default {
   },
   data() {
     return {
-      date: "",
       show: false
     };
   },

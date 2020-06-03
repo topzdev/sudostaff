@@ -5,23 +5,13 @@
       <v-card-text>
         <v-row>
           <v-col cols="7">
-            <v-text-field
-              label="License Title*"
-              v-model="civilEligibility.licenseTitle"
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field label="License Title*" v-model="civilEligibility.licenseTitle" outlined></v-text-field>
           </v-col>
           <v-col cols="5">
-            <v-text-field
-              label="License Number*"
-              v-model="civilEligibility.licenseNumber"
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field label="License Number*" v-model="civilEligibility.licenseNumber" outlined></v-text-field>
           </v-col>
           <v-col cols="7">
-            <v-text-field label="Rating" v-model="civilEligibility.rating" hide-details outlined></v-text-field>
+            <v-text-field label="Rating" v-model="civilEligibility.rating" outlined></v-text-field>
           </v-col>
           <v-col cols="5">
             <date-picker label="Date Validity" v-model="civilEligibility.validityDate" />
@@ -30,7 +20,6 @@
             <v-text-field
               label="Examination Place"
               v-model="civilEligibility.examinationDate"
-              hide-details
               outlined
             ></v-text-field>
           </v-col>

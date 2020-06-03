@@ -14,7 +14,6 @@
             label="House/Block/Lot No."
             :value="houseBlock"
             @input="$emit('update:houseBlock', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -23,7 +22,6 @@
             label="Street"
             :value="street"
             @input="$emit('update:street', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -32,7 +30,6 @@
             label="Subdivision/Village"
             :value="subdivision"
             @input="$emit('update:subdivision', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -41,7 +38,6 @@
             label="Barangay"
             :value="barangay"
             @input="$emit('update:barangay', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -50,14 +46,12 @@
             label="City/Municipality"
             :value="city"
             @input="$emit('update:city', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
         <v-col cols="6">
           <v-select
             label="Province"
-            hide-details
             :value="province"
             @input="$emit('update:province', $event)"
             outlined
@@ -68,7 +62,6 @@
             label="Zip Code"
             :value="zipcode"
             @input="$emit('update:zipcode', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -82,7 +75,6 @@
             label="House/Block/Lot No."
             :value="houseBlock2"
             @input="$emit('update:houseBlock2', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -91,7 +83,6 @@
             label="Street"
             :value="street2"
             @input="$emit('update:street2', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -100,7 +91,6 @@
             label="Subdivision/Village"
             :value="subdivision2"
             @input="$emit('update:subdivision2', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -109,7 +99,6 @@
             label="Barangay"
             :value="barangay2"
             @input="$emit('update:barangay2', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -118,14 +107,12 @@
             label="City/Municipality"
             :value="city2"
             @input="$emit('update:city2', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
         <v-col cols="6">
           <v-select
             label="Province"
-            hide-details
             :value="province2"
             @input="$emit('update:province2', $event)"
             outlined
@@ -136,7 +123,6 @@
             label="Zip Code"
             :value="zipcode2"
             @input="$emit('update:zipcode2', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>

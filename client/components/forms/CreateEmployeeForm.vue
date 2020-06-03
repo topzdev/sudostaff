@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <v-card flat class="align-center">
       <v-row>
         <v-col class="py-0">
@@ -12,16 +12,19 @@
         <v-row>
           <v-col cols="8">
             <v-row>
+              <!-- <v-col v-if="isEdit" cols="12">
+                <is-active-info-card v-bind="employee" />
+              </v-col>-->
               <v-col cols="12">
-                <employee-info-card v-bind.sync="employee" />
+                <work-info-card :is-edit="isEdit" v-bind.sync="employee" :rules="workRules" />
               </v-col>
 
               <v-col cols="12">
-                <personal-info-card v-bind.sync="employee" />
+                <personal-info-card v-bind.sync="employee" :rules="personalRules" />
               </v-col>
 
               <v-col cols="12">
-                <contact-info-card v-bind.sync="employee" />
+                <contact-info-card v-bind.sync="employee" :rules="contactRules" />
               </v-col>
             </v-row>
           </v-col>
@@ -52,8 +55,12 @@
 
 <script>
 import FormMixin from "@/mixins/FormMixin";
+import PersonalFormMixin from "@/mixins/forms/PersonalFormMixin";
+import WorkFormMixin from "@/mixins/forms/WorkFormMixin";
+import ContactFormMixin from "@/mixins/forms/ContactFormMixin";
+
 export default {
-  mixins: [FormMixin],
+  mixins: [FormMixin, PersonalFormMixin, WorkFormMixin, ContactFormMixin],
   data() {
     return {
       employee: {
@@ -106,12 +113,16 @@ export default {
         if (data) {
           this.employee = data;
           this.employee.departmentId = data.designation.department.id;
-          this.employee.designationId = data.designation;
+          this.employee.designationId = data.designation.id;
         }
         console.log(this.employee);
       }
     },
     async create() {
+      this.$refs.form.validate();
+
+      if (!this.valid) return;
+
       this.loading = true;
       await this.$store.dispatch("employee/createEmployee", {
         ...this.employee,

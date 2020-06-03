@@ -19,10 +19,11 @@ class PhotoServices {
 
   async create(rawPhoto) {
     /* Check if the raw photo is null, if proven then return a error with a status 400 */
+    console.log("CREATE", rawPhoto);
     if (!rawPhoto)
       return {
         status: 400,
-        msg: "No profile photo provided",
+        msg: "(CREATE) No profile photo provided",
       };
 
     /* Validate if the raw photo is actual photo, if not then return error */
@@ -99,8 +100,6 @@ class PhotoServices {
         msg: "No profile photo provided",
         data: null,
       };
-
-    console.log(photoId, rawPhoto);
 
     /*Check if photoId is avaialble(its means that there is a photo uploaded) if exist then delete it first before upload a new photo*/
     if (photoId) {

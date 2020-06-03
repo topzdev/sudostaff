@@ -14,7 +14,6 @@
             label="First Name"
             :value="fatherFirstName"
             @input="$emit('update:fatherFirstName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -23,7 +22,6 @@
             label="Last Name"
             :value="fatherLastName"
             @input="$emit('update:fatherLastName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -32,7 +30,6 @@
             label="Middle Name"
             :value="fatherMiddleName"
             @input="$emit('update:fatherMiddleName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -41,7 +38,6 @@
             label="Extension Name"
             :value="fatherExt"
             @input="$emit('update:fatherExt', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -56,7 +52,6 @@
             label="First Name"
             :value="motherFirstName"
             @input="$emit('update:motherFirstName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -65,7 +60,6 @@
             label="Last Name"
             :value="motherLastName"
             @input="$emit('update:motherLastName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -74,7 +68,6 @@
             label="Middle Name"
             :value="motherMiddleName"
             @input="$emit('update:motherMiddleName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -83,7 +76,6 @@
             label="Extension Name"
             :value="motherExt"
             @input="$emit('update:motherExt', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -98,7 +90,6 @@
             label="First Name"
             :value="spouseFirstName"
             @input="$emit('update:spouseFirstName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -107,7 +98,6 @@
             label="Last Name"
             :value="spouseLastName"
             @input="$emit('update:spouseLastName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -116,7 +106,6 @@
             label="Middle Name"
             :value="spouseMiddleName"
             @input="$emit('update:spouseMiddleName', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -125,7 +114,6 @@
             label="Extension Name"
             :value="spouseExt"
             @input="$emit('update:spouseExt', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>

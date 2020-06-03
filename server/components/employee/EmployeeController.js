@@ -11,8 +11,7 @@ class EmployeeController {
       const result = await employeeServices.getAll(req.query);
       validateResponse(res, result);
     } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
   async fetchSingleEmployee(req, res) {
@@ -21,8 +20,7 @@ class EmployeeController {
       const result = await employeeServices.getOne(req.params, req.query);
       validateResponse(res, result);
     } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
@@ -31,19 +29,18 @@ class EmployeeController {
       const result = await employeeServices.create(req.body, req.files);
       validateResponse(res, result);
     } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
   async updateEmployee(req, res) {
     try {
-      console.log("Update", req.body);
-      const result = await employeeServices.update(req.body);
+      console.log("Update", req.body, req.files);
+      const result = await employeeServices.update(req.body, req.files);
       validateResponse(res, result);
     } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      console.log("ERROR EME:", error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
@@ -52,8 +49,7 @@ class EmployeeController {
       const result = await employeeServices.remove(req.params);
       validateResponse(res, result);
     } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
@@ -62,8 +58,7 @@ class EmployeeController {
       const result = await employeeServices.delete(req.params);
       validateResponse(res, result);
     } catch (error) {
-      console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 }

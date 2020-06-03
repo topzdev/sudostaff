@@ -5,7 +5,7 @@ export const state = () => ({
 });
 
 export const mutations = {
-  [types.SET_NOTIF_SNACKBAR](state, options) {
-    state.notifSnackbar = { ...options, timeout: 6000 };
+  [types.SET_NOTIF_SNACKBAR](state, { show, message, color }) {
+    state.notifSnackbar = { show, message, color, timeout: 6000 };
   }
 };

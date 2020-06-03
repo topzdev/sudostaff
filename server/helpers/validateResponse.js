@@ -16,6 +16,7 @@ exports.validateResponse = function (response, { data, msg, status }) {
   } else if (status === 404) {
     return notFoundResponse(response, msg);
   } else if (status === 500) {
-    return errorResponse(response, msg);
+    console.log("ERROR: ", data);
+    return errorResponse(response, msg, data);
   }
 };

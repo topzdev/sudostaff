@@ -74,10 +74,9 @@ export const actions = {
       dispatch("utils/setNotifDefault", result, { root: true });
       console.log(result, data);
       commit(types.ADD_EMPLOYEE, { ...data, id: result.data });
+      this.app.router.push("/employee");
     } catch (error) {
       dispatch("utils/setNotifError", error, { root: true });
-    } finally {
-      this.app.router.push("/employee");
     }
   },
   updateEmployee: async function({ dispatch, commit }, data) {
@@ -87,10 +86,9 @@ export const actions = {
       console.log("...updating", result);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_EMPLOYEE, data);
+      this.app.router.push("/employee");
     } catch (error) {
       dispatch("utils/setNotifError", error, { root: true });
-    } finally {
-      this.app.router.push("/employee");
     }
   }
 };

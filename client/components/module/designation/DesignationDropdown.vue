@@ -6,11 +6,12 @@
       :items="list"
       item-text="name"
       item-value="id"
-      hide-details
       :no-data-text="noDataText"
       label="Select Designation"
       outlined
       :disabled="disabled"
+      :required="required"
+      :rules="rules"
     >
       <template v-slot:selection="data">{{ data.item.name }}</template>
       <template v-slot:item="data">
@@ -24,16 +25,14 @@
 </template>
 
 <script>
+import InputMixin from "@/mixins/InputMixin";
+
 export default {
+  mixins: [InputMixin],
   props: {
-    value: String | Number,
     departmentId: {
       type: Number,
       default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {

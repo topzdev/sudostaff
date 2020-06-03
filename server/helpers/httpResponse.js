@@ -7,10 +7,11 @@ exports.successResponse = function (res, msg, data) {
   return res.status(200).json(resData);
 };
 
-exports.errorResponse = function (res, msg) {
+exports.errorResponse = function (res, msg, data) {
   var data = {
     status: false,
     message: msg,
+    data,
   };
   return res.status(500).json(data);
 };

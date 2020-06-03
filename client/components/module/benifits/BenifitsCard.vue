@@ -12,7 +12,6 @@
             label="GSIS ID No."
             :value="gsisId"
             @input="$emit('update:gsisId', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -21,7 +20,6 @@
             label="PAGIBIG ID No."
             :value="pagibigId"
             @input="$emit('update:pagibigId', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -30,7 +28,6 @@
             label="PHILHEALTH TIN ID No."
             :value="philhealthId"
             @input="$emit('update:philhealthId', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -39,7 +36,6 @@
             label="SSS No."
             :value="sssNo"
             @input="$emit('update:sssNo', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -48,7 +44,6 @@
             label="TIN No."
             :value="tinNo"
             @input="$emit('update:tinNo', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -57,7 +52,6 @@
             label="Agency Employee No."
             :value="agencyEmployeerId"
             @input="$emit('update:agencyEmployeerId', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>

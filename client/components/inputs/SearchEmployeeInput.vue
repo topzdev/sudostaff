@@ -23,7 +23,6 @@
       item-text="fullName"
       item-value="id"
       :loading="loading"
-      hide-details
       :search-input.sync="search"
     >
       <template v-slot:selection="data">

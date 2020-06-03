@@ -5,7 +5,7 @@
       <v-card-text>
         <v-row>
           <v-col cols="12">
-            <v-text-field label="Title*" v-model="trainingProg.company" hide-details outlined></v-text-field>
+            <v-text-field label="Title*" v-model="trainingProg.company" outlined></v-text-field>
           </v-col>
 
           <v-col cols="6">
@@ -20,15 +20,14 @@
               label="Total Number of Hours"
               type="number"
               v-model="trainingProg.totalHours"
-              hide-details
               outlined
             ></v-text-field>
           </v-col>
           <v-col cols="6">
-            <v-text-field label="Type" v-model="trainingProg.type" hide-details outlined></v-text-field>
+            <v-text-field label="Type" v-model="trainingProg.type" outlined></v-text-field>
           </v-col>
           <v-col cols="12">
-            <v-text-field label="Sponsor" v-model="trainingProg.sponsor" hide-details outlined></v-text-field>
+            <v-text-field label="Sponsor" v-model="trainingProg.sponsor" outlined></v-text-field>
           </v-col>
         </v-row>
         <small>*indicates required field</small>

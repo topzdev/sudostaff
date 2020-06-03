@@ -11,6 +11,13 @@ export default {
     outlined: {
       type: Boolean,
       default: true
+    },
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    rules: {
+      type: Object
     }
   }
 };

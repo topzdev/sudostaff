@@ -5,9 +5,11 @@
     :items="list"
     item-text="name"
     item-value="id"
-    hide-details
+    :disabled="disabled"
+    :required="required"
     label="Select Department"
     outlined
+    :rules="rules"
   >
     <template v-slot:selection="data">{{ postFixed(data.item.name) }}</template>
     <template v-slot:item="data">{{ postFixed(data.item.name) }}</template>
@@ -15,8 +17,9 @@
 </template>
 
 <script>
+import InputMixin from "@/mixins/InputMixin";
 export default {
-  props: ["value"],
+  mixins: [InputMixin],
   computed: {
     list() {
       return this.$store.state.department.dropdown;

@@ -1,5 +1,4 @@
 import types from "@/store/types";
-import { state } from "./department";
 
 export const actions = {
   setNotifError({ commit }, error) {

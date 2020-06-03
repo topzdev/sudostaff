@@ -1,6 +1,7 @@
 export default {
   data() {
     return {
+      valid: false,
       loading: false
     };
   },

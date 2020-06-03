@@ -5,48 +5,28 @@
       <v-card-text>
         <v-row>
           <v-col cols="12">
-            <v-text-field
-              label="School Name*"
-              v-model="educDetails.schoolName"
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field label="School Name*" v-model="educDetails.schoolName" outlined></v-text-field>
           </v-col>
           <v-col cols="4">
-            <v-select label="Level" v-model="educDetails.level" hide-details outlined></v-select>
+            <v-select label="Level" v-model="educDetails.level" outlined></v-select>
           </v-col>
           <v-col cols="8">
-            <v-text-field label="Degree*" v-model="educDetails.degree" hide-details outlined></v-text-field>
+            <v-text-field label="Degree*" v-model="educDetails.degree" outlined></v-text-field>
           </v-col>
           <v-col cols="4">
-            <v-select label="From" v-model="educDetails.from" hide-details outlined></v-select>
+            <v-select label="From" v-model="educDetails.from" outlined></v-select>
           </v-col>
           <v-col cols="4">
-            <v-select label="To" v-model="educDetails.to" hide-details outlined></v-select>
+            <v-select label="To" v-model="educDetails.to" outlined></v-select>
           </v-col>
           <v-col cols="4">
-            <v-select
-              label="Year Graduated"
-              v-model="educDetails.graduateYear"
-              hide-details
-              outlined
-            ></v-select>
+            <v-select label="Year Graduated" v-model="educDetails.graduateYear" outlined></v-select>
           </v-col>
           <v-col cols="12">
-            <v-text-field
-              label="Recognition"
-              v-model="educDetails.recognition"
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field label="Recognition" v-model="educDetails.recognition" outlined></v-text-field>
           </v-col>
           <v-col cols="12">
-            <v-text-field
-              label="Scholarship"
-              v-model="educDetails.scholarship"
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field label="Scholarship" v-model="educDetails.scholarship" outlined></v-text-field>
           </v-col>
         </v-row>
         <small>*indicates required field</small>

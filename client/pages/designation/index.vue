@@ -8,7 +8,7 @@
         </v-col>
         <v-col cols="12" md="5" class="d-flex align-center justify-center py-0">
           <v-text-field
-            :hide-details="true"
+            :="true"
             dense
             placeholder="Search Department"
             v-model="search"

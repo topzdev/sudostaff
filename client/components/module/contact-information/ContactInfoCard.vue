@@ -7,32 +7,32 @@
     ></form-card-header>
     <v-card-text>
       <v-row>
-        <v-col cols="12">
+        <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="Email Address"
             type="email"
             :value="emailAddress"
             @input="$emit('update:emailAddress', $event)"
-            hide-details
             outlined
+            :rules="rules.emailAddress"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Cellphone No."
             :value="mobile"
             @input="$emit('update:mobile', $event)"
-            hide-details
             outlined
+            :rules="rules.mobile"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Telephone No."
             :value="landline"
             @input="$emit('update:landline', $event)"
-            hide-details
             outlined
+            :rules="rules.landline"
           ></v-text-field>
         </v-col>
       </v-row>

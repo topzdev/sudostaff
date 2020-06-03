@@ -11,7 +11,7 @@ class WorkExpController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
   async fetchSingleWorkExp(req, res) {
@@ -21,7 +21,7 @@ class WorkExpController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
@@ -32,7 +32,7 @@ class WorkExpController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
@@ -42,7 +42,7 @@ class WorkExpController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 
@@ -52,7 +52,7 @@ class WorkExpController {
       validateResponse(res, result);
     } catch (error) {
       console.error(error);
-      validateResponse(res, { status: 500, msg: "Server Error" });
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
 }

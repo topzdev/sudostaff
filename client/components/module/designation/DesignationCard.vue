@@ -7,7 +7,6 @@
             label="Designation Name"
             :value="name"
             @input="$emit('update:name', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -16,7 +15,6 @@
             label="Description"
             :value="description"
             @input="$emit('update:description', $event)"
-            hide-details
             outlined
           ></v-textarea>
         </v-col>

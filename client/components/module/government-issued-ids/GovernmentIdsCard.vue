@@ -12,7 +12,6 @@
             label="Government Issued ID"
             :value="governmentIssueId"
             @input="$emit('update:governmentIssueId', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -21,7 +20,6 @@
             label="ID/License/Passport No."
             :value="idLicensePassportId"
             @input="$emit('update:idLicensePassportId', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>
@@ -37,7 +35,6 @@
             label="Place of Issuance"
             :value="placeIssuance"
             @input="$emit('update:placeIssuance', $event)"
-            hide-details
             outlined
           ></v-text-field>
         </v-col>

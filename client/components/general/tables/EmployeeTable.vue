@@ -21,8 +21,11 @@
           </v-tooltip>
         </template>
 
-        <template v-slot:item.isActive="data">
-          <v-chip v-if="data" color="success lighten-5 success--text font-weight-bold">Active</v-chip>
+        <template v-slot:item.isActive="{item}">
+          <v-chip
+            v-if="item.isActive"
+            color="success lighten-5 success--text font-weight-bold"
+          >Active</v-chip>
           <v-chip v-else color="error lighten-5 error--text font-weight-bold">Inactive</v-chip>
         </template>
       </v-data-table>
@@ -75,6 +78,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    log(data) {
+      console.log(data);
+    }
   }
 };
 </script>

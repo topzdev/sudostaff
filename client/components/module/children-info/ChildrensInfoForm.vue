@@ -5,7 +5,7 @@
       <v-card-text>
         <v-row>
           <v-col cols="12">
-            <v-text-field label="Children Name*" v-model="children.fullName" hide-details outlined></v-text-field>
+            <v-text-field label="Children Name*" v-model="children.fullName" outlined></v-text-field>
           </v-col>
           <v-col cols="12">
             <date-picker label="Birth Date*" v-model="children.birthDate" />

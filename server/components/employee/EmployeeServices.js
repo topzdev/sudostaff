@@ -1,6 +1,6 @@
 const EmployeeModel = require("./EmployeeModel");
 const helper = require("./employeeHelpers");
-const imageServices = require("../photo/PhotoServices");
+const photServices = require("../photo/PhotoServices");
 const benifitsServices = require("../benifits/BenifitsServices");
 const addressServices = require("../address/AddressServices");
 const familyDetailsServices = require("../family-details/FamilyDetailsServices");
@@ -72,7 +72,7 @@ class EmployeeServices {
       gender,
       designationId,
     },
-    rawImage
+    rawPhoto
   ) {
     let photoId = null;
 
@@ -82,8 +82,8 @@ class EmployeeServices {
         msg: "Employee ID is already exist",
       };
 
-    if (rawImage["photo"]) {
-      const uploaded = await imageServices.create(rawImage["photo"]);
+    if (rawPhoto && rawPhoto["photo"]) {
+      const uploaded = await photServices.create(rawPhoto["photo"]);
 
       /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
       if (uploaded.status !== 200) return uploaded;
@@ -137,15 +137,15 @@ class EmployeeServices {
     };
   }
 
-  async update(employeeInfo, rawImage) {
-    const photoId = null;
+  async update(employeeInfo, rawPhoto) {
+    let photoId = null;
     const id = employeeInfo.id;
     delete employeeInfo.id;
 
-    if (rawImage["photo"]) {
-      const uploaded = await imageServices.update({
+    if (rawPhoto["photo"]) {
+      const uploaded = await photServices.update({
+        rawPhoto: rawPhoto["photo"],
         photoId: employeeInfo.photoId,
-        rawImage: rawImage["photo"],
       });
 
       /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/

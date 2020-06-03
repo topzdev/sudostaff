@@ -35,4 +35,11 @@ export default {
 .v-application {
   font-family: "Poppins" !important;
 }
+.v-input__slot {
+  margin-bottom: 4px;
+}
+
+.v-text-field.v-text-field--enclosed .v-text-field__details {
+  margin-bottom: 4px;
+}
 </style>

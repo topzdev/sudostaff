@@ -17,7 +17,6 @@
         prepend-icon
         prepend-inner-icon="mdi-image"
         label="Select employee photo"
-        hide-details
         outlined
         @change="uploadPhoto"
       ></v-file-input>
