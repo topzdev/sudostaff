@@ -13,7 +13,7 @@
             :value="id"
             @input="$emit('update:id', $event)"
             outlined
-            :disabled="isEdit"
+            :readonly="isEdit"
             required
             :rules="rules.id"
           ></v-text-field>
@@ -21,7 +21,7 @@
 
         <v-col class="py-0 pb-1" cols="6">
           <department-dropdown
-            :disabled="isEdit"
+            :readonly="isEdit"
             :value="departmentId"
             :rules="rules.departmentId"
             required
@@ -33,7 +33,7 @@
           <designation-dropdown
             :value="designationId"
             :rules="rules.designationId"
-            :disabled="departmentId && !isEdit ? false : true"
+            :readonly="departmentId && !isEdit ? false : true"
             @input="$emit('update:designationId', $event)"
             :departmentId="departmentId"
             required

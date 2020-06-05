@@ -7,7 +7,7 @@
     ></form-card-header>
     <v-card-text>
       <v-row>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="GSIS ID No."
             :value="gsisId"
@@ -15,7 +15,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="PAGIBIG ID No."
             :value="pagibigId"
@@ -23,7 +23,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="PHILHEALTH TIN ID No."
             :value="philhealthId"
@@ -31,7 +31,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="SSS No."
             :value="sssNo"
@@ -39,7 +39,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="TIN No."
             :value="tinNo"
@@ -47,7 +47,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Agency Employee No."
             :value="agencyEmployeerId"

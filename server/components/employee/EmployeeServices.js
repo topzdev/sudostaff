@@ -142,7 +142,7 @@ class EmployeeServices {
     const id = employeeInfo.id;
     delete employeeInfo.id;
 
-    if (rawPhoto["photo"]) {
+    if (rawPhoto && rawPhoto["photo"]) {
       const uploaded = await photServices.update({
         rawPhoto: rawPhoto["photo"],
         photoId: employeeInfo.photoId,

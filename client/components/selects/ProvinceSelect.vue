@@ -1,17 +1,23 @@
 <template>
   <v-select
-    label="Citezenship"
+    label="Province"
     :items="items"
     :value="value"
     item-value="value"
     item-text="text"
     @input="$emit('input', $event)"
     outlined
-    :rules="rules"
-  ></v-select>
+  >
+    <template v-slot:item="data">
+      <v-list-item-content>
+        <v-list-item-title>{{data.item.text}}</v-list-item-title>
+        <v-list-item-subtitle>{{data.item.region}}</v-list-item-subtitle>
+      </v-list-item-content>
+    </template>
+  </v-select>
 </template>
 <script>
-import nationality from "./nationalities.json";
+import province from "./phprovince.json";
 import InputMixin from "@/mixins/InputMixin";
 export default {
   mixins: [InputMixin],
@@ -21,7 +27,7 @@ export default {
     };
   },
   async mounted() {
-    this.items = nationality;
+    this.items = province;
   }
 };
 </script>

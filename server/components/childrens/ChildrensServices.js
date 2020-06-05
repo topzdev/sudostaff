@@ -1,6 +1,15 @@
 const ChildrensModel = require("./ChildrensModel");
 
 class ChildrensServices {
+  async getOne({ id }) {
+    const result = await ChildrensModel.findByPk(id);
+    return {
+      status: 200,
+      msg: "Children successfully fetched",
+      data: result,
+    };
+  }
+
   async getAll({ id }) {
     const result = await ChildrensModel.findAll({ where: { employeeId: id } });
     return {

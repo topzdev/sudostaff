@@ -13,7 +13,7 @@
           <div class="overline">Name</div>
           <div
             class="subtitle-1 black--text"
-          >{{workInfo.firstName}} {{workInfo.middleName}} {{workInfo.lastName}}</div>
+          >{{workInfo.firstName}} {{workInfo.middleName}} {{workInfo.lastName}} {{workInfo.extensionName}}</div>
         </v-col>
 
         <v-col cols="6">
@@ -48,34 +48,42 @@ export default {
         designation: null,
         firstName: null,
         middleName: null,
+        extensionName: null,
         lastName: null,
         joiningDate: null,
-        imageId: null,
         photoUrl: null
       }
     };
   },
   computed: {
     joinedFormat() {
-      return dayjs(this.workInfo.joiningDate).format("MMMM DD, YYYY");
+      return this.workInfo.joiningDate
+        ? dayjs(this.workInfo.joiningDate).format("MMMM DD, YYYY")
+        : "";
     },
     getInfo() {
-      return this.$store.state.auth.personalInfo;
+      return this.$store.state.auth.workInfo;
     }
   },
-
-  async created() {
-    await this.$store.dispatch("auth/fetchPersonalInfo");
-
-    if (this.getInfo) {
-      const result = JSON.parse(JSON.stringify(this.getInfo));
-      this.workInfo = result;
-      this.workInfo.designation = result.designation.name;
-      this.workInfo.photoUrl = result.photo ? result.photo.photoUrl : null;
-      // this.workInfo.department = result.designation.department.name;
+  methods: {
+    loadData() {
+      if (this.getInfo) {
+        const result = JSON.parse(JSON.stringify(this.getInfo));
+        const { designation } = result;
+        this.workInfo = result;
+        this.workInfo.designation = designation.name;
+        this.workInfo.photoUrl = result.photo ? result.photo.photoUrl : null;
+        this.workInfo.department = designation.department.name;
+      }
     }
-
-    console.log(this.getInfo);
+  },
+  watch: {
+    getInfo() {
+      this.loadData();
+    }
+  },
+  mounted() {
+    this.loadData();
   }
 };
 </script>

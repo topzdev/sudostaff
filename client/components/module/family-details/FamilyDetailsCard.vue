@@ -7,9 +7,9 @@
     ></form-card-header>
 
     <v-card-text>
-      <div class="subtitle-2 my-2">Father Information</div>
+      <div class="subtitle-2 mb-5">Father Information</div>
       <v-row class="mb-5">
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="First Name"
             :value="fatherFirstName"
@@ -17,7 +17,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Last Name"
             :value="fatherLastName"
@@ -25,7 +25,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="8">
+        <v-col class="py-0 pb-1" cols="8">
           <v-text-field
             label="Middle Name"
             :value="fatherMiddleName"
@@ -33,7 +33,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="4">
+        <v-col class="py-0 pb-1" cols="4">
           <v-text-field
             label="Extension Name"
             :value="fatherExt"
@@ -45,9 +45,9 @@
 
       <v-divider class="d-flex my-5" />
 
-      <div class="subtitle-2 my-2">Mother Information</div>
+      <div class="subtitle-2 mb-5">Mother Information</div>
       <v-row class="mb-5">
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="First Name"
             :value="motherFirstName"
@@ -55,7 +55,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Last Name"
             :value="motherLastName"
@@ -63,7 +63,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="8">
+        <v-col class="py-0 pb-1" cols="8">
           <v-text-field
             label="Middle Name"
             :value="motherMiddleName"
@@ -71,7 +71,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="4">
+        <v-col class="py-0 pb-1" cols="4">
           <v-text-field
             label="Extension Name"
             :value="motherExt"
@@ -83,9 +83,9 @@
 
       <v-divider class="d-flex my-5" />
 
-      <div class="subtitle-2 my-2">Spouse Information</div>
+      <div class="subtitle-2 mb-5">Spouse Information</div>
       <v-row class="mb-5">
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="First Name"
             :value="spouseFirstName"
@@ -93,7 +93,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Last Name"
             :value="spouseLastName"
@@ -101,7 +101,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="8">
+        <v-col class="py-0 pb-1" cols="8">
           <v-text-field
             label="Middle Name"
             :value="spouseMiddleName"
@@ -109,7 +109,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="4">
+        <v-col class="py-0 pb-1" cols="4">
           <v-text-field
             label="Extension Name"
             :value="spouseExt"

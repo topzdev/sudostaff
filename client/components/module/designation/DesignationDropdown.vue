@@ -9,6 +9,7 @@
       :no-data-text="noDataText"
       label="Select Designation"
       outlined
+      :readonly="readonly"
       :disabled="disabled"
       :required="required"
       :rules="rules"

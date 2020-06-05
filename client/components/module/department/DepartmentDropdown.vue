@@ -7,6 +7,7 @@
     item-value="id"
     :disabled="disabled"
     :required="required"
+    :readonly="readonly"
     label="Select Department"
     outlined
     :rules="rules"

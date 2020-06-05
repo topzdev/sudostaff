@@ -44,8 +44,8 @@ export const actions = {
     try {
       const result = await DesignationAPI.getOne(id, { include, exclude });
       commit(types.SET_CURRENT, result.data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   fetchDesignations: async function(
@@ -61,8 +61,8 @@ export const actions = {
         withDept: true
       });
       commit(types.SET_DESIGNATIONS, result.data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   createDesignation: async function({ dispatch, commit }, data) {
@@ -70,8 +70,8 @@ export const actions = {
       const result = await DesignationAPI.create(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.ADD_DESIGNATION, { ...data, id: result.data });
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     } finally {
       this.app.router.push("/designation");
     }
@@ -81,8 +81,8 @@ export const actions = {
       const result = await DesignationAPI.update(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_DESIGNATION, data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     } finally {
       this.app.router.push("/designation");
     }

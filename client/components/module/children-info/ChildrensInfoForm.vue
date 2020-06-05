@@ -1,44 +1,37 @@
 <template>
-  <v-card :loading="loading">
-    <v-form ref="form" v-model="valid">
-      <v-card-title>Add Children</v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-col cols="12">
-            <v-text-field label="Children Name*" v-model="children.fullName" outlined></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <date-picker label="Birth Date*" v-model="children.birthDate" />
-          </v-col>
-        </v-row>
-        <small>*indicates required field</small>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="showChildren(false)">Close</v-btn>
-        <v-btn color="Add" :loading="loading" text @click="showChildren(false)">Save</v-btn>
-      </v-card-actions>
-    </v-form>
-  </v-card>
+  <v-form ref="form" v-model="valid">
+    <v-card flat>
+      <childrens-info-card
+        v-bind.sync="children"
+        :is-edit="isEdit"
+        :loading="loading"
+        :rules="childrenRules"
+      ></childrens-info-card>
+      <modal-form-action :is-edit="isEdit" :close-func="close" :save-func="save" />
+    </v-card>
+  </v-form>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import CardMixin from "@/mixins/CardMixin";
+import ModalMixin from "@/mixins/ModalMixin";
+import ChildrenFormMixin from "@/mixins/forms/ChildrenFormMixin";
 export default {
-  mixins: [CardMixin],
+  mixins: [ModalMixin, ChildrenFormMixin],
   data() {
     return {
-      children: {
-        fullName: "",
-        birthDate: ""
-      }
+      modalName: "children",
+      dataName: "children"
     };
   },
   methods: {
-    ...mapMutations({
-      showChildren: "modal/showChildren"
-    })
+    async save() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+      this.loading = true;
+      await this.$store.dispatch("children/addChildren", this.children);
+      this.loading = false;
+      this.close();
+    }
   }
 };
 </script>

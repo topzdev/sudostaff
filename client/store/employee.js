@@ -45,8 +45,8 @@ export const actions = {
         withDesignation
       });
       commit(types.SET_CURRENT, result.data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   fetchEmployees: async function(
@@ -63,8 +63,8 @@ export const actions = {
         withDesignation
       });
       commit(types.SET_EMPLOYEES, result.data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   createEmployee: async function({ dispatch, commit }, data) {
@@ -75,8 +75,8 @@ export const actions = {
       console.log(result, data);
       commit(types.ADD_EMPLOYEE, { ...data, id: result.data });
       this.app.router.push("/employee");
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   updateEmployee: async function({ dispatch, commit }, data) {
@@ -87,8 +87,8 @@ export const actions = {
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_EMPLOYEE, data);
       this.app.router.push("/employee");
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   }
 };

@@ -2,7 +2,7 @@ const BenifitsModel = require("./BenifitsModel");
 
 class BenifitsServices {
   async getOne({ id }) {
-    const result = await BenifitsModel.findOne({ where: { id } });
+    const result = await BenifitsModel.findByPk(id);
 
     return {
       status: 200,

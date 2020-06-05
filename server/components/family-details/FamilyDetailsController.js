@@ -8,7 +8,7 @@ class FamilyDetailsController {
   async fetchFamilyDetails(req, res) {
     try {
       console.log(req.body);
-      const result = await FamilyDetailsServices.getAll(req.params);
+      const result = await FamilyDetailsServices.getOne(req.params);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);

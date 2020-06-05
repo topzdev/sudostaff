@@ -5,7 +5,7 @@
     <v-tabs v-model="active" grow class="font-weight-bold">
       <v-tab v-for="(item, idx) in tabs" :key="idx">{{item.short ||item.title}}</v-tab>
     </v-tabs>
-    <v-tabs-items v-model="active">
+    <v-tabs-items v-if="loaded" v-model="active">
       <personal-info-tab-item />
       <contact-info-tab-item />
       <address-tab-item />
@@ -70,6 +70,9 @@ export default {
 
     loading() {
       return this.$store.state.auth.loading;
+    },
+    loaded() {
+      return this.$store.state.auth.personalInfo ? true : false;
     }
   },
 

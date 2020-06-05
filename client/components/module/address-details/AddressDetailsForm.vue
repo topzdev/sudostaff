@@ -2,7 +2,13 @@
   <v-form ref="form" v-model="valid">
     <address-details-card v-bind.sync="addressDetails" :header="header" :outlined="outlined" />
     <v-card flat>
-      <form-card-action :is-edit="isEdit" update-text="Update Address" />
+      <form-card-action
+        :cancelFunc="back"
+        :updateFunc="update"
+        :is-edit="isEdit"
+        :loading="loading"
+        update-text="Update Address"
+      />
     </v-card>
   </v-form>
 </template>
@@ -10,28 +16,39 @@
 
 <script>
 import FormMixin from "@/mixins/FormMixin";
+import AddressFormMixin from "@/mixins/forms/AddressFormMixin";
 export default {
-  mixins: [FormMixin],
-  data() {
-    return {
-      addressDetails: {
-        id: 1,
-        houseBlock: "",
-        street: "",
-        subdivision: "",
-        barangay: "",
-        city: "",
-        province: "",
-        zipcode: "",
-        houseBlock2: "",
-        street2: "",
-        subdivision2: "",
-        barangay2: "",
-        city2: "",
-        province2: "",
-        zipcode2: ""
-      }
-    };
+  mixins: [FormMixin, AddressFormMixin],
+  computed: {
+    getInfo() {
+      return this.$store.state.auth.address;
+    }
+  },
+  methods: {
+    loadData() {
+      if (this.getInfo)
+        this.addressDetails = JSON.parse(JSON.stringify(this.getInfo));
+    },
+    async update() {
+      this.loading = true;
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
+      await this.$store.dispatch(
+        "auth/updateAddressDetails",
+        this.addressDetails
+      );
+      this.loading = false;
+    }
+  },
+  watch: {
+    getInfo() {
+      this.loadData();
+    }
+  },
+  async mounted() {
+    await this.$store.dispatch("auth/fetchAddressDetails");
+    this.loadData();
   }
 };
 </script>

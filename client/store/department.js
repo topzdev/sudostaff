@@ -47,8 +47,8 @@ export const actions = {
         withDeptHead: true
       });
       commit(types.SET_CURRENT, result.data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   fetchDepartments: async function(
@@ -64,8 +64,8 @@ export const actions = {
         withDeptHead: true
       });
       commit(types.SET_DEPARTMENTS, result.data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   createDepartment: async function({ dispatch, commit }, data) {
@@ -74,8 +74,8 @@ export const actions = {
       dispatch("utils/setNotifDefault", result, { root: true });
       console.log(result, data);
       commit(types.ADD_DEPARTMENT, { ...data, id: result.data });
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     } finally {
       this.app.router.push("/department");
     }
@@ -86,8 +86,8 @@ export const actions = {
       console.log("...updating", result);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_DEPARTMENT, data);
-    } catch (error) {
-      dispatch("utils/setNotifError", error, { root: true });
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     } finally {
       this.app.router.push("/department");
     }

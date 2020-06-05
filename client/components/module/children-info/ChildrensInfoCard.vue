@@ -1,30 +1,42 @@
 <template>
-  <v-card :outlined="outlined" flat>
+  <v-card :loading="loading" flat>
+    <v-card-title>Add Children</v-card-title>
     <v-card-text>
-      <v-alert text outlined type="info" dense>
-        <b>Adding</b> and
-        <b>Removing</b> children information will automatically saved to database without clicking the
-        <b>Update Button</b> below.
-      </v-alert>
-      <div class="d-flex mb-3">
-        <div class="subtitle-2 mr-auto">Childrens Information</div>
-        <v-btn @click="showChildren(true)" color="success" text>Add Children</v-btn>
-      </div>
-      <childrens-info-modal />
-      <childrens-info-table />
+      <v-row>
+        <v-col class="py-0 pb-1" cols="12">
+          <v-text-field
+            label="Children Name*"
+            :value="fullName"
+            @input="$emit('update:fullName', $event)"
+            :rules="rules.fullName"
+            :readonly="isEdit"
+            outlined
+          ></v-text-field>
+        </v-col>
+        <v-col class="py-0 pb-1" cols="12">
+          <date-picker
+            label="Birth Date*"
+            :value="birthDate"
+            @input="$emit('update:birthDate', $event)"
+            :rules="rules.birthDate"
+            :readonly="isEdit"
+          />
+        </v-col>
+      </v-row>
+      <small>*indicates required field</small>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
 import CardMixin from "@/mixins/CardMixin";
-import { mapMutations } from "vuex";
 export default {
   mixins: [CardMixin],
-  methods: {
-    ...mapMutations({
-      showChildren: "modal/showChildren"
-    })
+  props: ["fullName", "birthDate"],
+  data() {
+    return {
+      test: ""
+    };
   }
 };
 </script>

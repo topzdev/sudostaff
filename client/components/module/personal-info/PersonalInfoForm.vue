@@ -7,7 +7,13 @@
       :rules="personalRules"
     />
     <v-card flat>
-      <form-card-action :is-edit="isEdit" update-text="Update Personal" />
+      <form-card-action
+        :cancelFunc="back"
+        :updateFunc="update"
+        :is-edit="isEdit"
+        :loading="loading"
+        update-text="Update Personal"
+      />
     </v-card>
   </v-form>
 </template>
@@ -22,9 +28,27 @@ export default {
       return this.$store.state.auth.personalInfo;
     }
   },
-  async created() {
-    await this.$store.dispatch("auth/fetchPersonalInfo");
-    this.personal = JSON.parse(JSON.stringify(this.getInfo));
+  methods: {
+    loadData() {
+      if (this.getInfo)
+        this.personal = JSON.parse(JSON.stringify(this.getInfo));
+    },
+    async update() {
+      this.loading = true;
+      this.$refs.form.validate();
+      if (!this.valid) return;
+
+      await this.$store.dispatch("auth/updatePersonalInfo", this.personal);
+      this.loading = false;
+    }
+  },
+  watch: {
+    getInfo() {
+      this.loadData();
+    }
+  },
+  created() {
+    this.loadData();
   }
 };
 </script>

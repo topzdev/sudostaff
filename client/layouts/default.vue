@@ -42,4 +42,8 @@ export default {
 .v-text-field.v-text-field--enclosed .v-text-field__details {
   margin-bottom: 4px;
 }
+
+.v-btn {
+  text-transform: none !important;
+}
 </style>

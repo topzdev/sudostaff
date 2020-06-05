@@ -1,17 +1,11 @@
 <template>
-  <v-menu
-    :value="show"
-    :close-on-content-click="false"
-    :nudge-right="40"
-    offset-y
-    min-width="290px"
-  >
+  <v-menu :value="show" :close-on-content-click="true" :nudge-right="40" offset-y min-width="290px">
     <template v-slot:activator="{ on }">
       <v-text-field
-        :value="value"
+        :value="formatDate(value)"
         @input="setValue"
         :label="label"
-        prepend-inner-icon="mdi-calendar"
+        append-icon="mdi-calendar"
         outlined
         readonly
         v-on="on"
@@ -20,12 +14,14 @@
         :rules="rules"
       ></v-text-field>
     </template>
-    <v-date-picker :value="value" @input="setValue"></v-date-picker>
+
+    <v-date-picker :readonly="readonly" :value="value" @input="setValue"></v-date-picker>
   </v-menu>
 </template>
 
 <script>
 import InputMixin from "@/mixins/InputMixin";
+import dayjs from "dayjs";
 export default {
   mixins: [InputMixin],
   props: {
@@ -40,9 +36,13 @@ export default {
     };
   },
   methods: {
-    setValue() {
+    setValue(value) {
+      console.log(value, "DATE PICKER");
       this.show = false;
-      this.$emit("input", this.date);
+      this.$emit("input", value);
+    },
+    formatDate(date) {
+      return date ? dayjs(date).format("MMMM D, YYYY") : "";
     }
   }
 };

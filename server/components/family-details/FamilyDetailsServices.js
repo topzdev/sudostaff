@@ -1,10 +1,8 @@
 const FamilyDetailsModel = require("./FamilyDetailsModel");
 
 class FamilyDetailsServices {
-  async getAll({ id }) {
-    const result = await FamilyDetailsModel.findAll({
-      where: { id },
-    });
+  async getOne({ id }) {
+    const result = await FamilyDetailsModel.findByPk(id);
 
     return {
       status: 200,

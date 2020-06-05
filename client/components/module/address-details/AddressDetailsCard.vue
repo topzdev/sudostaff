@@ -7,9 +7,9 @@
     ></form-card-header>
 
     <v-card-text>
-      <div class="subtitle-2 my-2">Permanent Address</div>
+      <div class="subtitle-2 mb-5">Permanent Address</div>
       <v-row class="mb-5">
-        <v-col cols="12">
+        <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="House/Block/Lot No."
             :value="houseBlock"
@@ -17,7 +17,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Street"
             :value="street"
@@ -25,7 +25,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Subdivision/Village"
             :value="subdivision"
@@ -33,7 +33,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Barangay"
             :value="barangay"
@@ -41,7 +41,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="City/Municipality"
             :value="city"
@@ -49,15 +49,10 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
-          <v-select
-            label="Province"
-            :value="province"
-            @input="$emit('update:province', $event)"
-            outlined
-          ></v-select>
+        <v-col class="py-0 pb-1" cols="6">
+          <province-select :value="province" @input="$emit('update:province', $event)"></province-select>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Zip Code"
             :value="zipcode"
@@ -68,9 +63,9 @@
       </v-row>
 
       <!-- <v-divider class="my-5" /> -->
-      <div class="subtitle-2 my-2">Residential Address</div>
+      <div class="subtitle-2 mb-5">Residential Address</div>
       <v-row class="mb-5">
-        <v-col cols="12">
+        <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="House/Block/Lot No."
             :value="houseBlock2"
@@ -78,7 +73,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Street"
             :value="street2"
@@ -86,7 +81,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Subdivision/Village"
             :value="subdivision2"
@@ -94,7 +89,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Barangay"
             :value="barangay2"
@@ -102,7 +97,7 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="City/Municipality"
             :value="city2"
@@ -110,15 +105,10 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
-          <v-select
-            label="Province"
-            :value="province2"
-            @input="$emit('update:province2', $event)"
-            outlined
-          ></v-select>
+        <v-col class="py-0 pb-1" cols="6">
+          <province-select :value="province2" @input="$emit('update:province2', $event)"></province-select>
         </v-col>
-        <v-col cols="6">
+        <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="Zip Code"
             :value="zipcode2"

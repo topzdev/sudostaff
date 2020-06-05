@@ -43,10 +43,9 @@
 
 <script>
 import { mapMutations } from "vuex";
-import CardMixin from "@/mixins/CardMixin";
 import FormMxin from "@/mixins/FormMixin";
 export default {
-  mixins: [CardMixin, FormMxin],
+  mixins: [FormMxin],
   data() {
     return {
       trainingProg: {

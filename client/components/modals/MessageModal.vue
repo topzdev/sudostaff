@@ -7,9 +7,9 @@
       </v-card-text>
       <v-card-actions>
         <template v-if="modal.isQuestion">
-          <v-btn color="error" text @click="no">{{noLabel}}</v-btn>
+          <v-btn color="error" text @click="noFunction">{{noLabel}}</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="success" text @click="yes">{{yesLabel}}</v-btn>
+          <v-btn color="success" text @click="yesFunction">{{yesLabel}}</v-btn>
         </template>
         <template v-else>
           <v-spacer></v-spacer>
