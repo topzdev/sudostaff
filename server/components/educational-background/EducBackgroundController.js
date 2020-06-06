@@ -5,6 +5,16 @@ class EducBackgroundController {
   constructor() {
     console.log("Training Programs Controller");
   }
+  async fetchSingleEducBackground(req, res) {
+    try {
+      const result = await EducBackgroundServices.getOne(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
+
   async fetchEducBackground(req, res) {
     try {
       const result = await EducBackgroundServices.getAll(req.params);

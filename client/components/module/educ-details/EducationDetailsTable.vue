@@ -1,23 +1,25 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="data"
+    :items="list"
     hide-default-footer
+    :loading="loading"
+    :no-data-text="noDataText"
     item-key="id"
     class="elevation-1"
-    sort-by="fullName"
+    sort-by="schoolName"
   >
     <template v-slot:item.actions="{ item }">
       <v-tooltip bottom color="info">
         <template v-slot:activator="{ on }">
-          <v-icon class="mr-2" @click="viewItem(item)" v-on="on">mdi-eye</v-icon>
+          <v-icon class="mr-2" @click="viewItem(item.id)" v-on="on">mdi-eye</v-icon>
         </template>
         <span>View</span>
       </v-tooltip>
 
       <v-tooltip bottom color="error">
         <template v-slot:activator="{ on }">
-          <v-icon @click="deleteItem(item)" v-on="on">mdi-delete</v-icon>
+          <v-icon @click="deleteItem(item.id)" v-on="on">mdi-delete</v-icon>
         </template>
         <span>Delete</span>
       </v-tooltip>
@@ -27,9 +29,22 @@
 
 <script>
 import dayjs from "dayjs";
+import TableModalMixin from "@/mixins/TableModalMixin";
 export default {
+  mixins: [TableModalMixin],
   data() {
     return {
+      config: {
+        title: "Delete Education Details.",
+        store: {
+          name: "educDetails",
+          delete: "educDetails/deleteEducDetails",
+          list: "educDetails/fetchEducDetails",
+          current: "educDetails/fetchSingleEducDetails"
+        },
+        modal: "modal/showEducationDetails"
+      },
+      noDataText: "No Education Details",
       headers: [
         {
           text: "Level",
@@ -55,31 +70,8 @@ export default {
           value: "actions",
           sortable: false
         }
-      ],
-      data: [
-        {
-          id: 1,
-          employeeId: 1,
-          level: "Fourth Year",
-          degree: "Information Technology",
-          schoolName: "Technological University of the Philippines",
-          from: "2020-05-28",
-          to: "2020-05-28",
-          graduateYear: "2018",
-          recognition: "Masteral",
-          scholarship: "UNIFAST"
-        }
       ]
     };
-  },
-
-  methods: {
-    deleteItem(item) {
-      console.log(item);
-    },
-    viewItem(item) {
-      console.log(item);
-    }
   }
 };
 </script>

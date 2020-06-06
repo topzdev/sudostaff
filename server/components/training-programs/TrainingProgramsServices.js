@@ -1,6 +1,16 @@
 const TrainingProgramsModel = require("./TrainingProgramsModel");
 
 class TrainingProgramsServices {
+  async getOne({ id }) {
+    const result = await TrainingProgramsModel.findByPk(id);
+
+    return {
+      status: 200,
+      msg: "Training Program Fetched Successfully",
+      data: result,
+    };
+  }
+
   async getAll({ id }) {
     const result = await TrainingProgramsModel.findAll({
       where: { employeeId: id },
@@ -20,6 +30,9 @@ class TrainingProgramsServices {
         totalHours,
         type,
         sponsor,
+        from,
+        to,
+        title,
       },
       { returning: ["id"] }
     );

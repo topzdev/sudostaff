@@ -1,10 +1,10 @@
 <template>
   <v-tab-item>
-    <education-details-tab-card class="mt-5" />
-    <civil-eligibility-tab-card class="mt-5" />
-    <work-exp-tab-card class="mt-5" />
-    <voluntary-exp-tab-card class="mt-5" />
-    <training-prog-tab-card class="mt-5" />
+    <education-details-main class="mt-5" />
+    <civil-eligibility-main class="mt-5" />
+    <work-exp-main class="mt-5" />
+    <voluntary-exp-main class="mt-5" />
+    <training-prog-main class="mt-5" />
   </v-tab-item>
 </template>
 

@@ -5,6 +5,16 @@ class CivilEligibilityController {
   constructor() {
     console.log("Civil Eligibility Controller");
   }
+  async fetchSingleCivilEligibilitys(req, res) {
+    try {
+      const result = await CivilEligibilityServices.getOne(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
+
   async fetchCivilEligibilitys(req, res) {
     try {
       const result = await CivilEligibilityServices.getAll(req.params);

@@ -5,6 +5,15 @@ class VoluntaryExpController {
   constructor() {
     console.log("Voluntary Experience Controller");
   }
+  async fetchSingleVoluntaryExp(req, res) {
+    try {
+      const result = await VoluntaryExpServices.getOne(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
   async fetchVoluntaryExp(req, res) {
     try {
       const result = await VoluntaryExpServices.getAll(req.params);

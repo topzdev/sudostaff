@@ -1,6 +1,15 @@
 const EducBackgroundModel = require("./EducBackgroundModel");
 
 class EducBackgroundServices {
+  async getOne({ id }) {
+    const result = await EducBackgroundModel.findByPk(id);
+    return {
+      status: 200,
+      msg: "Educational Background successfully fetched",
+      data: result,
+    };
+  }
+
   async getAll({ id }) {
     const result = await EducBackgroundModel.findAll({
       where: { employeeId: id },

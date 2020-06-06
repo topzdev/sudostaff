@@ -20,11 +20,15 @@
               </v-col>
 
               <v-col cols="12">
-                <personal-info-card v-bind.sync="employee" :rules="personalRules" />
+                <personal-info-card
+                  :is-edit="isEdit"
+                  v-bind.sync="employee"
+                  :rules="personalRules"
+                />
               </v-col>
 
               <v-col cols="12">
-                <contact-info-card v-bind.sync="employee" :rules="contactRules" />
+                <contact-info-card :is-edit="isEdit" v-bind.sync="employee" :rules="contactRules" />
               </v-col>
             </v-row>
           </v-col>

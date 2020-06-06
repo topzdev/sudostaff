@@ -23,9 +23,10 @@ export const mutations = {
 export const actions = {
   async fetchChildrens({ rootState, state, commit, dispatch }) {
     try {
-      if (!rootState.auth.user.id || state.list.length) return;
-      const result = await childrenServices.getAll(rootState.auth.user.id);
-      console.log(rootState.auth.user.id, "FETCHINGG", result);
+      const employeeId = rootState.auth.user.id;
+      if (!employeeId || state.list.length) return;
+      const result = await childrenServices.getAll(employeeId);
+      console.log(employeeId, "FETCHINGG", result);
 
       commit(types.SET_CHILDRENS, result.data);
     } catch ({ response: { data } }) {
@@ -35,8 +36,9 @@ export const actions = {
 
   async fetchSingleChildren({ rootState, state, commit, dispatch }, id) {
     try {
-      if (!rootState.auth.user.id) return;
-
+      const employeeId = rootState.auth.user.id;
+      if (!employeeId) return;
+      console.log(id);
       const result = await childrenServices.getOne(id);
 
       commit(types.SET_CURRENT, result.data);
@@ -46,16 +48,17 @@ export const actions = {
   },
   async addChildren({ rootState, commit, dispatch }, data) {
     try {
-      if (!rootState.auth.user.id) return;
+      const employeeId = rootState.auth.user.id;
+      if (!employeeId) return;
 
       const result = await childrenServices.create({
-        employeeId: rootState.auth.user.id,
+        employeeId,
         ...data
       });
 
       commit(types.ADD_CHILDREN, {
-        employeeId: rootState.auth.user.id,
-        ...data
+        ...data,
+        id: result.data
       });
       dispatch("utils/setNotifDefault", result, { root: true });
     } catch ({ response: { data } }) {

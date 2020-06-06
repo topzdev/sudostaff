@@ -10,8 +10,8 @@
     sort-by="fullName"
   >
     <template v-slot:item.actions="{ item }">
-      <v-icon class="mr-2" @click="viewItem(item)">mdi-eye</v-icon>
-      <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
+      <v-icon class="mr-2" @click="viewItem(item.id)">mdi-eye</v-icon>
+      <v-icon @click="deleteItem(item.id)">mdi-delete</v-icon>
     </template>
 
     <template v-slot:item.birthDate="{item}">{{dayjs(item.birthDate).format('MMMM DD, YYYY')}}</template>
@@ -19,12 +19,21 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
-import types from "@/store/types";
+import TableModalMixin from "@/mixins/TableModalMixin";
 export default {
+  mixins: [TableModalMixin],
   data() {
     return {
-      loading: false,
+      config: {
+        title: "Delete Children Information",
+        store: {
+          name: "children",
+          delete: "children/deleteChildren",
+          list: "children/fetchChildrens",
+          current: "children/fetchSingleChildren"
+        },
+        modal: "modal/showChildren"
+      },
       noDataText: "No Children Informations",
       headers: [
         {
@@ -38,46 +47,6 @@ export default {
         { text: "Actions", align: "center", value: "actions", sortable: false }
       ]
     };
-  },
-
-  methods: {
-    dayjs,
-    async fetchList() {
-      this.loading = true;
-      await this.$store.dispatch("children/fetchChildrens");
-      this.loading = false;
-    },
-    async deleteItem(item) {
-      const self = this;
-      this.$store.commit("modal/" + types.SET_MESSAGE_MODAL, {
-        title: "Delete Children Information",
-        show: true,
-        message: `Are you sure to delete this product ${item.fullName}?`,
-        isQuestion: true,
-        async yesFunction() {
-          self.loading = true;
-          await self.$store.dispatch("children/deleteChildren", item.id);
-          self.loading = false;
-        }
-      });
-    },
-    async viewItem(item) {
-      this.loading = true;
-      await this.$store.dispatch("children/fetchSingleChildren", item.id);
-      this.$store.commit("modal/showChildren", true);
-      this.loading = false;
-    }
-  },
-
-  computed: {
-    list() {
-      return this.$store.state.children.list;
-    }
-  },
-
-  async created() {
-    await this.fetchList();
-    console.log("hello children info", this.list);
   }
 };
 </script>

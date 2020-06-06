@@ -1,23 +1,25 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="data"
+    :items="list"
     hide-default-footer
+    :loading="loading"
+    :no-data-text="noDataText"
     item-key="id"
     class="elevation-1"
-    sort-by="fullName"
+    sort-by="title"
   >
     <template v-slot:item.actions="{ item }">
       <v-tooltip bottom color="info">
         <template v-slot:activator="{ on }">
-          <v-icon class="mr-2" @click="viewItem(item)" v-on="on">mdi-eye</v-icon>
+          <v-icon class="mr-2" @click="viewItem(item.id)" v-on="on">mdi-eye</v-icon>
         </template>
         <span>View</span>
       </v-tooltip>
 
       <v-tooltip bottom color="error">
         <template v-slot:activator="{ on }">
-          <v-icon @click="deleteItem(item)" v-on="on">mdi-delete</v-icon>
+          <v-icon @click="deleteItem(item.id)" v-on="on">mdi-delete</v-icon>
         </template>
         <span>Delete</span>
       </v-tooltip>
@@ -26,10 +28,22 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
+import TableModalMixin from "@/mixins/TableModalMixin";
 export default {
+  mixins: [TableModalMixin],
   data() {
     return {
+      config: {
+        title: "Delete Training Program Info.",
+        store: {
+          name: "trainingProgram",
+          delete: "trainingProgram/deleteTrainingProgram",
+          list: "trainingProgram/fetchTrainingProgram",
+          current: "trainingProgram/fetchSingleTrainingProgram"
+        },
+        modal: "modal/showTrainingProg"
+      },
+      noDataText: "No Training Program info.",
       headers: [
         {
           text: "Title",
@@ -55,29 +69,8 @@ export default {
           value: "actions",
           sortable: false
         }
-      ],
-      data: [
-        {
-          id: 1,
-          employeeId: 1,
-          title: "Hello,World",
-          from: "2020-05-28",
-          to: "2020-05-28",
-          totalHours: 24,
-          type: "Programming",
-          sponsor: "Microsoft"
-        }
       ]
     };
-  },
-
-  methods: {
-    deleteItem(item) {
-      console.log(item);
-    },
-    viewItem(item) {
-      console.log(item);
-    }
   }
 };
 </script>

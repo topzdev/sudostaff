@@ -1,6 +1,14 @@
 const CivilEligibilityModel = require("./CivilEligibilityModel");
 
 class CivilEligibilityServices {
+  async getOne({ id }) {
+    const result = await CivilEligibilityModel.findByPk(id);
+    return {
+      status: 200,
+      msg: "Civil Eligibility Fetched Successfully",
+      data: result,
+    };
+  }
   async getAll({ id }) {
     const result = await CivilEligibilityModel.findAll({
       where: { employeeId: id },

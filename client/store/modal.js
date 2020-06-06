@@ -6,7 +6,7 @@ export const state = () => ({
   civilEligibility: false,
   workExp: false,
   voluntaryExp: false,
-  training: true,
+  training: false,
   messageDialog: {
     show: false,
     message: "",

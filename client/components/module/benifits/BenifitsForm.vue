@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <benifits-card v-bind.sync="benifits" :header="header" :outlined="outlined" />
+    <benifits-card :is-edit="isEdit" v-bind.sync="benifits" :header="header" :outlined="outlined" />
     <v-card flat>
       <form-card-action
         :cancelFunc="back"

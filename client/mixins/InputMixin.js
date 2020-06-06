@@ -1,6 +1,9 @@
 export default {
   props: {
     value: [String, Number],
+    label: {
+      type: String
+    },
     required: {
       type: Boolean,
       default: false

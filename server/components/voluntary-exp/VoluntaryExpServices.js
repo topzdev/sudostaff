@@ -1,6 +1,16 @@
 const VoluntaryExpModel = require("./VoluntaryExpModel");
 
 class VoluntaryExpServices {
+  async getOne({ id }) {
+    const result = await VoluntaryExpModel.findByPk(id);
+
+    return {
+      status: 200,
+      msg: "Voluntary Experience Fetched Successfully",
+      data: result,
+    };
+  }
+
   async getAll({ id }) {
     const result = await VoluntaryExpModel.findAll({
       where: { employeeId: id },
@@ -18,7 +28,6 @@ class VoluntaryExpServices {
       returning: ["id"],
     });
 
-    console.log(result, VoluntaryExpArray);
     return {
       status: 200,
       msg: "Voluntary Experiences Added",

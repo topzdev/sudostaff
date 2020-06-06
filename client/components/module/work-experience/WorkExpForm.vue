@@ -1,84 +1,35 @@
 <template>
-  <v-card :loading="loading">
-    <v-form ref="form" v-model="valid">
-      <v-card-title>Work Experience</v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-col cols="7">
-            <v-text-field label="Company*" v-model="workExp.company" outlined></v-text-field>
-          </v-col>
-
-          <v-col cols="5">
-            <v-text-field label="Position*" v-model="workExp.position" outlined></v-text-field>
-          </v-col>
-
-          <v-col cols="4">
-            <v-select label="Salary Grade*" v-model="workExp.salaryGrade" outlined></v-select>
-          </v-col>
-
-          <v-col cols="4">
-            <v-select label="Step Increment" v-model="workExp.stepIncrementd" outlined></v-select>
-          </v-col>
-
-          <v-col cols="4">
-            <v-text-field
-              label="Monthly Salary"
-              type="number"
-              v-model="workExp.monthlySalaray"
-              outlined
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6">
-            <v-select label="From*" v-model="workExp.from" outlined></v-select>
-          </v-col>
-          <v-col cols="6">
-            <v-select label="to*" v-model="workExp.to" outlined></v-select>
-          </v-col>
-
-          <v-col cols="6">
-            <v-checkbox v-model="workExp.isFullTime" label="is Full Time*"></v-checkbox>
-          </v-col>
-          <v-col cols="6">
-            <v-checkbox v-model="workExp.isGovernmentService" label="is Government Service*"></v-checkbox>
-          </v-col>
-        </v-row>
-        <small>*indicates required field</small>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="showModal(false)">Close</v-btn>
-        <v-btn color="Add" :loading="loading" text @click="showModal(false)">Save</v-btn>
-      </v-card-actions>
-    </v-form>
-  </v-card>
+  <v-form ref="form" v-model="valid">
+    <v-card flat>
+      <work-exp-card :is-edit="isEdit" v-bind.sync="workExp" :rules="workExpRules" />
+      <modal-form-action :is-edit="isEdit" :close-func="close" :save-func="save" />
+    </v-card>
+  </v-form>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-import CardMixin from "@/mixins/CardMixin";
+import ModalMixin from "@/mixins/ModalMixin";
+import WorkExpFormMixin from "@/mixins/forms/WorkExpFormMixin";
 export default {
-  mixins: [CardMixin],
+  mixins: [ModalMixin, WorkExpFormMixin],
+
   data() {
     return {
-      workExp: {
-        id: 1,
-        employeeId: 1,
-        company: "",
-        position: "",
-        salaryGrade: "",
-        stepIncrementd: "",
-        monthlySalaray: 0,
-        from: 2020,
-        to: 2020,
-        isFullTime: null,
-        isGovernmentService: null
-      }
+      modalName: "workExp",
+      storeName: "workExp",
+      dataName: "workExp"
     };
   },
   methods: {
-    ...mapMutations({
-      showModal: "modal/showWorkExp"
-    })
+    async save() {
+      this.$refs.form.validate();
+      if (!this.valid) return;
+      this.loading = true;
+      await this.$store.dispatch("workExp/addWorkExp", this.workExp);
+      this.loading = false;
+      this.close();
+    }
   }
 };
 </script>

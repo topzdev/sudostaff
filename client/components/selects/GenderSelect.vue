@@ -8,6 +8,7 @@
     @input="$emit('input', $event)"
     outlined
     :rules="rules"
+    :readonly="readonly"
   ></v-select>
 </template>
 

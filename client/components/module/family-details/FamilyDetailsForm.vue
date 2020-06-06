@@ -1,6 +1,11 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <family-details-card v-bind.sync="familyDetails" :header="header" :outlined="outlined" />
+    <family-details-card
+      :is-edit="isEdit"
+      v-bind.sync="familyDetails"
+      :header="header"
+      :outlined="outlined"
+    />
     <v-card flat>
       <form-card-action
         :cancelFunc="back"

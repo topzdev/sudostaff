@@ -6,6 +6,7 @@
     item-value="value"
     item-text="text"
     @input="$emit('input', $event)"
+    :readonly="readonly"
     outlined
   >
     <template v-slot:item="data">

@@ -23,7 +23,7 @@
           />
         </v-col>
       </v-row>
-      <small>*indicates required field</small>
+      <small v-if="!isEdit">*indicates required field</small>
     </v-card-text>
   </v-card>
 </template>
@@ -32,12 +32,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["fullName", "birthDate"],
-  data() {
-    return {
-      test: ""
-    };
-  }
+  props: ["fullName", "birthDate"]
 };
 </script>
 

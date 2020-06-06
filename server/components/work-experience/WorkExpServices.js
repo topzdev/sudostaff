@@ -1,6 +1,15 @@
 const WorkExpModel = require("./WorkExpModel");
 
 class WorkExpServices {
+  async getOne({ id }) {
+    const result = await WorkExpModel.findByPk(id);
+
+    return {
+      status: 200,
+      msg: "Licenses Information Fetched Successfully",
+      data: result,
+    };
+  }
   async getAll({ id }) {
     const result = await WorkExpModel.findAll({
       where: { employeeId: id },

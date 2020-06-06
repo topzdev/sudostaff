@@ -13,10 +13,10 @@ export default {
         commit(`modal/show${this.capitalize}`, show);
       }
     }),
-    close() {
-      this.$store.commit(this.modalName + "/SET_CURRENT", null);
+    async close() {
+      await this.showModal(false);
+      this.$store.commit(this.storeName + "/SET_CURRENT", null);
       this.$refs.form.reset();
-      this.showModal(false);
     },
     setData() {
       if (!this.current) return;
@@ -30,7 +30,7 @@ export default {
     },
 
     current() {
-      return this.$store.state[this.modalName].current;
+      return this.$store.state[this.storeName].current;
     },
 
     isEdit() {
