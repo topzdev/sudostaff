@@ -2,8 +2,8 @@ const LeaveTypeModel = require("./LeaveTypeModel");
 const helpers = require("./leaveTypeHelpers");
 
 class LeaveTypeServices {
-  async getOne({ id }) {
-    const result = await LeaveTypeModel.findAll({ where: { id }, limit: 1 });
+  async getOne({ id }, { include, exclude }) {
+    const result = await LeaveTypeModel.findByPk(id);
     return {
       status: 200,
       msg: "Leave Type fetch successfully",
@@ -11,16 +11,15 @@ class LeaveTypeServices {
     };
   }
 
-  async getAll({ search, limit, offset }) {
-    const options = {
-      where: {},
-      offset,
-      limit,
-    };
-
-    if (search) options.where.name = { [Op.like]: `%${search}%` };
-
-    const result = await LeaveTypeModel.findAll(options);
+  async getAll({ searchBy, searchText, limit, offset }) {
+    const result = await LeaveTypeModel.findAll({
+      ...parseCondition({
+        searchBy,
+        searchText,
+        limit,
+        offset,
+      }),
+    });
     return {
       status: 200,
       msg: "Leave Types fetch successfully",

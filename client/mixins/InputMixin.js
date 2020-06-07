@@ -16,6 +16,14 @@ export default {
       type: Boolean,
       default: false
     },
-    rules: Array
+    rules: Array,
+    dense: {
+      type: Boolean,
+      default: false
+    },
+    hideDetails: {
+      type: Boolean,
+      default: false
+    }
   }
 };

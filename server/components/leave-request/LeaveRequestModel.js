@@ -43,7 +43,7 @@ LeaveRequestModel.init(
     },
 
     requestStatus: {
-      type: Sequelize.ENUM("active", "pending", "rejected", "authorized"),
+      type: Sequelize.ENUM("active", "pending", "rejected", "approved"),
       defaultValue: "active",
     },
 

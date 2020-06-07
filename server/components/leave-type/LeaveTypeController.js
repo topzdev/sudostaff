@@ -25,7 +25,7 @@ class LeaveTypeController {
   async fetchLeaveTypes(req, res) {
     try {
       console.log(req.body);
-      const result = await leaveTypeService.getAll(req.query);
+      const result = await leaveTypeService.getAll(req.query, req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);

@@ -7,6 +7,7 @@ export const state = () => ({
   workExp: false,
   voluntaryExp: false,
   training: false,
+  leaveRequest: true,
   messageDialog: {
     show: false,
     message: "",
