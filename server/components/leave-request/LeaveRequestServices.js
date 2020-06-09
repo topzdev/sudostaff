@@ -1,26 +1,24 @@
 const LeaveRequestModel = require("./LeaveRequestModel");
 const helpers = require("./leaveRequestHelpers");
+const parseCondition = require("../../helpers/parseCondition");
 
 class LeaveRequestServices {
-  async getOne({ id }) {
-    const result = await LeaveRequestModel.findAll({ where: { id }, limit: 1 });
+  async getOne({ id }, { include, exclude }) {
+    const result = await LeaveRequestModel.findByPk(id, {
+      ...parseCondition({ limit: 1, include, exclude }),
+    });
+
     return {
       status: 200,
       msg: "Leave Request fetch successfully",
-      data: result.length ? result[0] : [],
+      data: result,
     };
   }
 
-  async getAll({ status, limit, offset }) {
-    const options = {
-      where: {},
-      offset,
-      limit,
-    };
-
-    if (status) options.where.status = status;
-
-    const result = await LeaveRequestModel.findAll(options);
+  async getAll({ status, limit, offset, include, exclude }) {
+    const result = await LeaveRequestModel.findAndCountAll({
+      ...parseCondition({ limit: 1, include, exclude, status }),
+    });
     return {
       status: 200,
       msg: "Leave Requests fetch successfully",
@@ -28,7 +26,7 @@ class LeaveRequestServices {
     };
   }
 
-  async create({ employeeId, startDate, endDate, leaveType, reason }) {
+  async create({ employeeId, startDate, endDate, leaveTypeId, reason }) {
     if (await helpers.isActive())
       return {
         status: 400,
@@ -39,7 +37,7 @@ class LeaveRequestServices {
       employeeId,
       startDate,
       endDate,
-      leaveType,
+      leaveTypeId,
       reason,
     });
 
@@ -50,7 +48,7 @@ class LeaveRequestServices {
     };
   }
 
-  async updateByUser({ id, startDate, endDate, leaveType, reason }) {
+  async updateByUser({ id, startDate, endDate, leaveTypeId, reason }) {
     console.log(id);
 
     if (!(await helpers.isExist(id)))
@@ -60,7 +58,7 @@ class LeaveRequestServices {
       };
 
     const result = await LeaveRequestModel.update(
-      { startDate, endDate, leaveType, reason },
+      { startDate, endDate, leaveTypeId, reason },
       { where: { id } }
     );
 
@@ -71,12 +69,7 @@ class LeaveRequestServices {
     };
   }
 
-  async updateByAdmin({
-    id,
-    requestStatus,
-    authorizedComment,
-    authorizedPersonId,
-  }) {
+  async updateByAdmin({ id, status, authorizedComment, authorizedPersonId }) {
     if (!(await helpers.isExist(id)))
       return {
         status: 400,
@@ -90,7 +83,7 @@ class LeaveRequestServices {
       };
 
     const result = await LeaveRequestModel.update(
-      { requestStatus, authorizedComment, authorizedPersonId },
+      { status, authorizedComment, authorizedPersonId },
       { where: { id } }
     );
 

@@ -7,6 +7,7 @@ export const state = () => ({
   user: {
     id: "EMP-001"
   },
+  departmentHead: null,
   loading: false,
   infoIds: {
     benifitsId: null,
@@ -35,6 +36,7 @@ export const mutations = {
       landline,
       mobile,
       designation,
+      department,
       firstName,
       middleName,
       lastName,
@@ -51,6 +53,7 @@ export const mutations = {
       photo,
       benifitsId,
       familyDetailsId,
+      departmentHead,
       addressId,
       governmentIssuedId
     } = data;
@@ -62,6 +65,7 @@ export const mutations = {
     };
     state.workInfo = {
       id,
+      department,
       designation,
       firstName,
       middleName,
@@ -85,6 +89,7 @@ export const mutations = {
       gender
     };
     state.contactInfo = { emailAddress, landline, mobile };
+    state.departmentHead = departmentHead;
   },
   [types.UPDATE_PERSONAL_INFO](state, data) {
     state.personalInfo = data;
@@ -106,7 +111,8 @@ export const actions = {
       const result = await employeeServices.getOne(state.user.id, {
         exclude: ["createdAt", "updatedAt", "deletedAt"],
         withPhoto: true,
-        withDesignation: true
+        withDesignation: true,
+        withDeptHead: true
       });
 
       commit(types.SET_PERSONAL_INFO, result.data);

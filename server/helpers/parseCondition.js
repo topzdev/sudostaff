@@ -9,6 +9,7 @@ module.exports = ({
   offset,
   include,
   exclude,
+  status,
 }) => {
   const options = {
     where: {},
@@ -34,6 +35,9 @@ module.exports = ({
         [Op.iLike]: `%${searchText}%`,
       };
     }
+  }
+  if (status) {
+    options.where.status = status;
   }
   if (exclude) options.attributes = { exclude: exclude.split(",") };
   if (include) options.attributes = ["id", ...include.split(",")];

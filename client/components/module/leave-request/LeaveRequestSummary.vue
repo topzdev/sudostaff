@@ -27,7 +27,7 @@
         <v-btn text>View</v-btn>
       </div>
       <v-divider class="my-5"></v-divider>
-      <v-btn class="mt-5" large block color="primary">Apply Leave</v-btn>
+      <v-btn class="mt-5" large block color="primary" to="/leave-request/create">Apply Leave</v-btn>
     </v-card-text>
   </v-card>
 </template>

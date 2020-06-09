@@ -1,9 +1,14 @@
 const LeaveTypeModel = require("./LeaveTypeModel");
 const helpers = require("./leaveTypeHelpers");
+const parseCondition = require("../../helpers/parseCondition");
 
 class LeaveTypeServices {
   async getOne({ id }, { include, exclude }) {
-    const result = await LeaveTypeModel.findByPk(id);
+    const result = await LeaveTypeModel.findAll({
+      ...parseCondition({ limit: 1, include, exclude }),
+      where: { id },
+    });
+
     return {
       status: 200,
       msg: "Leave Type fetch successfully",
@@ -11,11 +16,11 @@ class LeaveTypeServices {
     };
   }
 
-  async getAll({ searchBy, searchText, limit, offset }) {
-    const result = await LeaveTypeModel.findAll({
+  async getAll({ include, exclude, limit, offset }) {
+    const result = await LeaveTypeModel.findAndCountAll({
       ...parseCondition({
-        searchBy,
-        searchText,
+        include,
+        exclude,
         limit,
         offset,
       }),

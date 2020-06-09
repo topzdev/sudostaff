@@ -31,11 +31,7 @@
 </template>
 
 <script>
-export default {
-  async mounted() {
-    await this.$store.dispatch("auth/fetchPersonalInfo");
-  }
-};
+export default {};
 </script>
 
 <style>

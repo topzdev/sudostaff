@@ -50,10 +50,11 @@ export const actions = {
     }
   },
   fetchEmployees: async function(
-    { dispatch, commit },
+    { dispatch, commit, state },
     { searchBy, searchText, limit, offset, withPhoto, withDesignation }
   ) {
     try {
+      if (state.list.rows.length) return;
       const result = await EmployeeAPI.getAll({
         searchBy,
         searchText,

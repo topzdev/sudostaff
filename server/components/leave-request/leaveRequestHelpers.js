@@ -12,9 +12,11 @@ exports.isActive = async () => {
   /** Check if the current employee is in active means that there is a active or pending application that the employee is submitted */
   const isActive = await LeaveRequestModel.findOne({
     where: {
-      [Op.or]: [{ requestStatus: "active" }, { requestStatus: "pending" }],
+      [Op.or]: [{ status: "active" }, { status: "pending" }],
     },
   });
 
   return isActive ? true : false;
 };
+
+exports.joinTable = () => {};

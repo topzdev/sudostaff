@@ -1,6 +1,6 @@
 <template>
   <v-card-actions>
-    <v-btn color="primary" large @click="cancelFunc" text>Cancel</v-btn>
+    <v-btn color="primary" large @click="cancelFunc" text>{{cancelText}}</v-btn>
     <v-spacer></v-spacer>
     <v-btn
       color="warning"
@@ -32,6 +32,11 @@ export default {
     saveText: {
       type: String,
       default: "Save"
+    },
+
+    cancelText: {
+      type: String,
+      default: "Cancel"
     },
 
     updateText: {

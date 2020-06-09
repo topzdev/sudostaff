@@ -12,7 +12,7 @@
     </v-card-title>
     <v-card-text>
       <v-row>
-        <v-col cols="12" v-for="item in items" :key="item.id">
+        <v-col cols="12" v-for="item in list.rows" :key="item.id">
           <leave-request-card v-bind="item" />
         </v-col>
         <v-col>
@@ -79,6 +79,18 @@ export default {
         }
       ]
     };
+  },
+
+  computed: {
+    list() {
+      return this.$store.state.leaveRequest.list;
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch("leaveRequest/fetchLeaveRequests", {
+      exclude: ["deletedAt", "updatedAt"]
+    });
   }
 };
 </script>

@@ -8,18 +8,20 @@ const governmentIssued = require("../government-ids/GovernmentIdsServices");
 const parseCondition = require("../../helpers/parseCondition");
 
 class EmployeeServices {
-  constructor() {}
-
-  async getOne({ id }, { include, exclude, withPhoto, withDesignation }) {
+  async getOne(
+    { id },
+    { include, exclude, withPhoto, withDesignation, withDeptHead }
+  ) {
     const result = await EmployeeModel.findByPk(id, {
       ...parseCondition({ include, exclude }),
-      include: helper.joinTable({ withPhoto, withDesignation }),
+      include: helper.joinTable({ withPhoto, withDesignation, withDeptHead }),
+      plain: true,
     });
-    console.log(result);
+
     return {
       status: 200,
       msg: "Employee fetch successfully",
-      data: result,
+      data: helper.flatten(result.get({ plain: true })),
     };
   }
 

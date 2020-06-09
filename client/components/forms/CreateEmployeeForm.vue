@@ -114,9 +114,10 @@ export default {
           }
         });
         const data = JSON.parse(JSON.stringify(this.current));
+        console.log(data);
         if (data) {
           this.employee = data;
-          this.employee.departmentId = data.designation.department.id;
+          this.employee.departmentId = data.department.id;
           this.employee.designationId = data.designation.id;
         }
         console.log(this.employee);

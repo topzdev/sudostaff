@@ -1,6 +1,6 @@
 import types from "./types";
 import setNotifError from "@/utils/setNotifError";
-import leaveTypeServices from "@/services/LeaveTypes";
+import leaveRequestServices from "@/services/LeaveRequest";
 
 export const state = () => ({
   loading: false,
@@ -8,27 +8,22 @@ export const state = () => ({
     rows: [],
     count: 0
   },
-  dropdown: [],
   current: null
 });
 
 export const mutations = {
-  [types.SET_LEAVE_TYPES](state, list) {
+  [types.SET_LEAVE_REQUEST](state, list) {
     state.list = list;
-  },
-
-  [types.SET_DROPDOWN](state, list) {
-    state.dropdown = list;
   },
 
   [types.SET_CURRENT](state, current) {
     state.current = current;
   },
 
-  [types.ADD_LEAVE_TYPE](state, data) {
+  [types.ADD_LEAVE_REQUEST](state, data) {
     state.list = [...state.list.rows, data];
   },
-  [types.UPDATE_LEAVE_TYPE](state, data) {
+  [types.UPDATE_LEAVEADD_LEAVE_REQUEST](state, data) {
     if (state.list.length)
       state.list = state.list.rows.map(item =>
         item.id === data.id ? data : item
@@ -37,51 +32,52 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchOneLeaveType(
+  async fetchOneLeaveRequest(
     { dispatch, commit },
     { id, query: { include, exclude } }
   ) {
     try {
-      const result = await leaveTypeServices.getOne(id, { include, exclude });
+      const result = await leaveRequestServices.getOne(id, {
+        include,
+        exclude
+      });
       commit(types.SET_CURRENT, result.data);
     } catch ({ response: { data } }) {
       dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
-  async fetchLeaveTypes({ dispatch, commit }, { include, exclude }) {
+  async fetchLeaveRequests({ dispatch, commit }, { include, exclude, status }) {
     try {
-      const result = await leaveTypeServices.getAll({ include, exclude });
-      commit(types.SET_LEAVE_TYPES, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
-    }
-  },
-  async createLeaveType({ dispatch, commit }, data) {
-    try {
-      const result = await leaveTypeServices.create(data);
-      dispatch("utils/setNotifDefault", result, { root: true });
-      commit(types.ADD_LEAVE_TYPE, { ...data, id: result.data });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
-    }
-  },
-  async updateLeaveType({ dispatch, commit }, data) {
-    try {
-      const result = await leaveTypeServices.update(data);
-      dispatch("utils/setNotifDefault", result, { root: true });
-      commit(types.UPDATE_LEAVE_TYPE, data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
-    }
-  },
-  async fetchDropdown({ dispatch, commit }) {
-    try {
-      const result = await leaveTypeServices.getAll({
-        include: ["id", "name", "description"]
+      const result = await leaveRequestServices.getAll({
+        include,
+        exclude,
+        status
       });
-
-      commit(types.SET_DROPDOWN, result.data.rows);
-    } catch (error) {
+      commit(types.SET_LEAVE_REQUEST, result.data);
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
+    }
+  },
+  async createLeaveRequest({ dispatch, commit, rootState }, data) {
+    try {
+      const employeeId = rootState.auth.user.id;
+      console.log(employeeId);
+      if (!employeeId) return;
+      const result = await leaveRequestServices.create({ ...data, employeeId });
+      dispatch("utils/setNotifDefault", result, { root: true });
+      commit(types.ADD_LEAVE_REQUEST, { ...data, id: result.data });
+      this.app.router.push("/leave-request");
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
+    }
+  },
+  async updateLeaveRequest({ dispatch, commit }, data) {
+    try {
+      const result = await leaveRequestServices.update(data);
+      dispatch("utils/setNotifDefault", result, { root: true });
+      commit(types.UPDATE_LEAVEADD_LEAVE_REQUEST, data);
+      this.app.router.push("/leave-request");
+    } catch ({ response: { data } }) {
       dispatch("utils/setNotifDefault", data, { root: true });
     }
   }

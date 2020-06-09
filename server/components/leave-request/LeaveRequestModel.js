@@ -18,14 +18,13 @@ LeaveRequestModel.init(
         key: "id",
       },
     },
-    startDate: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
 
-    endDate: {
+    departmentId: {
       type: Sequelize.STRING,
-      allowNull: false,
+      references: {
+        model: "departments",
+        key: "id",
+      },
     },
 
     leaveTypeId: {
@@ -37,14 +36,24 @@ LeaveRequestModel.init(
       },
     },
 
+    startDate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    endDate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
     reason: {
       type: Sequelize.STRING,
       allowNull: false,
     },
 
-    requestStatus: {
-      type: Sequelize.ENUM("active", "pending", "rejected", "approved"),
-      defaultValue: "active",
+    status: {
+      type: Sequelize.ENUM("pending", "rejected", "approved"),
+      defaultValue: "pending",
     },
 
     authorizedComment: {

@@ -40,7 +40,7 @@ export default {
 }
 
 .v-text-field.v-text-field--enclosed .v-text-field__details {
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 
 .v-btn {

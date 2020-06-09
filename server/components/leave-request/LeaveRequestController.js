@@ -4,6 +4,7 @@ const leaveRequestService = require("./LeaveRequestServices");
 class LeaveRequestController {
   async createLeaveRequest(req, res) {
     try {
+      console.log(req.body);
       const result = await leaveRequestService.create(req.body);
       validateResponse(res, result);
     } catch (error) {
@@ -14,7 +15,7 @@ class LeaveRequestController {
 
   async fetchSingleLeaveRequest(req, res) {
     try {
-      const result = await leaveRequestService.getOne(req.params);
+      const result = await leaveRequestService.getOne(req.params, req.query);
       validateResponse(res, result);
     } catch (error) {
       console.error(error);

@@ -1,24 +1,12 @@
-import departmentServices from "@/services/Department";
-import designationServices from "@/services/Designation";
-import types from "./types";
 export const actions = {
-  async nuxtServerInit({ commit }) {
+  async nuxtServerInit({ commit, dispatch }) {
     // fetch initialy the departments and designation data for dropdowns
-    const departments = await departmentServices.getAll({
-      include: ["id", "name"]
-    });
+    await dispatch("department/fetchDropdown");
 
-    commit("department/" + types.SET_DROPDOWN, departments.data.rows, {
-      deep: true
-    });
+    await dispatch("designation/fetchDropdown");
 
-    const designation = await designationServices.getAll({
-      include: ["id", "name", "departmentId"],
-      withDept: true
-    });
+    await dispatch("leaveTypes/fetchDropdown");
 
-    commit("designation/" + types.SET_DROPDOWN, designation.data.rows, {
-      deep: true
-    });
+    await dispatch("auth/fetchPersonalInfo");
   }
 };

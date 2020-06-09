@@ -52,10 +52,12 @@ export const actions = {
     }
   },
   fetchDepartments: async function(
-    { dispatch, commit },
+    { dispatch, commit, state },
     { searchBy, searchText, limit, offset }
   ) {
     try {
+      if (state.list.rows.length) return;
+
       const result = await DepartmentAPI.getAll({
         searchBy,
         searchText,
@@ -90,6 +92,17 @@ export const actions = {
       dispatch("utils/setNotifDefault", data, { root: true });
     } finally {
       this.app.router.push("/department");
+    }
+  },
+  async fetchDropdown({ dispatch, commit }) {
+    try {
+      const result = await DepartmentAPI.getAll({
+        include: ["id", "name"]
+      });
+
+      commit(types.SET_DROPDOWN, result.data.rows);
+    } catch (error) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   }
 };

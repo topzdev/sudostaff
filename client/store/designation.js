@@ -49,10 +49,11 @@ export const actions = {
     }
   },
   fetchDesignations: async function(
-    { dispatch, commit },
+    { dispatch, commit, state },
     { searchBy, searchText, limit, offset }
   ) {
     try {
+      if (state.list.rows.length) return;
       const result = await DesignationAPI.getAll({
         searchBy,
         searchText,
@@ -85,6 +86,17 @@ export const actions = {
       dispatch("utils/setNotifDefault", data, { root: true });
     } finally {
       this.app.router.push("/designation");
+    }
+  },
+  async fetchDropdown({ dispatch, commit }) {
+    try {
+      const result = await DesignationAPI.getAll({
+        include: ["id", "name", "departmentId"]
+      });
+
+      commit(types.SET_DROPDOWN, result.data.rows);
+    } catch (error) {
+      dispatch("utils/setNotifDefault", data, { root: true });
     }
   }
 };

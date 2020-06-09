@@ -15,7 +15,16 @@
       ></v-text-field>
     </template>
 
-    <v-date-picker :readonly="readonly" :value="value" @input="setValue"></v-date-picker>
+    <v-date-picker
+      :readonly="readonly"
+      :value="value"
+      @input="setValue"
+      :min="min"
+      :max="max"
+      :show-current="false"
+      color="primary"
+      header-color="primary"
+    ></v-date-picker>
   </v-menu>
 </template>
 
@@ -28,6 +37,12 @@ export default {
     label: {
       type: String,
       default: "Select Date"
+    },
+    min: String,
+    max: String,
+    format: {
+      type: String,
+      default: "MMMM D, YYYY"
     }
   },
   data() {
@@ -37,12 +52,11 @@ export default {
   },
   methods: {
     setValue(value) {
-      console.log(value, "DATE PICKER");
       this.show = false;
       this.$emit("input", value);
     },
     formatDate(date) {
-      return date ? dayjs(date).format("MMMM D, YYYY") : "";
+      return date ? dayjs(date).format(this.format) : "";
     }
   }
 };

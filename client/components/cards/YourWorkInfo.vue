@@ -69,11 +69,11 @@ export default {
     loadData() {
       if (this.getInfo) {
         const result = JSON.parse(JSON.stringify(this.getInfo));
-        const { designation } = result;
+        const { designation, department, photo } = result;
         this.workInfo = result;
         this.workInfo.designation = designation.name;
-        this.workInfo.photoUrl = result.photo ? result.photo.photoUrl : null;
-        this.workInfo.department = designation.department.name;
+        this.workInfo.photoUrl = photo ? photo.photoUrl : null;
+        this.workInfo.department = department.name;
       }
     }
   },

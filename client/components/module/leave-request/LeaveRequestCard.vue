@@ -3,13 +3,13 @@
     <v-card-title class="title">
       <div>{{leaveTypeId}}</div>
       <v-spacer />
-      <v-chip v-if="status.isApproved" color="success" class="px-5">
+      <v-chip v-if="statuses.isApproved" color="success" class="px-5">
         <b>Approved</b>
       </v-chip>
-      <v-chip v-else-if="status.isPending" color="warning" class="px-5">
+      <v-chip v-else-if="statuses.isPending" color="warning" class="px-5">
         <b>Waiting for Approval</b>
       </v-chip>
-      <v-chip v-else-if="status.isRejected" color="error" class="px-5">
+      <v-chip v-else-if="statuses.isRejected" color="error" class="px-5">
         <b>Rejected</b>
       </v-chip>
     </v-card-title>
@@ -52,7 +52,7 @@ export default {
     "startDate",
     "endDate",
     "leaveTypeId",
-    "requestStatus",
+    "status",
     "authorizedComment",
     "departmentHead",
     "department",
@@ -78,7 +78,7 @@ export default {
 
     statusText() {
       let text = "";
-      switch (this.requestStatus) {
+      switch (this.status) {
         case "pending":
           text = "Waiting for response by";
           break;
@@ -95,11 +95,11 @@ export default {
       return text;
     },
 
-    status() {
+    statuses() {
       return {
-        isApproved: this.requestStatus === "approved",
-        isPending: this.requestStatus === "pending",
-        isRejected: this.requestStatus === "rejected"
+        isApproved: this.status === "approved",
+        isPending: this.status === "pending",
+        isRejected: this.status === "rejected"
       };
     }
   }

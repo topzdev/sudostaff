@@ -24,7 +24,7 @@
       </v-card-text>
     </v-card>
 
-    <leave-request-modal />
+    <!-- <leave-request-modal /> -->
   </v-container>
 </template>
 
