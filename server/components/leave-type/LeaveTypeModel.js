@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
-const LeaveRequestModel = require("../leave-request/LeaveRequestModel");
 
 class LeaveTypeModel extends Model {}
 
@@ -22,8 +21,5 @@ LeaveTypeModel.init(
   },
   { sequelize, modelName: "leaveTypes" }
 );
-
-LeaveRequestModel.hasOne(LeaveTypeModel);
-LeaveTypeModel.belongsTo(LeaveRequestModel);
 
 module.exports = LeaveTypeModel;

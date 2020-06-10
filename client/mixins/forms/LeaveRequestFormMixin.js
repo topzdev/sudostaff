@@ -7,7 +7,9 @@ export default {
         endDate: "",
         leaveTypeId: "",
         reason: "",
-        status: ""
+        status: "",
+        authorizedComment: "",
+        leaveType: null
       },
       leaveRequestRules: {
         startDate: [v => !!v || "Start Date is required"],

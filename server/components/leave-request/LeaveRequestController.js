@@ -13,6 +13,39 @@ class LeaveRequestController {
     }
   }
 
+  async fetchSummaryEmployee(req, res) {
+    try {
+      const result = await leaveRequestService.getSummaryEmployee(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
+
+  async fetchSummaryAdmin(req, res) {
+    try {
+      const result = await leaveRequestService.getSummaryAdmin();
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
+
+  async fetchLeaveRequestEmployee(req, res) {
+    try {
+      const result = await leaveRequestService.getAllByEmployee(
+        req.params,
+        req.query
+      );
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
+
   async fetchSingleLeaveRequest(req, res) {
     try {
       const result = await leaveRequestService.getOne(req.params, req.query);

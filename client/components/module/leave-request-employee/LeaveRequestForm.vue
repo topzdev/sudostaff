@@ -28,12 +28,13 @@
         <v-card flat>
           <form-card-action
             :cancelFunc="backPage"
-            :updateFunc="update"
-            :saveText="saveText"
-            :cancelText="cancelText"
+            :updateFunc="nextPage"
             :saveFunc="nextPage"
+            :saveText="saveText"
+            :updateText="updateText"
+            :cancelText="cancelText"
             :loading="loading"
-            :is-edit="isEdit"
+            :is-edit="current ? true : false"
           />
         </v-card>
       </v-col>
@@ -52,18 +53,22 @@ export default {
     return {
       page: 1,
       saveText: "Next",
-      cancelText: "Cancel"
+      cancelText: "Cancel",
+      updateText: "Next"
     };
   },
   methods: {
     async fetchData() {
       const id = this.$route.params.id;
 
-      if (id && this.isEdit) {
-        await this.$store.dispatch("leaveRequest/fetchOneLeaveRequest", {
-          id,
-          query: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
-        });
+      if (id) {
+        await this.$store.dispatch(
+          "leaveRequestEmployee/fetchOneLeaveRequest",
+          {
+            id,
+            query: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+          }
+        );
         const data = JSON.parse(JSON.stringify(this.current));
         if (data) this.leaveRequest = data;
       }
@@ -72,7 +77,7 @@ export default {
       this.loading = true;
       console.log("Creatinngg!!!");
       await this.$store.dispatch(
-        "leaveRequest/createLeaveRequest",
+        "leaveRequestEmployee/createLeaveRequest",
         this.leaveRequest
       );
       this.loading = false;
@@ -86,13 +91,16 @@ export default {
         this.setButtonText();
         return;
       }
-      this.create();
+
+      if (this.current) this.update();
+      else this.create();
     },
 
     backPage() {
       this.page--;
       if (this.page < 1) {
         this.back();
+        this.page = 1;
       }
       this.setButtonText();
     },
@@ -101,9 +109,11 @@ export default {
       if (this.page === 1) {
         this.cancelText = "Cancel";
         this.saveText = "Next";
+        this.updateText = "Next";
       } else {
         this.cancelText = "Back";
         this.saveText = "Sumbit";
+        this.updateText = "Update";
       }
     },
 
@@ -113,7 +123,7 @@ export default {
 
       this.loading = true;
       await this.$store.dispatch(
-        "leaveRequest/updateLeaveRequest",
+        "leaveRequestEmployee/updateLeaveRequest",
         this.leaveRequest
       );
       this.loading = false;
@@ -121,15 +131,15 @@ export default {
   },
   computed: {
     title() {
-      return this.isEdit ? "Update Leave Request" : "Create Leave Request";
+      return this.current ? "Update Leave Request" : "Create Leave Request";
     },
     subtitle() {
-      return this.isEdit
+      return this.current
         ? "Edit Leave Request"
         : "Create and sumbit Leave Request";
     },
     current() {
-      return this.$store.state.leaveRequest.current;
+      return this.$store.state.leaveRequestEmployee.current;
     }
   },
   created() {

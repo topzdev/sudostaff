@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const Model = Sequelize.Model;
 const sequelize = require("../../database");
+const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
 
 class LeaveRequestModel extends Model {}
 
@@ -11,18 +12,11 @@ LeaveRequestModel.init(
       autoIncrement: true,
       primaryKey: true,
     },
+
     employeeId: {
       type: Sequelize.STRING,
       references: {
         model: "employees",
-        key: "id",
-      },
-    },
-
-    departmentId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "departments",
         key: "id",
       },
     },
@@ -70,5 +64,8 @@ LeaveRequestModel.init(
   },
   { sequelize, modelName: "leaveRequest", timestamps: true, paranoid: true }
 );
+
+// LeaveRequestModel.hasOne(LeaveTypeModel);
+LeaveRequestModel.belongsTo(LeaveTypeModel);
 
 module.exports = LeaveRequestModel;

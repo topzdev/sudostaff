@@ -1,11 +1,14 @@
 const LeaveRequestModel = require("./LeaveRequestModel");
+const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
+const Sequelize = require("sequelize");
 const helpers = require("./leaveRequestHelpers");
 const parseCondition = require("../../helpers/parseCondition");
 
 class LeaveRequestServices {
-  async getOne({ id }, { include, exclude }) {
+  async getOne({ id }, { include, exclude, withLeaveType, withEmployee }) {
     const result = await LeaveRequestModel.findByPk(id, {
-      ...parseCondition({ limit: 1, include, exclude }),
+      ...parseCondition({ include, exclude }),
+      include: helpers.joinTable({ withLeaveType, withEmployee }),
     });
 
     return {
@@ -15,9 +18,68 @@ class LeaveRequestServices {
     };
   }
 
-  async getAll({ status, limit, offset, include, exclude }) {
+  async getSummaryEmployee({ id }) {
+    const result = await helpers.summaryEmp(id);
+
+    return {
+      status: 200,
+      msg: "Leave Summary fetch successfully",
+      data: result,
+    };
+  }
+
+  async getSummaryAdmin() {
+    const result = await helpers.summaryAdmin();
+
+    return {
+      status: 200,
+      msg: "Leave Summary fetch successfully [Admin]",
+      data: result,
+    };
+  }
+
+  async getAllByEmployee({ id }, { status, include, exclude, withLeaveType }) {
+    const where = {};
+
+    where.employeeId = id;
+
+    if (status) where.status = status;
+
     const result = await LeaveRequestModel.findAndCountAll({
-      ...parseCondition({ limit: 1, include, exclude, status }),
+      ...parseCondition({ include, exclude, withLeaveType }),
+      where,
+      include: helpers.joinTable({ withLeaveType }),
+    });
+
+    return {
+      status: 200,
+      msg: "Leave Request fetch successfully",
+      data: result,
+    };
+  }
+
+  async getAll({
+    status,
+    searchBy,
+    searchText,
+    limit,
+    offset,
+    include,
+    exclude,
+    withLeaveType,
+    withEmployee,
+  }) {
+    const result = await LeaveRequestModel.findAndCountAll({
+      ...parseCondition({
+        limit,
+        offset,
+        include,
+        exclude,
+        status,
+        searchBy,
+        searchText,
+      }),
+      include: helpers.joinTable({ withLeaveType, withEmployee }),
     });
     return {
       status: 200,

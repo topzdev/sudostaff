@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="1">
     <v-card-title class="title">
-      <div>{{leaveTypeId}}</div>
+      <div>{{leaveType.name}}</div>
       <v-spacer />
       <v-chip v-if="statuses.isApproved" color="success" class="px-5">
         <b>Approved</b>
@@ -25,7 +25,7 @@
       </div>
     </v-card-text>
     <v-card-actions class="grey lighten-5 d-flex align-end">
-      <v-list-item class="px-0 pl-3" :title="department+ ' Department Head'">
+      <v-list-item v-if="authorizedPersonId" class="px-0 pl-3">
         <v-list-item-avatar size="30px">
           <base-image />
         </v-list-item-avatar>
@@ -35,9 +35,10 @@
           <v-list-item-title style="font-size:14px;">{{departmentHead}}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
       <v-spacer />
-      <v-btn v-if="status.isPending" text>Cancel</v-btn>
-      <v-btn v-if="status.isPending" text color="primary">Edit</v-btn>
+      <v-btn v-if="statuses.isPending" text>Cancel</v-btn>
+      <v-btn v-if="statuses.isPending" text color="primary" @click="edit">Edit</v-btn>
       <v-btn v-else text color="primary">View</v-btn>
     </v-card-actions>
   </v-card>
@@ -51,16 +52,18 @@ export default {
     "employeeId",
     "startDate",
     "endDate",
+    "leaveType",
     "leaveTypeId",
     "status",
     "authorizedComment",
-    "departmentHead",
-    "department",
+    "authorizedPersonId",
     "createdAt"
   ],
 
   methods: {
-    dayjs
+    edit() {
+      this.$router.push("/user/leave-request/update/" + this.id);
+    }
   },
 
   computed: {
@@ -80,7 +83,7 @@ export default {
       let text = "";
       switch (this.status) {
         case "pending":
-          text = "Waiting for response by";
+          text = "Waiting for response...";
           break;
 
         case "approved":
@@ -102,6 +105,9 @@ export default {
         isRejected: this.status === "rejected"
       };
     }
+  },
+  destroyed() {
+    this.$store.commit("leaveRequestEmployee/SET_CURRENT", null);
   }
 };
 </script>

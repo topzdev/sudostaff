@@ -4,6 +4,7 @@ const sequelize = require("../../database");
 const PhotoModel = require("../photo/PhotoModel");
 const DesignationModel = require("../designation/DesignationModel");
 const DepartmentHeadModel = require("../department/DepartmentHeadModel");
+const LeaveRequestModel = require("../leave-request/LeaveRequestModel");
 
 class EmployeeModel extends Model {}
 
@@ -98,4 +99,5 @@ EmployeeModel.init(
 EmployeeModel.belongsTo(PhotoModel);
 EmployeeModel.belongsTo(DesignationModel);
 DepartmentHeadModel.belongsTo(EmployeeModel);
+LeaveRequestModel.belongsTo(EmployeeModel);
 module.exports = EmployeeModel;

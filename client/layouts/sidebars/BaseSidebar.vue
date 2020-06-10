@@ -73,22 +73,22 @@ export default {
         { title: "Dashboard", icon: "mdi-view-dashboard", to: "/dashboard" },
         {
           title: "User",
-          to: "/your-info",
+          to: "/user/your-info",
           icon: "mdi-account-circle",
           subItem: [
             {
               title: "Your Info",
-              to: "/your-info",
+              to: "/user/your-info",
               icon: "mdi-card-account-details-outline"
             },
             {
               title: "Leave Request",
-              to: "/leave-request",
+              to: "/user/leave-request",
               icon: "mdi-account-arrow-right-outline"
             },
             {
               title: "Account Setting",
-              to: "/account-setting",
+              to: "/user/account-setting",
               icon: "mdi-shield-account-outline"
             }
           ]
@@ -104,6 +104,11 @@ export default {
           title: "Designation",
           icon: "mdi-clipboard-account",
           to: "/designation"
+        },
+        {
+          title: "Leave Request",
+          to: "/leave-request",
+          icon: "mdi-account-arrow-right-outline"
         },
         { title: "Mail", icon: "mdi-account-group", to: "/mail" },
         { title: "About", icon: "mdi-help-box", to: "/about" }

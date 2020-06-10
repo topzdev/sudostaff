@@ -28,10 +28,10 @@
             <div class="subtitle-1">{{reason}}</div>
           </div>
         </v-col>
-        <v-col cols="auto">
+        <!-- <v-col cols="auto">
           <div>
             <div class="overline">Approver</div>
-            <div class="d-flex" v-if="approver.employeeId">
+            <div class="d-flex" v-if="authorizedPersonId">
               <v-list-item-avatar>
                 <base-image v-if="approver.photo" :src="approver.photo.imageUrl" />
                 <base-image v-else />
@@ -42,7 +42,7 @@
               </v-list-item-content>
             </div>
           </div>
-        </v-col>
+        </v-col>-->
       </v-row>
     </v-card-text>
   </v-card>
@@ -51,7 +51,15 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  props: ["startDate", "endDate", "leaveTypeId", "reason", "status", "range"],
+  props: [
+    "startDate",
+    "endDate",
+    "leaveTypeId",
+    "reason",
+    "status",
+    "range",
+    "authorizedPersonId"
+  ],
 
   computed: {
     leaveType() {
@@ -68,10 +76,6 @@ export default {
 
     totalDays() {
       return `${dayjs(this.endDate).diff(this.startDate, "day")} Day(s)`;
-    },
-
-    approver() {
-      return this.$store.state.auth.departmentHead;
     }
   }
 };
