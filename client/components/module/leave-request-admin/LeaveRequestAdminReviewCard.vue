@@ -3,10 +3,10 @@
     <v-card-text class="text--primary">
       <v-row>
         <v-col cols="6">
-          <div v-if="employee">
+          <div v-if="submittedBy">
             <div class="overline">Submitted by</div>
             <div class="subtitle-1">
-              <employee-template :employee="employee" />
+              <employee-template :employee="submittedBy" />
             </div>
           </div>
         </v-col>
@@ -41,19 +41,37 @@
             <div class="subtitle-1">{{reason}}</div>
           </div>
         </v-col>
-
         <v-col cols="12">
           <v-divider />
         </v-col>
 
-        <v-col cols="12">
-          <v-textarea
-            label="Comment"
-            :value="authorizedComment"
-            @input="$emit('update:authorizedComment', $event)"
-            outlined
-          ></v-textarea>
-        </v-col>
+        <template v-if="status === 'pending'">
+          <v-col cols="12">
+            <v-textarea
+              label="Comment"
+              :value="authorizedComment"
+              @input="$emit('update:authorizedComment', $event)"
+              outlined
+            ></v-textarea>
+          </v-col>
+        </template>
+
+        <template>
+          <v-col cols="12">
+            <div>
+              <div class="overline">Approver Comment</div>
+              <div class="subtitle-1">{{authorizedComment}}</div>
+            </div>
+          </v-col>
+          <v-col cols="12">
+            <div v-if="authorizedBy">
+              <div class="overline">Authorized by</div>
+              <div class="subtitle-1">
+                <employee-template :employee="authorizedBy" />
+              </div>
+            </div>
+          </v-col>
+        </template>
       </v-row>
     </v-card-text>
   </v-card>
@@ -70,7 +88,8 @@ export default {
     "status",
     "authorizedPersonId",
     "authorizedComment",
-    "employee",
+    "submittedBy",
+    "authorizedBy",
     "leaveType",
     "createdAt"
   ],

@@ -14,6 +14,12 @@ class LeaveRequest extends ApiClient {
     return $axios.$get("/leave-request/employee/summary/" + id);
   }
 
+  getUpcoming(id, query) {
+    return $axios.$get(
+      "/leave-request/employee/upcoming/" + id + this.genQuery(query)
+    );
+  }
+
   getSummaryAdmin() {
     return $axios.$get("/leave-request/admin/summary/");
   }

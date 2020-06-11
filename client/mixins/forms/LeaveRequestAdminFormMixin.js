@@ -3,7 +3,7 @@ export default {
   data() {
     return {
       leaveRequest: {
-        employee: null,
+        submittedBy: null,
         startDate: dayjs().format("YYYY-MM-DD"),
         endDate: null,
         leaveTypeId: null,
@@ -12,6 +12,7 @@ export default {
         leaveType: null,
         authorizedComment: null,
         authorizedPersonId: null,
+        authorizedBy: null,
         createdAt: null
       },
       leaveRequestRules: {

@@ -12,31 +12,36 @@
       height="400px"
     >
       <template v-slot:item.actions="{ item }">
-        <v-btn @click="reviewItem(item.id)" color="warning" small text>Review</v-btn>
+        <v-btn
+          v-if="item.status === 'pending'"
+          @click="reviewItem(item.id)"
+          color="warning"
+          small
+          text
+        >Review</v-btn>
+
+        <v-btn v-else @click="viewItem(item.id)" color="primary" small text>View</v-btn>
       </template>
 
       <template v-slot:item.startDate="{item}">{{formatDate(item.startDate)}}</template>
+
+      <template v-slot:item.createdAt="{item}">
+        <span :title="fromNow(item.createdAt).tip">{{fromNow(item.createdAt).relative}}</span>
+      </template>
 
       <template v-slot:item.endDate="{item}">{{formatDate(item.endDate)}}</template>
 
       <template v-slot:item.duration="{item}">{{duration(item.startDate, item.endDate)}}</template>
 
       <template v-slot:item.status="{item}">
-        <v-chip
-          small
-          v-if="statuses(item.status).isPending"
-          color="orange lighten-4 orange--text font-weight-bold"
-        >Pending</v-chip>
-        <v-chip
-          small
-          v-if="statuses(item.status).isApproved"
-          color="success lighten-5 success--text font-weight-bold"
-        >Approved</v-chip>
-        <v-chip
-          small
-          v-if="statuses(item.status).isRejected"
-          color="error lighten-5 error--text font-weight-bold"
-        >Rejected</v-chip>
+        <v-tooltip color="primary" bottom>
+          <template v-slot:activator="{ on }">
+            <div v-on="on">
+              <leave-request-chips :status="item.status" admin />
+            </div>
+          </template>
+          <span>{{authorTooltip(item.authorizedBy)}}</span>
+        </v-tooltip>
       </template>
     </v-data-table>
   </v-card>
@@ -45,6 +50,9 @@
 <script>
 import TableMixin from "@/mixins/TableMixin";
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 export default {
   mixins: [TableMixin],
   data() {
@@ -52,14 +60,14 @@ export default {
       dispatch: "leaveRequestAdmin/fetchLeaveRequests",
       store: "leaveRequestAdmin",
       queryParams: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["updatedAt", "deletedAt"],
         withEmployee: true,
         withLeaveType: true
       },
       headers: [
         {
           text: "Employee",
-          value: "employee.fullName"
+          value: "submittedBy.fullName"
         },
         {
           text: "Type",
@@ -74,17 +82,12 @@ export default {
           value: "endDate"
         },
         {
-          text: "Duration",
-          value: "duration"
+          text: "Submitted At",
+          value: "createdAt"
         },
         {
           text: "Status",
           value: "status",
-          align: "center"
-        },
-        {
-          text: "Authorized By",
-          value: "authorizedPersonId",
           align: "center"
         },
         {
@@ -98,16 +101,8 @@ export default {
     };
   },
   methods: {
-    statuses(status) {
-      return {
-        isApproved: status === "approved",
-        isPending: status === "pending",
-        isRejected: status === "rejected"
-      };
-    },
-
-    formatDate(date) {
-      return dayjs(date).format("MMMM DD, YYYY");
+    formatDate(date, format) {
+      return dayjs(date).format(format || "MMMM DD, YYYY");
     },
 
     duration(startDate, endDate) {
@@ -115,8 +110,24 @@ export default {
       return day > 1 ? `${day} Days` : `${day} Day`;
     },
 
+    fromNow(date) {
+      return {
+        relative: dayjs(date).from(),
+        tip: this.formatDate(date, "MMMM DD, YYYY hh:mm:ss A")
+      };
+    },
+
     reviewItem(id) {
       this.$router.push("/leave-request/review/" + id);
+    },
+
+    viewItem(id) {
+      this.$router.push("/leave-request/view/" + id);
+    },
+
+    authorTooltip(author) {
+      if (!author) return "Needed to be review";
+      return "Reviewed by " + author.fullName;
     }
   }
 };

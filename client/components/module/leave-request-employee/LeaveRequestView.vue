@@ -1,7 +1,11 @@
 <template>
   <v-card outlined>
-    <v-card-title>Leave Request Summary</v-card-title>
-    <v-card-subtitle>Review and analyze the leave request before click the sumbit button.</v-card-subtitle>
+    <v-card-title>
+      <employee-template v-if="submittedBy" :employee="submittedBy" />
+      <v-spacer />
+
+      <leave-request-chips :status="status" />
+    </v-card-title>
     <v-card-text class="text--primary">
       <v-row>
         <v-col v-for="item in items" :key="item.title" :cols="'12'">
@@ -17,6 +21,33 @@
           </div>
           <v-divider v-if="item.divider" class="mt-3" />
         </v-col>
+        <v-col cols="12">
+          <div class="d-flex align-center">
+            <v-row no-gutters>
+              <v-col cols="4">
+                <div class="subtitle-2">{{statusText}}</div>
+              </v-col>
+              <v-col>
+                <div class="body-1">
+                  <employee-template v-if="authorizedBy" :employee="authorizedBy" />
+                </div>
+              </v-col>
+            </v-row>
+          </div>
+          <v-divider class="mt-3" />
+        </v-col>
+        <v-col cols="12">
+          <div class="d-flex align-center">
+            <v-row no-gutters>
+              <v-col cols="4">
+                <div class="subtitle-2">Commented</div>
+              </v-col>
+              <v-col>
+                <div class="body-1">{{authorizedComment}}</div>
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
       </v-row>
     </v-card-text>
   </v-card>
@@ -31,7 +62,7 @@ export default {
   props: [
     "startDate",
     "endDate",
-    "leaveTypeId",
+    "leaveType",
     "reason",
     "status",
     "range",
@@ -39,7 +70,8 @@ export default {
     "createdAt",
     "authorizedBy",
     "authorizedComment",
-    "isView"
+    "isView",
+    "submittedBy"
   ],
 
   computed: {
@@ -47,7 +79,7 @@ export default {
       return [
         {
           title: "Leave Type",
-          value: this.leaveTypeName,
+          value: this.leaveType ? this.leaveType.name : "",
           divider: true
         },
         {
@@ -68,14 +100,15 @@ export default {
 
         {
           title: "Reason",
-          value: this.reason
+          value: this.reason,
+          divider: true
+        },
+        {
+          title: "Submitted at",
+          value: this.dates.createdAt,
+          divider: true
         }
       ];
-    },
-    leaveTypeName() {
-      return this.$store.state.leaveTypes.dropdown.filter(
-        item => item.id === this.leaveTypeId
-      )[0].name;
     }
   }
 };

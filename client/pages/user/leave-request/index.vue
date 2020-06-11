@@ -15,6 +15,7 @@
         </v-alert>
         <v-row>
           <v-col cols="4">
+            <leave-request-upcoming class="mb-5" />
             <leave-request-summary />
           </v-col>
           <v-col cols="8">
@@ -23,8 +24,6 @@
         </v-row>
       </v-card-text>
     </v-card>
-
-    <!-- <leave-request-modal /> -->
   </v-container>
 </template>
 

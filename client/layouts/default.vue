@@ -46,4 +46,8 @@ export default {
 .v-btn {
   text-transform: none !important;
 }
+
+.v-card:not(.v-sheet--tile):not(.v-card--shaped) {
+  border-radius: 8px !important;
+}
 </style>

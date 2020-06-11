@@ -15,10 +15,12 @@
       <v-col cols="8" class="py-0">
         <v-card flat>
           <v-card-actions>
-            <v-btn text>Cancel</v-btn>
+            <v-btn @click="back" text>Cancel</v-btn>
             <v-spacer />
-            <v-btn color="error" @click="reject" large>Reject</v-btn>
-            <v-btn color="success" @click="approve" large>Approved</v-btn>
+            <template v-if="leaveRequest.status === 'pending'">
+              <v-btn color="error" @click="reject" large>Reject</v-btn>
+              <v-btn color="success" @click="approve" large>Approved</v-btn>
+            </template>
           </v-card-actions>
         </v-card>
       </v-col>

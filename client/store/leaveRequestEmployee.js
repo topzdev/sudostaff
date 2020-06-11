@@ -17,7 +17,8 @@ export const state = () => ({
     },
     balance: null
   },
-  current: null
+  current: null,
+  upcoming: null
 });
 
 export const mutations = {
@@ -35,6 +36,9 @@ export const mutations = {
   [types.SUMMARY_LEAVE_REQUEST_EMPLOYEE](state, data) {
     state.summary = data;
   },
+  [types.UPCOMING_LEAVE_REQUEST_EMPLOYEE](state, data) {
+    state.upcoming = data;
+  },
   [types.UPDATE_LEAVE_REQUEST_EMPLOYEE](state, data) {
     if (state.list.length)
       state.list = state.list.rows.map(item =>
@@ -46,12 +50,14 @@ export const mutations = {
 export const actions = {
   async fetchOneLeaveRequest(
     { dispatch, commit },
-    { id, query: { include, exclude } }
+    { id, query: { include, exclude, withEmployee, withLeaveType } }
   ) {
     try {
       const result = await leaveRequestServices.getOne(id, {
         include,
-        exclude
+        exclude,
+        withEmployee,
+        withLeaveType
       });
       commit(types.SET_CURRENT, result.data);
     } catch ({ response: { data } }) {
@@ -77,19 +83,6 @@ export const actions = {
       dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
-
-  // async fetchLeaveRequests({ dispatch, commit }, { include, exclude, status }) {
-  //   try {
-  //     const result = await leaveRequestServices.getAll({
-  //       include,
-  //       exclude,
-  //       status
-  //     });
-  //     commit(types.SET_LEAVE_REQUEST_EMPLOYEE, result.data);
-  //   } catch ({ response: { data } }) {
-  //     dispatch("utils/setNotifDefault", data, { root: true });
-  //   }
-  // },
 
   async createLeaveRequest({ dispatch, commit, rootState }, data) {
     try {
@@ -124,6 +117,25 @@ export const actions = {
       const result = await leaveRequestServices.getSummaryEmployee(employeeId);
 
       commit(types.SUMMARY_LEAVE_REQUEST_EMPLOYEE, result.data);
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
+    }
+  },
+
+  async fetchUpcoming(
+    { dispatch, commit, rootState, state },
+    { include, exclude }
+  ) {
+    try {
+      const employeeId = rootState.auth.user.id;
+      if (!employeeId && state.summary.balance !== null) return;
+
+      const result = await leaveRequestServices.getUpcoming(employeeId, {
+        include,
+        exclude
+      });
+
+      commit(types.UPCOMING_LEAVE_REQUEST_EMPLOYEE, result.data);
     } catch ({ response: { data } }) {
       dispatch("utils/setNotifDefault", data, { root: true });
     }

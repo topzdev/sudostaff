@@ -1,52 +1,69 @@
 <template>
-  <v-card elevation="1">
-    <v-card-title class="title">
-      <div>{{leaveType.name}}</div>
-      <v-spacer />
-      <v-chip v-if="statuses.isApproved" color="success" class="px-5">
-        <b>Approved</b>
-      </v-chip>
-      <v-chip v-else-if="statuses.isPending" color="warning" class="px-5">
-        <b>Waiting for Approval</b>
-      </v-chip>
-      <v-chip v-else-if="statuses.isRejected" color="error" class="px-5">
-        <b>Rejected</b>
-      </v-chip>
+  <v-card outlined>
+    <v-card-title>
+      <v-row no-gutters>
+        <v-col cols="7">
+          <!-- <span>
+            <v-avatar color="primary" size="40" class="mr-1">
+              <v-icon color="white">mdi-calendar</v-icon>
+            </v-avatar>
+          </span>-->
+          <span class="font-weight-medium text-truncate">{{leaveType.name}}</span>
+        </v-col>
+
+        <v-col class="ml-auto" cols="auto">
+          <leave-request-chips icons :status="status" />
+        </v-col>
+      </v-row>
     </v-card-title>
-    <v-card-subtitle>Submitted on {{dates.createdAt}}</v-card-subtitle>
-    <v-card-text>
+    <v-card-subtitle>
+      <span>{{dates.createdAt}}</span>
+    </v-card-subtitle>
+
+    <v-card-text class="grey lighten-5 py-5">
       <div class="d-flex align-center">
-        <div class="overline">Target Date: &nbsp;</div>
-        <div class="font-weight-medium">
-          <span class="primary--text">{{dates.startDate}}</span> to
-          <span class="primary--text">{{dates.endDate}}</span> -
-          <b>{{totalDaysLeave}}</b>.
+        <div>
+          <h1 class="font-weight-bold primary--text">{{totalDaysLeave}}</h1>
+          <div>of leave</div>
+        </div>
+        <v-divider vertical class="mx-5" />
+
+        <div>
+          <div class="primary--text">Starts</div>
+          <h2 class="font-weight-bold text--primary">{{dates.startDate}}</h2>
+          <div>{{dates.startDateYear}}</div>
+        </div>
+
+        <v-divider class="mx-5" />
+
+        <div>
+          <div class="primary--text">End</div>
+          <h2 class="font-weight-bold text--primary">{{dates.endDate}}</h2>
+          <div>{{dates.endDateYear}}</div>
         </div>
       </div>
     </v-card-text>
-    <v-card-actions class="grey lighten-5 d-flex align-end">
-      <v-list-item v-if="authorizedPersonId" class="px-0 pl-3">
-        <v-list-item-avatar size="30px">
-          <base-image />
-        </v-list-item-avatar>
 
-        <v-list-item-content class="py-0">
-          <v-list-item-subtitle style="font-size:12px;">{{statusText}}</v-list-item-subtitle>
-          <v-list-item-title style="font-size:14px;">{{departmentHead}}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+    <v-card-actions>
+      <leave-request-authorized
+        :personId="authorizedPersonId"
+        :person="authorizedBy"
+        :status="status"
+      />
 
       <v-spacer />
       <v-btn v-if="statuses.isPending" text>Cancel</v-btn>
       <v-btn v-if="statuses.isPending" text color="primary" @click="edit">Edit</v-btn>
-      <v-btn v-else text color="primary">View</v-btn>
+      <v-btn v-else text color="primary" @click="view">View</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import dayjs from "dayjs";
+import LeaveRequestUtils from "@/mixins/utils/LeaveRequestUtils";
+
 export default {
+  mixins: [LeaveRequestUtils],
   props: [
     "id",
     "employeeId",
@@ -55,57 +72,22 @@ export default {
     "leaveType",
     "leaveTypeId",
     "status",
+    "reason",
     "authorizedComment",
     "authorizedPersonId",
+    "authorizedBy",
     "createdAt"
   ],
 
   methods: {
     edit() {
       this.$router.push("/user/leave-request/update/" + this.id);
+    },
+    view() {
+      this.$router.push("/user/leave-request/view/" + this.id);
     }
   },
 
-  computed: {
-    dates() {
-      return {
-        startDate: dayjs(this.startDate).format("MMMM DD, YYYY (dddd)"),
-        endDate: dayjs(this.endDate).format("MMMM DD, YYYY (dddd)"),
-        createdAt: dayjs(this.createdAt).format("MMMM DD, YYYY h:mm:s a")
-      };
-    },
-    totalDaysLeave() {
-      const day = dayjs(this.endDate).diff(this.startDate, "day");
-      return day > 1 ? `${day} Days` : `${day} Day`;
-    },
-
-    statusText() {
-      let text = "";
-      switch (this.status) {
-        case "pending":
-          text = "Waiting for response...";
-          break;
-
-        case "approved":
-          text = "Approved by";
-          break;
-
-        case "rejected":
-          text = "Rejected by";
-          break;
-      }
-
-      return text;
-    },
-
-    statuses() {
-      return {
-        isApproved: this.status === "approved",
-        isPending: this.status === "pending",
-        isRejected: this.status === "rejected"
-      };
-    }
-  },
   destroyed() {
     this.$store.commit("leaveRequestEmployee/SET_CURRENT", null);
   }

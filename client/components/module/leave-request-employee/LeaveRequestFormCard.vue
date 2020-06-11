@@ -19,6 +19,7 @@
             :format="format"
             :min="minDate"
             :max="endDate"
+            x
           />
         </v-col>
         <v-col class="py-0 pb-1" cols="6">
