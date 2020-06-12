@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import LeaveRequestUtils from "@/mixins/utils/LeaveRequestUtils";
+import LeaveUtils from "@/mixins/utils/LeaveUtils";
 import dayjs from "dayjs";
 
 export default {
-  mixins: [LeaveRequestUtils],
+  mixins: [LeaveUtils],
   props: [
     "startDate",
     "endDate",

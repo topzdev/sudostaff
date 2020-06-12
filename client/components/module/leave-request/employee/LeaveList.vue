@@ -16,7 +16,7 @@
           <v-progress-circular indeterminate color="primary"></v-progress-circular>
         </v-col>
         <v-col v-else cols="12" v-for="item in list.rows" :key="item.id">
-          <leave-request-card v-bind="item" />
+          <leave-card v-bind="item" />
         </v-col>
         <v-col>
           <div class="d-flex">

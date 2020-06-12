@@ -65,7 +65,6 @@ LeaveRequestModel.init(
   { sequelize, modelName: "leaveRequest", timestamps: true, paranoid: true }
 );
 
-// LeaveRequestModel.hasOne(LeaveTypeModel);
 LeaveRequestModel.belongsTo(LeaveTypeModel);
 
 module.exports = LeaveRequestModel;

@@ -8,18 +8,14 @@
         </v-col>
       </v-row>
       <v-card-text class="py-0">
-        <v-alert v-if="balance" type="info">
-          You currently have
-          <b>{{balance}}</b> leave request balance for this year
-          <b>2020</b>.
-        </v-alert>
+        <leave-warning />
         <v-row>
           <v-col cols="4">
-            <leave-request-upcoming class="mb-5" />
-            <leave-request-summary />
+            <leave-upcoming class="mb-5" />
+            <leave-summary />
           </v-col>
           <v-col cols="8">
-            <leave-request-list />
+            <leave-list />
           </v-col>
         </v-row>
       </v-card-text>

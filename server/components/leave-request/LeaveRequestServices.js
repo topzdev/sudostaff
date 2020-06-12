@@ -1,6 +1,5 @@
 const LeaveRequestModel = require("./LeaveRequestModel");
 const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
-const Sequelize = require("sequelize");
 const helpers = require("./leaveRequestHelpers");
 const parseCondition = require("../../helpers/parseCondition");
 
@@ -14,6 +13,19 @@ class LeaveRequestServices {
     return {
       status: 200,
       msg: "Leave Request fetch successfully",
+      data: result,
+    };
+  }
+
+  async upcoming({ id }, { include, exclude }) {
+    const result = await LeaveRequestModel.findOne({
+      ...parseCondition({ include, exclude }),
+      ...helpers.upcomingOption(id),
+    });
+
+    return {
+      status: 200,
+      msg: "Upcoming Leave Request",
       data: result,
     };
   }
@@ -49,6 +61,7 @@ class LeaveRequestServices {
       ...parseCondition({ include, exclude, withLeaveType }),
       where,
       include: helpers.joinTable({ withLeaveType }),
+      order: helpers.order,
     });
 
     return {
@@ -80,6 +93,7 @@ class LeaveRequestServices {
         searchText,
       }),
       include: helpers.joinTable({ withLeaveType, withEmployee }),
+      order: helpers.order,
     });
     return {
       status: 200,
@@ -89,11 +103,17 @@ class LeaveRequestServices {
   }
 
   async create({ employeeId, startDate, endDate, leaveTypeId, reason }) {
-    if (await helpers.isActive())
+    if (helpers.isPending(employeeId))
       return {
         status: 400,
         msg: "Your account is currently active in leave application",
       };
+    if (helpers.hasUpcoming(employeeId)) {
+      return {
+        status: 400,
+        msg: "The employee has upcoming leave",
+      };
+    }
 
     const result = await LeaveRequestModel.create({
       employeeId,
@@ -110,14 +130,26 @@ class LeaveRequestServices {
     };
   }
 
-  async updateByUser({ id, startDate, endDate, leaveTypeId, reason }) {
-    console.log(id);
-
-    if (!(await helpers.isExist(id)))
+  async updateByUser({
+    id,
+    employeeId,
+    startDate,
+    endDate,
+    leaveTypeId,
+    reason,
+  }) {
+    if (helpers.isExist(id))
       return {
         status: 400,
         msg: "leave application is not exist",
       };
+
+    if (helpers.hasUpcoming(employeeId)) {
+      return {
+        status: 400,
+        msg: "You currently have upcoming leave.",
+      };
+    }
 
     const result = await LeaveRequestModel.update(
       { startDate, endDate, leaveTypeId, reason },
@@ -131,14 +163,27 @@ class LeaveRequestServices {
     };
   }
 
-  async updateByAdmin({ id, status, authorizedComment, authorizedPersonId }) {
-    if (!(await helpers.isExist(id)))
+  async updateByAdmin({
+    id,
+    employeeId,
+    status,
+    authorizedComment,
+    authorizedPersonId,
+  }) {
+    if (!helpers.isExist(id))
       return {
         status: 400,
         msg: "leave application is not exist",
       };
 
-    if (!helpers.isActive())
+    if (helpers.hasUpcoming(employeeId)) {
+      return {
+        status: 400,
+        msg: "The employee has upcoming leave",
+      };
+    }
+
+    if (helpers.isPending(employeeId))
       return {
         status: 400,
         msg: "This request is already marked as rejected/authorized",

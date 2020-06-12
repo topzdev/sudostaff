@@ -8,36 +8,38 @@
         </v-col>
       </v-row>
 
-      <v-col cols="8">
-        <v-slide-x-transition hide-on-leave>
-          <leave-request-form-card
-            v-if="page === 1"
-            v-bind.sync="leaveRequest"
-            :header="header"
-            :outlined="outlined"
-            :rules="leaveRequestRules"
-          />
-        </v-slide-x-transition>
+      <template v-if="allow">
+        <v-col cols="8">
+          <v-slide-x-transition hide-on-leave>
+            <leave-form-card
+              v-if="page === 1"
+              v-bind.sync="leaveRequest"
+              :header="header"
+              :outlined="outlined"
+              :rules="leaveRequestRules"
+            />
+          </v-slide-x-transition>
 
-        <v-slide-x-reverse-transition hide-on-leave>
-          <leave-request-form-summary v-bind="leaveRequest" v-if="page === 2" />
-        </v-slide-x-reverse-transition>
-      </v-col>
+          <v-slide-x-reverse-transition hide-on-leave>
+            <leave-form-summary v-bind="leaveRequest" v-if="page === 2" />
+          </v-slide-x-reverse-transition>
+        </v-col>
 
-      <v-col cols="8" class="py-0">
-        <v-card flat>
-          <form-card-action
-            :cancelFunc="backPage"
-            :updateFunc="nextPage"
-            :saveFunc="nextPage"
-            :saveText="saveText"
-            :updateText="updateText"
-            :cancelText="cancelText"
-            :loading="loading"
-            :is-edit="current ? true : false"
-          />
-        </v-card>
-      </v-col>
+        <v-col cols="8" class="py-0">
+          <v-card flat>
+            <form-card-action
+              :cancelFunc="backPage"
+              :updateFunc="nextPage"
+              :saveFunc="nextPage"
+              :saveText="saveText"
+              :updateText="updateText"
+              :cancelText="cancelText"
+              :loading="loading"
+              :is-edit="current ? true : false"
+            />
+          </v-card>
+        </v-col>
+      </template>
     </v-card>
   </v-form>
 </template>
@@ -54,7 +56,8 @@ export default {
       page: 1,
       saveText: "Next",
       cancelText: "Cancel",
-      updateText: "Next"
+      updateText: "Next",
+      fallback: "/user/leave-request"
     };
   },
   methods: {
@@ -142,8 +145,9 @@ export default {
       return this.$store.state.leaveRequestEmployee.current;
     }
   },
-  created() {
-    this.fetchData();
+  async created() {
+    await this.fetchData();
+    this.restrictPage(this.current.status !== "pending");
   }
 };
 </script>

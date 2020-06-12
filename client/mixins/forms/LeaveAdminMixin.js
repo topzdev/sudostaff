@@ -10,6 +10,7 @@ export default {
         reason: null,
         status: null,
         leaveType: null,
+        employeeId: null,
         authorizedComment: null,
         authorizedPersonId: null,
         authorizedBy: null,

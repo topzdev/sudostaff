@@ -7,7 +7,7 @@
           <div class="d-flex align-center">
             <div class="d-flex align-center">
               <v-icon class="mr-2">{{item.icon}}</v-icon>
-              <div class="subtitle-1">{{item.title}}:</div>
+              <div class="subtitle-1">{{item.title}}</div>
             </div>
             <v-spacer />
             <div class="title font-weight-bold text--primary">

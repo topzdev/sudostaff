@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const config = {
   port: process.env.PORT,
+  jwtSecret: "topzdevsecret2020",
   database: {
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,

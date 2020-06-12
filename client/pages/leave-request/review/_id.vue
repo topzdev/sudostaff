@@ -1,6 +1,6 @@
 <template>
   <div>
-    <leave-request-admin-review-form />
+    <leave-admin-form />
   </div>
 </template>
 

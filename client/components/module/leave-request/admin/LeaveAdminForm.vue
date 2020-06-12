@@ -8,22 +8,27 @@
         </v-col>
       </v-row>
 
-      <v-col cols="8" v-if="current">
-        <leave-request-admin-review-card v-bind.sync="leaveRequest" :rules="leaveRequestRules" />
-      </v-col>
+      <template v-if="allow">
+        <v-col cols="8" v-if="current">
+          <leave-submitted-card
+            :rules="leaveRequestRules"
+            v-bind.sync="{...leaveRequest, admin: true}"
+          />
+        </v-col>
 
-      <v-col cols="8" class="py-0">
-        <v-card flat>
-          <v-card-actions>
-            <v-btn @click="back" text>Cancel</v-btn>
-            <v-spacer />
-            <template v-if="leaveRequest.status === 'pending'">
-              <v-btn color="error" @click="reject" large>Reject</v-btn>
-              <v-btn color="success" @click="approve" large>Approved</v-btn>
-            </template>
-          </v-card-actions>
-        </v-card>
-      </v-col>
+        <v-col cols="8" class="py-0">
+          <v-card flat>
+            <v-card-actions>
+              <v-btn @click="back" text>Cancel</v-btn>
+              <v-spacer />
+              <template>
+                <v-btn color="error" @click="reject" large>Reject</v-btn>
+                <v-btn color="success" @click="approve" large>Approved</v-btn>
+              </template>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </template>
     </v-card>
   </v-form>
 </template>
@@ -31,10 +36,14 @@
 <script>
 import { mapMutations } from "vuex";
 import FormMixin from "@/mixins/FormMixin";
-import LeaveRequestAdminFormMixin from "@/mixins/forms/LeaveRequestAdminFormMixin";
+import LeaveAdminMixin from "@/mixins/forms/LeaveAdminMixin";
 
 export default {
-  mixins: [FormMixin, LeaveRequestAdminFormMixin],
+  mixins: [FormMixin, LeaveAdminMixin],
+
+  data() {
+    return { fallback: "/leave-request/" };
+  },
 
   methods: {
     async fetchData() {
@@ -58,12 +67,13 @@ export default {
       this.$refs.form.validate();
       if (!this.valid) return;
 
-      const { id, authorizedComment } = this.leaveRequest;
+      const { id, authorizedComment, employeeId } = this.leaveRequest;
 
       this.loading = true;
       await this.$store.dispatch("leaveRequestAdmin/updateLeaveRequest", {
         id,
         status,
+        employeeId,
         authorizedComment
       });
       this.loading = false;
@@ -90,8 +100,10 @@ export default {
       return this.$store.state.leaveRequestAdmin.current;
     }
   },
-  created() {
-    this.fetchData();
+
+  async created() {
+    await this.fetchData();
+    this.restrictPage(this.current.status !== "pending");
   }
 };
 </script>

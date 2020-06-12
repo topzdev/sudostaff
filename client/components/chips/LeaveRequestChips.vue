@@ -40,9 +40,9 @@
 </template>
 
 <script>
-import LeaveRequestUtils from "@/mixins/utils/LeaveRequestUtils";
+import LeaveUtils from "@/mixins/utils/LeaveUtils";
 export default {
-  mixins: [LeaveRequestUtils],
+  mixins: [LeaveUtils],
   props: {
     status: {
       type: String

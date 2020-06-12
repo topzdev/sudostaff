@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <leave-request-form />
+    <leave-form />
   </v-container>
 </template>
 

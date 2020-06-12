@@ -89,7 +89,7 @@ export const actions = {
       });
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_LEAVE_REQUEST_ADMIN, data);
-      this.app.router.push("/user/leave-request");
+      this.app.router.push("/leave-request");
     } catch ({ response: { data } }) {
       console.log(data);
       dispatch("utils/setNotifDefault", data, { root: true });

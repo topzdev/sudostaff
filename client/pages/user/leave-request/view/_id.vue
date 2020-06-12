@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <leave-request-review />
+    <leave-submitted-form />
   </v-container>
 </template>
 

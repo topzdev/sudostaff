@@ -7,15 +7,17 @@
         </v-col>
       </v-row>
 
-      <v-col cols="8">
-        <leave-request-view v-bind="leaveRequest" />
-      </v-col>
+      <template v-if="allow">
+        <v-col cols="8">
+          <leave-submitted-card v-bind="leaveRequest" />
+        </v-col>
 
-      <v-col cols="8" class="py-0">
-        <v-card flat>
-          <v-btn text large color="primary" @click="back">Back</v-btn>
-        </v-card>
-      </v-col>
+        <v-col cols="8" class="py-0">
+          <v-card flat>
+            <v-btn text large color="primary" @click="back">Back</v-btn>
+          </v-card>
+        </v-col>
+      </template>
     </v-card>
   </v-form>
 </template>
@@ -25,8 +27,10 @@ import FormMixin from "@/mixins/FormMixin";
 
 export default {
   mixins: [FormMixin],
+
   data() {
     return {
+      fallback: "/user/leave-request/",
       leaveRequest: {
         startDate: "",
         submittedBy: null,
@@ -72,8 +76,7 @@ export default {
   },
   async created() {
     await this.fetchData();
-
-    if (this.current.status === "pending") this.back();
+    this.restrictPage(this.current.status === "pending");
   }
 };
 </script>

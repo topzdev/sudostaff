@@ -99,5 +99,16 @@ EmployeeModel.init(
 EmployeeModel.belongsTo(PhotoModel);
 EmployeeModel.belongsTo(DesignationModel);
 DepartmentHeadModel.belongsTo(EmployeeModel);
-LeaveRequestModel.belongsTo(EmployeeModel);
+LeaveRequestModel.belongsTo(EmployeeModel, {
+  as: "submittedBy",
+  foreignKey: {
+    name: "employeeId",
+  },
+});
+LeaveRequestModel.belongsTo(EmployeeModel, {
+  as: "authorizedBy",
+  foreignKey: {
+    name: "authorizedPersonId",
+  },
+});
 module.exports = EmployeeModel;

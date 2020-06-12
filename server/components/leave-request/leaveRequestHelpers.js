@@ -9,19 +9,26 @@ const TOTAL_LEAVE_CREDIT = 5;
 
 exports.isExist = async (id) => {
   /** Check if the leave application is exist */
-  const isExist = await LeaveRequestModel.findOne({ where: { id } });
-  return isExist ? true : false;
+  const result = await LeaveRequestModel.count({ where: { id } });
+  return result ? true : false;
 };
 
-exports.isActive = async () => {
+exports.isPending = async (employeeId) => {
   /** Check if the current employee is in active means that there is a active or pending application that the employee is submitted */
-  const isActive = await LeaveRequestModel.findOne({
+  const result = await LeaveRequestModel.count({
     where: {
-      [Op.or]: [{ status: "active" }, { status: "pending" }],
+      employeeId,
+      status: "pending",
     },
   });
 
-  return isActive ? true : false;
+  return result ? true : false;
+};
+
+exports.hasUpcoming = async (employeeId) => {
+  const result = await LeaveRequestModel.count(this.upcomingOption(employeeId));
+
+  return result ? true : false;
 };
 
 const overallCount = async ({ employeeId }) => {
@@ -86,6 +93,7 @@ exports.joinTable = ({ withLeaveType, withEmployee }) => {
   if (withEmployee)
     tables.push({
       model: EmployeeModel,
+      as: "submittedBy",
       attributes: ["firstName", "lastName", "fullName", "id", "photoId"],
       include: [
         {
@@ -93,5 +101,30 @@ exports.joinTable = ({ withLeaveType, withEmployee }) => {
         },
       ],
     });
+
+  tables.push({
+    model: EmployeeModel,
+    foreignKey: "authorizedPersonId",
+    as: "authorizedBy",
+    attributes: ["firstName", "lastName", "fullName", "id", "photoId"],
+    include: [
+      {
+        model: PhotoModel,
+      },
+    ],
+  });
+
   return tables;
 };
+
+exports.upcomingOption = (employeeId) => ({
+  where: {
+    employeeId,
+    status: "approved",
+    startDate: { [Op.gte]: new Date() },
+  },
+  order: this.order,
+  include: this.joinTable({ withLeaveType: true }),
+});
+
+exports.order = [["createdAt", "DESC"]];

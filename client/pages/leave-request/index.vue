@@ -9,8 +9,8 @@
       </v-row>
 
       <v-card-text>
-        <leave-request-admin-rank />
-        <leave-request-admin-table />
+        <leave-admin-summary />
+        <leave-admin-table />
       </v-card-text>
     </v-card>
   </v-container>

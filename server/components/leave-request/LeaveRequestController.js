@@ -13,6 +13,16 @@ class LeaveRequestController {
     }
   }
 
+  async fetchUpcomingLeave(req, res) {
+    try {
+      const result = await leaveRequestService.upcoming(req.params, req.query);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
+
   async fetchSummaryEmployee(req, res) {
     try {
       const result = await leaveRequestService.getSummaryEmployee(req.params);

@@ -6,7 +6,7 @@ class DepartmentHeadModel extends Model {}
 DepartmentHeadModel.init(
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.UUIDV4,
       autoIncrement: true,
       primaryKey: true,
     },
