@@ -2,28 +2,17 @@
   <v-app>
     <base-navbar />
     <base-sidebar />
-    <modals />
-    <snackbars />
+    <base-modals />
+    <base-snackbars />
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
   </v-app>
 </template>
 <script>
-import BaseNavbar from "./navbars/BaseNavbar";
-import BaseSidebar from "./sidebars/BaseSidebar";
-import Modals from "./modals";
-import Snackbars from "./snackbars";
 export default {
   name: "Default",
-  components: {
-    BaseSidebar,
-    BaseNavbar,
-    Modals,
-    Snackbars
-  },
+
   data() {
     return {};
   }
@@ -45,9 +34,18 @@ export default {
 
 .v-btn {
   text-transform: none !important;
+  padding: 0 25px !important;
 }
 
 .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
   border-radius: 8px !important;
+}
+
+.v-btn:not(.v-btn--round).v-size--large {
+  padding: 0 30px;
+}
+
+.v-text-field--outlined fieldset {
+  border-color: none !important;
 }
 </style>

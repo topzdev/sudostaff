@@ -69,10 +69,10 @@ export default {
     },
 
     loading() {
-      return this.$store.state.auth.loading;
+      return this.$store.state.personal.loading;
     },
     loaded() {
-      return this.$store.state.auth.personalInfo ? true : false;
+      return this.$store.state.personal.personalInfo ? true : false;
     }
   },
 

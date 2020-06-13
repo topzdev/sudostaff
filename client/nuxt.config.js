@@ -1,6 +1,32 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  router: {
+    middleware: ["auth"]
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/auth/login",
+            method: "post",
+            propertyName: "data"
+          },
+          logout: { url: "/auth/logout", method: "post" },
+          user: { url: "/auth/user", method: "get", propertyName: "data" }
+        }
+      }
+    },
+    redirect: {
+      login: "/login",
+      logout: "/",
+      callback: "/login",
+      home: "/"
+    }
+  },
+
   mode: "universal",
   /*
    ** Headers of the page
@@ -57,7 +83,8 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/pwa",
     // Doc: https://github.com/nuxt-community/dotenv-module
-    "@nuxtjs/dotenv"
+    "@nuxtjs/dotenv",
+    "@nuxtjs/auth"
   ],
   /*
    ** Axios module configuration

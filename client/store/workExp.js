@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   async fetchWorkExp({ rootState, state, commit, dispatch }) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.personal.user.id;
       if (!employeeId || state.list.length) return;
 
       console.log("EMP", employeeId);
@@ -37,7 +37,7 @@ export const actions = {
 
   async fetchSingleWorkExp({ rootState, state, commit, dispatch }, id) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.personal.user.id;
       if (!employeeId) return;
 
       const result = await workExpServices.getOne(id);
@@ -49,7 +49,7 @@ export const actions = {
   },
   async addWorkExp({ rootState, commit, dispatch }, data) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.personal.user.id;
       if (!employeeId) return;
 
       const result = await workExpServices.create({

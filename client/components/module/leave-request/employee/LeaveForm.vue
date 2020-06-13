@@ -96,7 +96,7 @@ export default {
       }
 
       if (this.current) this.update();
-      else this.create();
+      else if (this.valid) this.create();
     },
 
     backPage() {
@@ -146,8 +146,10 @@ export default {
     }
   },
   async created() {
-    await this.fetchData();
-    this.restrictPage(this.current.status !== "pending");
+    if (!this.$route.name.includes("create")) {
+      await this.fetchData();
+      this.restrictPage(this.current.status !== "pending");
+    } else this.allow = true;
   }
 };
 </script>

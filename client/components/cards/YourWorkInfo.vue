@@ -62,7 +62,7 @@ export default {
         : "";
     },
     getInfo() {
-      return this.$store.state.auth.workInfo;
+      return this.$store.state.personal.workInfo;
     }
   },
   methods: {

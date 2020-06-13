@@ -4,11 +4,14 @@ const bcrypt = require("bcryptjs");
 
 class AccountServices {
   async create({ employeeId, birthDate, lastName }) {
-    const { username, password } = await helper.genDefaultCredential(
-      employeeId,
-      birthDate,
-      lastName
-    );
+    console.log("creating....");
+    const {
+      username,
+      password,
+      rawPassword,
+    } = await helper.genDefaultCredential(employeeId, birthDate, lastName);
+
+    console.log("almosttt....");
 
     const result = await AccountModel.create({
       username,
@@ -21,7 +24,7 @@ class AccountServices {
       msg: "Account Created Successfully",
       data: {
         username,
-        password,
+        password: rawPassword,
       },
     };
   }
@@ -33,8 +36,6 @@ class AccountServices {
     confirmPassword,
   }) {
     const account = await helper.findAccount(username);
-
-    console.log(account);
 
     if (!account)
       return {
@@ -66,7 +67,7 @@ class AccountServices {
       };
     }
 
-    const salt = await bcrypt.genSalt(25);
+    const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(newPassword, salt);
 
     const result = await AccountModel.update(
@@ -93,17 +94,34 @@ class AccountServices {
         msg: "Employee Information not found",
       };
 
-    const { username, password } = await helper.genDefaultCredential(
-      employeeInfo.employeeId,
+    console.log(employeeInfo);
+
+    const {
+      username,
+      password,
+      rawPassword,
+    } = await helper.genDefaultCredential(
+      employeeInfo.id,
       employeeInfo.birthDate,
       employeeInfo.lastName
     );
 
-    const result = await AccountModel.update({ username, password });
+    const result = await AccountModel.update(
+      { username, password },
+      {
+        where: {
+          employeeId: employeeInfo.id,
+        },
+      }
+    );
 
     return {
       status: 200,
       msg: "Account Reset Successfully",
+      data: {
+        username,
+        password: rawPassword,
+      },
     };
   }
 }

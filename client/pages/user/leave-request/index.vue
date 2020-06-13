@@ -8,7 +8,7 @@
         </v-col>
       </v-row>
       <v-card-text class="py-0">
-        <leave-warning />
+        <leave-warning war />
         <v-row>
           <v-col cols="4">
             <leave-upcoming class="mb-5" />
@@ -24,13 +24,7 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    balance() {
-      return this.$store.state.leaveRequestEmployee.summary.balance;
-    }
-  }
-};
+export default {};
 </script>
 
 <style>

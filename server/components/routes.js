@@ -26,11 +26,15 @@ const familyDetails = require("./family-details/familyDetailsRoute");
 const childrensRouter = require("./childrens/childrenRoute");
 const photoRouter = require("./photo/photoRoute");
 const mailerRouter = require("./mailer/mailerRoute");
+const accountRouter = require("./account/accountRoute");
+const authRouter = require("./auth/authRoute");
 
 router.use("/api-docs", swaggerUi.serve);
 router.get("/api-docs", swaggerUi.setup(apiDocs));
 
 router.use("/employee", employeeRouter);
+router.use("/account", accountRouter);
+router.use("/auth", authRouter);
 router.use("/attendance", attendanceRouter);
 router.use("/department", departmentRouter);
 router.use("/designation", designationRouter);

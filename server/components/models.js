@@ -14,6 +14,7 @@ const ChildrensModel = require("./childrens/ChildrensModel");
 const AddressModel = require("./address/AddressModel");
 const PhotoModel = require("./photo/PhotoModel");
 const DepartmentHeadModel = require("./department/DepartmentHeadModel");
+const AccountModel = require("./account/AccountModel");
 
 module.exports = function () {
   // EmployeeModel.sync({ force: true });

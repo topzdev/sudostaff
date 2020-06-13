@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <v-navigation-drawer permanent app width="300px"></v-navigation-drawer>
-    <v-navigation-drawer permanent fixed width="300px">
+  <div v-if="show">
+    <v-navigation-drawer v-model="show" :permanent="show" app width="300px"></v-navigation-drawer>
+    <v-navigation-drawer v-model="show" :permanent="show" fixed width="300px">
       <v-list shaped class="pl-0">
         <v-list-item two-line>
           <v-list-item-avatar>
@@ -114,6 +114,17 @@ export default {
         { title: "About", icon: "mdi-help-box", to: "/about" }
       ]
     };
+  },
+  computed: {
+    show: {
+      get() {
+        return this.$auth.loggedIn;
+      },
+
+      set(value) {
+        console.log(value);
+      }
+    }
   }
 };
 </script>

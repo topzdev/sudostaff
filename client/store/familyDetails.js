@@ -13,7 +13,7 @@ export const mutations = {
 export const actions = {
   async fetchFamilyDetails({ rootState, state, commit, dispatch }) {
     try {
-      const id = rootState.auth.infoIds.familyDetailsId;
+      const id = rootState.personal.infoIds.familyDetailsId;
       if (!id) return;
 
       const result = await familyDetailsServices.getOne(id);
@@ -25,7 +25,7 @@ export const actions = {
   },
   async updateFamilyDetails({ rootState, commit, dispatch }, data) {
     try {
-      const id = rootState.auth.infoIds.familyDetailsId;
+      const id = rootState.personal.infoIds.familyDetailsId;
       if (!id) return;
 
       console.log(data);

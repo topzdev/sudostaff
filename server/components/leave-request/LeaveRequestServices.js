@@ -103,12 +103,13 @@ class LeaveRequestServices {
   }
 
   async create({ employeeId, startDate, endDate, leaveTypeId, reason }) {
-    if (helpers.isPending(employeeId))
-      return {
-        status: 400,
-        msg: "Your account is currently active in leave application",
-      };
-    if (helpers.hasUpcoming(employeeId)) {
+    // if (await helpers.isPending(employeeId))
+    //   return {
+    //     status: 400,
+    //     msg: "Your account is currently active in leave application",
+    //   };
+
+    if (await helpers.hasUpcoming(employeeId)) {
       return {
         status: 400,
         msg: "The employee has upcoming leave",
@@ -138,13 +139,13 @@ class LeaveRequestServices {
     leaveTypeId,
     reason,
   }) {
-    if (helpers.isExist(id))
+    if (await helpers.isExist(id))
       return {
         status: 400,
         msg: "leave application is not exist",
       };
 
-    if (helpers.hasUpcoming(employeeId)) {
+    if (await helpers.hasUpcoming(employeeId)) {
       return {
         status: 400,
         msg: "You currently have upcoming leave.",
@@ -170,23 +171,23 @@ class LeaveRequestServices {
     authorizedComment,
     authorizedPersonId,
   }) {
-    if (!helpers.isExist(id))
+    if (!(await helpers.isExist(id)))
       return {
         status: 400,
         msg: "leave application is not exist",
       };
 
-    if (helpers.hasUpcoming(employeeId)) {
+    if (await helpers.hasUpcoming(employeeId)) {
       return {
         status: 400,
         msg: "The employee has upcoming leave",
       };
     }
 
-    if (helpers.isPending(employeeId))
+    if (!(await helpers.isPending(employeeId)))
       return {
         status: 400,
-        msg: "This request is already marked as rejected/authorized",
+        msg: "This request is already marked as approved/rejected",
       };
 
     const result = await LeaveRequestModel.update(

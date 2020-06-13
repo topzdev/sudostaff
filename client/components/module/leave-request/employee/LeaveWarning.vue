@@ -10,11 +10,13 @@
 
 <script>
 export default {
-  props: ["balance"],
   computed: {
     balanceType() {
       if (this.balance >= 1) return "info";
       return "error";
+    },
+    balance() {
+      return this.$store.state.leaveRequestEmployee.summary.balance;
     }
   }
 };

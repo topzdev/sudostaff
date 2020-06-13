@@ -5,6 +5,7 @@ const PhotoModel = require("../photo/PhotoModel");
 const DesignationModel = require("../designation/DesignationModel");
 const DepartmentHeadModel = require("../department/DepartmentHeadModel");
 const LeaveRequestModel = require("../leave-request/LeaveRequestModel");
+const AccountModel = require("../account/AccountModel");
 
 class EmployeeModel extends Model {}
 
@@ -99,6 +100,12 @@ EmployeeModel.init(
 EmployeeModel.belongsTo(PhotoModel);
 EmployeeModel.belongsTo(DesignationModel);
 DepartmentHeadModel.belongsTo(EmployeeModel);
+AccountModel.belongsTo(EmployeeModel, {
+  as: "employee",
+  foreignKey: {
+    name: "employeeId",
+  },
+});
 LeaveRequestModel.belongsTo(EmployeeModel, {
   as: "submittedBy",
   foreignKey: {
@@ -111,4 +118,5 @@ LeaveRequestModel.belongsTo(EmployeeModel, {
     name: "authorizedPersonId",
   },
 });
+
 module.exports = EmployeeModel;

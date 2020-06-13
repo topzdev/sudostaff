@@ -13,7 +13,7 @@ export const mutations = {
 export const actions = {
   async fetchGovernment({ rootState, state, commit, dispatch }) {
     try {
-      const id = rootState.auth.infoIds.governmentIssuedId;
+      const id = rootState.personal.infoIds.governmentIssuedId;
       if (!id) return;
 
       const result = await governmentServices.getOne(id);
@@ -25,7 +25,7 @@ export const actions = {
   },
   async updateGovernment({ rootState, commit, dispatch }, data) {
     try {
-      const id = rootState.auth.infoIds.governmentIssuedId;
+      const id = rootState.personal.infoIds.governmentIssuedId;
       if (!id) return;
 
       const result = await governmentServices.update({

@@ -13,7 +13,7 @@ export const mutations = {
 export const actions = {
   async fetchBenifits({ rootState, state, commit, dispatch }) {
     try {
-      const id = rootState.auth.infoIds.benifitsId;
+      const id = rootState.personal.infoIds.benifitsId;
       if (!id) return;
 
       const result = await benifitsServices.getOne(id);
@@ -25,7 +25,7 @@ export const actions = {
   },
   async updateBenifits({ rootState, commit, dispatch }, data) {
     try {
-      const id = rootState.auth.infoIds.benifitsId;
+      const id = rootState.personal.infoIds.benifitsId;
       if (!id) return;
 
       const result = await benifitsServices.update({

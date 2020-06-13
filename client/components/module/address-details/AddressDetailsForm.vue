@@ -26,7 +26,7 @@ export default {
   mixins: [FormMixin, AddressFormMixin],
   computed: {
     getInfo() {
-      return this.$store.state.auth.address;
+      return this.$store.state.personal.address;
     }
   },
   methods: {
@@ -40,7 +40,7 @@ export default {
       if (!this.valid) return;
 
       await this.$store.dispatch(
-        "auth/updateAddressDetails",
+        "personal/updateAddressDetails",
         this.addressDetails
       );
       this.loading = false;
@@ -52,7 +52,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch("auth/fetchAddressDetails");
+    await this.$store.dispatch("personal/fetchAddressDetails");
     this.loadData();
   }
 };

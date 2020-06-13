@@ -13,7 +13,7 @@ export const actions = {
       { root: true }
     );
   },
-  setNotifDefault({ commit }, { status, message }) {
+  setNotifDefault({ commit, dispatch }, { status, message }) {
     if (!status) console.error(message);
     commit(
       "frontend/" + types.SET_NOTIF_SNACKBAR,

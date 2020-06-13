@@ -25,7 +25,7 @@ export default {
   mixins: [FormMixin, PersonalFormMixin],
   computed: {
     getInfo() {
-      return this.$store.state.auth.personalInfo;
+      return this.$store.state.personal.personalInfo;
     }
   },
   methods: {
@@ -38,7 +38,7 @@ export default {
       this.$refs.form.validate();
       if (!this.valid) return;
 
-      await this.$store.dispatch("auth/updatePersonalInfo", this.personal);
+      await this.$store.dispatch("personal/updatePersonalInfo", this.personal);
       this.loading = false;
     }
   },

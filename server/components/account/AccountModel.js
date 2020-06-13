@@ -6,12 +6,14 @@ class DepartmentHeadModel extends Model {}
 DepartmentHeadModel.init(
   {
     id: {
-      type: Sequelize.UUIDV4,
-      autoIncrement: true,
+      type: Sequelize.UUID,
+      allowNull: false,
       primaryKey: true,
+      defaultValue: Sequelize.UUIDV4,
     },
     employeeId: {
       type: Sequelize.STRING,
+      allowNull: false,
       references: {
         model: "employees",
         key: "id",

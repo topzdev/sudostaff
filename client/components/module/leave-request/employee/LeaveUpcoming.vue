@@ -80,19 +80,21 @@ export default {
       exclude: ["updateAt", "deletedAt"]
     });
 
-    const {
-      startDate,
-      endDate,
-      createdAt,
-      leaveType,
-      authorizedBy
-    } = this.upcoming;
+    if (this.upcoming) {
+      const {
+        startDate,
+        endDate,
+        createdAt,
+        leaveType,
+        authorizedBy
+      } = this.upcoming;
 
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.createdAt = createdAt;
-    this.leaveType = leaveType;
-    this.authorizedBy = authorizedBy;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      this.createdAt = createdAt;
+      this.leaveType = leaveType;
+      this.authorizedBy = authorizedBy;
+    }
   }
 };
 </script>
