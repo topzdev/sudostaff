@@ -4,9 +4,6 @@ import createFormData from "@/utils/createFormData";
 import addressServices from "@/services/Address";
 
 export const state = () => ({
-  user: {
-    id: "EMP-001"
-  },
   departmentHead: null,
   loading: false,
   infoIds: {
@@ -103,12 +100,13 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchPersonalInfo({ commit, dispatch, state }) {
+  async fetchPersonalInfo({ commit, dispatch, rootState }) {
     try {
-      if (state.personalInfo) return;
+      const id = rootState.auth.user.id;
+      if (state.personalInfo && !id) return;
       commit(types.SET_LOADING, true);
 
-      const result = await employeeServices.getOne(state.user.id, {
+      const result = await employeeServices.getOne(id, {
         exclude: ["createdAt", "updatedAt", "deletedAt"],
         withPhoto: true,
         withDesignation: true,
@@ -121,12 +119,15 @@ export const actions = {
       dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
-  async updatePersonalInfo({ commit, dispatch, state }, data) {
+  async updatePersonalInfo({ commit, dispatch, state, rootState }, data) {
     try {
       commit(types.SET_LOADING, true);
+      const id = rootState.auth.user.id;
+      if (!id) return;
+
       const result = await employeeServices.update(
         createFormData({
-          id: state.user.id,
+          id,
           ...data
         })
       );
@@ -144,9 +145,11 @@ export const actions = {
     }
   },
 
-  async fetchAddressDetails({ commit, dispatch, state }) {
+  async fetchAddressDetails({ commit, dispatch, state, rootState }) {
     try {
-      if (state.address) return;
+      const id = rootState.auth.user.id;
+      if (state.address && !id) return;
+
       commit(types.SET_LOADING, true);
 
       const result = await addressServices.getOne(state.infoIds.addressId);
@@ -158,8 +161,11 @@ export const actions = {
     }
   },
 
-  async updateAddressDetails({ commit, dispatch, state }, data) {
+  async updateAddressDetails({ commit, dispatch, state, rootState }, data) {
     try {
+      const id = rootState.auth.user.id;
+      if (!id) return;
+
       commit(types.SET_LOADING, true);
 
       const result = await addressServices.update(

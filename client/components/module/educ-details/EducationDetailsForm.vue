@@ -1,7 +1,11 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card flat>
-      <education-details-card  :is-edit="isEdit" v-bind.sync="educDetails" :rules="educDetailsRules" />
+    <v-card flat class="background-none">
+      <education-details-card
+        :is-edit="isEdit"
+        v-bind.sync="educDetails"
+        :rules="educDetailsRules"
+      />
       <modal-form-action :is-edit="isEdit" :close-func="close" :save-func="save" />
     </v-card>
   </v-form>

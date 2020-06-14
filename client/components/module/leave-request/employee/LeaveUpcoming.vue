@@ -13,7 +13,7 @@
             Upcoming
             <b>{{leaveType.name}}</b>
           </div>
-          <h2>{{daysToGo}}</h2>
+          <h2>{{daysToGo.value}}</h2>
         </div>
       </div>
     </v-card-title>
@@ -42,7 +42,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn text color="primary">View</v-btn>
+      <v-btn text color="primary" :to="to">View</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -71,7 +71,21 @@ export default {
     daysToGo() {
       if (!this.upcoming) return "";
       const day = dayjs(this.startDate).diff(Date.now(), "day");
-      return day > 1 ? `${day} Days to go` : `${day} Day to go`;
+
+      const toReturn = {
+        raw: day,
+        value: null
+      };
+
+      if (!day) return { ...toReturn, value: "Today" };
+
+      return {
+        ...toReturn,
+        value: day > 1 ? `${day} Days to go` : `${day} Day to go`
+      };
+    },
+    to() {
+      return "/user/leave-request/view/" + this.upcoming.id;
     }
   },
 

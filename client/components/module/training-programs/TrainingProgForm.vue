@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card flat>
+    <v-card flat class="background-none">
       <training-prog-card :is-edit="isEdit" v-bind.sync="trainingProg" :rules="trainingProgRules" />
       <modal-form-action :is-edit="isEdit" :close-func="close" :save-func="save" />
     </v-card>

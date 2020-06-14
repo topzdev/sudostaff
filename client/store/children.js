@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   async fetchChildrens({ rootState, state, commit, dispatch }) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId || state.list.length) return;
       const result = await childrenServices.getAll(employeeId);
       console.log(employeeId, "FETCHINGG", result);
@@ -36,7 +36,7 @@ export const actions = {
 
   async fetchSingleChildren({ rootState, state, commit, dispatch }, id) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId) return;
       console.log(id);
       const result = await childrenServices.getOne(id);
@@ -48,7 +48,7 @@ export const actions = {
   },
   async addChildren({ rootState, commit, dispatch }, data) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId) return;
 
       const result = await childrenServices.create({

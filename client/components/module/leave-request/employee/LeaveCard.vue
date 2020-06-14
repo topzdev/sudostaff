@@ -20,7 +20,7 @@
       <span>{{dates.createdAt}}</span>
     </v-card-subtitle>
 
-    <v-card-text class="grey lighten-5 py-5">
+    <v-card-text class="py-5">
       <div class="d-flex align-center">
         <div>
           <h1 class="font-weight-bold primary--text">{{totalDaysLeave}}</h1>

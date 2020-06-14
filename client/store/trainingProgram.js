@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   async fetchTrainingProgram({ rootState, state, commit, dispatch }) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId || state.list.length) return;
 
       console.log("EMP", employeeId);
@@ -37,7 +37,7 @@ export const actions = {
 
   async fetchSingleTrainingProgram({ rootState, state, commit, dispatch }, id) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId) return;
 
       const result = await trainingProgramServices.getOne(id);
@@ -49,7 +49,7 @@ export const actions = {
   },
   async addTrainingProgram({ rootState, commit, dispatch }, data) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId) return;
 
       const result = await trainingProgramServices.create({

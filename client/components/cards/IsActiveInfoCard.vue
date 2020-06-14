@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat class="background-none">
     <v-switch
       :value="isActive"
       @input="valued"

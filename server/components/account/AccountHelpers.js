@@ -2,26 +2,37 @@ const AccountModel = require("./AccountModel");
 const EmployeeModel = require("../employee/EmployeeModel");
 const bcrypt = require("bcryptjs");
 const dayjs = require("dayjs");
+const sequelize = require("sequelize");
+const employeeHelper = require("../employee/employeeHelpers");
+
+const Op = sequelize.Op;
 
 exports.isExist = () => {};
 
 exports.findAccount = async (username) => {
   const result = await AccountModel.findOne({
     where: {
-      username,
+      [Op.or]: [{ username: username.toLowerCase() }, { employeeId: username }],
     },
     attributes: ["username", "password", "id", "employeeId"],
   });
+
+  console.log(result);
+
   return result;
 };
 
 exports.genDefaultCredential = async (employeeId, birthDate, lastName) => {
-  const password =
-    lastName.toUpperCase() + "-" + dayjs(birthDate).format("MDYYYY");
+  const password = (
+    lastName +
+    "-" +
+    dayjs(birthDate).format("MDYYYY")
+  ).toLowerCase();
+
   const salt = await bcrypt.genSalt(10);
 
   const hashPassword = await bcrypt.hash(password, salt);
-  const username = employeeId.toUpperCase();
+  const username = employeeId.toLowerCase();
 
   return { password: hashPassword, username, rawPassword: password };
 };
@@ -32,4 +43,14 @@ exports.employeeInfo = async (employeeId) => {
   });
 
   return result.get({ plain: true });
+};
+
+exports.flatten = async (user) => {
+  let userInfo = user;
+  let employee = userInfo.employee;
+  delete userInfo.employee;
+
+  userInfo = { ...userInfo, employee: employeeHelper.flatten(employee) };
+
+  return userInfo;
 };

@@ -2,7 +2,7 @@
   <v-chip
     :small="small"
     v-if="statuses.isApproved"
-    color="success lighten-5 success--text"
+    color="green lighten-5 green--text"
     class="px-5"
   >
     <v-avatar v-if="icons" left>

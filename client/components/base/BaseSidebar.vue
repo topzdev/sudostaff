@@ -88,7 +88,7 @@ export default {
             },
             {
               title: "Account Setting",
-              to: "/user/account-setting",
+              to: "/user/settings",
               icon: "mdi-shield-account-outline"
             }
           ]
@@ -146,11 +146,19 @@ export default {
 }
 
 .custom-sub-group .v-list-group__items {
-  background: #f5fbff;
+  /* background: #f5fbff; */
   border-top-right-radius: 32px;
   border-bottom-right-radius: 32px;
 }
 .custom-sub-group .v-list-group__items .v-list-item {
   padding-left: 40px !important;
+}
+
+.theme--dark .v-navigation-drawer {
+  background-color: #121212 !important;
+}
+
+.theme--dark .v-navigation-drawer__border {
+  display: block !important;
 }
 </style>

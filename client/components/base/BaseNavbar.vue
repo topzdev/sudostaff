@@ -1,10 +1,10 @@
 <template>
   <div v-if="show">
     <v-app-bar v-model="show" flat></v-app-bar>
-    <v-app-bar v-model="show" color="white" fixed elevate-on-scroll>
+    <v-app-bar v-model="show" fixed elevate-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="font-weight-bold">Sudostaff</v-toolbar-title>
+      <v-toolbar-title class="font-weight-bold">Human Resources</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -35,6 +35,7 @@
               <v-list-item-title>{{item.title}}</v-list-item-title>
             </v-list-item>
           </template>
+          <base-theme-toggle />
         </v-list>
       </v-menu>
     </v-app-bar>
@@ -80,4 +81,7 @@ export default {
 </script>
 
 <style>
+.theme--light.v-app-bar.v-toolbar.v-sheet {
+  background-color: #fff !important;
+}
 </style>

@@ -5,7 +5,6 @@ const accountHelper = require("../account/AccountHelpers");
 const bcrypt = require("bcryptjs");
 const config = require("../../config");
 const jwt = require("jsonwebtoken");
-const { jwtSecret } = require("../../config");
 
 class AuthServices {
   async login({ username, password }) {
@@ -36,7 +35,7 @@ class AuthServices {
       };
 
     const token = jwt.sign(
-      { employeeId: account.employeeId },
+      { employeeId: account.employeeId, id: account.id },
       config.jwtSecret,
       { expiresIn: "12hr" }
     );
@@ -68,25 +67,35 @@ class AuthServices {
         status: 401,
       };
 
-    const result = await EmployeeModel.findByPk(user.employeeId, {
-      attributes: [
-        "firstName",
-        "lastName",
-        "fullName",
-        "id",
-        "designationId",
-        "photoId",
+    const result = await AccountModel.findByPk(user.id, {
+      attributes: ["id", "employeeId", "username"],
+      include: [
+        {
+          as: "employee",
+          model: EmployeeModel,
+          attributes: [
+            "firstName",
+            "lastName",
+            "fullName",
+            "id",
+            "designationId",
+            "photoId",
+          ],
+
+          include: employeeHelper.joinTable({
+            withPhoto: true,
+            withDesignation: true,
+          }),
+        },
       ],
-      include: employeeHelper.joinTable({
-        withPhoto: true,
-        withDesignation: true,
-      }),
     });
+
+    console.log(result.get({ plain: true }));
 
     return {
       msg: "Logged in",
       status: 200,
-      data: employeeHelper.flatten(result.get({ plain: true })),
+      data: accountHelper.flatten(result.get({ plain: true })),
     };
   }
 }

@@ -17,16 +17,8 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions v-if="summary.balance" class="card-actions-btn">
-      <v-btn
-        text
-        large
-        block
-        tile
-        color="primary"
-        to="/user/leave-request/create"
-      >Apply Leave Request</v-btn>
-    </v-card-actions>
+
+    <base-card-actions v-if="summary.balance" to="/user/leave-request/create">Apply Leave Request</base-card-actions>
   </v-card>
 </template>
 
@@ -74,16 +66,3 @@ export default {
 };
 </script>
 
-<style>
-.card-actions-btn {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 0 !important;
-  overflow: hidden;
-}
-
-.card-actions-btn .v-btn {
-  font-weight: 600 !important;
-  padding: 10px 20px !important;
-  height: 60px !important;
-}
-</style>

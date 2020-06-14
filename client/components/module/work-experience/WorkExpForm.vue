@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card flat>
+    <v-card flat class="background-none">
       <work-exp-card :is-edit="isEdit" v-bind.sync="workExp" :rules="workExpRules" />
       <modal-form-action :is-edit="isEdit" :close-func="close" :save-func="save" />
     </v-card>

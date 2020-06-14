@@ -1,6 +1,6 @@
 <template>
-  <v-container class="py-0">
-    <department-form :is-edit="true"/>
+  <v-container>
+    <department-form :is-edit="true" />
   </v-container>
 </template>
 

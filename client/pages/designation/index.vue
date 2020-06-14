@@ -1,6 +1,6 @@
 <template>
-  <v-container class="py-0">
-    <v-card flat :loading="loading" class="align-center">
+  <v-container>
+    <v-card flat :loading="loading" class="align-center background-none">
       <v-row>
         <v-col class="py-0">
           <v-card-title class="display-1 font-weight-medium">Designation Management</v-card-title>

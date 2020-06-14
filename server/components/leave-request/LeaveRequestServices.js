@@ -103,11 +103,11 @@ class LeaveRequestServices {
   }
 
   async create({ employeeId, startDate, endDate, leaveTypeId, reason }) {
-    // if (await helpers.isPending(employeeId))
-    //   return {
-    //     status: 400,
-    //     msg: "Your account is currently active in leave application",
-    //   };
+    if (await helpers.isPending(employeeId))
+      return {
+        status: 400,
+        msg: "Your account is currently active in leave application",
+      };
 
     if (await helpers.hasUpcoming(employeeId)) {
       return {

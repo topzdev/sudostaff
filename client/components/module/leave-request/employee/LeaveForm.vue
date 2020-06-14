@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card :loading="loading" flat class="align-center">
+    <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
         <v-col class="py-0">
           <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
@@ -26,7 +26,7 @@
         </v-col>
 
         <v-col cols="8" class="py-0">
-          <v-card flat>
+          <v-card flat class="background-none">
             <form-card-action
               :cancelFunc="backPage"
               :updateFunc="nextPage"

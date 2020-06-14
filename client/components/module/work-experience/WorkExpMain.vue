@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat class="background-none">
     <v-card-text>
       <div class="d-flex mb-3">
         <div class="subtitle-2 mr-auto">Work Experience</div>

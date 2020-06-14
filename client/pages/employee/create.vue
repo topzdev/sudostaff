@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-0">
+  <v-container>
     <create-employee-form />
   </v-container>
 </template>

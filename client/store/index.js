@@ -4,6 +4,5 @@ export const actions = {
     await dispatch("leaveTypes/fetchDropdown");
     await dispatch("department/fetchDropdown");
     await dispatch("designation/fetchDropdown");
-    await dispatch("personal/fetchPersonalInfo");
   }
 };

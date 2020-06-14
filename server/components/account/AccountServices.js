@@ -3,15 +3,25 @@ const helper = require("./AccountHelpers");
 const bcrypt = require("bcryptjs");
 
 class AccountServices {
+  async getOne({ id }) {
+    const result = await AccountModel.findOne({
+      where: { employeeId: id },
+      attributes: ["employeeId", "username"],
+    });
+
+    return {
+      status: 200,
+      msg: "Account Successfully Fetched",
+      data: result.get({ plain: true }),
+    };
+  }
+
   async create({ employeeId, birthDate, lastName }) {
-    console.log("creating....");
     const {
       username,
       password,
       rawPassword,
     } = await helper.genDefaultCredential(employeeId, birthDate, lastName);
-
-    console.log("almosttt....");
 
     const result = await AccountModel.create({
       username,
@@ -32,7 +42,7 @@ class AccountServices {
   async updatePassword({
     username,
     newPassword,
-    oldPassword,
+    currentPassword,
     confirmPassword,
   }) {
     const account = await helper.findAccount(username);
@@ -41,21 +51,18 @@ class AccountServices {
       return {
         status: 404,
         msg: "Account not found.",
-        data: helper.flatten(result.get({ plain: true })),
       };
 
-    if (!(await bcrypt.compare(oldPassword, account.password)))
+    if (!(await bcrypt.compare(currentPassword, account.password)))
       return {
         status: 400,
         msg: "Old Password not match",
-        data: helper.flatten(result.get({ plain: true })),
       };
 
     if (!(newPassword === confirmPassword)) {
       return {
         status: 400,
         msg: "New password not match with confirm password",
-        data: helper.flatten(result.get({ plain: true })),
       };
     }
 
@@ -63,7 +70,6 @@ class AccountServices {
       return {
         status: 400,
         msg: "New password is too short",
-        data: helper.flatten(result.get({ plain: true })),
       };
     }
 
@@ -82,6 +88,39 @@ class AccountServices {
     return {
       status: 200,
       msg: "Account Password Successfully Changed",
+    };
+  }
+
+  async updateUsername({ employeeId, newUsername, password }) {
+    const account = await helper.findAccount(employeeId);
+
+    if (!account)
+      return {
+        status: 404,
+        msg: "Account not found.",
+      };
+
+    if (!(await bcrypt.compare(password, account.password)))
+      return {
+        status: 400,
+        msg: "Old Password not match",
+      };
+
+    const username = newUsername.toLowerCase();
+
+    const result = await AccountModel.update(
+      { username },
+      {
+        where: {
+          id: account.id,
+        },
+      }
+    );
+
+    return {
+      status: 200,
+      msg: "Account Username Successfully Changed",
+      data: username,
     };
   }
 

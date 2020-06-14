@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-0">
+  <v-container>
     <designation-form :is-edit="true" />
   </v-container>
 </template>

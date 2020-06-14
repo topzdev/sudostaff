@@ -12,25 +12,25 @@
         <v-col cols="12">
           <div class="overline">Name</div>
           <div
-            class="subtitle-1 black--text"
+            class="subtitle-1"
           >{{workInfo.firstName}} {{workInfo.middleName}} {{workInfo.lastName}} {{workInfo.extensionName}}</div>
         </v-col>
 
         <v-col cols="6">
           <div class="overline">Employee ID</div>
-          <div class="subtitle-1 black--text" v-text="workInfo.id"></div>
+          <div class="subtitle-1" v-text="workInfo.id"></div>
         </v-col>
         <v-col cols="6">
           <div class="overline">Joining Date</div>
-          <div class="subtitle-1 black--text" v-text="joinedFormat"></div>
+          <div class="subtitle-1" v-text="joinedFormat"></div>
         </v-col>
         <v-col cols="12">
           <div class="overline">Department</div>
-          <div class="subtitle-1 black--text" v-text="workInfo.department"></div>
+          <div class="subtitle-1" v-text="workInfo.department"></div>
         </v-col>
         <v-col cols="12">
           <div class="overline">Designation</div>
-          <div class="subtitle-1 black--text" v-text="workInfo.designation"></div>
+          <div class="subtitle-1" v-text="workInfo.designation"></div>
         </v-col>
       </v-row>
     </v-card-text>

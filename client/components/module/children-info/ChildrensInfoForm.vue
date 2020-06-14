@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card flat>
+    <v-card flat class="background-none">
       <childrens-info-card
         v-bind.sync="children"
         :is-edit="isEdit"

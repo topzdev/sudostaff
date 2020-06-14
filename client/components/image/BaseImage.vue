@@ -1,5 +1,5 @@
 <template>
-  <img :src="checkImage" />
+  <img :src="checkImage" :draggable="false" />
 </template>
 
 <script>

@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   async fetchCivilEligibility({ rootState, state, commit, dispatch }) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId || state.list.length) return;
 
       console.log("EMP", employeeId);
@@ -40,7 +40,7 @@ export const actions = {
     id
   ) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId) return;
 
       const result = await civilServices.getOne(id);
@@ -52,7 +52,7 @@ export const actions = {
   },
   async addCivilEligibility({ rootState, commit, dispatch }, data) {
     try {
-      const employeeId = rootState.personal.user.id;
+      const employeeId = rootState.auth.user.id;
       if (!employeeId) return;
 
       const result = await civilServices.create({

@@ -3,6 +3,7 @@ const LeaveRequestModel = require("./LeaveRequestModel");
 const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
 const PhotoModel = require("../photo/PhotoModel");
 const EmployeeModel = require("../employee/EmployeeModel");
+const dayjs = require("dayjs");
 const Op = Sequelize.Op;
 
 const TOTAL_LEAVE_CREDIT = 5;
@@ -121,7 +122,7 @@ exports.upcomingOption = (employeeId) => ({
   where: {
     employeeId,
     status: "approved",
-    startDate: { [Op.gte]: new Date() },
+    startDate: { [Op.gte]: dayjs(Date.now()).format("YYYY-MM-DD") },
   },
   order: this.order,
   include: this.joinTable({ withLeaveType: true }),

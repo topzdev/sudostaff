@@ -6,7 +6,7 @@
       :outlined="outlined"
       :rules="contactRules"
     />
-    <v-card flat>
+    <v-card flat class="background-none">
       <form-card-action
         :cancelFunc="back"
         :updateFunc="update"

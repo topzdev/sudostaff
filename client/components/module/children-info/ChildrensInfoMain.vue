@@ -1,7 +1,7 @@
 <template>
   <v-card :outlined="outlined" flat>
     <v-card-text>
-      <v-alert text outlined type="info" dense>
+      <v-alert text outlined type="blue" dense>
         <b>Adding</b> and
         <b>Removing</b> children information will automatically saved to database without clicking the
         <b>Update Button</b> below.

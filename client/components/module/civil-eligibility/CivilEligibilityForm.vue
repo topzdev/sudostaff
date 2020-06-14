@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card flat>
+    <v-card flat class="background-none">
       <civil-eligibility-card
         :is-edit="isEdit"
         v-bind.sync="civilEligibility"

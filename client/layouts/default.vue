@@ -48,4 +48,8 @@ export default {
 .v-text-field--outlined fieldset {
   border-color: none !important;
 }
+
+.background-none {
+  background-color: unset !important;
+}
 </style>
