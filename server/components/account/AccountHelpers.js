@@ -45,12 +45,14 @@ exports.employeeInfo = async (employeeId) => {
   return result.get({ plain: true });
 };
 
-exports.flatten = async (user) => {
+exports.flatten = (user) => {
   let userInfo = user;
   let employee = userInfo.employee;
   delete userInfo.employee;
 
   userInfo = { ...userInfo, employee: employeeHelper.flatten(employee) };
+
+  console.log(userInfo);
 
   return userInfo;
 };

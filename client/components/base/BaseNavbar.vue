@@ -16,7 +16,7 @@
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-avatar size="45">
-              <base-image v-if="$auth.user.photo" :src="$auth.user.photo.photoUrl" />
+              <base-image v-if="employee.photo" :src="photo.photoUrl" />
               <base-image v-else />
             </v-avatar>
           </v-btn>
@@ -24,7 +24,7 @@
 
         <v-list width="250">
           <v-list-item to="/user/your-info">
-            <employee-template :employee="$auth.user" />
+            <employee-template :employee="employee" />
           </v-list-item>
           <v-divider />
           <template v-for="item in items">
@@ -69,6 +69,9 @@ export default {
 
     user() {
       return this.$auth.user;
+    },
+    employee() {
+      return this.user.employee;
     }
   },
 

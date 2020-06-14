@@ -102,7 +102,7 @@ export const mutations = {
 export const actions = {
   async fetchPersonalInfo({ commit, dispatch, rootState }) {
     try {
-      const id = rootState.auth.user.id;
+      const id = rootState.auth.user.employeeId;
       if (state.personalInfo && !id) return;
       commit(types.SET_LOADING, true);
 
@@ -122,7 +122,7 @@ export const actions = {
   async updatePersonalInfo({ commit, dispatch, state, rootState }, data) {
     try {
       commit(types.SET_LOADING, true);
-      const id = rootState.auth.user.id;
+      const id = rootState.auth.user.employeeId;
       if (!id) return;
 
       const result = await employeeServices.update(
@@ -147,7 +147,7 @@ export const actions = {
 
   async fetchAddressDetails({ commit, dispatch, state, rootState }) {
     try {
-      const id = rootState.auth.user.id;
+      const id = rootState.auth.user.employeeId;
       if (state.address && !id) return;
 
       commit(types.SET_LOADING, true);
@@ -163,7 +163,7 @@ export const actions = {
 
   async updateAddressDetails({ commit, dispatch, state, rootState }, data) {
     try {
-      const id = rootState.auth.user.id;
+      const id = rootState.auth.user.employeeId;
       if (!id) return;
 
       commit(types.SET_LOADING, true);

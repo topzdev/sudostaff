@@ -39,10 +39,7 @@ export default {
       if (!this.valid) return;
 
       this.loading = true;
-      await this.$store.dispatch(
-        "designation/updateDesignation",
-        this.designation
-      );
+      await this.$store.dispatch("account/updatePassword", this.password);
       this.loading = false;
     }
   },

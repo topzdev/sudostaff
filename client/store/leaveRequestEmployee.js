@@ -68,7 +68,7 @@ export const actions = {
     { dispatch, commit, rootState },
     { include, exclude, status, withLeaveType }
   ) {
-    const employeeId = rootState.auth.user.id;
+    const employeeId = rootState.auth.user.employeeId;
     if (!employeeId) return;
 
     try {
@@ -86,7 +86,7 @@ export const actions = {
 
   async createLeaveRequest({ dispatch, commit, rootState }, data) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId) return;
 
       const result = await leaveRequestServices.create({ ...data, employeeId });
@@ -111,7 +111,7 @@ export const actions = {
 
   async fetchSummary({ dispatch, commit, rootState, state }) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId && state.summary.balance !== null) return;
 
       const result = await leaveRequestServices.getSummaryEmployee(employeeId);
@@ -127,7 +127,7 @@ export const actions = {
     { include, exclude }
   ) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId && state.summary.balance !== null) return;
 
       const result = await leaveRequestServices.getUpcoming(employeeId, {

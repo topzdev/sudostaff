@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   async fetchEducDetails({ rootState, state, commit, dispatch }) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId || state.list.length) return;
 
       console.log("EMP", employeeId);
@@ -37,7 +37,7 @@ export const actions = {
 
   async fetchSingleEducDetails({ rootState, state, commit, dispatch }, id) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId) return;
 
       const result = await educDetailsServices.getOne(id);
@@ -49,7 +49,7 @@ export const actions = {
   },
   async addEducDetails({ rootState, commit, dispatch }, data) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId) return;
 
       const result = await educDetailsServices.create({

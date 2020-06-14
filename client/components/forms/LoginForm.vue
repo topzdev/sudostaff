@@ -47,8 +47,8 @@ export default {
     return {
       show: false,
       account: {
-        username: "EMP-001",
-        password: "LUGOD-5152000"
+        username: "topzdev",
+        password: "dev123"
       },
       accountRules: {
         username: [v => !!v || "Username is required"],
@@ -72,11 +72,23 @@ export default {
       self.loading = true;
 
       setTimeout(async () => {
-        const result = await self.$auth.loginWith("local", {
-          data: self.account
-        });
+        await self.login();
         self.loading = false;
       }, 1000);
+
+      self.loading = false;
+    },
+
+    async login() {
+      try {
+        const result = await this.$auth.loginWith("local", {
+          data: this.account
+        });
+
+        this.$store.dispatch("utils/setNotifDefault", result, { root: true });
+      } catch ({ response: { data } }) {
+        this.$store.dispatch("utils/setNotifDefault", data, { root: true });
+      }
     }
   }
 };

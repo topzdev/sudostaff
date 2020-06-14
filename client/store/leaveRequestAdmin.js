@@ -80,7 +80,7 @@ export const actions = {
 
   async updateLeaveRequest({ dispatch, commit, rootState }, data) {
     try {
-      const employeeId = rootState.auth.user.id;
+      const employeeId = rootState.auth.user.employeeId;
       if (!employeeId) return;
 
       const result = await leaveRequestServices.updateAdmin({

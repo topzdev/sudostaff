@@ -56,7 +56,7 @@ class AccountServices {
     if (!(await bcrypt.compare(currentPassword, account.password)))
       return {
         status: 400,
-        msg: "Old Password not match",
+        msg: "Current password not match",
       };
 
     if (!(newPassword === confirmPassword)) {
@@ -66,7 +66,7 @@ class AccountServices {
       };
     }
 
-    if (newPassword.length < 8) {
+    if (newPassword.length <= 5) {
       return {
         status: 400,
         msg: "New password is too short",

@@ -9,6 +9,7 @@
             :value="currentPassword"
             @input="$emit('update:currentPassword', $event)"
             outlined
+            type="password"
             :rules="rules.currentPassword"
           ></v-text-field>
         </v-col>
@@ -22,6 +23,7 @@
             :value="newPassword"
             @input="$emit('update:newPassword', $event)"
             outlined
+            type="password"
             :rules="rules.newPassword"
           ></v-text-field>
         </v-col>
@@ -32,6 +34,7 @@
             :value="confirmPassword"
             @input="$emit('update:confirmPassword', $event)"
             outlined
+            type="password"
             :rules="rules.confirmPassword"
           ></v-text-field>
         </v-col>
