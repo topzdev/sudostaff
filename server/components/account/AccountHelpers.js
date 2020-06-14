@@ -17,9 +17,7 @@ exports.findAccount = async (username) => {
     attributes: ["username", "password", "id", "employeeId"],
   });
 
-  console.log(result);
-
-  return result;
+  return result.get({ plain: true });
 };
 
 exports.genDefaultCredential = async (employeeId, birthDate, lastName) => {

@@ -13,7 +13,7 @@
             :rules="rules.currentPassword"
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col class="py-0">
           <v-divider class="py-0 pb-5" />
         </v-col>
         <v-col class="py-0 pb-2" cols="12">

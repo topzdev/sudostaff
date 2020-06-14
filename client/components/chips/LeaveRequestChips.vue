@@ -1,48 +1,45 @@
 <template>
-  <v-chip
-    :small="small"
-    v-if="statuses.isApproved"
-    color="green lighten-5 green--text"
-    class="px-5"
-  >
-    <v-avatar v-if="icons" left>
-      <v-icon>mdi-check-circle-outline</v-icon>
-    </v-avatar>
-    <b>Approved</b>
-  </v-chip>
-  <v-chip
-    :small="small"
-    v-else-if="statuses.isPending"
-    color="orange lighten-5 orange--text"
-    class="px-5"
-  >
-    <v-avatar v-if="icons" left>
-      <v-icon>mdi-clock-outline</v-icon>
-    </v-avatar>
-    <span v-if="!admin">
-      <b>Waiting for Approval</b>
-    </span>
-    <span v-else>
-      <b>Pending</b>
-    </span>
-  </v-chip>
-  <v-chip
-    :small="small"
-    v-else-if="statuses.isRejected"
-    color="error lighten-5 error--text"
-    class="px-5"
-  >
-    <v-avatar v-if="icons" left>
-      <v-icon>mdi-close-circle-outline</v-icon>
-    </v-avatar>
-    <b>Rejected</b>
-  </v-chip>
+  <div>
+    <template v-for="item in list">
+      <v-chip :key="item.title" v-if="item.show" :small="small" :color="item.color" class="px-5">
+        <v-avatar v-if="icons" left>
+          <v-icon>{{item.icon}}</v-icon>
+        </v-avatar>
+        <b>{{item.title}}</b>
+      </v-chip>
+    </template>
+  </div>
 </template>
 
 <script>
 import LeaveUtils from "@/mixins/utils/LeaveUtils";
 export default {
+  inject: ["theme"],
   mixins: [LeaveUtils],
+  computed: {
+    list() {
+      return [
+        {
+          color: this.theme.isDark ? "green" : "green lighten-5 green--text",
+          title: "Approved",
+          icon: "mdi-check-circle-outline",
+          show: this.statuses.isApproved
+        },
+        {
+          color: this.theme.isDark ? "orange" : "orange lighten-5 orange--text",
+          title: "Waiting for Approval",
+          icon: "mdi-clock-outline",
+          show: this.statuses.isPending
+        },
+        {
+          color: this.theme.isDark ? "error" : "error lighten-5 error--text",
+          title: "Rejected",
+          icon: "mdi-close-circle-outline",
+          show: this.statuses.isRejected
+        }
+      ];
+    }
+  },
   props: {
     status: {
       type: String

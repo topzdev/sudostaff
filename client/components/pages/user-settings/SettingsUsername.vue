@@ -7,7 +7,7 @@
         <v-list-item>
           <v-row>
             <v-col cols="6" class="body-1">Username</v-col>
-            <v-col cols="6">topzdev</v-col>
+            <v-col cols="6">{{$auth.user.username}}</v-col>
           </v-row>
         </v-list-item>
         <v-divider />
@@ -15,14 +15,14 @@
           <v-row>
             <v-col cols="6" class="body-1">Employee ID</v-col>
             <v-col cols="6">
-              EMP-001
+              {{$auth.user.employeeId}}
               <i>(Alternative)</i>
             </v-col>
           </v-row>
         </v-list-item>
       </v-list>
     </v-card-text>
-    <base-card-actions>Change Username</base-card-actions>
+    <base-card-actions to="/user/settings/change-username">Change Username</base-card-actions>
   </v-card>
 </template>
 
