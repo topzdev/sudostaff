@@ -1,25 +1,18 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class LeaveTypeModel extends Model {}
-
-LeaveTypeModel.init(
-  {
+module.exports = (sequelize, Datatypes) => {
+  const LeaveType = sequelize.define("leaveTypes", {
     id: {
-      type: Sequelize.INTEGER,
+      type: Datatypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
 
     name: {
-      type: Sequelize.STRING,
+      type: Datatypes.STRING,
       allowNull: false,
     },
 
-    description: Sequelize.STRING,
-  },
-  { sequelize, modelName: "leaveTypes" }
-);
+    description: Datatypes.STRING,
+  });
 
-module.exports = LeaveTypeModel;
+  return LeaveType;
+};

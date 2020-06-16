@@ -1,33 +1,30 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class VoluntaryExpModel extends Model {}
-
-VoluntaryExpModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const VoluntaryExp = sequelize.define(
+    "voluntaryExperiences",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
+
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+
+      company: Datatypes.STRING,
+      position: Datatypes.STRING,
+      address: Datatypes.STRING,
+      from: Datatypes.INTEGER,
+      to: Datatypes.INTEGER,
+      totalHours: Datatypes.DECIMAL(10, 2),
     },
+    { timestamps: false }
+  );
 
-    company: Sequelize.STRING,
-    position: Sequelize.STRING,
-    address: Sequelize.STRING,
-    from: Sequelize.INTEGER,
-    to: Sequelize.INTEGER,
-    totalHours: Sequelize.DECIMAL(10, 2),
-  },
-  { sequelize, modelName: "voluntaryExperiences", timestamps: false }
-);
-
-module.exports = VoluntaryExpModel;
+  return VoluntaryExp;
+};

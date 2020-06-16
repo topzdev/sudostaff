@@ -1,34 +1,30 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class WorkExpModel extends Model {}
-
-WorkExpModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const WorkExp = sequelize.define(
+    "workExperiences",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
       },
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+      company: Datatypes.STRING,
+      position: Datatypes.STRING,
+      salaryGrade: Datatypes.STRING,
+      stepIncremented: Datatypes.STRING,
+      monthlySalaray: Datatypes.DECIMAL(10, 2),
+      from: Datatypes.INTEGER,
+      to: Datatypes.INTEGER,
+      isFullTime: Datatypes.BOOLEAN,
+      isGovernmentService: Datatypes.BOOLEAN,
     },
-    company: Sequelize.STRING,
-    position: Sequelize.STRING,
-    salaryGrade: Sequelize.STRING,
-    stepIncremented: Sequelize.STRING,
-    monthlySalaray: Sequelize.DECIMAL(10, 2),
-    from: Sequelize.INTEGER,
-    to: Sequelize.INTEGER,
-    isFullTime: Sequelize.BOOLEAN,
-    isGovernmentService: Sequelize.BOOLEAN,
-  },
-  { sequelize, modelName: "workExperiences", timestamps: false }
-);
-
-module.exports = WorkExpModel;
+    { timestamps: false }
+  );
+  return WorkExp;
+};

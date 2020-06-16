@@ -1,31 +1,28 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class TrainingPrograms extends Model {}
-
-TrainingPrograms.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const TrainingPrograms = sequelize.define(
+    "trainingPrograms",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+      title: Datatypes.STRING,
+      from: Datatypes.DATEONLY,
+      to: Datatypes.DATEONLY,
+      totalHours: Datatypes.DECIMAL(10, 2),
+      type: Datatypes.STRING,
+      sponsor: Datatypes.STRING,
     },
-    title: Sequelize.STRING,
-    from: Sequelize.DATEONLY,
-    to: Sequelize.DATEONLY,
-    totalHours: Sequelize.DECIMAL(10, 2),
-    type: Sequelize.STRING,
-    sponsor: Sequelize.STRING,
-  },
-  { sequelize, modelName: "trainingPrograms", timestamps: true }
-);
+    { timestamps: true }
+  );
 
-module.exports = TrainingPrograms;
+  return TrainingPrograms;
+};

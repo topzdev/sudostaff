@@ -1,35 +1,29 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class FamilyModel extends Model {}
-
-FamilyModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+module.exports = (sequelize, Datatypes) => {
+  const FamilyDetails = sequelize.define(
+    "familyDetails",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      spouseFirstName: Datatypes.STRING,
+      spouseMiddleName: Datatypes.STRING,
+      spouseLastName: Datatypes.STRING,
+      spouseExt: Datatypes.STRING,
+      fatherFirstName: Datatypes.STRING,
+      fatherMiddleName: Datatypes.STRING,
+      fatherLastName: Datatypes.STRING,
+      fatherExt: Datatypes.STRING,
+      motherFirstName: Datatypes.STRING,
+      motherMiddleName: Datatypes.STRING,
+      motherLastName: Datatypes.STRING,
+      motherExt: Datatypes.STRING,
     },
-    spouseFirstName: Sequelize.STRING,
-    spouseMiddleName: Sequelize.STRING,
-    spouseLastName: Sequelize.STRING,
-    spouseExt: Sequelize.STRING,
-    fatherFirstName: Sequelize.STRING,
-    fatherMiddleName: Sequelize.STRING,
-    fatherLastName: Sequelize.STRING,
-    fatherExt: Sequelize.STRING,
-    motherFirstName: Sequelize.STRING,
-    motherMiddleName: Sequelize.STRING,
-    motherLastName: Sequelize.STRING,
-    motherExt: Sequelize.STRING,
-  },
-  {
-    sequelize,
-    modelName: "familyDetails",
-    timestamps: false,
-  }
-);
+    {
+      timestamps: false,
+    }
+  );
 
-module.exports = FamilyModel;
-FamilyModel;
+  return FamilyDetails;
+};

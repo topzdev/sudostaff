@@ -1,23 +1,20 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
+module.exports = (sequelize, Datatypes) => {
+  const GovernmentIds = sequelize.define(
+    "governmentIds",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
 
-class GovernmentIdsModel extends Model {}
-
-GovernmentIdsModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      governmentIssueId: Datatypes.STRING,
+      idLicensePassportId: Datatypes.STRING,
+      dateIssuance: Datatypes.DATEONLY,
+      placeIssuance: Datatypes.STRING,
     },
+    { timestamps: false }
+  );
 
-    governmentIssueId: Sequelize.STRING,
-    idLicensePassportId: Sequelize.STRING,
-    dateIssuance: Sequelize.DATEONLY,
-    placeIssuance: Sequelize.STRING,
-  },
-  { sequelize, modelName: "governmentIds", timestamps: false }
-);
-
-module.exports = GovernmentIdsModel;
+  return GovernmentIds;
+};

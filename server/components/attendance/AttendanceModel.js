@@ -1,42 +1,39 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class AttendanceModel extends Model {}
-
-AttendanceModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const Attendance = sequelize.define(
+    "attendances",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
+
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+
+      amBreakStart: Datatypes.DATE,
+      amBreakEnd: Datatypes.DATE,
+
+      pmBreakStart: Datatypes.DATE,
+      pmBreakEnd: Datatypes.DATE,
+
+      lunchBreakStart: Datatypes.DATE,
+      lunchBreakEnd: Datatypes.DATE,
+
+      signInTime: {
+        type: Datatypes.DATE,
+        defaultValue: Datatypes.NOW,
+      },
+
+      signOutTime: Datatypes.DATE,
     },
+    { timestamps: true }
+  );
 
-    amBreakStart: Sequelize.DATE,
-    amBreakEnd: Sequelize.DATE,
-
-    pmBreakStart: Sequelize.DATE,
-    pmBreakEnd: Sequelize.DATE,
-
-    lunchBreakStart: Sequelize.DATE,
-    lunchBreakEnd: Sequelize.DATE,
-
-    signInTime: {
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW,
-    },
-
-    signOutTime: Sequelize.DATE,
-  },
-  { sequelize, modelName: "attendances", timestamps: true }
-);
-
-module.exports = AttendanceModel;
+  return Attendance;
+};

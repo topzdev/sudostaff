@@ -1,31 +1,27 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class CivilEligibility extends Model {}
-
-CivilEligibility.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const CivilEligibility = sequelize.define(
+    "civilEligibilities",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+      licenseTitle: Datatypes.STRING,
+      licenseNumber: Datatypes.STRING,
+      rating: Datatypes.STRING,
+      validityDate: Datatypes.DATEONLY,
+      examinationDate: Datatypes.DATEONLY,
+      examinationPlace: Datatypes.STRING,
     },
-    licenseTitle: Sequelize.STRING,
-    licenseNumber: Sequelize.STRING,
-    rating: Sequelize.STRING,
-    validityDate: Sequelize.DATEONLY,
-    examinationDate: Sequelize.DATEONLY,
-    examinationPlace: Sequelize.STRING,
-  },
-  { sequelize, modelName: "civilEligibilities", timestamps: false }
-);
-
-module.exports = CivilEligibility;
+    { timestamps: false }
+  );
+  return CivilEligibility;
+};

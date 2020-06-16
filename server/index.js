@@ -3,8 +3,7 @@ const cors = require("cors");
 const app = express();
 const config = require("./config");
 const bodyParser = require("body-parser");
-const database = require("./database");
-const hrModels = require("./components/models");
+const models = require("./components/models");
 const hrRoute = require("./components/routes");
 const cloudinary = require("cloudinary");
 const fileUpload = require("express-fileupload");
@@ -21,7 +20,7 @@ app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/", debug: true }));
 
 cloudinary.v2.config(config.cloudinary);
 
-database
+models.sequelize
   .authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");
@@ -32,7 +31,7 @@ database
 
 // Sync all tables
 // database.drop();
-// database.sync({ force: true });
+models.sequelize.sync({ force: true });
 
 app.use("/hr/api/", hrRoute);
 

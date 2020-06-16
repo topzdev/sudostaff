@@ -1,70 +1,68 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
+module.exports = (sequelize, Datatypes) => {
+  const LeaveRequest = sequelize.define(
+    "leaveRequest",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
 
-class LeaveRequestModel extends Model {}
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
 
-LeaveRequestModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+      leaveTypeId: {
+        type: Datatypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "leaveTypes",
+          key: "id",
+        },
+      },
 
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+      startDate: {
+        type: Datatypes.STRING,
+        allowNull: false,
+      },
+
+      endDate: {
+        type: Datatypes.STRING,
+        allowNull: false,
+      },
+
+      reason: {
+        type: Datatypes.STRING,
+        allowNull: false,
+      },
+
+      status: {
+        type: Datatypes.ENUM("pending", "rejected", "approved"),
+        defaultValue: "pending",
+      },
+
+      authorizedComment: {
+        type: Datatypes.STRING,
+      },
+
+      authorizedPersonId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
       },
     },
+    { timestamps: true, paranoid: true }
+  );
 
-    leaveTypeId: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: "leaveTypes",
-        key: "id",
-      },
-    },
+  LeaveRequest.associate = function (models) {
+    models.LeaveRequest.belongsTo(models.LeaveType);
+  };
 
-    startDate: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-
-    endDate: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-
-    reason: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-
-    status: {
-      type: Sequelize.ENUM("pending", "rejected", "approved"),
-      defaultValue: "pending",
-    },
-
-    authorizedComment: {
-      type: Sequelize.STRING,
-    },
-
-    authorizedPersonId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
-      },
-    },
-  },
-  { sequelize, modelName: "leaveRequest", timestamps: true, paranoid: true }
-);
-
-LeaveRequestModel.belongsTo(LeaveTypeModel);
-
-module.exports = LeaveRequestModel;
+  return LeaveRequest;
+};

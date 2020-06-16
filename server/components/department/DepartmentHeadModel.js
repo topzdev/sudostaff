@@ -1,31 +1,32 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-class DepartmentHeadModel extends Model {}
-
-DepartmentHeadModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const DepartmentHead = sequelize.define(
+    "departmentHeads",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+      departmentId: {
+        type: Datatypes.INTEGER,
+        references: {
+          model: "departments",
+          key: "id",
+        },
       },
     },
-    departmentId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: "departments",
-        key: "id",
-      },
-    },
-  },
-  { sequelize, modelName: "departmentHeads", timestamps: true, paranoid: true }
-);
+    { timestamps: true, paranoid: true }
+  );
 
-module.exports = DepartmentHeadModel;
+  DepartmentHead.associate = function (models) {
+    models.DepartmentHead.belongsTo(models.Employee);
+  };
+  return DepartmentHead;
+};

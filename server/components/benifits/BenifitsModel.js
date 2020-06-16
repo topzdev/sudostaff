@@ -1,24 +1,21 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class BenifitsModel extends Model {}
-
-BenifitsModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+module.exports = (sequelize, Datatypes) => {
+  const Benifits = sequelize.define(
+    "benifits",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      gsisId: Datatypes.STRING,
+      pagibigId: Datatypes.STRING,
+      philhealthId: Datatypes.STRING,
+      sssNo: Datatypes.STRING,
+      tinNo: Datatypes.STRING,
+      agencyEmployeerId: Datatypes.STRING,
     },
-    gsisId: Sequelize.STRING,
-    pagibigId: Sequelize.STRING,
-    philhealthId: Sequelize.STRING,
-    sssNo: Sequelize.STRING,
-    tinNo: Sequelize.STRING,
-    agencyEmployeerId: Sequelize.STRING,
-  },
-  { sequelize, modelName: "benifits", timestamps: false }
-);
+    { timestamps: false }
+  );
 
-module.exports = BenifitsModel;
+  return Benifits;
+};

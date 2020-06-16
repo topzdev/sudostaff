@@ -1,33 +1,29 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
-
-class EducBackgroundModel extends Model {}
-
-EducBackgroundModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    employeeId: {
-      type: Sequelize.STRING,
-      references: {
-        model: "employees",
-        key: "id",
+module.exports = (sequelize, Datatypes) => {
+  const EducBackground = sequelize.define(
+    "educationBackgrounds",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
+      employeeId: {
+        type: Datatypes.STRING,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+      level: Datatypes.STRING,
+      degree: Datatypes.STRING,
+      schoolName: Datatypes.STRING,
+      from: Datatypes.DATEONLY,
+      to: Datatypes.DATEONLY,
+      graduateYear: Datatypes.INTEGER,
+      recognition: Datatypes.STRING,
+      scholarship: Datatypes.STRING,
     },
-    level: Sequelize.STRING,
-    degree: Sequelize.STRING,
-    schoolName: Sequelize.STRING,
-    from: Sequelize.DATEONLY,
-    to: Sequelize.DATEONLY,
-    graduateYear: Sequelize.INTEGER,
-    recognition: Sequelize.STRING,
-    scholarship: Sequelize.STRING,
-  },
-  { sequelize, modelName: "educationBackgrounds", timestamps: false }
-);
-
-module.exports = EducBackgroundModel;
+    { timestamps: false }
+  );
+  return EducBackground;
+};

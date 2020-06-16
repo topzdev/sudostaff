@@ -1,37 +1,32 @@
-const Sequelize = require("sequelize");
-const Model = Sequelize.Model;
-const sequelize = require("../../database");
+module.exports = (sequelize, Datatypes) => {
+  const Address = sequelize.define(
+    "addresses",
+    {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
 
-class AddressModel extends Model {}
-
-AddressModel.init(
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      houseBlock: Datatypes.STRING,
+      street: Datatypes.STRING,
+      subdivision: Datatypes.STRING,
+      barangay: Datatypes.STRING,
+      city: Datatypes.STRING,
+      province: Datatypes.STRING,
+      zipcode: Datatypes.STRING,
+      houseBlock2: Datatypes.STRING,
+      street2: Datatypes.STRING,
+      subdivision2: Datatypes.STRING,
+      barangay2: Datatypes.STRING,
+      city2: Datatypes.STRING,
+      province2: Datatypes.STRING,
+      zipcode2: Datatypes.STRING,
     },
+    {
+      timestamps: false,
+    }
+  );
 
-    houseBlock: Sequelize.STRING,
-    street: Sequelize.STRING,
-    subdivision: Sequelize.STRING,
-    barangay: Sequelize.STRING,
-    city: Sequelize.STRING,
-    province: Sequelize.STRING,
-    zipcode: Sequelize.STRING,
-    houseBlock2: Sequelize.STRING,
-    street2: Sequelize.STRING,
-    subdivision2: Sequelize.STRING,
-    barangay2: Sequelize.STRING,
-    city2: Sequelize.STRING,
-    province2: Sequelize.STRING,
-    zipcode2: Sequelize.STRING,
-  },
-  {
-    sequelize,
-    modelName: "addresses",
-    timestamps: false,
-  }
-);
-
-module.exports = AddressModel;
+  return Address;
+};
