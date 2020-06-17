@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatypes) => {
   const Employee = sequelize.define(
-    "employess",
+    "employees",
     {
       id: {
         type: Datatypes.STRING,

@@ -1,10 +1,6 @@
-const EmployeeModel = require("./EmployeeModel");
-const PhotoModel = require("../photo/PhotoModel");
-const DesignationModel = require("../designation/DesignationModel");
-const DepartmentModel = require("../department/DepartmentModel");
-const DepartmentHeadModel = require("../department/DepartmentHeadModel");
+const models = require("../models");
 exports.isExist = async (id) => {
-  const count = await EmployeeModel.count({
+  const count = await models.Employee.count({
     where: { id },
   });
   return count ? true : false;
@@ -41,23 +37,23 @@ exports.arrayFlatten = (result) => {
 exports.joinTable = ({ withPhoto, withDesignation, withDeptHead }) => {
   const tables = [];
 
-  if (withPhoto) tables.push({ model: PhotoModel });
+  if (withPhoto) tables.push({ model: models.Photo });
   if (withDesignation)
     tables.push({
-      model: DesignationModel,
+      model: models.Designation,
       attributes: ["id", "name"],
       include: [
         {
-          model: DepartmentModel,
+          model: models.Department,
           attributes: ["id", "name"],
           include: withDeptHead
             ? [
                 {
-                  model: DepartmentHeadModel,
+                  model: models.DepartmentHead,
                   attributes: ["id", "employeeId"],
                   include: [
                     {
-                      model: EmployeeModel,
+                      model: models.Employee,
                       attributes: [
                         "firstName",
                         "lastName",
@@ -66,7 +62,7 @@ exports.joinTable = ({ withPhoto, withDesignation, withDeptHead }) => {
                       ],
                       include: [
                         {
-                          model: PhotoModel,
+                          model: models.Photo,
                         },
                       ],
                     },

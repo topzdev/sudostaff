@@ -1,8 +1,8 @@
-const FamilyDetailsModel = require("./FamilyDetailsModel");
+const models = require("../models");
 
 class FamilyDetailsServices {
   async getOne({ id }) {
-    const result = await FamilyDetailsModel.findByPk(id);
+    const result = await models.FamilyDetails.findByPk(id);
 
     return {
       status: 200,
@@ -12,7 +12,7 @@ class FamilyDetailsServices {
   }
 
   async create(familyDetailsInfo) {
-    const result = await FamilyDetailsModel.create(familyDetailsInfo, {
+    const result = await models.FamilyDetails.create(familyDetailsInfo, {
       returning: ["id"],
     });
 
@@ -20,7 +20,7 @@ class FamilyDetailsServices {
   }
 
   async update(familyDetailsInfo) {
-    const result = await FamilyDetailsModel.update(familyDetailsInfo, {
+    const result = await models.FamilyDetails.update(familyDetailsInfo, {
       where: { id: familyDetailsInfo.id },
       returning: ["id"],
     });
@@ -33,7 +33,7 @@ class FamilyDetailsServices {
   }
 
   async delete({ id }) {
-    const result = await FamilyDetailsModel.destroy({ where: { id } });
+    const result = await models.FamilyDetails.destroy({ where: { id } });
 
     return {
       status: 200,

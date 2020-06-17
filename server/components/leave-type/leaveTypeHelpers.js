@@ -1,4 +1,4 @@
-const LeaveTypeModel = require("./LeaveTypeModel");
+const models = require("../models");
 
 exports.isExist = async ({ id, name }) => {
   const condition = {};
@@ -6,6 +6,6 @@ exports.isExist = async ({ id, name }) => {
   if (id) condition.id = id;
   if (name) condition.name = name;
 
-  const result = await LeaveTypeModel.findOne({ where: condition });
+  const result = await models.LeaveType.findOne({ where: condition });
   return result ? true : false;
 };

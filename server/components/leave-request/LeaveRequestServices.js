@@ -1,11 +1,10 @@
-const LeaveRequestModel = require("./LeaveRequestModel");
-const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
+const models = require("../models");
 const helpers = require("./leaveRequestHelpers");
 const parseCondition = require("../../helpers/parseCondition");
 
 class LeaveRequestServices {
   async getOne({ id }, { include, exclude, withLeaveType, withEmployee }) {
-    const result = await LeaveRequestModel.findByPk(id, {
+    const result = await models.LeaveRequest.findByPk(id, {
       ...parseCondition({ include, exclude }),
       include: helpers.joinTable({ withLeaveType, withEmployee }),
     });
@@ -18,7 +17,7 @@ class LeaveRequestServices {
   }
 
   async upcoming({ id }, { include, exclude }) {
-    const result = await LeaveRequestModel.findOne({
+    const result = await models.LeaveRequest.findOne({
       ...parseCondition({ include, exclude }),
       ...helpers.upcomingOption(id),
     });
@@ -57,7 +56,7 @@ class LeaveRequestServices {
 
     if (status) where.status = status;
 
-    const result = await LeaveRequestModel.findAndCountAll({
+    const result = await models.LeaveRequest.findAndCountAll({
       ...parseCondition({ include, exclude, withLeaveType }),
       where,
       include: helpers.joinTable({ withLeaveType }),
@@ -82,7 +81,7 @@ class LeaveRequestServices {
     withLeaveType,
     withEmployee,
   }) {
-    const result = await LeaveRequestModel.findAndCountAll({
+    const result = await models.LeaveRequest.findAndCountAll({
       ...parseCondition({
         limit,
         offset,
@@ -116,7 +115,7 @@ class LeaveRequestServices {
       };
     }
 
-    const result = await LeaveRequestModel.create({
+    const result = await models.LeaveRequest.create({
       employeeId,
       startDate,
       endDate,
@@ -152,7 +151,7 @@ class LeaveRequestServices {
       };
     }
 
-    const result = await LeaveRequestModel.update(
+    const result = await models.LeaveRequest.update(
       { startDate, endDate, leaveTypeId, reason },
       { where: { id } }
     );
@@ -190,7 +189,7 @@ class LeaveRequestServices {
         msg: "This request is already marked as approved/rejected",
       };
 
-    const result = await LeaveRequestModel.update(
+    const result = await models.LeaveRequest.update(
       { status, authorizedComment, authorizedPersonId },
       { where: { id } }
     );

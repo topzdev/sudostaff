@@ -1,8 +1,8 @@
-const BenifitsModel = require("./BenifitsModel");
+const models = require("../models");
 
 class BenifitsServices {
   async getOne({ id }) {
-    const result = await BenifitsModel.findByPk(id);
+    const result = await models.Benifits.findByPk(id);
 
     return {
       status: 200,
@@ -19,7 +19,7 @@ class BenifitsServices {
     tinNo,
     agencyEmployeerId,
   }) {
-    const result = await BenifitsModel.create(
+    const result = await models.Benifits.create(
       {
         gsisId,
         pagibigId,
@@ -38,7 +38,9 @@ class BenifitsServices {
     const id = benifitsInfo.id;
     delete benifitsInfo.id;
 
-    const result = await BenifitsModel.update(benifitsInfo, { where: { id } });
+    const result = await models.Benifits.update(benifitsInfo, {
+      where: { id },
+    });
 
     return {
       status: 200,
@@ -48,7 +50,7 @@ class BenifitsServices {
   }
 
   async delete({ id }) {
-    const result = await BenifitsModel.destroy({ where: { id } });
+    const result = await models.Benifits.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Benifits Information Deleted",

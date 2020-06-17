@@ -1,14 +1,13 @@
-const DesignationModel = require("./DesignationModel");
+const models = require("../models");
 const designationHelpers = require("./designationHelpers");
-const DepartmentModel = require("../department/DepartmentModel");
 const parseCondition = require("../../helpers/parseCondition");
 
 class DesignationServices {
   constructor() {
-    this.tableJoin = [{ model: DepartmentModel, attributes: ["name", "id"] }];
+    this.tableJoin = [{ model: models.Department, attributes: ["name", "id"] }];
   }
   async getOne({ id }, { include, exclude, withDept }) {
-    const result = await DesignationModel.findAll({
+    const result = await models.Designation.findAll({
       ...parseCondition({ limit: 1, include, exclude }),
       include: withDept ? this.tableJoin : [],
       where: { id },
@@ -30,7 +29,7 @@ class DesignationServices {
     exclude,
     withDept,
   }) {
-    const result = await DesignationModel.findAndCountAll({
+    const result = await models.Designation.findAndCountAll({
       ...parseCondition({
         searchText,
         searchBy,
@@ -56,7 +55,7 @@ class DesignationServices {
         msg: "Designation name is already exist",
       };
 
-    const result = await DesignationModel.create({
+    const result = await models.Designation.create({
       departmentId,
       name,
       description,
@@ -82,7 +81,7 @@ class DesignationServices {
       };
      */
 
-    const result = await DesignationModel.update(designationInfo, {
+    const result = await models.Designation.update(designationInfo, {
       where: { id },
     });
 
@@ -100,7 +99,7 @@ class DesignationServices {
         msg: "Designation is not exist",
       };
 
-    const result = await DesignationModel.destroy({ where: { id } });
+    const result = await models.Designation.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Designation Deleted Permenanently",

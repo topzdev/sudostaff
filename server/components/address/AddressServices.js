@@ -1,8 +1,8 @@
-const AddressModel = require("./AddressModel");
+const models = require("../models");
 
 class AddressServices {
   async getOne({ id }) {
-    const result = await AddressModel.findOne({ where: { id } });
+    const result = await models.Address.findOne({ where: { id } });
 
     return {
       status: 200,
@@ -27,7 +27,7 @@ class AddressServices {
     province2,
     zipcode2,
   }) {
-    const result = await AddressModel.create(
+    const result = await models.Address.create(
       {
         houseBlock,
         street,
@@ -54,7 +54,7 @@ class AddressServices {
     const id = AddressInfo.id;
     delete AddressInfo.id;
 
-    const result = await AddressModel.update(AddressInfo, { where: { id } });
+    const result = await models.Address.update(AddressInfo, { where: { id } });
 
     return {
       status: 200,
@@ -64,7 +64,7 @@ class AddressServices {
   }
 
   async delete({ id }) {
-    const result = await AddressModel.destroy({ where: { id } });
+    const result = await models.Address.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Address Information Deleted",

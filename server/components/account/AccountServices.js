@@ -1,10 +1,10 @@
-const AccountModel = require("./AccountModel");
+const models = require("../models");
 const helper = require("./AccountHelpers");
 const bcrypt = require("bcryptjs");
 
 class AccountServices {
   async getOne({ id }) {
-    const result = await AccountModel.findOne({
+    const result = await models.Account.findOne({
       where: { employeeId: id },
       attributes: ["employeeId", "username"],
     });
@@ -17,13 +17,15 @@ class AccountServices {
   }
 
   async create({ employeeId, birthDate, lastName }) {
+    console.log("ACCOUNT ", employeeId, birthDate, lastName);
+
     const {
       username,
       password,
       rawPassword,
     } = await helper.genDefaultCredential(employeeId, birthDate, lastName);
 
-    const result = await AccountModel.create({
+    const result = await models.Account.create({
       username,
       employeeId,
       password,
@@ -76,7 +78,7 @@ class AccountServices {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(newPassword, salt);
 
-    const result = await AccountModel.update(
+    const result = await models.Account.update(
       { password: hashPassword },
       {
         where: {
@@ -108,7 +110,7 @@ class AccountServices {
 
     const username = newUsername.toLowerCase();
 
-    const result = await AccountModel.update(
+    const result = await models.Account.update(
       { username },
       {
         where: {
@@ -145,7 +147,7 @@ class AccountServices {
       employeeInfo.lastName
     );
 
-    const result = await AccountModel.update(
+    const result = await models.Account.update(
       { username, password },
       {
         where: {

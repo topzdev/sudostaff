@@ -1,12 +1,12 @@
 const Sequelize = require("sequelize");
-const AttendanceModel = require("./AttendanceModel");
+const models = require("../models");
 const attendanceHelpers = require("./attendanceHelpers");
 const employeeHelpers = require("../employee/employeeHelpers");
 const employeeServices = require("../employee/EmployeeServices");
 
 class AttendaceServices {
   async getAll({ date }) {
-    const result = await AttendanceModel.findAll(
+    const result = await models.Attendance.findAll(
       attendanceHelpers.parseCondition({ date })
     );
 
@@ -18,7 +18,7 @@ class AttendaceServices {
   }
 
   async getOne({ id }, { date }) {
-    const result = await AttendanceModel.findOne(
+    const result = await models.Attendance.findOne(
       attendanceHelpers.parseCondition({ date, employeeId: id })
     );
 
@@ -45,7 +45,7 @@ class AttendaceServices {
 
     // fetch the employee for displaying employee info in login
     const employee = await employeeServices.getOne({ id: employeeId });
-    const result = await AttendanceModel.create(
+    const result = await models.Attendance.create(
       { employeeId },
       { returning: ["id"] }
     );
@@ -78,7 +78,7 @@ class AttendaceServices {
     const employee = await employeeServices.getOne({ id: employeeId });
 
     // after checking if the employee is already timein then we update the employee attenadace signout to current datetime using Sequeilize.NOW
-    const result = await AttendanceModel.update(
+    const result = await models.Attendance.update(
       {
         signOutTime: Sequelize.fn("NOW"),
       },

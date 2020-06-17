@@ -1,8 +1,8 @@
-const WorkExpModel = require("./WorkExpModel");
+const models = require("../models");
 
 class WorkExpServices {
   async getOne({ id }) {
-    const result = await WorkExpModel.findByPk(id);
+    const result = await models.WorkExp.findByPk(id);
 
     return {
       status: 200,
@@ -11,7 +11,7 @@ class WorkExpServices {
     };
   }
   async getAll({ id }) {
-    const result = await WorkExpModel.findAll({
+    const result = await models.WorkExp.findAll({
       where: { employeeId: id },
     });
 
@@ -34,7 +34,7 @@ class WorkExpServices {
     isFullTime,
     isGovernmentService,
   }) {
-    const result = await WorkExpModel.create(
+    const result = await models.WorkExp.create(
       {
         employeeId,
         company,
@@ -60,7 +60,7 @@ class WorkExpServices {
   async update(licenseInfo) {
     const id = licenseInfo.id;
     delete licenseInfo.id;
-    const result = await WorkExpModel.update(licenseInfo, {
+    const result = await models.WorkExp.update(licenseInfo, {
       where: { id },
     });
 
@@ -72,7 +72,7 @@ class WorkExpServices {
   }
 
   async delete({ id }) {
-    const result = await WorkExpModel.destroy({ where: { id } });
+    const result = await models.WorkExp.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Licenses Information Deleted",

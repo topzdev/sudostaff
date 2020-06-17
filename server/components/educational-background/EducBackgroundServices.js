@@ -1,8 +1,8 @@
-const EducBackgroundModel = require("./EducBackgroundModel");
+const models = require("../models");
 
 class EducBackgroundServices {
   async getOne({ id }) {
-    const result = await EducBackgroundModel.findByPk(id);
+    const result = await models.EducBackground.findByPk(id);
     return {
       status: 200,
       msg: "Educational Background successfully fetched",
@@ -11,7 +11,7 @@ class EducBackgroundServices {
   }
 
   async getAll({ id }) {
-    const result = await EducBackgroundModel.findAll({
+    const result = await models.EducBackground.findAll({
       where: { employeeId: id },
     });
 
@@ -33,7 +33,7 @@ class EducBackgroundServices {
     recognition,
     scholarship,
   }) {
-    const result = await EducBackgroundModel.create(
+    const result = await models.EducBackground.create(
       {
         employeeId,
         level,
@@ -58,7 +58,7 @@ class EducBackgroundServices {
   async update(EducBackground) {
     const id = EducBackground.id;
     delete EducBackground.id;
-    const result = await EducBackgroundModel.update(EducBackground, {
+    const result = await models.EducBackground.update(EducBackground, {
       where: { id },
     });
 
@@ -70,7 +70,7 @@ class EducBackgroundServices {
   }
 
   async delete({ id }) {
-    const result = await EducBackgroundModel.destroy({ where: { id } });
+    const result = await models.EducBackground.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Educational Background Deleted",

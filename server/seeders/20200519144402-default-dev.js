@@ -1,5 +1,6 @@
 /* To run this type "npx sequelize-cli db:seed:all" on command line */
 
+const photoData = require("../data/photos.json");
 const departmentsData = require("../data/departments.json");
 const designationsData = require("../data/designations.json");
 const employeesData = require("../data/employees.json");
@@ -14,6 +15,9 @@ module.exports = {
     console.log(departmentsData, designationsData);
     return queryInterface.sequelize.transaction((t) => {
       return Promise.all([
+        // queryInterface.bulkInsert("photos", photoData, {
+        //   transaction: t,
+        // }),
         queryInterface.bulkInsert("departments", departmentsData, {
           transaction: t,
         }),
@@ -56,6 +60,9 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.sequelize.transaction((t) => {
       return Promise.all([
+        // queryInterface.bulkDelete("photos", null, {
+        //   transaction: t,
+        // }),
         queryInterface.bulkDelete("departments", null, {
           transaction: t,
         }),

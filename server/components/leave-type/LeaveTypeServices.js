@@ -1,10 +1,10 @@
-const LeaveTypeModel = require("./LeaveTypeModel");
+const models = require("../models");
 const helpers = require("./leaveTypeHelpers");
 const parseCondition = require("../../helpers/parseCondition");
 
 class LeaveTypeServices {
   async getOne({ id }, { include, exclude }) {
-    const result = await LeaveTypeModel.findAll({
+    const result = await models.LeaveType.findAll({
       ...parseCondition({ limit: 1, include, exclude }),
       where: { id },
     });
@@ -17,7 +17,7 @@ class LeaveTypeServices {
   }
 
   async getAll({ include, exclude, limit, offset }) {
-    const result = await LeaveTypeModel.findAndCountAll({
+    const result = await models.LeaveType.findAndCountAll({
       ...parseCondition({
         include,
         exclude,
@@ -39,7 +39,7 @@ class LeaveTypeServices {
         msg: "Leave type is already exist",
       };
 
-    const result = await LeaveTypeModel.create({ name, description });
+    const result = await models.LeaveType.create({ name, description });
 
     return {
       status: 200,
@@ -55,7 +55,7 @@ class LeaveTypeServices {
         msg: "Leave type is not exist",
       };
 
-    const result = await LeaveTypeModel.update(
+    const result = await models.LeaveType.update(
       { name, description },
       { where: { id } }
     );
@@ -74,7 +74,7 @@ class LeaveTypeServices {
         msg: "Leave type is not exist",
       };
 
-    const result = await LeaveTypeModel.destroy({ where: { id } });
+    const result = await models.LeaveType.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Leave type deleted successfully",

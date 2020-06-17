@@ -1,4 +1,4 @@
-const EmployeeModel = require("./EmployeeModel");
+const models = require("../models");
 const helper = require("./employeeHelpers");
 const photServices = require("../photo/PhotoServices");
 const benifitsServices = require("../benifits/BenifitsServices");
@@ -6,13 +6,13 @@ const addressServices = require("../address/AddressServices");
 const familyDetailsServices = require("../family-details/FamilyDetailsServices");
 const governmentIssued = require("../government-ids/GovernmentIdsServices");
 const parseCondition = require("../../helpers/parseCondition");
-
+const accountServices = require("../account/AccountServices");
 class EmployeeServices {
   async getOne(
     { id },
     { include, exclude, withPhoto, withDesignation, withDeptHead }
   ) {
-    const result = await EmployeeModel.findByPk(id, {
+    const result = await models.Employee.findByPk(id, {
       ...parseCondition({ include, exclude }),
       include: helper.joinTable({ withPhoto, withDesignation, withDeptHead }),
       plain: true,
@@ -35,7 +35,7 @@ class EmployeeServices {
     withPhoto,
     withDesignation,
   }) {
-    const result = await EmployeeModel.findAndCountAll({
+    const result = await models.Employee.findAndCountAll({
       ...parseCondition({
         searchText,
         limit,
@@ -84,15 +84,13 @@ class EmployeeServices {
         msg: "Employee ID is already exist",
       };
 
-    if (rawPhoto && rawPhoto["photo"]) {
-      const uploaded = await photServices.create(rawPhoto["photo"]);
+    const uploaded = await photServices.create(
+      rawPhoto && rawPhoto["photo"] ? rawPhoto["photo"] : null
+    );
 
-      /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
-      if (uploaded.status !== 200) return uploaded;
+    if (uploaded.status !== 200) return uploaded;
 
-      /* if the uploading image is successfull then assign the id of upload image to photoId */
-      photoId = uploaded.data;
-    }
+    photoId = uploaded.data;
 
     // Create blanks model and get the id
     const benifitsId = await benifitsServices.create({});
@@ -100,7 +98,7 @@ class EmployeeServices {
     const addressId = await addressServices.create({});
     const governmentIssuedId = await governmentIssued.create({});
 
-    const result = await EmployeeModel.create(
+    const result = await models.Employee.create(
       {
         id,
         firstName,
@@ -128,6 +126,8 @@ class EmployeeServices {
       },
       { returning: ["id"] }
     );
+    // Create account
+    await accountServices.create({ employeeId: id, birthDate, lastName });
 
     return {
       status: 200,
@@ -144,25 +144,25 @@ class EmployeeServices {
     const id = employeeInfo.id;
     delete employeeInfo.id;
 
-    if (rawPhoto && rawPhoto["photo"]) {
-      const uploaded = await photServices.update({
-        rawPhoto: rawPhoto["photo"],
-        photoId: employeeInfo.photoId,
-      });
+    const uploaded = await photServices.update({
+      rawPhoto: rawPhoto && rawPhoto["photo"] ? rawPhoto["photo"] : null,
+      photoId: employeeInfo.photoId,
+    });
 
-      /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
-      if (uploaded.status !== 200) return uploaded;
+    /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
+    if (uploaded.status !== 200) return uploaded;
 
-      /* if the uploading image is successfull then assign the id of upload image to employeeInfo.photoId */
-      photoId = uploaded.data;
-    }
+    /* if the uploading image is successfull then assign the id of upload image to employeeInfo.photoId */
+    photoId = uploaded.data;
 
-    const result = await EmployeeModel.update(
+    const result = await models.Employee.update(
       { ...employeeInfo, photoId },
       {
         where: { id },
       }
     );
+
+    console.log(result);
 
     return {
       status: 200,
@@ -182,7 +182,7 @@ class EmployeeServices {
         msg: "Employee is not exist",
       };
 
-    const result = await EmployeeModel.destroy({ where: { id } });
+    const result = await models.Employee.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Employee Deleted Permenanently",

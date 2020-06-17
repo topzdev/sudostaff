@@ -1,35 +1,14 @@
-const DepartmentModel = require("./DepartmentModel");
-const deparmentHelpers = require("./departmentHelpers");
-const DeparmentHeadModel = require("./DepartmentHeadModel");
-const EmployeeModel = require("../employee/EmployeeModel");
-const PhotoModel = require("../photo/PhotoModel");
+const models = require("../models");
+const helpers = require("./departmentHelpers");
 const parseCondition = require("../../helpers/parseCondition");
 
 class DepartmentServices {
-  constructor() {
-    this.tableJoin = [
-      {
-        model: DeparmentHeadModel,
-        attributes: ["id"],
-        include: [
-          {
-            model: EmployeeModel,
-            attributes: ["id", "firstName", "lastName", "fullName"],
-            include: [
-              {
-                model: PhotoModel,
-              },
-            ],
-          },
-        ],
-      },
-    ];
-  }
+  constructor() {}
 
   async getOne({ id }, { include, exclude, withDeptHead }) {
-    const result = await DepartmentModel.findAll({
+    const result = await models.Department.findAll({
       ...parseCondition({ limit: 1, include, exclude }),
-      include: withDeptHead ? this.tableJoin : [],
+      include: withDeptHead ? helpers.tableJoin() : [],
       where: { id },
     });
 
@@ -49,7 +28,7 @@ class DepartmentServices {
     exclude,
     withDeptHead,
   }) {
-    const result = await DepartmentModel.findAndCountAll({
+    const result = await models.Department.findAndCountAll({
       ...parseCondition({
         searchText,
         searchBy,
@@ -58,7 +37,7 @@ class DepartmentServices {
         include,
         exclude,
       }),
-      include: withDeptHead ? this.tableJoin : [],
+      include: withDeptHead ? helpers.tableJoin() : [],
     });
     return {
       status: 200,
@@ -74,9 +53,9 @@ class DepartmentServices {
         msg: "Department name is already exist",
       };
 
-    const result = await DepartmentModel.create({ name, description });
+    const result = await models.Department.create({ name, description });
 
-    const head = await DeparmentHeadModel.create({
+    const head = await models.DepartmentHead.create({
       departmentId: result.id,
       employeeId,
     });
@@ -92,11 +71,11 @@ class DepartmentServices {
     const id = departmentInfo.id;
     delete departmentInfo.id;
 
-    const result = await DepartmentModel.update(departmentInfo, {
+    const result = await models.Department.update(departmentInfo, {
       where: { id },
     });
 
-    const departmentHead = await DeparmentHeadModel.update(
+    const departmentHead = await models.DepartmentHead.update(
       { employeeId: departmentInfo.employeeId },
       {
         where: { departmentId: id },
@@ -119,11 +98,11 @@ class DepartmentServices {
         msg: "Department is not exist",
       };
 
-    const departmentHead = await DeparmentHeadModel.destroy({
+    const departmentHead = await models.DepartmentHead.destroy({
       departmentId: id,
     });
 
-    const result = await DepartmentModel.destroy({ where: { id } });
+    const result = await models.Department.destroy({ where: { id } });
 
     console.log(departmentHead, result);
 

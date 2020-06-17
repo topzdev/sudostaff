@@ -24,3 +24,23 @@ exports.parseCondition = ({ search, limit, offset }) => {
 
   return options;
 };
+
+exports.tableJoin = () => {
+  return [
+    {
+      model: models.DepartmentHead,
+      attributes: ["id"],
+      include: [
+        {
+          model: models.Employee,
+          attributes: ["id", "firstName", "lastName", "fullName"],
+          include: [
+            {
+              model: models.Photo,
+            },
+          ],
+        },
+      ],
+    },
+  ];
+};

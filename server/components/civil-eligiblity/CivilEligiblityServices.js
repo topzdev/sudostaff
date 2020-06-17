@@ -1,8 +1,8 @@
-const CivilEligibilityModel = require("./CivilEligibilityModel");
+const models = require("../models");
 
 class CivilEligibilityServices {
   async getOne({ id }) {
-    const result = await CivilEligibilityModel.findByPk(id);
+    const result = await models.CivilEligibility.findByPk(id);
     return {
       status: 200,
       msg: "Civil Eligibility Fetched Successfully",
@@ -10,7 +10,7 @@ class CivilEligibilityServices {
     };
   }
   async getAll({ id }) {
-    const result = await CivilEligibilityModel.findAll({
+    const result = await models.CivilEligibility.findAll({
       where: { employeeId: id },
     });
 
@@ -30,7 +30,7 @@ class CivilEligibilityServices {
     examinationDate,
     examinationPlace,
   }) {
-    const result = await CivilEligibilityModel.create(
+    const result = await models.CivilEligibility.create(
       {
         employeeId,
         licenseTitle,
@@ -53,7 +53,7 @@ class CivilEligibilityServices {
   async update(CivilEligibility) {
     const id = CivilEligibility.id;
     delete CivilEligibility.id;
-    const result = await CivilEligibilityModel.update(CivilEligibility, {
+    const result = await models.CivilEligibility.update(CivilEligibility, {
       where: { id },
     });
 
@@ -65,7 +65,7 @@ class CivilEligibilityServices {
   }
 
   async delete({ id }) {
-    const result = await CivilEligibilityModel.destroy({ where: { id } });
+    const result = await models.CivilEligibility.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Civil Eligibility Deleted",

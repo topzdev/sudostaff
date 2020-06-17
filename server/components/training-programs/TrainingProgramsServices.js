@@ -1,8 +1,8 @@
-const TrainingProgramsModel = require("./TrainingProgramsModel");
+const models = require("../models");
 
 class TrainingProgramsServices {
   async getOne({ id }) {
-    const result = await TrainingProgramsModel.findByPk(id);
+    const result = await models.TrainingPrograms.findByPk(id);
 
     return {
       status: 200,
@@ -12,7 +12,7 @@ class TrainingProgramsServices {
   }
 
   async getAll({ id }) {
-    const result = await TrainingProgramsModel.findAll({
+    const result = await models.TrainingPrograms.findAll({
       where: { employeeId: id },
     });
 
@@ -24,7 +24,7 @@ class TrainingProgramsServices {
   }
 
   async create({ employeeId, totalHours, type, sponsor, from, to, title }) {
-    const result = await TrainingProgramsModel.create(
+    const result = await models.TrainingPrograms.create(
       {
         employeeId,
         totalHours,
@@ -47,7 +47,7 @@ class TrainingProgramsServices {
   async update(TrainingPrograms) {
     const id = TrainingPrograms.id;
     delete TrainingPrograms.id;
-    const result = await TrainingProgramsModel.update(TrainingPrograms, {
+    const result = await models.TrainingPrograms.update(TrainingPrograms, {
       where: { id },
     });
 
@@ -59,7 +59,7 @@ class TrainingProgramsServices {
   }
 
   async delete({ id }) {
-    const result = await TrainingProgramsModel.destroy({ where: { id } });
+    const result = await models.TrainingPrograms.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Training Programs Deleted",

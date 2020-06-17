@@ -1,22 +1,18 @@
-const Sequelize = require("sequelize");
-const LeaveRequestModel = require("./LeaveRequestModel");
-const LeaveTypeModel = require("../leave-type/LeaveTypeModel");
-const PhotoModel = require("../photo/PhotoModel");
-const EmployeeModel = require("../employee/EmployeeModel");
+const models = require("../models");
 const dayjs = require("dayjs");
-const Op = Sequelize.Op;
+const Op = models.Sequelize.Op;
 
 const TOTAL_LEAVE_CREDIT = 5;
 
 exports.isExist = async (id) => {
   /** Check if the leave application is exist */
-  const result = await LeaveRequestModel.count({ where: { id } });
+  const result = await models.LeaveRequest.count({ where: { id } });
   return result ? true : false;
 };
 
 exports.isPending = async (employeeId) => {
   /** Check if the current employee is in active means that there is a active or pending application that the employee is submitted */
-  const result = await LeaveRequestModel.count({
+  const result = await models.LeaveRequest.count({
     where: {
       employeeId,
       status: "pending",
@@ -27,7 +23,9 @@ exports.isPending = async (employeeId) => {
 };
 
 exports.hasUpcoming = async (employeeId) => {
-  const result = await LeaveRequestModel.count(this.upcomingOption(employeeId));
+  const result = await models.LeaveRequest.count(
+    this.upcomingOption(employeeId)
+  );
 
   return result ? true : false;
 };
@@ -38,16 +36,16 @@ const overallCount = async ({ employeeId }) => {
   if (employeeId) where.employeeId = employeeId;
 
   return {
-    pending: await LeaveRequestModel.count({
+    pending: await models.LeaveRequest.count({
       where: { ...where, status: "pending" },
     }),
-    rejected: await LeaveRequestModel.count({
+    rejected: await models.LeaveRequest.count({
       where: { ...where, status: "rejected" },
     }),
-    approved: await LeaveRequestModel.count({
+    approved: await models.LeaveRequest.count({
       where: { ...where, status: "approved" },
     }),
-    overall: await LeaveRequestModel.count({
+    overall: await models.LeaveRequest.count({
       where: { ...where },
     }),
   };
@@ -64,7 +62,7 @@ exports.summaryAdmin = async () => {
 exports.summaryEmp = async (employeeId) => {
   const count = await overallCount({ employeeId });
 
-  const balance = await LeaveRequestModel.count({
+  const balance = await models.LeaveRequest.count({
     where: {
       employeeId,
       status: {
@@ -87,30 +85,30 @@ exports.joinTable = ({ withLeaveType, withEmployee }) => {
 
   if (withLeaveType)
     tables.push({
-      model: LeaveTypeModel,
+      model: models.LeaveType,
       attributes: ["id", "name"],
     });
 
   if (withEmployee)
     tables.push({
-      model: EmployeeModel,
+      model: models.Employee,
       as: "submittedBy",
       attributes: ["firstName", "lastName", "fullName", "id", "photoId"],
       include: [
         {
-          model: PhotoModel,
+          model: models.Photo,
         },
       ],
     });
 
   tables.push({
-    model: EmployeeModel,
+    model: models.Employee,
     foreignKey: "authorizedPersonId",
     as: "authorizedBy",
     attributes: ["firstName", "lastName", "fullName", "id", "photoId"],
     include: [
       {
-        model: PhotoModel,
+        model: models.Photo,
       },
     ],
   });

@@ -1,8 +1,8 @@
-const VoluntaryExpModel = require("./VoluntaryExpModel");
+const models = require("../models");
 
 class VoluntaryExpServices {
   async getOne({ id }) {
-    const result = await VoluntaryExpModel.findByPk(id);
+    const result = await models.VoluntaryExp.findByPk(id);
 
     return {
       status: 200,
@@ -12,7 +12,7 @@ class VoluntaryExpServices {
   }
 
   async getAll({ id }) {
-    const result = await VoluntaryExpModel.findAll({
+    const result = await models.VoluntaryExp.findAll({
       where: { employeeId: id },
     });
 
@@ -24,7 +24,7 @@ class VoluntaryExpServices {
   }
 
   async create(VoluntaryExp) {
-    const result = await VoluntaryExpModel.create(VoluntaryExp, {
+    const result = await models.VoluntaryExp.create(VoluntaryExp, {
       returning: ["id"],
     });
 
@@ -38,7 +38,7 @@ class VoluntaryExpServices {
   async update(VoluntaryExp) {
     const id = VoluntaryExp.id;
     delete VoluntaryExp.id;
-    const result = await VoluntaryExpModel.update(VoluntaryExp, {
+    const result = await models.VoluntaryExp.update(VoluntaryExp, {
       where: { id },
     });
 
@@ -50,7 +50,7 @@ class VoluntaryExpServices {
   }
 
   async delete({ id }) {
-    const result = await VoluntaryExpModel.destroy({ where: { id } });
+    const result = await models.VoluntaryExp.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Voluntary Experiences Deleted",

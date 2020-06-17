@@ -1,4 +1,4 @@
-const DesignationModel = require("./DesignationModel");
+const models = require("../models");
 
 exports.isExist = async ({ name, id }) => {
   const condition = {};
@@ -6,7 +6,7 @@ exports.isExist = async ({ name, id }) => {
   if (name) condition.name = name;
   if (id) condition.id = id;
 
-  const result = await DesignationModel.findOne({ where: condition });
+  const result = await models.Designation.findOne({ where: condition });
 
   return result ? true : false;
 };

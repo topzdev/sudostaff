@@ -1,8 +1,8 @@
-const ChildrensModel = require("./ChildrensModel");
+const models = require("../models");
 
 class ChildrensServices {
   async getOne({ id }) {
-    const result = await ChildrensModel.findByPk(id);
+    const result = await models.Childrens.findByPk(id);
     return {
       status: 200,
       msg: "Children successfully fetched",
@@ -11,7 +11,9 @@ class ChildrensServices {
   }
 
   async getAll({ id }) {
-    const result = await ChildrensModel.findAll({ where: { employeeId: id } });
+    const result = await models.Childrens.findAll({
+      where: { employeeId: id },
+    });
     return {
       status: 200,
       msg: "Childrens successfully fetched",
@@ -20,7 +22,7 @@ class ChildrensServices {
   }
 
   async create({ employeeId, fullName, birthDate }) {
-    const result = await ChildrensModel.create(
+    const result = await models.Childrens.create(
       { employeeId, fullName, birthDate },
       { returning: ["id"] }
     );
@@ -34,7 +36,9 @@ class ChildrensServices {
   async update(childrenInfo) {
     const id = childrenInfo.id;
     delete childrenInfo.id;
-    const result = await ChildrensModel.update(childrenInfo, { where: { id } });
+    const result = await models.Childrens.update(childrenInfo, {
+      where: { id },
+    });
     return {
       status: 200,
       msg: "Childrens Updated",
@@ -43,7 +47,7 @@ class ChildrensServices {
   }
 
   async delete({ id }) {
-    const result = await ChildrensModel.destroy({
+    const result = await models.Childrens.destroy({
       where: { id },
     });
 

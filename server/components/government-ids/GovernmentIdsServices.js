@@ -1,8 +1,8 @@
-const GovernmentIdsModel = require("./GovernmentIdsModel");
+const models = require("../models");
 
 class GovernmentIdsServices {
   async getOne({ id }) {
-    const result = await GovernmentIdsModel.findOne({ where: { id } });
+    const result = await models.GovernmentIds.findOne({ where: { id } });
 
     return {
       status: 200,
@@ -17,7 +17,7 @@ class GovernmentIdsServices {
     dateIssuance,
     placeIssuance,
   }) {
-    const result = await GovernmentIdsModel.create(
+    const result = await models.GovernmentIds.create(
       {
         governmentIssueId,
         idLicensePassportId,
@@ -33,7 +33,7 @@ class GovernmentIdsServices {
   async update(governmentIdsInfo) {
     const id = governmentIdsInfo.id;
     delete governmentIdsInfo.id;
-    const result = await GovernmentIdsModel.update(governmentIdsInfo, {
+    const result = await models.GovernmentIds.update(governmentIdsInfo, {
       where: { id },
     });
 
@@ -45,7 +45,7 @@ class GovernmentIdsServices {
   }
 
   async delete({ id }) {
-    const result = await GovernmentIdsModel.destroy({ where: { id } });
+    const result = await models.GovernmentIds.destroy({ where: { id } });
     return {
       status: 200,
       msg: "Benifits Information Deleted",

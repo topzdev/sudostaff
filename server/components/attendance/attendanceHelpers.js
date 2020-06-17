@@ -1,11 +1,10 @@
-const Sequelize = require("sequelize");
-const AttendaceModel = require("./AttendanceModel");
-const Op = Sequelize.Op;
+const models = require("../models");
+const Op = models.Sequelize.Op;
 
 exports.isAlreadyTimeIn = async (employeeId) => {
   /** Check if the employeeId is already in attendance within the current day using createAt */
 
-  const result = await AttendaceModel.findOne({
+  const result = await models.Attendance.findOne({
     attributes: ["id", "employeeId", "signInTime", "signOutTime"],
     where: {
       employeeId,
