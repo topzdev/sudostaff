@@ -110,8 +110,8 @@ export default {
           to: "/leave-request",
           icon: "mdi-account-arrow-right-outline"
         },
-        { title: "Mail", icon: "mdi-account-group", to: "/mail" },
-        { title: "About", icon: "mdi-help-box", to: "/about" }
+        // { title: "Mail", icon: "mdi-email-multiple-outline", to: "/mail" },
+        { title: "Account", icon: "mdi-account-group", to: "/account" }
       ]
     };
   },

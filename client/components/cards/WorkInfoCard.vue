@@ -8,15 +8,13 @@
     <v-card-text>
       <v-row>
         <v-col class="py-0 pb-1" cols="12">
-          <v-text-field
-            label="Employee ID"
+          <employee-id-input
             :value="id"
-            @input="$emit('update:id', $event)"
+            @input="$emit('update:id', $event.toUpperCase())"
             outlined
             :readonly="isEdit"
-            required
             :rules="rules.id"
-          ></v-text-field>
+          ></employee-id-input>
         </v-col>
 
         <v-col class="py-0 pb-1" cols="6">

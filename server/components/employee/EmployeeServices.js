@@ -100,7 +100,7 @@ class EmployeeServices {
 
     const result = await models.Employee.create(
       {
-        id,
+        id: id.toUpperCase(),
         firstName,
         lastName,
         middleName,
@@ -139,21 +139,31 @@ class EmployeeServices {
     };
   }
 
+  async checkExist({ id }) {
+    const result = await helper.isExist(id);
+    return {
+      status: 200,
+      data: result,
+    };
+  }
+
   async update(employeeInfo, rawPhoto) {
     let photoId = null;
-    const id = employeeInfo.id;
+    const id = employeeInfo.id.toUpperCase();
     delete employeeInfo.id;
 
-    const uploaded = await photServices.update({
-      rawPhoto: rawPhoto && rawPhoto["photo"] ? rawPhoto["photo"] : null,
-      photoId: employeeInfo.photoId,
-    });
+    if (rawPhoto && rawPhoto["photo"]) {
+      const uploaded = await photServices.update({
+        rawPhoto: rawPhoto["photo"],
+        photoId: employeeInfo.photoId,
+      });
 
-    /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
-    if (uploaded.status !== 200) return uploaded;
+      /*Check if the status is not equal to 200 its means that uploading is failed and if not procede*/
+      if (uploaded.status !== 200) return uploaded;
 
-    /* if the uploading image is successfull then assign the id of upload image to employeeInfo.photoId */
-    photoId = uploaded.data;
+      /* if the uploading image is successfull then assign the id of upload image to employeeInfo.photoId */
+      photoId = uploaded.data;
+    }
 
     const result = await models.Employee.update(
       { ...employeeInfo, photoId },

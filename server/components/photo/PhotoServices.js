@@ -77,6 +77,12 @@ class PhotoServices {
   }
 
   async update({ photoId, rawPhoto }) {
+    if (!photoId)
+      return {
+        status: 400,
+        msg: "Photo id is required",
+      };
+
     const photo = await models.Photo.findByPk(photoId);
 
     if (!photo.get({ plain: true }))

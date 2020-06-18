@@ -9,7 +9,7 @@ export default {
       },
 
       workRules: {
-        id: [v => !!v || "Birth Date is required"],
+        id: [v => !!v || "Employee is required"],
         joiningDate: [v => !!v || "Joining Date is required"],
         departmentId: [v => !!v || "Department is required"],
         designationId: [v => !!v || "Birth Place is required"]

@@ -13,8 +13,10 @@
 export default {
   name: "Default",
 
-  data() {
-    return {};
+  async beforeCreate() {
+    if (process.browser)
+      this.$vuetify.theme.dark =
+        (await localStorage.getItem("hr-theme")) === "true" ? true : false;
   }
 };
 </script>
@@ -51,5 +53,20 @@ export default {
 
 .background-none {
   background-color: unset !important;
+}
+
+.settings-card__image {
+  display: block;
+  position: relative;
+  height: 120px;
+  margin-left: auto;
+  margin-top: -50px;
+  z-index: 0;
+}
+
+.settings-card .v-card__subtitle {
+  position: relative;
+  z-index: 1;
+  width: 60%;
 }
 </style>

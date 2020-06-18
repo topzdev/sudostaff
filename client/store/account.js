@@ -63,5 +63,15 @@ export const actions = {
     } catch ({ response: { data } }) {
       dispatch("utils/setNotifDefault", data, { root: true });
     }
+  },
+
+  resetAccount: async function({ dispatch, commit }, data) {
+    try {
+      const result = await accountServices.reset(data);
+      dispatch("utils/setNotifDefault", result, { root: true });
+      this.app.router.push("/account");
+    } catch ({ response: { data } }) {
+      dispatch("utils/setNotifDefault", data, { root: true });
+    }
   }
 };

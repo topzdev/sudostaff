@@ -22,6 +22,20 @@
 export default {
   props: {
     icon: Boolean
+  },
+
+  watch: {
+    "$vuetify.theme.dark"() {
+      if (process.browser)
+        localStorage.setItem("hr-theme", this.$vuetify.theme.dark);
+    }
+  },
+
+  methods: {
+    toggleDarkMode() {
+      console.log("Toggle");
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+    }
   }
 };
 </script>

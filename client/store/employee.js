@@ -49,6 +49,7 @@ export const actions = {
       dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
+
   fetchEmployees: async function(
     { dispatch, commit, state },
     { searchBy, searchText, limit, offset, withPhoto, withDesignation }

@@ -1,23 +1,22 @@
-const AccountModel = require("./AccountModel");
-const EmployeeModel = require("../employee/EmployeeModel");
+const models = require("../models");
 const bcrypt = require("bcryptjs");
 const dayjs = require("dayjs");
-const sequelize = require("sequelize");
 const employeeHelper = require("../employee/employeeHelpers");
 
-const Op = sequelize.Op;
+const Op = models.Sequelize.Op;
 
 exports.isExist = () => {};
 
 exports.findAccount = async (username) => {
-  const result = await AccountModel.findOne({
+  const result = await models.Account.findOne({
     where: {
       [Op.or]: [{ username: username.toLowerCase() }, { employeeId: username }],
     },
     attributes: ["username", "password", "id", "employeeId"],
   });
 
-  return result.get({ plain: true });
+  console.log(result);
+  return result;
 };
 
 exports.genDefaultCredential = async (employeeId, birthDate, lastName) => {
@@ -36,7 +35,7 @@ exports.genDefaultCredential = async (employeeId, birthDate, lastName) => {
 };
 
 exports.employeeInfo = async (employeeId) => {
-  const result = await EmployeeModel.findByPk(employeeId, {
+  const result = await models.Employee.findByPk(employeeId, {
     attributes: ["lastName", "id", "birthDate"],
   });
 

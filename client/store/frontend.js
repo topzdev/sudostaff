@@ -1,7 +1,7 @@
 import types from "./types";
 
 export const state = () => ({
-  notifSnackbar: { show: false, message: "", color: "info", timeout: 6000 },
+  notifSnackbar: { show: false, message: "", color: "info" },
   navbar: false,
   sidebar: false
 });

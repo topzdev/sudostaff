@@ -19,7 +19,7 @@
       :items="parsedList"
       outlined
       chips
-      label="Deparment head"
+      :label="label"
       item-text="fullName"
       item-value="id"
       :loading="loading"
@@ -33,7 +33,7 @@
           :input-value="data.selected"
           color="primary"
           close
-          @click:close="$emit('input', null)"
+          @click:close="remove"
           large
         >
           <v-avatar left size="50">
@@ -51,14 +51,7 @@
           <v-list-item-content v-text="data.item"></v-list-item-content>
         </template>
         <template v-else>
-          <v-list-item-avatar>
-            <base-image v-if="data.item.photo" :src="data.item.photo.photoUrl" />
-            <base-image v-else />
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>{{data.item.fullName}}</v-list-item-title>
-            <v-list-item-subtitle>{{data.item.id}}</v-list-item-subtitle>
-          </v-list-item-content>
+          <employee-template :employee="data.item" />
         </template>
       </template>
     </v-autocomplete>
@@ -108,6 +101,9 @@ export default {
     }
   },
   methods: {
+    remove() {
+      this.$emit("input", null);
+    },
     async fetchEmployee() {
       const self = this;
       self.loading = true;
@@ -121,8 +117,8 @@ export default {
           withPhoto: true
         });
         self.employee = result.data.rows;
+        self.loading = false;
       }, 1000);
-      self.loading = false;
     }
   },
   mounted() {

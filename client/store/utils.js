@@ -15,8 +15,9 @@ export const actions = {
   },
   setNotifDefault({ commit, dispatch }, { status, message }) {
     if (!status) console.error(message);
-    commit(
-      "frontend/" + types.SET_NOTIF_SNACKBAR,
+
+    dispatch(
+      "frontend/showPushNotif",
       {
         show: true,
         color: status ? "success" : "error",

@@ -1,9 +1,5 @@
 <template>
-  <v-snackbar
-    :value="notifSnackbar"
-    :timeout="snackbarOption.timeout"
-    :color="snackbarOption.color"
-  >
+  <v-snackbar :value="notifSnackbar" :color="snackbarOption.color">
     {{ message }}
     <v-btn dark text @click="showSnackbar(false)">Close</v-btn>
   </v-snackbar>

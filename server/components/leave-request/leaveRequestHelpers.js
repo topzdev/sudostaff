@@ -69,7 +69,11 @@ exports.summaryEmp = async (employeeId) => {
         [Op.not]: "pending",
       },
       createdAt: {
-        [Op.gte]: Sequelize.fn("date_trunc", "year", Sequelize.fn("now")),
+        [Op.gte]: models.Sequelize.fn(
+          "date_trunc",
+          "year",
+          models.Sequelize.fn("now")
+        ),
       },
     },
   });

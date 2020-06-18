@@ -1,4 +1,4 @@
-const DepartmentModel = require("./DepartmentModel");
+const models = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -8,7 +8,7 @@ exports.isExist = async ({ name, id }) => {
   if (name) condition.name = name;
   if (id) condition.id = id;
 
-  const result = await DepartmentModel.count({ where: condition });
+  const result = await models.Department.count({ where: condition });
   console.log(result);
   return result ? true : false;
 };

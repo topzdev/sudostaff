@@ -29,9 +29,6 @@ export default {};
 </script>
 
 <style>
-.settings-card {
-}
-
 .settings-card__image {
   display: block;
   position: relative;

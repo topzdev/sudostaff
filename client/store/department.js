@@ -97,7 +97,8 @@ export const actions = {
   async fetchDropdown({ dispatch, commit }) {
     try {
       const result = await DepartmentAPI.getAll({
-        include: ["id", "name"]
+        include: ["id", "name"],
+        withDeptHead: true
       });
 
       commit(types.SET_DROPDOWN, result.data.rows);

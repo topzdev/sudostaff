@@ -91,6 +91,7 @@ export default {
         governmentIssuedId: null,
         designationId: null,
         departmentId: null,
+        photoId: null,
         photo: null
       },
 

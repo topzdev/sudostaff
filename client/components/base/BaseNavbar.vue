@@ -16,7 +16,7 @@
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-avatar size="45">
-              <base-image v-if="employee.photo" :src="photo.photoUrl" />
+              <base-image v-if="employee.photo" :src="employee.photo.photoUrl" />
               <base-image v-else />
             </v-avatar>
           </v-btn>

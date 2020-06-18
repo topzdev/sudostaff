@@ -13,6 +13,10 @@ class Account extends ApiClient {
   updateUsername(data) {
     return $axios.$put("/account/change-username", data);
   }
+
+  reset(data) {
+    return $axios.$put("/account/reset", data);
+  }
 }
 
 export default new Account();

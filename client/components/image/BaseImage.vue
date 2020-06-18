@@ -1,5 +1,11 @@
 <template>
-  <img :src="checkImage" :draggable="false" />
+  <v-img contain :loading="loading" :src="checkImage" :draggable="false">
+    <template v-slot:placeholder>
+      <v-row class="fill-height ma-0" align="center" justify="center">
+        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+      </v-row>
+    </template>
+  </v-img>
 </template>
 
 <script>
@@ -12,6 +18,10 @@ export default {
     src: {
       type: String,
       default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
 

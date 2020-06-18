@@ -1,7 +1,6 @@
-const AccountModel = require("../account/AccountModel");
-const EmployeeModel = require("../employee/EmployeeModel");
-const employeeHelper = require("../employee/employeeHelpers");
+const models = require("../models");
 const accountHelper = require("../account/AccountHelpers");
+const employeeHelper = require("../employee/employeeHelpers");
 const bcrypt = require("bcryptjs");
 const config = require("../../config");
 const jwt = require("jsonwebtoken");
@@ -67,12 +66,12 @@ class AuthServices {
         status: 401,
       };
 
-    const result = await AccountModel.findByPk(user.id, {
+    const result = await models.Account.findByPk(user.id, {
       attributes: ["id", "employeeId", "username"],
       include: [
         {
           as: "employee",
-          model: EmployeeModel,
+          model: models.Employee,
           attributes: [
             "firstName",
             "lastName",

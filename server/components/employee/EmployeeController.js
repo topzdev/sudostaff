@@ -14,6 +14,14 @@ class EmployeeController {
       validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
+  async checkExist(req, res) {
+    try {
+      const result = await employeeServices.checkExist(req.params);
+      validateResponse(res, result);
+    } catch (error) {
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
   async fetchSingleEmployee(req, res) {
     try {
       console.log(req.params);

@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <v-autocomplete
-      :value="value"
-      @input="$emit('input', $event)"
-      :items="list"
-      item-text="name"
-      item-value="id"
-      :no-data-text="noDataText"
-      label="Select Designation"
-      outlined
-      :readonly="readonly"
-      :disabled="disabled"
-      :required="required"
-      :rules="rules"
-    >
-      <template v-slot:selection="data">{{ data.item.name }}</template>
-      <template v-slot:item="data">
-        <v-list-item-content>
-          <v-list-item-title>{{ data.item.name }}</v-list-item-title>
-          <v-list-item-subtitle>{{postFixed(data.item.department.name)}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </template>
-    </v-autocomplete>
-  </div>
+  <v-autocomplete
+    :value="value"
+    @input="$emit('input', $event)"
+    :items="list"
+    item-text="name"
+    item-value="id"
+    :no-data-text="noDataText"
+    label="Select Designation"
+    outlined
+    :readonly="readonly"
+    :disabled="disabled"
+    :required="required"
+    :rules="rules"
+  >
+    <template v-slot:selection="data">{{ data.item.name }}</template>
+    <template v-slot:item="data">
+      <v-list-item-content>
+        <v-list-item-title>{{ data.item.name }}</v-list-item-title>
+        <v-list-item-subtitle>{{postFixed(data.item.department.name)}}</v-list-item-subtitle>
+      </v-list-item-content>
+    </template>
+  </v-autocomplete>
 </template>
 
 <script>

@@ -1,7 +1,9 @@
 const models = require("../models");
+const Op = models.Sequelize.Op;
+
 exports.isExist = async (id) => {
   const count = await models.Employee.count({
-    where: { id },
+    where: { id: id.toUpperCase() },
   });
   return count ? true : false;
 };

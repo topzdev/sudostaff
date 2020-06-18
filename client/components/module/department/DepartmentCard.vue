@@ -22,6 +22,7 @@
 
         <v-col class="py-0 pb-1" cols="12">
           <search-employee-input
+            label="Select Department Head"
             :value="employeeId"
             @input="$emit('update:employeeId', $event)"
             :default-value="departmentHead"

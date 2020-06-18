@@ -12,6 +12,7 @@
         :disabled="disabled"
         :required="required"
         :rules="rules"
+        @click:append="show=!show"
       ></v-text-field>
     </template>
 

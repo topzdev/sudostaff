@@ -3,7 +3,7 @@
     <v-card-title>Change Password</v-card-title>
     <v-card-subtitle>Protect account by adding a strong password</v-card-subtitle>
     <v-card-text>
-      <base-image class="settings-card__image" :src="image"></base-image>
+      <img class="settings-card__image" :src="image" />
     </v-card-text>
     <base-card-actions to="/user/settings/change-password">Secure Account</base-card-actions>
   </v-card>

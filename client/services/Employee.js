@@ -22,6 +22,10 @@ class EmployeeApi extends ApiClient {
   delete(id) {
     return $axios.$delete("/employee/delete/" + id);
   }
+
+  checkId(id) {
+    return $axios.$get("/employee/check/" + id);
+  }
 }
 
 export default new EmployeeApi();
