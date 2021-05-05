@@ -1,6 +1,13 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false
+    }
+  ],
   router: {
     middleware: ["auth"]
   },
@@ -8,14 +15,19 @@ export default {
   auth: {
     strategies: {
       local: {
+        token: {
+          property: "data"
+        },
+        user: {
+          property: "data"
+        },
         endpoints: {
           login: {
             url: "/auth/login",
-            method: "post",
-            propertyName: "data"
+            method: "post"
           },
           logout: { url: "/auth/logout", method: "post" },
-          user: { url: "/auth/user", method: "get", propertyName: "data" }
+          user: { url: "/auth/user", method: "get" }
         }
       }
     },
@@ -54,9 +66,6 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["~/plugins/axios-accessor"],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

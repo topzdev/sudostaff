@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <leave-admin-form />
-  </div>
+  <auth-layout>
+    <div>
+      <leave-admin-form />
+    </div>
+  </auth-layout>
 </template>
 
 <script>

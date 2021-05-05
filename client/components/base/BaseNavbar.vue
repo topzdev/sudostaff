@@ -1,7 +1,7 @@
 <template>
-  <div v-if="show">
-    <v-app-bar v-model="show" flat></v-app-bar>
-    <v-app-bar v-model="show" fixed elevate-on-scroll>
+  <div>
+    <v-app-bar flat></v-app-bar>
+    <v-app-bar fixed elevate-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title class="font-weight-bold"
@@ -68,14 +68,6 @@ export default {
     };
   },
   computed: {
-    show: {
-      get() {
-        return this.$auth.loggedIn;
-      },
-
-      set(value) {},
-    },
-
     user() {
       return this.$auth.user ? this.$auth.user : null;
     },

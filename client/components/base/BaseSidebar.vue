@@ -1,7 +1,7 @@
 <template>
-  <div v-if="show">
-    <v-navigation-drawer v-model="show" :permanent="show" app width="300px"></v-navigation-drawer>
-    <v-navigation-drawer v-model="show" :permanent="show" fixed width="300px">
+  <div>
+    <v-navigation-drawer app width="300px"></v-navigation-drawer>
+    <v-navigation-drawer fixed width="300px">
       <v-list shaped class="pl-0">
         <v-list-item two-line>
           <v-list-item-avatar>
@@ -43,7 +43,7 @@
             class="custom-sub-group mb-0"
           >
             <template v-slot:activator>
-              <v-list-item-title>{{item.title}}</v-list-item-title>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </template>
 
             <v-list-item
@@ -79,53 +79,42 @@ export default {
             {
               title: "Your Info",
               to: "/user/your-info",
-              icon: "mdi-card-account-details-outline"
+              icon: "mdi-card-account-details-outline",
             },
             {
               title: "Leave Request",
               to: "/user/leave-request",
-              icon: "mdi-account-arrow-right-outline"
+              icon: "mdi-account-arrow-right-outline",
             },
             {
               title: "Account Setting",
               to: "/user/settings",
-              icon: "mdi-shield-account-outline"
-            }
-          ]
+              icon: "mdi-shield-account-outline",
+            },
+          ],
         },
 
         { title: "Employee", icon: "mdi-account-multiple", to: "/employee" },
         {
           title: "Department",
           icon: "mdi-account-box-multiple",
-          to: "/department"
+          to: "/department",
         },
         {
           title: "Designation",
           icon: "mdi-clipboard-account",
-          to: "/designation"
+          to: "/designation",
         },
         {
           title: "Leave Request",
           to: "/leave-request",
-          icon: "mdi-account-arrow-right-outline"
+          icon: "mdi-account-arrow-right-outline",
         },
         // { title: "Mail", icon: "mdi-email-multiple-outline", to: "/mail" },
-        { title: "Account", icon: "mdi-account-group", to: "/account" }
-      ]
+        { title: "Account", icon: "mdi-account-group", to: "/account" },
+      ],
     };
   },
-  computed: {
-    show: {
-      get() {
-        return this.$auth.loggedIn;
-      },
-
-      set(value) {
-        console.log(value);
-      }
-    }
-  }
 };
 </script>
 

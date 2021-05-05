@@ -1,7 +1,9 @@
 <template>
-  <v-container>
-    <department-form />
-  </v-container>
+  <auth-layout>
+    <v-container>
+      <department-form />
+    </v-container>
+  </auth-layout>
 </template>
 
 <script>

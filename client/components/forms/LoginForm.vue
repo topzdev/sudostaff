@@ -46,6 +46,7 @@
           :loading="loading"
           block
           large
+          :disabled="loading"
           elevation="0"
           @click="login"
           >Sign in</v-btn
@@ -63,8 +64,8 @@ export default {
     return {
       show: false,
       account: {
-        username: "topzdev",
-        password: "dev123",
+        username: "emp-004",
+        password: "lugod-5152000",
       },
       accountRules: {
         username: [(v) => !!v || "Username is required"],
@@ -81,30 +82,42 @@ export default {
     },
   },
   methods: {
+    // async login() {
+    //   const self = this;
+    //   self.$refs.form.validate();
+    //   if (!self.valid) return;
+    //   self.loading = true;
+
+    //   setTimeout(async () => {
+    //     await self.login();
+    //     self.loading = false;
+    //   }, 1000);
+
+    //   self.loading = false;
+    // },
+
     async login() {
-      const self = this;
-      self.$refs.form.validate();
-      if (!self.valid) return;
-      self.loading = true;
-
-      setTimeout(async () => {
-        await self.login();
-        self.loading = false;
-      }, 1000);
-
-      self.loading = false;
-    },
-
-    async login() {
+      this.loading = true;
       try {
         const result = await this.$auth.loginWith("local", {
           data: this.account,
         });
+        console.log("loging in", result, this.$auth.loggedIn);
 
-        this.$store.dispatch("utils/setNotifDefault", result, { root: true });
-      } catch ({ response: { data } }) {
-        this.$store.dispatch("utils/setNotifDefault", data, { root: true });
+        if (this.$auth.loggedIn) {
+          this.account = {
+            username: "",
+            password: "",
+          };
+
+          this.$router.push("/");
+          // this.$store.dispatch("utils/setNotifDefault", result, { root: true });
+        }
+      } catch (error) {
+        console.log(error);
+        // this.$store.dispatch("utils/setNotifDefault", data, { root: true });
       }
+      this.loading = false;
     },
   },
 };

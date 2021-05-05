@@ -3,7 +3,10 @@
     <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
         <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+          <v-card-title
+            class="display-1 font-weight-medium"
+            v-text="title"
+          ></v-card-title>
           <v-card-subtitle v-text="subtitle"></v-card-subtitle>
         </v-col>
       </v-row>
@@ -12,7 +15,7 @@
         <reset-account-card v-bind.sync="reset" :rules="resetRules" />
       </v-col>
 
-      <v-col cols="8" class="py-0">
+      <v-col cols="8">
         <v-card flat class="background-none">
           <form-card-action
             updateText="Reset Account"
@@ -35,12 +38,12 @@ export default {
   data() {
     return {
       reset: {
-        employeeId: null
+        employeeId: null,
       },
 
       resetRules: {
-        employeeId: [v => !!v || "Employee is required"]
-      }
+        employeeId: [(v) => !!v || "Employee is required"],
+      },
     };
   },
   methods: {
@@ -51,7 +54,7 @@ export default {
       this.loading = true;
       await this.$store.dispatch("account/resetAccount", this.reset);
       this.loading = false;
-    }
+    },
   },
   computed: {
     title() {
@@ -59,8 +62,8 @@ export default {
     },
     subtitle() {
       return "Set employee account to default password";
-    }
-  }
+    },
+  },
 };
 </script>
 

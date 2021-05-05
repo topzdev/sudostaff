@@ -1,7 +1,9 @@
 <template>
-  <v-container>
-    <username-form />
-  </v-container>
+  <auth-layout>
+    <v-container>
+      <username-form />
+    </v-container>
+  </auth-layout>
 </template>
 
 <script>

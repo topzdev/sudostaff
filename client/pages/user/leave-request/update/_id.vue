@@ -1,7 +1,9 @@
 <template>
-  <v-container>
-    <leave-form />
-  </v-container>
+  <auth-layout>
+    <v-container>
+      <leave-form />
+    </v-container>
+  </auth-layout>
 </template>
 
 <script>

@@ -32,9 +32,7 @@ export default {
       titleTemplate: "%s - Swupp",
     };
   },
-  components: {
-    AppNavbar,
-  },
+  components: {},
 };
 </script>
 

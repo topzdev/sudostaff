@@ -1,7 +1,9 @@
 <template>
-  <v-container>
-    <designation-form :is-edit="true" />
-  </v-container>
+  <auth-layout>
+    <v-container>
+      <designation-form :is-edit="true" />
+    </v-container>
+  </auth-layout>
 </template>
 
 <script>

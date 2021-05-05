@@ -1,7 +1,9 @@
 <template>
-  <v-container>
-    <designation-form />
-  </v-container>
+  <auto-layout>
+    <v-container>
+      <designation-form />
+    </v-container>
+  </auto-layout>
 </template>
 
 <script>
