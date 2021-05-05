@@ -27,80 +27,50 @@ export default {
     }
   },
 
-  mode: "universal",
-  /*
-   ** Headers of the page
-   */
+  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - " + process.env.npm_package_name,
-    title: process.env.npm_package_name || "",
+    titleTemplate: "%s - toystoreyhris",
+    title: "toystoreyhris",
+    htmlAttrs: {
+      lang: "en"
+    },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        hid: "description",
-        name: "description",
-        content: process.env.npm_package_description || ""
-      }
+      { hid: "description", name: "description", content: "" }
     ],
-    link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
-      }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: "#fff" },
-  /*
-   ** Global CSS
-   */
+
+  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["~/plugins/axios-accessor"],
-  /*
-   ** Nuxt.js dev-modules
-   */
 
-  components: { dirs: ["~/components"] },
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
 
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    "@nuxtjs/vuetify",
-    // TODO: remove this when upgrading to nuxt version 2.13+
-    "@nuxt/components"
+    // https://go.nuxtjs.dev/vuetify
+    "@nuxtjs/vuetify"
   ],
-  /*
-   ** Nuxt.js modules
-   */
+
+  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    "@nuxtjs/pwa",
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    "@nuxtjs/dotenv",
-    "@nuxtjs/auth"
+    // https://go.nuxtjs.dev/axios
+    "@nuxtjs/axios"
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: { host: "localhost", port: 5000, prefix: "/hr/api" },
-  /*
-   ** vuetify module configuration
-   ** https://github.com/nuxt-community/vuetify-module
-   */
+
+  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
-    // defaultAssets: false,
-    // treeShake: true,
     theme: {
-      dark: false,
+      dark: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -114,13 +84,7 @@ export default {
       }
     }
   },
-  /*
-   ** Build configuration
-   */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
-  }
+
+  // Build Configuration: https://go.nuxtjs.dev/config-build
+  build: {}
 };

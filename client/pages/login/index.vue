@@ -6,9 +6,9 @@
 
 <script>
 export default {
-  created() {
-    this.$store.dispatch("frontend/showNavigationBar", false);
-  }
+  // created() {
+  //   this.$store.dispatch("frontend/showNavigationBar", false);
+  // },
 };
 </script>
 

@@ -4,7 +4,9 @@
     <v-app-bar v-model="show" fixed elevate-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="font-weight-bold">Human Resources</v-toolbar-title>
+      <v-toolbar-title class="font-weight-bold"
+        >Human Resources</v-toolbar-title
+      >
 
       <v-spacer></v-spacer>
 
@@ -16,7 +18,10 @@
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-avatar size="45">
-              <base-image v-if="employee.photo" :src="employee.photo.photoUrl" />
+              <base-image
+                v-if="employee.photo"
+                :src="employee.photo.photoUrl"
+              />
               <base-image v-else />
             </v-avatar>
           </v-btn>
@@ -29,10 +34,14 @@
           <v-divider />
           <template v-for="item in items">
             <v-list-item v-if="item.to" :key="item.title" :to="item.to">
-              <v-list-item-title>{{item.title}}</v-list-item-title>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
-            <v-list-item v-if="item.action" :key="item.title" @click="item.action()">
-              <v-list-item-title>{{item.title}}</v-list-item-title>
+            <v-list-item
+              v-if="item.action"
+              :key="item.title"
+              @click="item.action()"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
           </template>
           <base-theme-toggle />
@@ -49,13 +58,13 @@ export default {
       items: [
         {
           title: "Settings",
-          to: "/user/settings"
+          to: "/user/settings",
         },
         {
           title: "Logout",
-          action: () => this.$auth.logout()
-        }
-      ]
+          action: () => this.$auth.logout(),
+        },
+      ],
     };
   },
   computed: {
@@ -64,22 +73,22 @@ export default {
         return this.$auth.loggedIn;
       },
 
-      set(value) {}
+      set(value) {},
     },
 
     user() {
-      return this.$auth.user;
+      return this.$auth.user ? this.$auth.user : null;
     },
     employee() {
       return this.user.employee;
-    }
+    },
   },
 
-  watch: {
-    user() {
-      if (this.user) this.$store.dispatch("frontend/showNavigationBar", true);
-    }
-  }
+  // watch: {
+  //   user() {
+  //     if (this.user) this.$store.dispatch("frontend/showNavigationBar", true);
+  //   },
+  // },
 };
 </script>
 

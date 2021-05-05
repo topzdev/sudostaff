@@ -1,23 +1,19 @@
 <template>
   <v-app>
-    <base-navbar />
-    <base-sidebar />
-    <base-modals />
-    <base-snackbars />
-    <v-content>
+    <v-main>
       <nuxt />
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 <script>
 export default {
   name: "Default",
 
-  async beforeCreate() {
-    if (process.browser)
-      this.$vuetify.theme.dark =
-        (await localStorage.getItem("hr-theme")) === "true" ? true : false;
-  }
+  // async beforeCreate() {
+  //   if (process.browser)
+  //     this.$vuetify.theme.dark =
+  //       (await localStorage.getItem("hr-theme")) === "true" ? true : false;
+  // },
 };
 </script>
 
