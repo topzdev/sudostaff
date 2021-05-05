@@ -1,12 +1,20 @@
 <template>
-  <v-card :loading="loading" :disabled="loading" width="450" height="480" outlined>
+  <v-card
+    :loading="loading"
+    :disabled="loading"
+    width="450"
+    height="480"
+    outlined
+  >
     <v-form ref="form" v-model="valid">
       <h2 class="primary--text text-center mt-5 pt-4">
-        <span class="red--text">Sudo</span>
-        <span>staff</span>
+        <span class="red--text">Toy Storey</span>
+        <span>HRIS</span>
       </h2>
       <v-card-title class="justify-center">Sign In</v-card-title>
-      <v-card-subtitle class="text-center mb-5">Use your employee account</v-card-subtitle>
+      <v-card-subtitle class="text-center mb-5"
+        >Use your employee account</v-card-subtitle
+      >
 
       <v-card-text class="login-form pb-0">
         <v-row no-gutters>
@@ -26,14 +34,22 @@
               :append-icon="passwordProps.icon"
               :type="passwordProps.type"
               :rules="accountRules.password"
-              @click:append="show=!show"
+              @click:append="show = !show"
             ></v-text-field>
           </v-col>
         </v-row>
       </v-card-text>
       <v-card-actions class="login-form">
         <v-spacer />
-        <v-btn color="primary" :loading="loading" block large elevation="0" @click="login">Sign in</v-btn>
+        <v-btn
+          color="primary"
+          :loading="loading"
+          block
+          large
+          elevation="0"
+          @click="login"
+          >Sign in</v-btn
+        >
       </v-card-actions>
     </v-form>
   </v-card>
@@ -48,21 +64,21 @@ export default {
       show: false,
       account: {
         username: "topzdev",
-        password: "dev123"
+        password: "dev123",
       },
       accountRules: {
-        username: [v => !!v || "Username is required"],
-        password: [v => !!v || "Password is required"]
-      }
+        username: [(v) => !!v || "Username is required"],
+        password: [(v) => !!v || "Password is required"],
+      },
     };
   },
   computed: {
     passwordProps() {
       return {
         type: this.show ? "text" : "password",
-        icon: this.show ? "mdi-eye" : "mdi-eye-off"
+        icon: this.show ? "mdi-eye" : "mdi-eye-off",
       };
-    }
+    },
   },
   methods: {
     async login() {
@@ -82,15 +98,15 @@ export default {
     async login() {
       try {
         const result = await this.$auth.loginWith("local", {
-          data: this.account
+          data: this.account,
         });
 
         this.$store.dispatch("utils/setNotifDefault", result, { root: true });
       } catch ({ response: { data } }) {
         this.$store.dispatch("utils/setNotifDefault", data, { root: true });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

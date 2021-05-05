@@ -5,7 +5,12 @@
 </template>
 
 <script>
+import LoginForm from "@/components/forms/LoginForm";
 export default {
+  auth: false,
+  components: {
+    LoginForm,
+  },
   // created() {
   //   this.$store.dispatch("frontend/showNavigationBar", false);
   // },

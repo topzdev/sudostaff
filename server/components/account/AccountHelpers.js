@@ -26,6 +26,8 @@ exports.genDefaultCredential = async (employeeId, birthDate, lastName) => {
     dayjs(birthDate).format("MDYYYY")
   ).toLowerCase();
 
+  console.log("Password:", password, employeeId);
+
   const salt = await bcrypt.genSalt(10);
 
   const hashPassword = await bcrypt.hash(password, salt);

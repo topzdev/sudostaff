@@ -7,6 +7,6 @@ router.get("/", auth, controller.getAccount);
 router.put("/change-password", auth, controller.updatePassword);
 router.put("/change-username", auth, controller.updateUsername);
 router.put("/reset", auth, controller.resetAccount);
-router.post("/create", auth, controller.create);
+router.post("/create", controller.create);
 
 module.exports = router;
