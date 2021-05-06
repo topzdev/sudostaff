@@ -40,7 +40,7 @@ class AuthServices {
     );
 
     return {
-      msg: "Welcome, Sudostaff Employee!",
+      msg: "Welcome, Toy Storey Employee!",
       status: 200,
       data: token,
     };

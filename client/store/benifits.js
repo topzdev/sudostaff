@@ -19,8 +19,13 @@ export const actions = {
       const result = await benifitsServices.getOne(id);
 
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async updateBenifits({ rootState, commit, dispatch }, data) {
@@ -35,8 +40,13 @@ export const actions = {
 
       commit(types.SET_CURRENT, data);
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

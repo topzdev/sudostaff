@@ -48,7 +48,7 @@ export default {
     }
   },
 
-  mounted() {
+  async fetch() {
     this.fetchList();
   }
 };

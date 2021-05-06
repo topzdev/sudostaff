@@ -7,7 +7,12 @@
     ></form-card-header>
     <v-card-text class="d-flex justify-center align-center">
       <v-avatar size="240px">
-        <base-image :loading="loading1" :src="src" alt="John" draggable="false" />
+        <base-image
+          :loading="loading1"
+          :src="src"
+          alt="John"
+          draggable="false"
+        />
       </v-avatar>
     </v-card-text>
     <v-card-actions>
@@ -36,7 +41,7 @@ export default {
     return {
       size: 0,
       hint: "",
-      loading1: false
+      loading1: false,
     };
   },
   methods: {
@@ -46,7 +51,7 @@ export default {
       const options = {
         maxSizeMB: 0.2,
         maxWidthOrHeight: 240,
-        useWebWorker: true
+        useWebWorker: true,
       };
 
       try {
@@ -54,13 +59,14 @@ export default {
         const compressedImage = await imageCompression(image, options);
         this.hint = "compressing image...";
         console.log(
-          `from ${image.size / 1024} KB to compressed ${compressedImage.size /
-            1024} KB`
+          `from ${image.size / 1024} KB to compressed ${
+            compressedImage.size / 1024
+          } KB`
         ); // smaller than maxSizeMB
         const self = this;
         const reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           self.$emit("update:imageUrl", e.target.result);
 
           console.log(compressedImage);
@@ -71,15 +77,15 @@ export default {
         this.hint = "image compressed!";
         this.loading1 = false;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
-    }
+    },
   },
   computed: {
     src() {
       return this.imageUrl || this.url;
-    }
-  }
+    },
+  },
 };
 </script>
 

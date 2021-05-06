@@ -44,16 +44,26 @@ export const actions = {
     try {
       const result = await leaveTypeServices.getOne(id, { include, exclude });
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async fetchLeaveTypes({ dispatch, commit }, { include, exclude }) {
     try {
       const result = await leaveTypeServices.getAll({ include, exclude });
       commit(types.SET_LEAVE_TYPES, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async createLeaveType({ dispatch, commit }, data) {
@@ -61,8 +71,13 @@ export const actions = {
       const result = await leaveTypeServices.create(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.ADD_LEAVE_TYPE, { ...data, id: result.data });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async updateLeaveType({ dispatch, commit }, data) {
@@ -70,8 +85,13 @@ export const actions = {
       const result = await leaveTypeServices.update(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_LEAVE_TYPE, data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async fetchDropdown({ dispatch, commit }) {

@@ -30,8 +30,13 @@ export const actions = {
       const result = await voluntaryOrgServices.getAll(employeeId);
 
       commit(types.SET_VOLUNTARY_ORG, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -43,8 +48,13 @@ export const actions = {
       const result = await voluntaryOrgServices.getOne(id);
 
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async addVoluntaryOrg({ rootState, commit, dispatch }, data) {
@@ -62,8 +72,13 @@ export const actions = {
         id: result.data
       });
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -73,8 +88,13 @@ export const actions = {
 
       commit(types.DELETE_VOLUNTARY_ORG, id);
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

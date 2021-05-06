@@ -18,7 +18,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Swupp",
+      default: "TS HRIS",
     },
     showNavbar: {
       type: Boolean,
@@ -29,7 +29,7 @@ export default {
   head() {
     return {
       title: this.title,
-      titleTemplate: "%s - Swupp",
+      titleTemplate: "%s - TS HRIS",
     };
   },
   components: {},

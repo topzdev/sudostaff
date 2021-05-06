@@ -55,8 +55,13 @@ export const actions = {
         withEmployee
       });
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -73,8 +78,13 @@ export const actions = {
         withLeaveType
       });
       commit(types.SET_LEAVE_REQUEST_ADMIN, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -101,8 +111,13 @@ export const actions = {
       const result = await leaveRequestServices.getSummaryAdmin();
 
       commit(types.SUMMARY_LEAVE_REQUEST_ADMIN, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

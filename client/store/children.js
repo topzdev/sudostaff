@@ -29,8 +29,13 @@ export const actions = {
       console.log(employeeId, "FETCHINGG", result);
 
       commit(types.SET_CHILDRENS, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -42,8 +47,13 @@ export const actions = {
       const result = await childrenServices.getOne(id);
 
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async addChildren({ rootState, commit, dispatch }, data) {
@@ -61,8 +71,13 @@ export const actions = {
         id: result.data
       });
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -72,8 +87,13 @@ export const actions = {
 
       commit(types.DELETE_CHILDREN, id);
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

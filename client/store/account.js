@@ -26,8 +26,13 @@ export const actions = {
 
       const result = await accountServices.getOne(id);
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -42,8 +47,13 @@ export const actions = {
       });
       dispatch("utils/setNotifDefault", result, { root: true });
       this.app.router.push("/user/settings");
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -60,8 +70,13 @@ export const actions = {
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_USERNAME, result.data);
       this.app.router.push("/user/settings");
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -70,8 +85,13 @@ export const actions = {
       const result = await accountServices.reset(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       this.app.router.push("/account");
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

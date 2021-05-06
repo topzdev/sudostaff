@@ -60,8 +60,13 @@ export const actions = {
         withLeaveType
       });
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async fetchLeaveRequests(
@@ -79,8 +84,13 @@ export const actions = {
         withLeaveType
       });
       commit(types.SET_LEAVE_REQUEST_EMPLOYEE, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -93,8 +103,13 @@ export const actions = {
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.ADD_LEAVE_REQUEST_EMPLOYEE, { ...data, id: result.data });
       this.app.router.push("/user/leave-request");
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async updateLeaveRequest({ dispatch, commit }, data) {
@@ -117,8 +132,13 @@ export const actions = {
       const result = await leaveRequestServices.getSummaryEmployee(employeeId);
 
       commit(types.SUMMARY_LEAVE_REQUEST_EMPLOYEE, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -136,8 +156,13 @@ export const actions = {
       });
 
       commit(types.UPCOMING_LEAVE_REQUEST_EMPLOYEE, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

@@ -110,11 +110,11 @@ export default {
             password: "",
           };
 
-          this.$router.push("/");
+          this.$router.push("/dashboard");
           // this.$store.dispatch("utils/setNotifDefault", result, { root: true });
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         // this.$store.dispatch("utils/setNotifDefault", data, { root: true });
       }
       this.loading = false;

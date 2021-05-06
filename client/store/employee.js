@@ -45,8 +45,13 @@ export const actions = {
         withDesignation
       });
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -55,7 +60,7 @@ export const actions = {
     { searchBy, searchText, limit, offset, withPhoto, withDesignation }
   ) {
     try {
-      if (state.list.rows.length) return;
+      // if (state.list.rows.length) return;
       const result = await EmployeeAPI.getAll({
         searchBy,
         searchText,
@@ -64,9 +69,11 @@ export const actions = {
         withPhoto,
         withDesignation
       });
+      console.log("Results", result);
       commit(types.SET_EMPLOYEES, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.log("Error", error);
+      // dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   createEmployee: async function({ dispatch, commit }, data) {
@@ -77,8 +84,9 @@ export const actions = {
       console.log(result, data);
       commit(types.ADD_EMPLOYEE, { ...data, id: result.data });
       this.app.router.push("/employee");
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      // dispatch("utils/setNotifDefault", data, { root: true });
     }
   },
   updateEmployee: async function({ dispatch, commit }, data) {
@@ -89,8 +97,13 @@ export const actions = {
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_EMPLOYEE, data);
       this.app.router.push("/employee");
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

@@ -44,8 +44,13 @@ export const actions = {
     try {
       const result = await DesignationAPI.getOne(id, { include, exclude });
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   fetchDesignations: async function(
@@ -53,7 +58,7 @@ export const actions = {
     { searchBy, searchText, limit, offset }
   ) {
     try {
-      if (state.list.rows.length) return;
+      // if (state.list.rows.length) return;
       const result = await DesignationAPI.getAll({
         searchBy,
         searchText,
@@ -62,8 +67,13 @@ export const actions = {
         withDept: true
       });
       commit(types.SET_DESIGNATIONS, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   createDesignation: async function({ dispatch, commit }, data) {
@@ -71,8 +81,13 @@ export const actions = {
       const result = await DesignationAPI.create(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.ADD_DESIGNATION, { ...data, id: result.data });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     } finally {
       this.app.router.push("/designation");
     }
@@ -82,8 +97,13 @@ export const actions = {
       const result = await DesignationAPI.update(data);
       dispatch("utils/setNotifDefault", result, { root: true });
       commit(types.UPDATE_DESIGNATION, data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     } finally {
       this.app.router.push("/designation");
     }

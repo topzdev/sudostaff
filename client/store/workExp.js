@@ -30,8 +30,13 @@ export const actions = {
       const result = await workExpServices.getAll(employeeId);
 
       commit(types.SET_WORK_EXP, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -43,8 +48,13 @@ export const actions = {
       const result = await workExpServices.getOne(id);
 
       commit(types.SET_CURRENT, result.data);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async addWorkExp({ rootState, commit, dispatch }, data) {
@@ -62,8 +72,13 @@ export const actions = {
         id: result.data
       });
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -73,8 +88,13 @@ export const actions = {
 
       commit(types.DELETE_WORK_EXP, id);
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };

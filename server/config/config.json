@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "dev123",
-    "database": "sudostaff_hr_dev",
+    "database": "toystorey_hr_dev",
     "host": "localhost",
     "dialect": "postgres"
   },

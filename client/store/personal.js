@@ -115,8 +115,13 @@ export const actions = {
 
       commit(types.SET_PERSONAL_INFO, result.data);
       commit(types.SET_LOADING, false);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
   async updatePersonalInfo({ commit, dispatch, state, rootState }, data) {
@@ -140,8 +145,13 @@ export const actions = {
       });
       commit(types.SET_LOADING, false);
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -156,8 +166,13 @@ export const actions = {
 
       commit(types.SET_ADDRESS, result.data);
       commit(types.SET_LOADING, false);
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   },
 
@@ -178,8 +193,13 @@ export const actions = {
       commit(types.SET_ADDRESS, data);
       commit(types.SET_LOADING, false);
       dispatch("utils/setNotifDefault", result, { root: true });
-    } catch ({ response: { data } }) {
-      dispatch("utils/setNotifDefault", data, { root: true });
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        "utils/setNotifDefault",
+        "Something went wrong, Please check your console",
+        { root: true }
+      );
     }
   }
 };
