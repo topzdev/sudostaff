@@ -42,9 +42,9 @@ module.exports = {
           transaction: t,
         }),
 
-        queryInterface.bulkInsert("employees", employeesData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("employees", employeesData, {
+        //   transaction: t,
+        // }),
 
         queryInterface.bulkInsert("leaveTypes", leaveTypesData, {
           transaction: t,
@@ -81,9 +81,9 @@ module.exports = {
         queryInterface.bulkDelete("familyDetails", null, {
           transaction: t,
         }),
-        queryInterface.bulkDelete("employees", null, {
-          transaction: t,
-        }),
+        // queryInterface.bulkDelete("employees", null, {
+        //   transaction: t,
+        // }),
         queryInterface.bulkDelete("leaveTypes", null, {
           transaction: t,
         }),

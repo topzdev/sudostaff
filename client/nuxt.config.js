@@ -32,10 +32,10 @@ export default {
       }
     },
     redirect: {
-      login: "/login",
-      logout: "/login",
-      callback: "/login",
-      home: "/dashboard"
+      login: "/",
+      logout: "/",
+      callback: "/",
+      home: "/user/your-info"
     }
   },
 

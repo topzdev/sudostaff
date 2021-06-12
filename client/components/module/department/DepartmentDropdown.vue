@@ -24,15 +24,16 @@ export default {
   computed: {
     list() {
       return this.$store.state.department.dropdown;
-    }
+    },
   },
   methods: {
     postFixed(text) {
-      return text.toLowerCase().includes("Department")
-        ? text
-        : text + " Department";
-    }
-  }
+      if (text)
+        return text.toLowerCase().includes("Department")
+          ? text
+          : text + " Department";
+    },
+  },
 };
 </script>
 

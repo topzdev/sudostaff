@@ -38,6 +38,7 @@
 <script>
 import TableMixin from "@/mixins/TableMixin";
 export default {
+  mixins: [TableMixin],
   data() {
     return {
       queryParams: {},

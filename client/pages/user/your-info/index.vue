@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  async mounted() {
+  async fetch() {
     await this.$store.dispatch("personal/fetchPersonalInfo");
   },
 };

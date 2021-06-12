@@ -5,7 +5,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title class="font-weight-bold"
-        >Human Resources</v-toolbar-title
+        >Toy Storey Human Resources</v-toolbar-title
       >
 
       <v-spacer></v-spacer>

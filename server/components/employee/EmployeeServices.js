@@ -92,6 +92,8 @@ class EmployeeServices {
 
     photoId = uploaded.data;
 
+    console.log("Photo ID", photoId);
+
     // Create blanks model and get the id
     const benifitsId = await benifitsServices.create({});
     const familyDetailsId = await familyDetailsServices.create({});

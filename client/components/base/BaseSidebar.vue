@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       items: [
-        { title: "Dashboard", icon: "mdi-view-dashboard", to: "/dashboard" },
+        // { title: "Dashboard", icon: "mdi-view-dashboard", to: "/dashboard" },
         {
           title: "User",
           to: "/user/your-info",

@@ -27,7 +27,7 @@ export default {
   computed: {
     getInfo() {
       return this.$store.state.personal.address;
-    }
+    },
   },
   methods: {
     loadData() {
@@ -36,6 +36,7 @@ export default {
     },
     async update() {
       this.loading = true;
+      console.log("Updatingg..");
       this.$refs.form.validate();
       if (!this.valid) return;
 
@@ -44,17 +45,17 @@ export default {
         this.addressDetails
       );
       this.loading = false;
-    }
+    },
   },
   watch: {
     getInfo() {
       this.loadData();
-    }
+    },
   },
   async mounted() {
     await this.$store.dispatch("personal/fetchAddressDetails");
     this.loadData();
-  }
+  },
 };
 </script>
 

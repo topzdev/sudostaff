@@ -77,11 +77,9 @@ class PhotoServices {
   }
 
   async update({ photoId, rawPhoto }) {
-    if (!photoId)
-      return {
-        status: 400,
-        msg: "Photo id is required",
-      };
+    if (!photoId) {
+      return this.create(rawPhoto);
+    }
 
     const photo = await models.Photo.findByPk(photoId);
 
@@ -97,10 +95,10 @@ class PhotoServices {
     };
 
     if (rawPhoto) {
-      if (photo.photoId) {
-        const deletePhoto = await this.delete(photo.photoId);
-        if (deletePhoto.status === 400) return deletePhoto;
-      }
+      // if (photo.photoId) {
+      //   const deletePhoto = await this.delete(photo.photoId);
+      //   if (deletePhoto.status === 400) return deletePhoto;
+      // }
 
       const newPhoto = await cloudinary.uploader.upload(
         rawPhoto.tempFilePath,
