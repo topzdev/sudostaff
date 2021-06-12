@@ -3,6 +3,13 @@
     <v-card-text>
       <v-row>
         <v-col class="py-0 pb-1" cols="12">
+          <department-dropdown
+            :value="departmentId"
+            @input="$emit('update:departmentId', $event)"
+            :rules="rules.departmentId"
+          />
+        </v-col>
+        <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="Designation Name"
             :value="name"
@@ -19,14 +26,6 @@
             outlined
           ></v-textarea>
         </v-col>
-
-        <v-col class="py-0 pb-1" cols="12">
-          <department-dropdown
-            :value="departmentId"
-            @input="$emit('update:departmentId', $event)"
-            :rules="rules.departmentId"
-          />
-        </v-col>
       </v-row>
     </v-card-text>
   </v-card>
@@ -36,7 +35,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["name", "description", "departmentId", "department"]
+  props: ["name", "description", "departmentId", "department"],
 };
 </script>
 

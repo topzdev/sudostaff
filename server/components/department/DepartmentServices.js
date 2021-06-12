@@ -8,7 +8,7 @@ class DepartmentServices {
   async getOne({ id }, { include, exclude, withDeptHead }) {
     const result = await models.Department.findAll({
       ...parseCondition({ limit: 1, include, exclude }),
-      include: withDeptHead ? helpers.tableJoin() : [],
+      // include: withDeptHead ? helpers.tableJoin() : [],
       where: { id },
     });
 
@@ -37,7 +37,7 @@ class DepartmentServices {
         include,
         exclude,
       }),
-      include: withDeptHead ? helpers.tableJoin() : [],
+      // include: withDeptHead ? helpers.tableJoin() : [],
     });
     return {
       status: 200,
@@ -47,7 +47,7 @@ class DepartmentServices {
   }
 
   async create({ name, description, employeeId }) {
-    if (await deparmentHelpers.isExist({ name }))
+    if (await helpers.isExist({ name }))
       return {
         status: 500,
         msg: "Department name is already exist",
@@ -55,10 +55,10 @@ class DepartmentServices {
 
     const result = await models.Department.create({ name, description });
 
-    const head = await models.DepartmentHead.create({
-      departmentId: result.id,
-      employeeId,
-    });
+    // const head = await models.DepartmentHead.create({
+    //   departmentId: result.id,
+    //   employeeId,
+    // });
 
     return {
       status: 200,
@@ -75,12 +75,12 @@ class DepartmentServices {
       where: { id },
     });
 
-    const departmentHead = await models.DepartmentHead.update(
-      { employeeId: departmentInfo.employeeId },
-      {
-        where: { departmentId: id },
-      }
-    );
+    // const departmentHead = await models.DepartmentHead.update(
+    //   { employeeId: departmentInfo.employeeId },
+    //   {
+    //     where: { departmentId: id },
+    //   }
+    // );
 
     console.log(departmentHead);
 
@@ -92,15 +92,15 @@ class DepartmentServices {
   }
 
   async delete({ id }) {
-    if (!(await deparmentHelpers.isExist({ name })))
+    if (!(await helpers.isExist({ name })))
       return {
         status: 500,
         msg: "Department is not exist",
       };
 
-    const departmentHead = await models.DepartmentHead.destroy({
-      departmentId: id,
-    });
+    // const departmentHead = await models.DepartmentHead.destroy({
+    //   departmentId: id,
+    // });
 
     const result = await models.Department.destroy({ where: { id } });
 

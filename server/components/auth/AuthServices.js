@@ -67,7 +67,7 @@ class AuthServices {
       };
 
     const result = await models.Account.findByPk(user.id, {
-      attributes: ["id", "employeeId", "username"],
+      attributes: ["id", "employeeId", "username", "isAdmin"],
       include: [
         {
           as: "employee",

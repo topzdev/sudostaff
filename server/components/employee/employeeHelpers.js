@@ -13,7 +13,7 @@ exports.flatten = (result) => {
   let department = null,
     departmentHead = null;
 
-  if (result.designation.department) {
+  if (result.designationId && result.designation.department) {
     department = result.designation.department;
 
     if (result.designation.department.departmentHead) {

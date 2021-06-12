@@ -12,35 +12,35 @@ const governmentData = require("../data/governmentIds.json");
 const familyData = require("../data/familyDetails.json");
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    console.log(departmentsData, designationsData);
+    // console.log(departmentsData, designationsData);
     return queryInterface.sequelize.transaction((t) => {
       return Promise.all([
         // queryInterface.bulkInsert("photos", photoData, {
         //   transaction: t,
         // }),
-        queryInterface.bulkInsert("departments", departmentsData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("departments", departmentsData, {
+        //   transaction: t,
+        // }),
 
-        queryInterface.bulkInsert("designations", designationsData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("designations", designationsData, {
+        //   transaction: t,
+        // }),
 
-        queryInterface.bulkInsert("benifits", benifitsData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("benifits", benifitsData, {
+        //   transaction: t,
+        // }),
 
-        queryInterface.bulkInsert("addresses", addressData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("addresses", addressData, {
+        //   transaction: t,
+        // }),
 
-        queryInterface.bulkInsert("governmentIds", governmentData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("governmentIds", governmentData, {
+        //   transaction: t,
+        // }),
 
-        queryInterface.bulkInsert("familyDetails", familyData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("familyDetails", familyData, {
+        //   transaction: t,
+        // }),
 
         // queryInterface.bulkInsert("employees", employeesData, {
         //   transaction: t,
@@ -50,9 +50,9 @@ module.exports = {
           transaction: t,
         }),
 
-        queryInterface.bulkInsert("departmentHeads", departmentHeadsData, {
-          transaction: t,
-        }),
+        // queryInterface.bulkInsert("departmentHeads", departmentHeadsData, {
+        //   transaction: t,
+        // }),
       ]);
     });
   },
@@ -63,33 +63,33 @@ module.exports = {
         // queryInterface.bulkDelete("photos", null, {
         //   transaction: t,
         // }),
-        queryInterface.bulkDelete("departments", null, {
-          transaction: t,
-        }),
-        queryInterface.bulkDelete("designations", null, {
-          transaction: t,
-        }),
-        queryInterface.bulkDelete("benifits", null, {
-          transaction: t,
-        }),
-        queryInterface.bulkDelete("addresses", null, {
-          transaction: t,
-        }),
-        queryInterface.bulkDelete("governmentIds", null, {
-          transaction: t,
-        }),
-        queryInterface.bulkDelete("familyDetails", null, {
-          transaction: t,
-        }),
+        // queryInterface.bulkDelete("departments", null, {
+        //   transaction: t,
+        // }),
+        // queryInterface.bulkDelete("designations", null, {
+        //   transaction: t,
+        // }),
+        // queryInterface.bulkDelete("benifits", null, {
+        //   transaction: t,
+        // }),
+        // queryInterface.bulkDelete("addresses", null, {
+        //   transaction: t,
+        // }),
+        // queryInterface.bulkDelete("governmentIds", null, {
+        //   transaction: t,
+        // }),
+        // queryInterface.bulkDelete("familyDetails", null, {
+        //   transaction: t,
+        // }),
         // queryInterface.bulkDelete("employees", null, {
         //   transaction: t,
         // }),
         queryInterface.bulkDelete("leaveTypes", null, {
           transaction: t,
         }),
-        queryInterface.bulkDelete("departmentHeads", null, {
-          transaction: t,
-        }),
+        // queryInterface.bulkDelete("departmentHeads", null, {
+        //   transaction: t,
+        // }),
       ]);
     });
   },

@@ -20,7 +20,7 @@
           ></v-textarea>
         </v-col>
 
-        <v-col class="py-0 pb-1" cols="12">
+        <!-- <v-col class="py-0 pb-1" cols="12">
           <search-employee-input
             label="Select Department Head"
             :value="employeeId"
@@ -28,7 +28,7 @@
             :default-value="departmentHead"
             :rules="rules.employeeId"
           />
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-card-text>
   </v-card>
@@ -38,7 +38,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["name", "description", "employeeId", "departmentHead"]
+  props: ["name", "description", "employeeId", "departmentHead"],
 };
 </script>
 

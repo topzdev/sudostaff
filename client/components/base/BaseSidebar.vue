@@ -14,7 +14,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <template v-for="item in items">
+        <template v-for="item in sidebarItem">
           <v-list-item
             link
             color="primary"
@@ -94,26 +94,48 @@ export default {
           ],
         },
 
-        { title: "Employee", icon: "mdi-account-multiple", to: "/employee" },
+        {
+          title: "Employee",
+          icon: "mdi-account-multiple",
+          to: "/employee",
+          admin: true,
+        },
         {
           title: "Department",
           icon: "mdi-account-box-multiple",
           to: "/department",
+          admin: true,
         },
         {
           title: "Designation",
           icon: "mdi-clipboard-account",
           to: "/designation",
+          admin: true,
         },
         {
           title: "Leave Request",
           to: "/leave-request",
           icon: "mdi-account-arrow-right-outline",
+          admin: true,
         },
         // { title: "Mail", icon: "mdi-email-multiple-outline", to: "/mail" },
         { title: "Account", icon: "mdi-account-group", to: "/account" },
       ],
     };
+  },
+
+  computed: {
+    user() {
+      return this.$auth.user ? this.$auth.user : null;
+    },
+
+    sidebarItem() {
+      const user = this.user;
+      return this.items.map((item) => {
+        if (item.admin !== user.isAdmin) return item;
+        return item;
+      });
+    },
   },
 };
 </script>

@@ -37,26 +37,26 @@ export default {
       headers: [
         {
           text: "Department Name",
-          value: "name"
+          value: "name",
         },
         {
           text: "Description",
-          value: "description"
+          value: "description",
         },
-        {
-          text: "Department Head",
-          value: "departmentHead.employee.fullName"
-        },
+        // {
+        //   text: "Department Head",
+        //   value: "departmentHead.employee.fullName"
+        // },
         {
           text: "Actions",
           width: "120px",
           align: "center",
           value: "actions",
-          sortable: false
-        }
-      ]
+          sortable: false,
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 

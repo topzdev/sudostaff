@@ -1,9 +1,11 @@
 <template>
-  <auto-layout>
-    <v-container>
-      <designation-form />
-    </v-container>
-  </auto-layout>
+  <auth-layout>
+    <auto-layout>
+      <v-container>
+        <designation-form />
+      </v-container>
+    </auto-layout>
+  </auth-layout>
 </template>
 
 <script>
