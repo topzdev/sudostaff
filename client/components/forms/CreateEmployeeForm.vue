@@ -2,13 +2,16 @@
   <v-form ref="form" v-model="valid">
     <v-card flat class="align-center background-none" tile>
       <v-row>
-        <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+        <v-col>
+          <v-card-title
+            class="display-1 font-weight-medium"
+            v-text="title"
+          ></v-card-title>
           <v-card-subtitle v-text="subtitle"></v-card-subtitle>
         </v-col>
       </v-row>
 
-      <v-card-text class="py-0">
+      <v-card-text>
         <v-row>
           <v-col cols="8">
             <v-row>
@@ -16,7 +19,11 @@
                 <is-active-info-card v-bind="employee" />
               </v-col>-->
               <v-col cols="12">
-                <work-info-card :is-edit="isEdit" v-bind.sync="employee" :rules="workRules" />
+                <work-info-card
+                  :is-edit="isEdit"
+                  v-bind.sync="employee"
+                  :rules="workRules"
+                />
               </v-col>
 
               <v-col cols="12">
@@ -28,7 +35,11 @@
               </v-col>
 
               <v-col cols="12">
-                <contact-info-card :is-edit="isEdit" v-bind.sync="employee" :rules="contactRules" />
+                <contact-info-card
+                  :is-edit="isEdit"
+                  v-bind.sync="employee"
+                  :rules="contactRules"
+                />
               </v-col>
             </v-row>
           </v-col>
@@ -92,13 +103,13 @@ export default {
         designationId: null,
         departmentId: null,
         photoId: null,
-        photo: null
+        photo: null,
       },
 
       photoInfo: {
         imageUrl: null,
-        raw: null
-      }
+        raw: null,
+      },
     };
   },
   methods: {
@@ -111,8 +122,8 @@ export default {
           query: {
             exclude: ["createdAt", "updatedAt", "deletedAt"],
             withPhoto: true,
-            withDesignation: true
-          }
+            withDesignation: true,
+          },
         });
         const data = JSON.parse(JSON.stringify(this.current));
         console.log(data);
@@ -131,7 +142,7 @@ export default {
       this.loading = true;
       await this.$store.dispatch("employee/createEmployee", {
         ...this.employee,
-        photo: this.photoInfo.raw || null
+        photo: this.photoInfo.raw || null,
       });
       this.loading = false;
     },
@@ -147,10 +158,10 @@ export default {
       */
       await this.$store.dispatch("employee/updateEmployee", {
         ...this.employee,
-        photo: this.photoInfo.raw || null
+        photo: this.photoInfo.raw || null,
       });
       this.loading = false;
-    }
+    },
   },
   computed: {
     title() {
@@ -163,11 +174,11 @@ export default {
     },
     current() {
       return this.$store.state.employee.current;
-    }
+    },
   },
   created() {
     this.fetchData();
-  }
+  },
 };
 </script>
 

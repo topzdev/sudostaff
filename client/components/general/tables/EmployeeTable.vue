@@ -30,15 +30,46 @@
           >Inactive</v-chip
         >
       </template>
+
+      <template v-slot:item.isActive="{ item }">
+        <v-chip
+          v-if="item.isActive"
+          color="success lighten-5 success--text font-weight-bold"
+          >Active</v-chip
+        >
+        <v-chip v-else color="error lighten-5 error--text font-weight-bold"
+          >Inactive</v-chip
+        >
+      </template>
+
+      <template v-slot:item.photo="{ item }">
+        <v-avatar size="40px">
+          <base-image v-if="item.photo.photoUrl" :src="item.photo.photoUrl" />
+          <base-image v-else />
+        </v-avatar>
+      </template>
+      <template v-slot:item.designation="{ item }">
+        <span v-if="item.designation">
+          {{ item.designation.name }}
+        </span>
+      </template>
+      <template v-slot:item.department="{ item }">
+        <span v-if="item.designation && item.designation.department.name">
+          {{ item.designation.department.name }}
+        </span>
+      </template>
     </v-data-table>
   </v-card>
 </template>
 
 
 <script>
-import TableMixin from "@/mixins/TableMixin";
+import debounce from "debounce";
+
 export default {
-  mixins: [TableMixin],
+  props: {
+    search: String,
+  },
   data() {
     return {
       queryParams: {},
@@ -57,6 +88,11 @@ export default {
 
       headers: [
         {
+          text: "",
+          value: "photo",
+          width: "50px",
+        },
+        {
           text: "Employee Id",
           value: "id",
         },
@@ -66,11 +102,11 @@ export default {
         },
         {
           text: "Designation",
-          value: "designation.name",
+          value: "designation",
         },
         {
           text: "Department",
-          value: "designation.department.name",
+          value: "department",
         },
         {
           text: "Status",
@@ -94,29 +130,29 @@ export default {
   },
 
   methods: {
-    log(data) {
-      console.log(data);
+    // searchText(text) {
+    //   this.search = text;
+    //   this.fetchEmployeeTable();
+    // },
+    editItem(id) {
+      this.$router.push(this.store + "/update/" + id);
     },
-
-    fetchEmployeeTable() {
+    fetchEmployeeTable: debounce(async function () {
       const self = this;
       this.loading = true;
       const { itemsPerPage, page } = this.pagination;
-
-      setTimeout(async () => {
-        console.log("Params", self.queryParams);
-        await self.$store.dispatch(self.dispatch, {
-          search: self.search,
-          limit: itemsPerPage,
-          offset: page ? (page - 1) * itemsPerPage : undefined,
-          ...self.queryParams,
-        });
-        console.log("Table Loaded..");
-        self.loading = false;
-      }, 500);
-
+      console.log(this.search);
+      await self.$store.dispatch(self.dispatch, {
+        searchBy: "fullName",
+        searchText: self.search,
+        limit: itemsPerPage,
+        offset: page ? (page - 1) * itemsPerPage : undefined,
+        ...self.queryParams,
+      });
+      console.log("Table Loaded..");
+      self.loading = false;
       console.log(this.list);
-    },
+    }, 500),
   },
   watch: {
     pagination: {
@@ -124,6 +160,9 @@ export default {
         this.fetchEmployeeTable();
       },
       deep: true,
+    },
+    search() {
+      this.fetchEmployeeTable();
     },
   },
 

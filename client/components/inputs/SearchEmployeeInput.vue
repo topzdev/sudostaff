@@ -1,18 +1,5 @@
 <template>
   <div class="d-flex align-center">
-    <!-- <v-chip v-if="parseDefault" class="mr-5" color="warning" large>
-      <v-avatar left size="50">
-        <img v-if="parseDefault.photo" :src="parseDefault.photo.photoUrl" />
-        <img v-else :src="emptyPhoto" />
-      </v-avatar>
-      <div>
-        <div class="body-1">{{parseDefault.fullName}}</div>
-        <span class="caption">
-          <b>Current Head</b>
-          ({{parseDefault.id}})
-        </span>
-      </div>
-    </v-chip>-->
     <v-autocomplete
       :value="value"
       @input="$emit('input', $event)"
@@ -37,12 +24,15 @@
           large
         >
           <v-avatar left size="50">
-            <base-image v-if="data.item.photo" :src="data.item.photo.photoUrl" />
+            <base-image
+              v-if="data.item.photo"
+              :src="data.item.photo.photoUrl"
+            />
             <base-image v-else />
           </v-avatar>
           <div>
-            <div class="body-1">{{data.item.fullName}}</div>
-            <span class="caption">({{data.item.id}})</span>
+            <div class="body-1">{{ data.item.fullName }}</div>
+            <span class="caption">({{ data.item.id }})</span>
           </div>
         </v-chip>
       </template>
@@ -64,14 +54,14 @@ import InputMixin from "@/mixins/InputMixin";
 export default {
   mixins: [InputMixin],
   props: {
-    defaultValue: Object
+    defaultValue: Object,
   },
   data() {
     return {
       search: null,
       loading: false,
       employee: [],
-      emptyPhoto: require("@/assets/img/no-photo.png")
+      emptyPhoto: require("@/assets/img/no-photo.png"),
     };
   },
 
@@ -83,13 +73,13 @@ export default {
     parsedList() {
       if (this.parseDefault) {
         const newList = this.employee.filter(
-          item => item.id !== this.parseDefault.id
+          (item) => item.id !== this.parseDefault.id
         );
         return [this.parseDefault, ...newList];
       }
 
       return this.employee;
-    }
+    },
   },
 
   watch: {
@@ -97,8 +87,8 @@ export default {
       handler() {
         this.fetchEmployee();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     remove() {
@@ -114,16 +104,16 @@ export default {
           searchBy: "fullName",
           limit: 6,
           include: ["firstName", "middleName", "lastName", "fullName"],
-          withPhoto: true
+          withPhoto: true,
         });
         self.employee = result.data.rows;
         self.loading = false;
       }, 1000);
-    }
+    },
   },
-  mounted() {
+  created() {
     this.fetchEmployee();
-  }
+  },
 };
 </script>
 

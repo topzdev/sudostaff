@@ -1,27 +1,26 @@
 <template>
-  <auth-layout>
-    <v-container>
-      <v-card flat :loading="loading" class="align-center background-none">
-        <v-row>
-          <v-col class="py-0">
-            <v-card-title class="display-1 font-weight-medium"
-              >Leave Request Management</v-card-title
-            >
-            <v-card-subtitle>Review leave request submittions</v-card-subtitle>
-          </v-col>
-        </v-row>
+  <v-container>
+    <v-card flat :loading="loading" class="align-center background-none">
+      <v-row>
+        <v-col>
+          <v-card-title class="display-1 font-weight-medium"
+            >Leave Request Management</v-card-title
+          >
+          <v-card-subtitle>Review leave request submittions</v-card-subtitle>
+        </v-col>
+      </v-row>
 
-        <v-card-text>
-          <leave-admin-summary />
-          <leave-admin-table />
-        </v-card-text>
-      </v-card>
-    </v-container>
-  </auth-layout>
+      <v-card-text>
+        <leave-admin-summary />
+        <leave-admin-table />
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
 export default {
+  middleware: ["is-admin"],
   data() {
     return {
       search: "",

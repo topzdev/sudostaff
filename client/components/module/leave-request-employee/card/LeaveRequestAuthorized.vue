@@ -5,9 +5,13 @@
       <base-image v-else />
     </v-list-item-avatar>
 
-    <v-list-item-content class="py-0">
-      <v-list-item-subtitle style="font-size:12px;">{{statusText}}</v-list-item-subtitle>
-      <v-list-item-title style="font-size:14px;">{{person.fullName}}</v-list-item-title>
+    <v-list-item-content>
+      <v-list-item-subtitle style="font-size: 12px">{{
+        statusText
+      }}</v-list-item-subtitle>
+      <v-list-item-title style="font-size: 14px">{{
+        person.fullName
+      }}</v-list-item-title>
     </v-list-item-content>
   </v-list-item>
 </template>
@@ -19,15 +23,15 @@ export default {
   mixins: [LeaveUtils],
   props: {
     personId: {
-      type: String
+      type: String,
     },
 
     person: {
-      type: Object
+      type: Object,
     },
 
-    status: String
-  }
+    status: String,
+  },
 };
 </script>
 

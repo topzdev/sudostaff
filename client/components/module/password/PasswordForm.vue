@@ -2,8 +2,11 @@
   <v-form ref="form" v-model="valid">
     <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
-        <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+        <v-col>
+          <v-card-title
+            class="display-1 font-weight-medium"
+            v-text="title"
+          ></v-card-title>
           <v-card-subtitle v-text="subtitle"></v-card-subtitle>
         </v-col>
       </v-row>
@@ -12,7 +15,7 @@
         <password-card v-bind.sync="password" :rules="passwordRules" />
       </v-col>
 
-      <v-col cols="8" class="py-0">
+      <v-col cols="8">
         <v-card flat class="background-none">
           <form-card-action
             updateText="Change Password"
@@ -41,7 +44,7 @@ export default {
       this.loading = true;
       await this.$store.dispatch("account/updatePassword", this.password);
       this.loading = false;
-    }
+    },
   },
   computed: {
     title() {
@@ -49,8 +52,8 @@ export default {
     },
     subtitle() {
       return "Make secure your account by putting a strong password.";
-    }
-  }
+    },
+  },
 };
 </script>
 

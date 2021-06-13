@@ -28,6 +28,7 @@ const photoRouter = require("./photo/photoRoute");
 const mailerRouter = require("./mailer/mailerRoute");
 const accountRouter = require("./account/accountRoute");
 const authRouter = require("./auth/authRoute");
+const dashboardRouter = require("./dashboard/route");
 
 router.use("/api-docs", swaggerUi.serve);
 router.get("/api-docs", swaggerUi.setup(apiDocs));
@@ -52,5 +53,6 @@ router.use("/childrens", childrensRouter);
 router.use("/address", addressRouter);
 router.use("/photo", photoRouter);
 router.use("/mailer", mailerRouter);
+router.use("/dashboard", dashboardRouter);
 
 module.exports = router;

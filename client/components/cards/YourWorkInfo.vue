@@ -91,7 +91,7 @@ export default {
       this.loadData();
     },
   },
-  mounted() {
+  created() {
     this.loadData();
   },
 };

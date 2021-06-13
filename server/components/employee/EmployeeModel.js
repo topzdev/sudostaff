@@ -104,6 +104,7 @@ module.exports = (sequelize, Datatypes) => {
     });
     models.Employee.belongsTo(models.Photo);
     models.Employee.belongsTo(models.Designation);
+    models.Employee.hasOne(models.Account);
     models.Account.belongsTo(models.Employee, {
       as: "employee",
       foreignKey: {

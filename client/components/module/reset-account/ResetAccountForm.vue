@@ -2,7 +2,7 @@
   <v-form ref="form" v-model="valid">
     <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
-        <v-col class="py-0">
+        <v-col>
           <v-card-title
             class="display-1 font-weight-medium"
             v-text="title"

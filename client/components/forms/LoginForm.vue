@@ -110,7 +110,7 @@ export default {
             password: "",
           };
 
-          this.$router.push("/dashboard");
+          // this.$router.push("/dashboard");
           // this.$store.dispatch("utils/setNotifDefault", result, { root: true });
         }
       } catch (error) {

@@ -2,8 +2,11 @@
   <v-form ref="form" v-model="valid">
     <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
-        <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+        <v-col>
+          <v-card-title
+            class="display-1 font-weight-medium"
+            v-text="title"
+          ></v-card-title>
           <v-card-subtitle v-text="subtitle"></v-card-subtitle>
         </v-col>
       </v-row>
@@ -17,7 +20,7 @@
         />
       </v-col>
 
-      <v-col cols="8" class="py-0">
+      <v-col cols="8">
         <v-card flat class="background-none">
           <form-card-action
             :cancelFunc="back"
@@ -47,22 +50,16 @@ export default {
       if (id && this.isEdit) {
         await this.$store.dispatch("department/fetchOneDepartment", {
           id,
-          query: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+          query: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
         });
         const data = JSON.parse(JSON.stringify(this.current));
         if (data) {
-          const { description, id, name, departmentHead } = data;
-
-          const employeeId = departmentHead.employee
-            ? departmentHead.employee.id
-            : null;
+          const { description, id, name } = data;
 
           this.department = {
             description,
             id,
             name,
-            departmentHead,
-            employeeId
           };
         }
       }
@@ -90,7 +87,7 @@ export default {
         this.department
       );
       this.loading = false;
-    }
+    },
   },
   computed: {
     title() {
@@ -103,11 +100,11 @@ export default {
     },
     current() {
       return this.$store.state.department.current;
-    }
+    },
   },
   created() {
     this.fetchData();
-  }
+  },
 };
 </script>
 

@@ -8,7 +8,7 @@
 
     <v-card-text>
       <div class="subtitle-2 mb-5">Father Information</div>
-      <v-row class="mb-5">
+      <v-row class="mt-2 mb-5">
         <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="First Name"
@@ -46,7 +46,7 @@
       <v-divider class="d-flex my-5" />
 
       <div class="subtitle-2 mb-5">Mother Information</div>
-      <v-row class="mb-5">
+      <v-row class="mt-2 mb-5">
         <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="First Name"
@@ -84,7 +84,7 @@
       <v-divider class="d-flex my-5" />
 
       <div class="subtitle-2 mb-5">Spouse Information</div>
-      <v-row class="mb-5">
+      <v-row class="mt-2 mb-5">
         <v-col class="py-0 pb-1" cols="6">
           <v-text-field
             label="First Name"
@@ -138,8 +138,8 @@ export default {
     "motherFirstName",
     "motherMiddleName",
     "motherLastName",
-    "motherExt"
-  ]
+    "motherExt",
+  ],
 };
 </script>
 

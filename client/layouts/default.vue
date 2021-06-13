@@ -1,27 +1,22 @@
 <template>
-  <v-app>
-    <v-main>
-      <nuxt />
+  <v-app dark>
+    <base-sidebar />
+    <base-navbar />
+    <v-main app>
+      <v-container style="margin-top: 60px" fluid>
+        <nuxt />
+      </v-container>
     </v-main>
+    <base-modals />
+    <base-snackbars />
   </v-app>
 </template>
 <script>
-export default {
-  name: "Default",
-
-  // async beforeCreate() {
-  //   if (process.browser)
-  //     this.$vuetify.theme.dark =
-  //       (await localStorage.getItem("hr-theme")) === "true" ? true : false;
-  // },
-};
+export default {};
 </script>
 
 
 <style lang="scss">
-.v-application {
-  font-family: "Poppins" !important;
-}
 .v-input__slot {
   margin-bottom: 4px;
 }

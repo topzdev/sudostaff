@@ -26,7 +26,7 @@ export default {
   computed: {
     getInfo() {
       return this.$store.state.familyDetails.current;
-    }
+    },
   },
   methods: {
     loadData() {
@@ -43,17 +43,17 @@ export default {
         this.familyDetails
       );
       this.loading = false;
-    }
+    },
   },
   watch: {
     getInfo() {
       this.loadData();
-    }
+    },
   },
-  async mounted() {
+  async fetch() {
     await this.$store.dispatch("familyDetails/fetchFamilyDetails");
     this.loadData();
-  }
+  },
 };
 </script>
 

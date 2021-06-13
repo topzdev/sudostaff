@@ -1,15 +1,15 @@
 <template>
-  <auth-layout>
-    <auto-layout>
-      <v-container>
-        <designation-form />
-      </v-container>
-    </auto-layout>
-  </auth-layout>
+  <auto-layout>
+    <v-container>
+      <designation-form />
+    </v-container>
+  </auto-layout>
 </template>
 
 <script>
-export default {};
+export default {
+  middleware: ["is-admin"],
+};
 </script>
 
 <style >

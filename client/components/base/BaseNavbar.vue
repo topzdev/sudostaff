@@ -1,54 +1,48 @@
 <template>
-  <div>
-    <v-app-bar flat></v-app-bar>
-    <v-app-bar fixed elevate-on-scroll>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-app-bar fixed elevate-on-scroll>
+    <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-      <v-toolbar-title class="font-weight-bold"
-        >Toy Storey Human Resources</v-toolbar-title
-      >
+    <v-toolbar-title class="font-weight-bold"
+      >Toy Storey Human Resources</v-toolbar-title
+    >
 
-      <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
+    <!-- <v-btn icon>
+      <v-icon>mdi-bell</v-icon>
+    </v-btn> -->
 
-      <v-menu offset-y bottom left>
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-avatar size="45">
-              <base-image
-                v-if="employee.photo"
-                :src="employee.photo.photoUrl"
-              />
-              <base-image v-else />
-            </v-avatar>
-          </v-btn>
-        </template>
+    <v-menu offset-y bottom left>
+      <template v-slot:activator="{ on }">
+        <v-btn icon v-on="on">
+          <v-avatar size="45">
+            <base-image v-if="employee.photo" :src="employee.photo.photoUrl" />
+            <base-image v-else />
+          </v-avatar>
+        </v-btn>
+      </template>
 
-        <v-list width="250">
-          <v-list-item to="/user/your-info">
-            <employee-template :employee="employee" />
+      <v-list width="250">
+        <v-list-item to="/user/your-info">
+          <employee-template :employee="employee" />
+        </v-list-item>
+        <v-divider />
+        <template v-for="item in items">
+          <v-list-item v-if="item.to" :key="item.title" :to="item.to">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
-          <v-divider />
-          <template v-for="item in items">
-            <v-list-item v-if="item.to" :key="item.title" :to="item.to">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              v-if="item.action"
-              :key="item.title"
-              @click="item.action()"
-            >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-          </template>
-          <base-theme-toggle />
-        </v-list>
-      </v-menu>
-    </v-app-bar>
-  </div>
+          <v-list-item
+            v-if="item.action"
+            :key="item.title"
+            @click="item.action()"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </template>
+        <base-theme-toggle />
+      </v-list>
+    </v-menu>
+  </v-app-bar>
 </template>
 
 <script>

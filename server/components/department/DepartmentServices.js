@@ -75,15 +75,6 @@ class DepartmentServices {
       where: { id },
     });
 
-    // const departmentHead = await models.DepartmentHead.update(
-    //   { employeeId: departmentInfo.employeeId },
-    //   {
-    //     where: { departmentId: id },
-    //   }
-    // );
-
-    console.log(departmentHead);
-
     return {
       status: 200,
       msg: "Department Updated Successfully",

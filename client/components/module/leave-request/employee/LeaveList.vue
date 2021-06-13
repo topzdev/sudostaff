@@ -13,7 +13,10 @@
     <v-card-text>
       <v-row>
         <v-col v-if="loading">
-          <v-progress-circular indeterminate color="primary"></v-progress-circular>
+          <v-progress-circular
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
         </v-col>
         <v-col v-else cols="12" v-for="item in list.rows" :key="item.id">
           <leave-card v-bind="item" />
@@ -34,14 +37,14 @@ export default {
   data() {
     return {
       loading: false,
-      status: ""
+      status: "",
     };
   },
 
   computed: {
     list() {
       return this.$store.state.leaveRequestEmployee.list;
-    }
+    },
   },
 
   methods: {
@@ -53,23 +56,23 @@ export default {
         await self.$store.dispatch("leaveRequestEmployee/fetchLeaveRequests", {
           exclude: ["deletedAt", "updatedAt"],
           status: self.status,
-          withLeaveType: true
+          withLeaveType: true,
         });
 
         self.loading = false;
       }, 1000);
-    }
+    },
   },
 
   watch: {
     status() {
       this.fetchList();
-    }
+    },
   },
 
-  mounted() {
+  fetch() {
     this.fetchList();
-  }
+  },
 };
 </script>
 

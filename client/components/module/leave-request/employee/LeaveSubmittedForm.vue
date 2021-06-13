@@ -2,8 +2,11 @@
   <v-form>
     <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
-        <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+        <v-col>
+          <v-card-title
+            class="display-1 font-weight-medium"
+            v-text="title"
+          ></v-card-title>
         </v-col>
       </v-row>
 
@@ -12,7 +15,7 @@
           <leave-submitted-card v-bind="leaveRequest" />
         </v-col>
 
-        <v-col cols="8" class="py-0">
+        <v-col cols="8">
           <v-card flat class="background-none">
             <v-btn text large color="primary" @click="back">Back</v-btn>
           </v-card>
@@ -40,8 +43,8 @@ export default {
         status: "",
         authorizedComment: "",
         authorizedBy: null,
-        leaveType: null
-      }
+        leaveType: null,
+      },
     };
   },
 
@@ -57,14 +60,14 @@ export default {
             query: {
               exclude: ["updatedAt", "deletedAt"],
               withEmployee: true,
-              withLeaveType: true
-            }
+              withLeaveType: true,
+            },
           }
         );
         const data = JSON.parse(JSON.stringify(this.current));
         if (data) this.leaveRequest = data;
       }
-    }
+    },
   },
   computed: {
     title() {
@@ -72,12 +75,12 @@ export default {
     },
     current() {
       return this.$store.state.leaveRequestEmployee.current;
-    }
+    },
   },
   async created() {
     await this.fetchData();
     this.restrictPage(this.current.status === "pending");
-  }
+  },
 };
 </script>
 

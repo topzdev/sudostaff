@@ -9,6 +9,7 @@ import LoginForm from "@/components/forms/LoginForm";
 export default {
   middleware: "auth",
   auth: "guest",
+  layout: "not-auth",
   components: {
     LoginForm,
   },

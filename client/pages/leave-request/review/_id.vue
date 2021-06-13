@@ -1,13 +1,13 @@
 <template>
-  <auth-layout>
-    <div>
-      <leave-admin-form />
-    </div>
-  </auth-layout>
+  <div>
+    <leave-admin-form />
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  middleware: ["is-admin"],
+};
 </script>
 
 <style>

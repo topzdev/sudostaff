@@ -43,7 +43,7 @@ export default {
     }
   },
 
-  mounted() {
+  fetch() {
     this.setData();
   }
 };

@@ -1,25 +1,28 @@
 <template>
-  <v-card :loading="loading" outlined>
-    <v-card-title
-      class="title font-weight-regular"
-      v-text="headerInfo.title"
-    ></v-card-title>
-    <v-card-subtitle v-text="headerInfo.description"></v-card-subtitle>
-    <v-tabs v-model="active" grow class="font-weight-bold">
-      <v-tab v-for="(item, idx) in tabs" :key="idx">{{
-        item.short || item.title
-      }}</v-tab>
-    </v-tabs>
-    <v-tabs-items v-if="loaded" v-model="active">
-      <personal-info-tab-item />
-      <contact-info-tab-item />
-      <address-tab-item />
-      <family-details-tab-item />
-      <benifits-tab-item />
-      <experience-tab-item />
-      <government-ids-tab-item />
-    </v-tabs-items>
-  </v-card>
+  <client-only>
+    <v-card :loading="loading" outlined>
+      <v-card-title
+        class="title font-weight-regular"
+        v-text="headerInfo.title"
+      ></v-card-title>
+      <v-card-subtitle v-text="headerInfo.description"></v-card-subtitle>
+
+      <v-tabs v-model="active" grow class="font-weight-bold">
+        <v-tab v-for="(item, idx) in tabs" :key="idx">{{
+          item.short || item.title
+        }}</v-tab>
+      </v-tabs>
+      <v-tabs-items v-if="loaded" v-model="active">
+        <personal-info-tab-item />
+        <contact-info-tab-item />
+        <address-tab-item />
+        <family-details-tab-item />
+        <benifits-tab-item />
+        <experience-tab-item />
+        <government-ids-tab-item />
+      </v-tabs-items>
+    </v-card>
+  </client-only>
 </template>
 
 <script>

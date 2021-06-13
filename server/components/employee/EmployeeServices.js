@@ -44,7 +44,11 @@ class EmployeeServices {
         exclude,
         searchBy,
       }),
-      include: helper.joinTable({ withPhoto, withDesignation }),
+      include: helper.joinTable({
+        withPhoto,
+        withDesignation,
+        withAccount: true,
+      }),
     });
     return {
       status: 200,

@@ -1,16 +1,17 @@
 <template>
-  <div>
-    <header>
-      <base-navbar />
-      <base-sidebar />
-      <base-modals />
-      <base-snackbars />
-    </header>
+  <span>
+    <base-sidebar />
+    <base-navbar />
 
-    <main>
-      <slot></slot>
-    </main>
-  </div>
+    <v-main>
+      <v-container fluid>
+        <slot></slot>
+      </v-container>
+    </v-main>
+
+    <base-modals />
+    <base-snackbars />
+  </span>
 </template>
 
 <script>

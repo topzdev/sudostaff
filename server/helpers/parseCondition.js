@@ -12,7 +12,9 @@ module.exports = ({
   status,
 }) => {
   const options = {
-    where: {},
+    where: {
+      // isAdmin: false,
+    },
     offset,
     limit,
   };

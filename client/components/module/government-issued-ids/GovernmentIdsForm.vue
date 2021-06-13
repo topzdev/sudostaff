@@ -27,7 +27,7 @@ export default {
   computed: {
     getInfo() {
       return this.$store.state.government.current;
-    }
+    },
   },
   methods: {
     loadData() {
@@ -44,17 +44,17 @@ export default {
         this.governmentIds
       );
       this.loading = false;
-    }
+    },
   },
   watch: {
     getInfo() {
       this.loadData();
-    }
+    },
   },
-  async mounted() {
+  async fetch() {
     await this.$store.dispatch("government/fetchGovernment");
     this.loadData();
-  }
+  },
 };
 </script>
 

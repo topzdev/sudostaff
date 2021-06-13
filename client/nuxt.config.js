@@ -35,7 +35,7 @@ export default {
       login: "/",
       logout: "/",
       callback: "/",
-      home: "/user/your-info"
+      home: "/dashboard"
     }
   },
 
@@ -85,7 +85,13 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
+    treeShake: true,
     customVariables: ["~/assets/variables.scss"],
+    defaultAssets: {
+      font: {
+        family: "Poppins"
+      }
+    },
     theme: {
       dark: true,
       themes: {

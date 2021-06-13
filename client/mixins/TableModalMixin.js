@@ -43,7 +43,7 @@ export default {
     }
   },
 
-  async mounted() {
+  async fetch() {
     await this.fetchList();
   }
 };

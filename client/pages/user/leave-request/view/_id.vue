@@ -1,9 +1,7 @@
 <template>
-  <auth-layout>
-    <v-container>
-      <leave-submitted-form />
-    </v-container>
-  </auth-layout>
+  <v-container>
+    <leave-submitted-form />
+  </v-container>
 </template>
 
 <script>

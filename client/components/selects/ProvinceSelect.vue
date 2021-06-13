@@ -11,8 +11,8 @@
   >
     <template v-slot:item="data">
       <v-list-item-content>
-        <v-list-item-title>{{data.item.text}}</v-list-item-title>
-        <v-list-item-subtitle>{{data.item.region}}</v-list-item-subtitle>
+        <v-list-item-title>{{ data.item.text }}</v-list-item-title>
+        <v-list-item-subtitle>{{ data.item.region }}</v-list-item-subtitle>
       </v-list-item-content>
     </template>
   </v-select>
@@ -24,12 +24,12 @@ export default {
   mixins: [InputMixin],
   data() {
     return {
-      items: []
+      items: [],
     };
   },
-  async mounted() {
+  async fetch() {
     this.items = province;
-  }
+  },
 };
 </script>
 

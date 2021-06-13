@@ -13,7 +13,7 @@
             :rules="rules.currentPassword"
           ></v-text-field>
         </v-col>
-        <v-col class="py-0">
+        <v-col>
           <v-divider class="py-0 pb-5" />
         </v-col>
         <v-col class="py-0 pb-2" cols="12">
@@ -47,7 +47,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["currentPassword", "newPassword", "confirmPassword"]
+  props: ["currentPassword", "newPassword", "confirmPassword"],
 };
 </script>
 

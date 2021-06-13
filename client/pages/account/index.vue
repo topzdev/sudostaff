@@ -1,29 +1,34 @@
 <template>
-  <auth-layout>
-    <v-container>
-      <v-card flat class="align-center background-none" tile>
+  <v-container>
+    <v-card flat class="align-center background-none" tile>
+      <v-row>
+        <v-col>
+          <v-card-title class="display-1 font-weight-medium"
+            >Account Settings</v-card-title
+          >
+          <v-card-subtitle>Manage employee accounts</v-card-subtitle>
+        </v-col>
+      </v-row>
+      <v-card-text>
         <v-row>
-          <v-col class="py-0">
-            <v-card-title class="display-1 font-weight-medium"
-              >Account Settings</v-card-title
-            >
-            <v-card-subtitle>Manage employee accounts</v-card-subtitle>
+          <v-col cols="8">
+            <reset-account />
+          </v-col>
+          <v-col cols="8">
+            <set-administrator />
           </v-col>
         </v-row>
-        <v-card-text class="py-0">
-          <v-row>
-            <v-col cols="8">
-              <reset-account />
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-container>
-  </auth-layout>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-export default {};
+import SetAdministrator from "~/components/pages/account/SetAdministrator.vue";
+export default {
+  components: { SetAdministrator },
+  middleware: ["is-admin"],
+};
 </script>
 
 <style>

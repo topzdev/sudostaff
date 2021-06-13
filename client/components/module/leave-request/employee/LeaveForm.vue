@@ -2,8 +2,11 @@
   <v-form ref="form" v-model="valid">
     <v-card :loading="loading" flat class="align-center background-none">
       <v-row>
-        <v-col class="py-0">
-          <v-card-title class="display-1 font-weight-medium" v-text="title"></v-card-title>
+        <v-col>
+          <v-card-title
+            class="display-1 font-weight-medium"
+            v-text="title"
+          ></v-card-title>
           <v-card-subtitle v-text="subtitle"></v-card-subtitle>
         </v-col>
       </v-row>
@@ -25,7 +28,7 @@
           </v-slide-x-reverse-transition>
         </v-col>
 
-        <v-col cols="8" class="py-0">
+        <v-col cols="8">
           <v-card flat class="background-none">
             <form-card-action
               :cancelFunc="backPage"
@@ -57,7 +60,7 @@ export default {
       saveText: "Next",
       cancelText: "Cancel",
       updateText: "Next",
-      fallback: "/user/leave-request"
+      fallback: "/user/leave-request",
     };
   },
   methods: {
@@ -69,7 +72,7 @@ export default {
           "leaveRequestEmployee/fetchOneLeaveRequest",
           {
             id,
-            query: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+            query: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
           }
         );
         const data = JSON.parse(JSON.stringify(this.current));
@@ -130,7 +133,7 @@ export default {
         this.leaveRequest
       );
       this.loading = false;
-    }
+    },
   },
   computed: {
     title() {
@@ -143,14 +146,14 @@ export default {
     },
     current() {
       return this.$store.state.leaveRequestEmployee.current;
-    }
+    },
   },
   async created() {
     if (!this.$route.name.includes("create")) {
       await this.fetchData();
       this.restrictPage(this.current.status !== "pending");
     } else this.allow = true;
-  }
+  },
 };
 </script>
 

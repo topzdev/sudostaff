@@ -8,7 +8,7 @@
 
     <v-card-text>
       <div class="subtitle-2 mb-5">Permanent Address</div>
-      <v-row class="mb-5">
+      <v-row class="mt-2 mb-5">
         <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="House/Block/Lot No."
@@ -50,7 +50,10 @@
           ></v-text-field>
         </v-col>
         <v-col class="py-0 pb-1" cols="6">
-          <province-select :value="province" @input="$emit('update:province', $event)"></province-select>
+          <province-select
+            :value="province"
+            @input="$emit('update:province', $event)"
+          ></province-select>
         </v-col>
         <v-col class="py-0 pb-1" cols="6">
           <v-text-field
@@ -64,7 +67,7 @@
 
       <!-- <v-divider class="my-5" /> -->
       <div class="subtitle-2 mb-5">Residential Address</div>
-      <v-row class="mb-5">
+      <v-row class="mt-2 mb-5">
         <v-col class="py-0 pb-1" cols="12">
           <v-text-field
             label="House/Block/Lot No."
@@ -106,7 +109,10 @@
           ></v-text-field>
         </v-col>
         <v-col class="py-0 pb-1" cols="6">
-          <province-select :value="province2" @input="$emit('update:province2', $event)"></province-select>
+          <province-select
+            :value="province2"
+            @input="$emit('update:province2', $event)"
+          ></province-select>
         </v-col>
         <v-col class="py-0 pb-1" cols="6">
           <v-text-field
@@ -140,8 +146,8 @@ export default {
     "barangay2",
     "city2",
     "province2",
-    "zipcode2"
-  ]
+    "zipcode2",
+  ],
 };
 </script>
 

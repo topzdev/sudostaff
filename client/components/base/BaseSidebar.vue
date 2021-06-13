@@ -1,68 +1,54 @@
 <template>
-  <div>
-    <v-navigation-drawer app width="300px"></v-navigation-drawer>
-    <v-navigation-drawer fixed width="300px">
-      <v-list shaped class="pl-0">
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/men/81.jpg" />
-          </v-list-item-avatar>
+  <v-navigation-drawer clipped app width="300px" style="padding-top: 67px">
+    <v-list shaped class="pl-0">
+      <template v-for="item in sidebarItem">
+        <v-list-item
+          link
+          color="primary"
+          :to="item.to"
+          v-if="!item.subItem"
+          class="mb-0 pl-4"
+          :key="item.title"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Application</v-list-item-title>
-            <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
-        <template v-for="item in sidebarItem">
+        <!-- If has a sub item then render this -->
+
+        <v-list-group
+          v-else
+          :to="item.to"
+          :prepend-icon="item.icon"
+          value="true"
+          :key="item.title"
+          class="custom-sub-group mb-0"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </template>
+
           <v-list-item
+            v-for="(subItem, i) in item.subItem"
+            :key="i"
             link
-            color="primary"
-            :to="item.to"
-            v-if="!item.subItem"
-            class="mb-0 pl-4"
-            :key="item.title"
+            :to="subItem.to"
+            color="blue"
           >
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon v-text="subItem.icon"></v-icon>
             </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title v-text="subItem.title"></v-list-item-title>
           </v-list-item>
-
-          <!-- If has a sub item then render this -->
-
-          <v-list-group
-            v-else
-            :to="item.to"
-            :prepend-icon="item.icon"
-            value="true"
-            :key="item.title"
-            class="custom-sub-group mb-0"
-          >
-            <template v-slot:activator>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </template>
-
-            <v-list-item
-              v-for="(subItem, i) in item.subItem"
-              :key="i"
-              link
-              :to="subItem.to"
-              color="blue"
-            >
-              <v-list-item-icon>
-                <v-icon v-text="subItem.icon"></v-icon>
-              </v-list-item-icon>
-              <v-list-item-title v-text="subItem.title"></v-list-item-title>
-            </v-list-item>
-          </v-list-group>
-        </template>
-      </v-list>
-    </v-navigation-drawer>
-  </div>
+        </v-list-group>
+      </template>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -72,7 +58,7 @@ export default {
       items: [
         // { title: "Dashboard", icon: "mdi-view-dashboard", to: "/dashboard" },
         {
-          title: "User",
+          title: "My Account",
           to: "/user/your-info",
           icon: "mdi-account-circle",
           subItem: [
@@ -93,33 +79,39 @@ export default {
             },
           ],
         },
-
+      ],
+      adminItem: [
+        {
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          to: "/dashboard",
+        },
         {
           title: "Employee",
           icon: "mdi-account-multiple",
           to: "/employee",
-          admin: true,
         },
         {
           title: "Department",
           icon: "mdi-account-box-multiple",
           to: "/department",
-          admin: true,
         },
         {
           title: "Designation",
           icon: "mdi-clipboard-account",
           to: "/designation",
-          admin: true,
         },
         {
           title: "Leave Request",
           to: "/leave-request",
           icon: "mdi-account-arrow-right-outline",
-          admin: true,
         },
         // { title: "Mail", icon: "mdi-email-multiple-outline", to: "/mail" },
-        { title: "Account", icon: "mdi-account-group", to: "/account" },
+        {
+          title: "Account",
+          icon: "mdi-account-group",
+          to: "/account",
+        },
       ],
     };
   },
@@ -130,11 +122,11 @@ export default {
     },
 
     sidebarItem() {
-      const user = this.user;
-      return this.items.map((item) => {
-        if (item.admin !== user.isAdmin) return item;
-        return item;
-      });
+      let newItem = [...this.items];
+      if (this.user.isAdmin) {
+        newItem = [...this.adminItem, ...newItem];
+      }
+      return newItem;
     },
   },
 };

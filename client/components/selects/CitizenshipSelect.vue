@@ -18,12 +18,12 @@ export default {
   mixins: [InputMixin],
   data() {
     return {
-      items: []
+      items: [],
     };
   },
-  async mounted() {
+  async fetch() {
     this.items = nationality;
-  }
+  },
 };
 </script>
 

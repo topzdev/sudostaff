@@ -1,6 +1,11 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <benifits-card :is-edit="isEdit" v-bind.sync="benifits" :header="header" :outlined="outlined" />
+    <benifits-card
+      :is-edit="isEdit"
+      v-bind.sync="benifits"
+      :header="header"
+      :outlined="outlined"
+    />
     <v-card flat class="background-none">
       <form-card-action
         :cancelFunc="back"
@@ -21,7 +26,7 @@ export default {
   computed: {
     getInfo() {
       return this.$store.state.benifits.current;
-    }
+    },
   },
   methods: {
     loadData() {
@@ -35,17 +40,17 @@ export default {
 
       await this.$store.dispatch("benifits/updateBenifits", this.benifits);
       this.loading = false;
-    }
+    },
   },
   watch: {
     getInfo() {
       this.loadData();
-    }
+    },
   },
-  async mounted() {
+  async fetch() {
     await this.$store.dispatch("benifits/fetchBenifits");
     this.loadData();
-  }
+  },
 };
 </script>
 

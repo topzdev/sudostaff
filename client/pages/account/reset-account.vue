@@ -1,13 +1,13 @@
 <template>
-  <auth-layout>
-    <v-container>
-      <reset-account-form />
-    </v-container>
-  </auth-layout>
+  <v-container>
+    <reset-account-form />
+  </v-container>
 </template>
 
 <script>
-export default {};
+export default {
+  middleware: ["is-admin"],
+};
 </script>
 
 <style>

@@ -13,20 +13,24 @@ exports.flatten = (result) => {
   let department = null,
     departmentHead = null;
 
+  console.log("Result", result);
+
+  if (!result) return;
+
   if (result.designationId && result.designation.department) {
     department = result.designation.department;
 
-    if (result.designation.department.departmentHead) {
-      departmentHead = result.designation.department.departmentHead;
-      departmentHead = { ...departmentHead, ...departmentHead.employee };
-      delete departmentHead.employee;
-      delete department.departmentHead;
-    }
+    // if (result.designation.department.departmentHead) {
+    //   departmentHead = result.designation.department.departmentHead;
+    //   departmentHead = { ...departmentHead, ...departmentHead.employee };
+    //   delete departmentHead.employee;
+    //   delete department.departmentHead;
+    // }
 
-    delete data.designation.department;
+    // delete data.designation.department;
 
     if (department) data.department = department;
-    if (departmentHead) data.departmentHead = departmentHead;
+    // if (departmentHead) data.departmentHead = departmentHead;
   }
 
   return data;
@@ -36,11 +40,26 @@ exports.arrayFlatten = (result) => {
   return result.forEach((obj) => this.flatten(obj));
 };
 
-exports.joinTable = ({ withPhoto, withDesignation, withDeptHead }) => {
-  const tables = [];
+exports.joinTable = ({
+  withPhoto,
+  withDesignation,
+  withDeptHead,
+  withAccount,
+}) => {
+  let tables = [];
+
+  if (withAccount) {
+    tables.push({
+      model: models.Account,
+      attributes: ["id", "isAdmin"],
+      where: {
+        isAdmin: false,
+      },
+    });
+  }
 
   if (withPhoto) tables.push({ model: models.Photo });
-  if (withDesignation)
+  if (withDesignation) {
     tables.push({
       model: models.Designation,
       attributes: ["id", "name"],
@@ -75,6 +94,7 @@ exports.joinTable = ({ withPhoto, withDesignation, withDeptHead }) => {
         },
       ],
     });
+  }
 
   return tables;
 };

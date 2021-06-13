@@ -2,10 +2,15 @@
   <v-card :outlined="outlined" :flat="true">
     <v-card-text>
       <v-row>
-        <v-col class="py-0" cols="12">
-          <v-text-field label="Current Username" :value="$auth.user.username" outlined readonly></v-text-field>
+        <v-col cols="12">
+          <v-text-field
+            label="Current Username"
+            :value="$auth.user.username"
+            outlined
+            readonly
+          ></v-text-field>
         </v-col>
-        <v-col class="py-0">
+        <v-col>
           <v-divider class="py-0 pb-5" />
         </v-col>
         <v-col class="py-0 pb-2" cols="12">
@@ -37,7 +42,7 @@
 import CardMixin from "@/mixins/CardMixin";
 export default {
   mixins: [CardMixin],
-  props: ["newUsername", "password"]
+  props: ["newUsername", "password"],
 };
 </script>
 

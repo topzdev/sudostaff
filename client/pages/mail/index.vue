@@ -1,6 +1,4 @@
-<template>
-  <auth-layout></auth-layout>
-</template>
+<template></template>
 
 <script>
 export default {};

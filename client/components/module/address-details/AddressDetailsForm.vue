@@ -52,7 +52,7 @@ export default {
       this.loadData();
     },
   },
-  async mounted() {
+  async fetch() {
     await this.$store.dispatch("personal/fetchAddressDetails");
     this.loadData();
   },

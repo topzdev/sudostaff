@@ -11,32 +11,32 @@
         <div v-if="leaveType">
           <div class="overline">
             Upcoming
-            <b>{{leaveType.name}}</b>
+            <b>{{ leaveType.name }}</b>
           </div>
-          <h2>{{daysToGo.value}}</h2>
+          <h2>{{ daysToGo.value }}</h2>
         </div>
       </div>
     </v-card-title>
     <v-card-text class="py-0 pt-5">
       <div class="d-flex align-center">
         <div>
-          <h2 class="font-weight-bold primary--text">{{totalDaysLeave}}</h2>
+          <h2 class="font-weight-bold primary--text">{{ totalDaysLeave }}</h2>
           <div>of leave</div>
         </div>
         <v-divider vertical class="mx-5" />
 
         <div>
           <div class="primary--text">Starts</div>
-          <h3 class="font-weight-bold text--primary">{{dates.startDate}}</h3>
-          <div>{{dates.startDateYear}}</div>
+          <h3 class="font-weight-bold text--primary">{{ dates.startDate }}</h3>
+          <div>{{ dates.startDateYear }}</div>
         </div>
 
         <v-spacer />
 
         <div>
           <div class="primary--text">End</div>
-          <h3 class="font-weight-bold text--primary">{{dates.endDate}}</h3>
-          <div>{{dates.endDateYear}}</div>
+          <h3 class="font-weight-bold text--primary">{{ dates.endDate }}</h3>
+          <div>{{ dates.endDateYear }}</div>
         </div>
       </div>
     </v-card-text>
@@ -60,7 +60,7 @@ export default {
       endDate: "",
       createdAt: "",
       leaveType: null,
-      authorizedBy: null
+      authorizedBy: null,
     };
   },
 
@@ -74,34 +74,29 @@ export default {
 
       const toReturn = {
         raw: day,
-        value: null
+        value: null,
       };
 
       if (!day) return { ...toReturn, value: "Today" };
 
       return {
         ...toReturn,
-        value: day > 1 ? `${day} Days to go` : `${day} Day to go`
+        value: day > 1 ? `${day} Days to go` : `${day} Day to go`,
       };
     },
     to() {
       return "/user/leave-request/view/" + this.upcoming.id;
-    }
+    },
   },
 
-  async mounted() {
+  async fetch() {
     await this.$store.dispatch("leaveRequestEmployee/fetchUpcoming", {
-      exclude: ["updateAt", "deletedAt"]
+      exclude: ["updateAt", "deletedAt"],
     });
 
     if (this.upcoming) {
-      const {
-        startDate,
-        endDate,
-        createdAt,
-        leaveType,
-        authorizedBy
-      } = this.upcoming;
+      const { startDate, endDate, createdAt, leaveType, authorizedBy } =
+        this.upcoming;
 
       this.startDate = startDate;
       this.endDate = endDate;
@@ -109,7 +104,7 @@ export default {
       this.leaveType = leaveType;
       this.authorizedBy = authorizedBy;
     }
-  }
+  },
 };
 </script>
 
