@@ -3,6 +3,8 @@ export default function({ store, redirect }) {
   //   console.log("Is Admin Middleware", context);
 
   if (!store.$auth.user.isAdmin) {
-    return redirect({ name: "/user/your-info" });
+    return redirect("/user/your-info");
   }
+
+  return;
 }

@@ -64,8 +64,10 @@ export default {
     return {
       show: false,
       account: {
-        username: "emp-004",
-        password: "lugod-5152000",
+        username: "",
+        password: "",
+        // username: "emp-001",
+        // password: "lugod-5152000",
       },
       accountRules: {
         username: [(v) => !!v || "Username is required"],
@@ -105,12 +107,12 @@ export default {
         console.log("loging in", result, this.$auth.loggedIn);
 
         if (this.$auth.loggedIn) {
+          this.$router.push("/dashboard");
           this.account = {
             username: "",
             password: "",
           };
 
-          // this.$router.push("/dashboard");
           // this.$store.dispatch("utils/setNotifDefault", result, { root: true });
         }
       } catch (error) {
