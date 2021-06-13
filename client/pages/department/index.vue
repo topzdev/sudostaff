@@ -40,6 +40,9 @@ export default {
       this.searchList();
     },
   },
+  head: {
+    title: "Department",
+  },
 
   methods: {
     searchList() {

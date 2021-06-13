@@ -32,6 +32,9 @@ export default {
       this.searchList();
     },
   },
+  head: {
+    title: "Leave Request",
+  },
 
   methods: {
     searchList() {

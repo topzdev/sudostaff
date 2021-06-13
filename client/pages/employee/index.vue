@@ -35,6 +35,9 @@ export default {
       search: "",
     };
   },
+  head: {
+    title: "Employee",
+  },
 };
 </script>
 

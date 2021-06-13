@@ -2,8 +2,9 @@
   <v-app-bar fixed elevate-on-scroll>
     <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-    <v-toolbar-title class="font-weight-bold"
-      >Toy Storey Human Resources</v-toolbar-title
+    <v-toolbar-title class="font-weight-bold">
+      <span class="primary--text">Toy Storey</span> Human Resources
+      System</v-toolbar-title
     >
 
     <v-spacer></v-spacer>

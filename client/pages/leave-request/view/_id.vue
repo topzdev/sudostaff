@@ -7,6 +7,9 @@
 <script>
 export default {
   middleware: ["is-admin"],
+  head: {
+    title: "View Leave Request",
+  },
 };
 </script>
 

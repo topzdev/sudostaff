@@ -15,7 +15,7 @@
             <reset-account />
           </v-col>
           <v-col cols="8">
-            <set-administrator />
+            <manage-administrator />
           </v-col>
         </v-row>
       </v-card-text>
@@ -24,10 +24,11 @@
 </template>
 
 <script>
-import SetAdministrator from "~/components/pages/account/SetAdministrator.vue";
 export default {
-  components: { SetAdministrator },
   middleware: ["is-admin"],
+  head: {
+    title: "Account",
+  },
 };
 </script>
 

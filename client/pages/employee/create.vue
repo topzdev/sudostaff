@@ -8,6 +8,9 @@
 export default {
   middleware: ["is-admin"],
   loading: false,
+  head: {
+    title: "Create Employee",
+  },
 };
 </script>
 

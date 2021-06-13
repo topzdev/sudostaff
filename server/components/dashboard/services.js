@@ -5,18 +5,7 @@ const Op = models.Sequelize.Op;
 
 class DasboardServices {
   async getCounts() {
-    const employeeCount = await models.Employee.count({
-      include: [
-        { model: models.Photo },
-        {
-          model: models.Account,
-          attributes: ["id", "isAdmin"],
-          where: {
-            isAdmin: false,
-          },
-        },
-      ],
-    });
+    const employeeCount = await models.Employee.count();
     const departmentCount = await models.Department.count();
     const designationCount = await models.Designation.count();
     const leaveRequestCount = await models.LeaveRequest.count();
@@ -40,16 +29,7 @@ class DasboardServices {
       attributes: ["id", "firstName", "lastName", "fullName", "createdAt"],
       order: [["createdAt", "DESC"]],
       limit: 10,
-      include: [
-        { model: models.Photo },
-        {
-          model: models.Account,
-          attributes: ["id", "isAdmin"],
-          where: {
-            isAdmin: false,
-          },
-        },
-      ],
+      include: [{ model: models.Photo }],
     });
 
     return {

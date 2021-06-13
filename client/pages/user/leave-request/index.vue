@@ -26,7 +26,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  head: {
+    title: "My Leave Request",
+  },
+};
 </script>
 
 <style>

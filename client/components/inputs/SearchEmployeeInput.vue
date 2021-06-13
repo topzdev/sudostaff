@@ -23,7 +23,7 @@
           @click:close="remove"
           large
         >
-          <v-avatar left size="50">
+          <v-avatar left size="90">
             <base-image
               v-if="data.item.photo"
               :src="data.item.photo.photoUrl"
@@ -105,6 +105,7 @@ export default {
           limit: 6,
           include: ["firstName", "middleName", "lastName", "fullName"],
           withPhoto: true,
+          withAccount: false,
         });
         self.employee = result.data.rows;
         self.loading = false;

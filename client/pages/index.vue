@@ -13,6 +13,9 @@ export default {
   components: {
     LoginForm,
   },
+  head: {
+    title: "Welcome to Toy Storery HRIS",
+  },
   // created() {
   //   this.$store.dispatch("frontend/showNavigationBar", false);
   // },

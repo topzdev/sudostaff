@@ -34,7 +34,9 @@ class EmployeeServices {
     exclude,
     withPhoto,
     withDesignation,
+    withAccount,
   }) {
+    console.log("With Account", withAccount);
     const result = await models.Employee.findAndCountAll({
       ...parseCondition({
         searchText,
@@ -47,7 +49,7 @@ class EmployeeServices {
       include: helper.joinTable({
         withPhoto,
         withDesignation,
-        withAccount: true,
+        // withAccount,
       }),
     });
     return {

@@ -3,7 +3,7 @@ import ApiClient from "./ApiClient";
 
 class Account extends ApiClient {
   getOne(id, query) {
-    return $axios.$get("/account/" + id + this.genQuery(query));
+    return $axios.$get("/account/" + id);
   }
 
   updatePassword(data) {
@@ -16,6 +16,10 @@ class Account extends ApiClient {
 
   reset(data) {
     return $axios.$put("/account/reset", data);
+  }
+
+  setAdmin(data) {
+    return $axios.$post("/account/set-admin", data);
   }
 }
 

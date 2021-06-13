@@ -7,8 +7,8 @@
     outlined
   >
     <v-form ref="form" v-model="valid">
-      <h2 class="primary--text text-center mt-5 pt-4">
-        <span class="red--text">Toy Storey</span>
+      <h2 class="text-center mt-5 pt-4">
+        <span class="primary--text">Toy Storey</span>
         <span>HRIS</span>
       </h2>
       <v-card-title class="justify-center">Sign In</v-card-title>

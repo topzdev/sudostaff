@@ -5,25 +5,30 @@ const bcrypt = require("bcryptjs");
 class AccountServices {
   async getOne({ id }) {
     const result = await models.Account.findOne({
+      attribute: ["id", "isAdmin"],
       where: { employeeId: id },
-      attributes: ["employeeId", "username"],
+      plain: true,
+      include: [
+        {
+          model: models.Employee,
+          as: "employee",
+          attribute: ["fullName", "lastName", "firstName"],
+        },
+      ],
     });
 
     return {
       status: 200,
       msg: "Account Successfully Fetched",
-      data: result.get({ plain: true }),
+      data: result,
     };
   }
 
   async create({ employeeId, birthDate, lastName }) {
     console.log("ACCOUNT ", employeeId, birthDate, lastName);
 
-    const {
-      username,
-      password,
-      rawPassword,
-    } = await helper.genDefaultCredential(employeeId, birthDate, lastName);
+    const { username, password, rawPassword } =
+      await helper.genDefaultCredential(employeeId, birthDate, lastName);
 
     const result = await models.Account.create({
       username,
@@ -137,15 +142,12 @@ class AccountServices {
 
     console.log(employeeInfo);
 
-    const {
-      username,
-      password,
-      rawPassword,
-    } = await helper.genDefaultCredential(
-      employeeInfo.id,
-      employeeInfo.birthDate,
-      employeeInfo.lastName
-    );
+    const { username, password, rawPassword } =
+      await helper.genDefaultCredential(
+        employeeInfo.id,
+        employeeInfo.birthDate,
+        employeeInfo.lastName
+      );
 
     const result = await models.Account.update(
       { username, password },
@@ -162,6 +164,29 @@ class AccountServices {
       data: {
         username,
         password: rawPassword,
+      },
+    };
+  }
+
+  async setAsAdmin({ employeeId, isAdmin }) {
+    console.log("Account Set Admin", employeeId, isAdmin);
+    const employeeInfo = await models.Account.update(
+      {
+        isAdmin,
+      },
+      {
+        where: {
+          employeeId,
+        },
+      }
+    );
+
+    return {
+      status: 200,
+      msg: "Update Account",
+      data: {
+        updated: true,
+        isAdmin,
       },
     };
   }

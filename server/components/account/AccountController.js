@@ -54,6 +54,16 @@ class AccountController {
       validateResponse(res, { status: 500, msg: "Server Error", data: error });
     }
   }
+
+  async setAsAdmin(req, res) {
+    try {
+      const result = await accountServices.setAsAdmin(req.body);
+      validateResponse(res, result);
+    } catch (error) {
+      console.error(error);
+      validateResponse(res, { status: 500, msg: "Server Error", data: error });
+    }
+  }
 }
 
 module.exports = new AccountController();

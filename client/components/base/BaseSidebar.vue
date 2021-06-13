@@ -38,7 +38,6 @@
             :key="i"
             link
             :to="subItem.to"
-            color="blue"
           >
             <v-list-item-icon>
               <v-icon v-text="subItem.icon"></v-icon>

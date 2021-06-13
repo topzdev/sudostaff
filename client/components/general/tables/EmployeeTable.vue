@@ -84,6 +84,7 @@ export default {
         include: ["fullName", "firstName", "lastName", "isActive"],
         withPhoto: true,
         withDesignation: true,
+        withAccount: true,
       },
 
       headers: [

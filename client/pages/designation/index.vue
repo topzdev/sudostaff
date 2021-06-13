@@ -40,6 +40,9 @@ export default {
       this.searchList();
     },
   },
+  head: {
+    title: "Designation",
+  },
 
   methods: {
     searchList() {

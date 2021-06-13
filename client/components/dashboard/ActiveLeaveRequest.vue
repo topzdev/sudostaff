@@ -6,7 +6,10 @@
         <template v-if="items.length">
           <template v-for="item in items">
             <v-list-item :key="item.title">
-              <nuxt-link :to="`/employee/update/${item.submittedBy.id}`">
+              <nuxt-link
+                :title="`${item.submittedBy.fullName}`"
+                :to="`/employee/update/${item.submittedBy.id}`"
+              >
                 <v-list-item-avatar size="50">
                   <base-image
                     v-if="item.submittedBy.photo.photoUrl"

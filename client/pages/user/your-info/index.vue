@@ -38,6 +38,9 @@ export default {
   async fetch() {
     await this.$store.dispatch("personal/fetchPersonalInfo");
   },
+  head: {
+    title: "My Account",
+  },
 };
 </script>
 

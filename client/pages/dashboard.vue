@@ -1,5 +1,5 @@
 <template>
-  <v-container class="login-container">
+  <span>
     <h2>Dashboard</h2>
 
     <v-row class="mt-2">
@@ -18,12 +18,15 @@
         </v-row>
       </v-col>
     </v-row>
-  </v-container>
+  </span>
 </template>
 
 <script>
 export default {
   middleware: ["is-admin"],
+  head: {
+    title: "Dashboard",
+  },
 };
 </script>
 

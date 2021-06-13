@@ -57,7 +57,15 @@ export const actions = {
 
   fetchEmployees: async function(
     { dispatch, commit, state },
-    { searchBy, searchText, limit, offset, withPhoto, withDesignation }
+    {
+      searchBy,
+      searchText,
+      limit,
+      offset,
+      withPhoto,
+      withDesignation,
+      withAccount
+    }
   ) {
     try {
       // if (state.list.rows.length) return;
@@ -67,7 +75,8 @@ export const actions = {
         limit,
         offset,
         withPhoto,
-        withDesignation
+        withDesignation,
+        withAccount
       });
       console.log("Results", result);
       commit(types.SET_EMPLOYEES, result.data);
