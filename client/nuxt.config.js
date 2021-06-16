@@ -1,6 +1,9 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  env: {
+    SERVER_URL: process.env.SERVER_URL
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     {
@@ -81,7 +84,16 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { host: "localhost", port: 5000, prefix: "/hr/api" },
+  axios: {
+    baseURL: "http://localhost:5000" || process.env.SERVER_URL,
+    prefix: "/hr/api"
+  },
+
+  // publicRuntimeConfig: {
+  //   axios: {
+  //     browserBaseURL: process.env.BROWSER_BASE_URL
+  //   }
+  // },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

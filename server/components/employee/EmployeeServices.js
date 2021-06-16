@@ -21,7 +21,7 @@ class EmployeeServices {
     return {
       status: 200,
       msg: "Employee fetch successfully",
-      data: helper.flatten(result.get({ plain: true })),
+      data: helper.flatten(result),
     };
   }
 
