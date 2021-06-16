@@ -31,7 +31,7 @@ models.sequelize
 
 // Sync all tables
 // models.sequelize.drop();
-// models.sequelize.sync({ force: true });
+models.sequelize.sync({});
 
 app.use("/hr/api/", hrRoute);
 
