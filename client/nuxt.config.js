@@ -85,15 +85,17 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "http://localhost:5000" || process.env.SERVER_URL,
-    prefix: "/hr/api"
+    baseURL: "https://toystorey-hris-server.herokuapp.com/hr/api",
+    // baseURL: "http://localhost:5000/hr/api",
+    // prefix: "/hr/api",
+    credential: true
   },
-
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     browserBaseURL: process.env.BROWSER_BASE_URL
-  //   }
-  // },
+  // axios: { host: "localhost", port: 5000, prefix: "/hr/api" },
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

@@ -24,6 +24,10 @@ models.sequelize
   .authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");
+    // models.Account.update(
+    //   { isAdmin: true },
+    //   { where: { id: "045b131f-68cb-4636-a735-48a75ea56b4b" } }
+    // );
   })
   .catch((err) => {
     console.error("Unable to connect to the database:", err);
