@@ -33,12 +33,6 @@ class LeaveTypeServices {
   }
 
   async create({ name, description }) {
-    if (helpers.isExist(name))
-      return {
-        status: 500,
-        msg: "Leave type is already exist",
-      };
-
     const result = await models.LeaveType.create({ name, description });
 
     return {
